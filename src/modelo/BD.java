@@ -37,52 +37,8 @@ public class BD {
 		return instanciaUnica;
 	}
 
-	public static BD getinstanciaUnica() {
-		return instanciaUnica;
-	}
-
-	public static void setinstanciaUnica(BD instanciaUnica) {
-		BD.instanciaUnica = instanciaUnica;
-	}
-
 	public Connection getConexion() {
 		return conexion;
 	}
 
-	public void setConexion(Connection conexion) {
-		this.conexion = conexion;
-	}
-
-	public String getServidor() {
-		return servidor;
-	}
-
-	public void setServidor(String servidor) {
-		this.servidor = servidor;
-	}
-
-	public String getBd() {
-		return bd;
-	}
-
-	public void setBd(String bd) {
-		this.bd = bd;
-	}
-
-	public String getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
-	}
-
-	public String getContrasena() {
-		return contrasena;
-	}
-
-	public void setContrasena(String contrasena) {
-		this.contrasena = contrasena;
-	}	
-	
 }
