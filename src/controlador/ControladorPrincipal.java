@@ -23,19 +23,16 @@ public class ControladorPrincipal implements ActionListener {
 		switch(e.getActionCommand()){
 			case "Entrar": preparaVistaPrincipal(); break;
 		}
-		
 	}
 	
 	public void preparaVistaPrincipal(){
 		this.esAdministrador = this.vistaLogin.getSoyAdmin().isSelected();
-		PrincipalView vp = new PrincipalView();
+		PrincipalView vp = new PrincipalView(esAdministrador);
 		vp.setVisible(true);
 	}
 	
 	public void cierraVista(JFrame vista){
 		vista.dispose();
 	}
-	
-	
 
 }

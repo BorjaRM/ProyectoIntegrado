@@ -17,6 +17,8 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import java.awt.Insets;
+import java.awt.Dimension;
 
 public class LoginView extends JFrame{
 
@@ -31,7 +33,7 @@ public class LoginView extends JFrame{
 	 */
 	public LoginView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1000, 562);
+		setBounds(100, 100, 800, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -65,7 +67,7 @@ public class LoginView extends JFrame{
 		panel_1.add(text_usuario);
 		text_usuario.setColumns(10);
 		
-		JLabel lbl_pass = new JLabel("Contrase\u00F1a:");
+		JLabel lbl_pass = new JLabel("Contrasenya:");
 		panel_1.add(lbl_pass);
 		
 		passwordField = new JPasswordField();
