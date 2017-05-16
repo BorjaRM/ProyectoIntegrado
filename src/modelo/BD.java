@@ -25,6 +25,7 @@ public class BD {
 		try{
 			String cadenaDeConexion = "jdbc:mysql://"+servidor+"/"+bd+"?user="+usuario+"&password="+contrasena;
 			conexion= DriverManager.getConnection(cadenaDeConexion);
+			System.out.println("conexion ok");
 		}catch(Exception e){
 			System.err.println("Error conectando a mysql/"+bd+" con el usuario="+usuario);
 		}
