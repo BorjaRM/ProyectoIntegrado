@@ -9,23 +9,18 @@ import javax.swing.JLabel;
 import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
-import javax.swing.SpringLayout;
-import javax.swing.JSplitPane;
 import javax.swing.JList;
-import javax.swing.JTextField;
 import java.awt.GridLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import javax.swing.JScrollPane;
 import java.awt.Insets;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
+import javax.swing.SpringLayout;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 
 public class PrincipalAdminView extends JPanel {
-	private JTextField textClientes;
+	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
@@ -65,62 +60,74 @@ public class PrincipalAdminView extends JPanel {
 		
 		JPanel panel_1 = new JPanel();
 		add(panel_1, BorderLayout.CENTER);
-		panel_1.setLayout(new GridLayout(0, 2, 20, 20));
+		SpringLayout sl_panel_1 = new SpringLayout();
+		panel_1.setLayout(sl_panel_1);
 		
 		JPanel panel_3 = new JPanel();
+		sl_panel_1.putConstraint(SpringLayout.NORTH, panel_3, 25, SpringLayout.NORTH, panel_1);
+		sl_panel_1.putConstraint(SpringLayout.WEST, panel_3, 22, SpringLayout.WEST, panel_1);
+		sl_panel_1.putConstraint(SpringLayout.SOUTH, panel_3, -24, SpringLayout.SOUTH, panel_1);
+		sl_panel_1.putConstraint(SpringLayout.EAST, panel_3, 128, SpringLayout.WEST, panel_1);
 		panel_1.add(panel_3);
-		panel_3.setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("72px"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("50px"),},
-			new RowSpec[] {
-				RowSpec.decode("20px"),
-				FormSpecs.LINE_GAP_ROWSPEC,
-				RowSpec.decode("20px"),
-				FormSpecs.LINE_GAP_ROWSPEC,
-				RowSpec.decode("20px"),
-				FormSpecs.LINE_GAP_ROWSPEC,
-				RowSpec.decode("20px"),
-				FormSpecs.LINE_GAP_ROWSPEC,
-				RowSpec.decode("20px"),}));
-		
-		JLabel lblNewLabel_1 = new JLabel("Clientes:");
-		panel_3.add(lblNewLabel_1, "1, 1, left, center");
-		
-		textClientes = new JTextField();
-		panel_3.add(textClientes, "3, 1, fill, top");
-		textClientes.setColumns(10);
-		
-		JLabel lblNewLabel_2 = new JLabel("Empleados:");
-		panel_3.add(lblNewLabel_2, "1, 3, left, center");
-		
-		textField_1 = new JTextField();
-		panel_3.add(textField_1, "3, 3, fill, top");
-		textField_1.setColumns(10);
-		
-		JLabel lblNewLabel_3 = new JLabel("Reservas:");
-		panel_3.add(lblNewLabel_3, "1, 5, fill, center");
-		
-		textField_2 = new JTextField();
-		panel_3.add(textField_2, "3, 5, fill, top");
-		textField_2.setColumns(10);
-		
-		JLabel lblNewLabel_4 = new JLabel("Habitaciones:");
-		panel_3.add(lblNewLabel_4, "1, 7, left, center");
-		
-		textField_3 = new JTextField();
-		panel_3.add(textField_3, "3, 7, fill, top");
-		textField_3.setColumns(10);
-		
-		JLabel lblNewLabel_5 = new JLabel("Incidencias:");
-		panel_3.add(lblNewLabel_5, "1, 9, left, center");
-		
-		textField_4 = new JTextField();
-		panel_3.add(textField_4, "3, 9, fill, top");
-		textField_4.setColumns(10);
 		
 		JList list = new JList();
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		sl_panel_1.putConstraint(SpringLayout.NORTH, list, 24, SpringLayout.NORTH, panel_1);
+		sl_panel_1.putConstraint(SpringLayout.WEST, list, 17, SpringLayout.EAST, panel_3);
+		sl_panel_1.putConstraint(SpringLayout.SOUTH, list, 0, SpringLayout.SOUTH, panel_3);
+		panel_3.setLayout(new BoxLayout(panel_3, BoxLayout.X_AXIS));
+		
+		JPanel panel_4 = new JPanel();
+		panel_3.add(panel_4);
+		panel_4.setLayout(new BoxLayout(panel_4, BoxLayout.Y_AXIS));
+		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		panel_4.add(lblNewLabel_1);
+		
+		Component verticalStrut_2 = Box.createVerticalStrut(20);
+		panel_4.add(verticalStrut_2);
+		
+		JLabel lblNewLabel_2 = new JLabel("New label");
+		panel_4.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("New label");
+		panel_4.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_4 = new JLabel("New label");
+		panel_4.add(lblNewLabel_4);
+		
+		JLabel lblNewLabel_5 = new JLabel("New label");
+		panel_4.add(lblNewLabel_5);
+		
+		JPanel panel_5 = new JPanel();
+		panel_3.add(panel_5);
+		panel_5.setLayout(new BoxLayout(panel_5, BoxLayout.Y_AXIS));
+		
+		textField = new JTextField();
+		panel_5.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		panel_5.add(textField_1);
+		textField_1.setColumns(10);
+		
+		textField_4 = new JTextField();
+		panel_5.add(textField_4);
+		textField_4.setColumns(10);
+		
+		textField_3 = new JTextField();
+		panel_5.add(textField_3);
+		textField_3.setColumns(10);
+		
+		textField_2 = new JTextField();
+		panel_5.add(textField_2);
+		textField_2.setColumns(10);
+		sl_panel_1.putConstraint(SpringLayout.EAST, list, 426, SpringLayout.WEST, panel_1);
 		panel_1.add(list);
 		
+	}
+	
+	public void visualiza(){
+		this.setVisible(true);
 	}
 }
