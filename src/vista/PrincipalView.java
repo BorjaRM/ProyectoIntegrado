@@ -12,11 +12,14 @@ import controlador.ControladorPrincipal;
 import javax.swing.BoxLayout;
 
 import java.awt.CardLayout;
+import javax.swing.JButton;
+import javax.swing.AbstractAction;
+import java.awt.event.ActionEvent;
+import javax.swing.Action;
 
 public class PrincipalView extends JFrame{
 
-	private JPanel contentpane;
-	private JPanel vistas;
+	private JPanel contentpane,vistas;
 	CardLayout cl;
 	//Referencias a las vistas
 	final static String PRINCIPAL_ADMIN = "vista principal admin";
@@ -29,21 +32,9 @@ public class PrincipalView extends JFrame{
 	PrincipalAdminView pav;
 	PrincipalEmpleadoView pev;
 	HotelView hv;
-
-	ClientesView cv;
-	NuevoClienteView ncv;
-	
 	//Botones barra superior
-	private JMenu inicio;
-	private JMenu clientes;
-	private JMenu empleados;
-	private JMenu reservas;
-	private JMenu estancias;
-	private JMenu incidencias;
-	private JMenu salir;
-	private JMenuItem salir2;
+	private JMenu inicio,clientes,empleados,reservas,estancias,incidencias,salir;
 	
-
 	/**
 	 * Create the frame.
 	 * @param esAdministrador 
@@ -67,8 +58,6 @@ public class PrincipalView extends JFrame{
 		estancias = new JMenu("Estancias");
 		incidencias = new JMenu("Incidencias");
 		salir = new JMenu("Salir");
-		salir2 = new JMenuItem("Salir2");
-		salir.setActionCommand("Salir");
 		menuBar.add(inicio);
 		menuBar.add(clientes);
 		menuBar.add(empleados);
@@ -76,7 +65,7 @@ public class PrincipalView extends JFrame{
 		menuBar.add(estancias);
 		menuBar.add(incidencias);
 		menuBar.add(salir);
-		menuBar.add(salir2);
+	
 		
 		//Este panel contiene todas las vistas que se iran intercambiando
 		vistas = new JPanel();
@@ -86,9 +75,6 @@ public class PrincipalView extends JFrame{
 		pav = new PrincipalAdminView();
 		pev = new PrincipalEmpleadoView();
 		hv = new HotelView();
-
-		cv = new ClientesView();
-		ncv = new NuevoClienteView();
 		
 		
 		//Creamos el cardLayout
@@ -99,9 +85,6 @@ public class PrincipalView extends JFrame{
 		vistas.add(pav,PRINCIPAL_ADMIN);
 		vistas.add(pev,PRINCIPAL_EMPLEADO);
 		vistas.add(hv,NUEVOHOTEL);
-
-		vistas.add(cv, VERCLIENTES);
-		vistas.add(ncv, NUEVOCLIENTE);
 		
 		if(!esAdministrador){
 			empleados.setVisible(false);
@@ -109,19 +92,4 @@ public class PrincipalView extends JFrame{
 		}
 	}
 	
-	public void estableceControlador(ControladorPrincipal controlador) {
-		/*this.inicio.addMenuListener(controlador);
-		this.clientes.addMenuListener(controlador);
-		this.empleados.addMenuListener(controlador);
-		this.reservas.addMenuListener(controlador);
-		this.estancias.addMenuListener(controlador);
-		this.incidencias.addMenuListener(controlador);
-		this.salir.addMenuListener(controlador);*/
-		this.salir.addActionListener(controlador);
-		this.salir.addMenuListener(controlador);
-		this.salir2.addActionListener(controlador);
-
-	}
-	
-
 }

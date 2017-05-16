@@ -17,8 +17,6 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import java.awt.Insets;
-import java.awt.Dimension;
 
 public class LoginView extends JFrame{
 
