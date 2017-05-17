@@ -14,9 +14,14 @@ import vista.Marco;
 
 public class ControladorPrincipal implements ActionListener{
 	private BD modelo;
-	private LoginView vistaLogin;
 	private boolean esAdministrador;
+	private LoginView vistaLogin;
 	private Marco frame;
+	private ControladorClientes cClientes;
+	private ControladorEmpleados cEmpleados;
+	private ControladorReservas cReservas;
+	private ControladorEstancias cEstancias;
+	private ControladorIncidencias cIncidencias;
 	
 	public ControladorPrincipal(BD modelo, LoginView login){
 		this.modelo=modelo;
@@ -36,20 +41,22 @@ public class ControladorPrincipal implements ActionListener{
 
 	public void preparaPrincipalView(){
 		this.esAdministrador = this.vistaLogin.getSoyAdmin().isSelected();
-		frame = new Marco();
+		frame = new Marco(this);
 		frame.creaVistaPrincipal();
 		frame.muestraVistaPrincipal(esAdministrador);
-		frame.estableceControlador(this);
-		frame.getPav().estableceControlador(this);
+		frame.estableceControlador();
 		frame.setVisible(true);
 	}
 	
 	public void preparaNuevoHotelView(){
 		frame.creaVistaHotel();
-		frame.getHv().estableceControlador(this);
 	}
 	
 	public void preparaVistaClientes(){
+		cClientes = new ControladorClientes(modelo);
+		cClientes.setCv(frame.getCv());
+		cClientes.setNcv(frame.getNcv());
+		cClientes.setMcv(frame.getMcv());
 		frame.creaVistaClientes();
 	}
 	
