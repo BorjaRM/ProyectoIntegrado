@@ -8,18 +8,13 @@ import javax.swing.border.EmptyBorder;
 
 import controlador.ControladorPrincipal;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-
 import java.awt.CardLayout;
-import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.JMenuItem;
-import javax.swing.JToggleButton;
-import javax.swing.JToolBar;
 
 public class Marco extends JFrame{
 
+	private ControladorPrincipal controlador;
 	private JPanel vistas;
 	private CardLayout cl;
 	//Referencias a las vistas
@@ -56,23 +51,15 @@ public class Marco extends JFrame{
 	private NuevaIncidenciaView niv;
 	//Botones barra superior
 	private JMenu inicio,clientes,empleados,reservas,estancias,incidencias;
-	private Component horizontalGlue;
-	private JMenuItem item_verClientes;
-	private JMenuItem item_nuevoCliente;
-	private JMenuItem item_verEmpleados;
-	private JMenuItem item_nuevoEmpleado;
-	private JMenuItem item_nuevaReserva;
-	private JMenuItem item_verReservas;
-	private JMenuItem item_verEstancias;
-	private JMenuItem item_nuevaEstancia;
-	private JMenuItem item_verIncidencias;
-	private JMenuItem item_nuevaIncidencia;
+	private JMenuItem item_verClientes,item_nuevoCliente,item_verEmpleados,item_nuevoEmpleado,item_nuevaReserva;
+	private JMenuItem item_verReservas,item_verEstancias,item_nuevaEstancia,item_verIncidencias,item_nuevaIncidencia;
 	
 	/**
 	 * Create the frame.
 	 * @param esAdministrador 
 	 */
-	public Marco() {
+	public Marco(ControladorPrincipal cp) {
+		this.controlador=cp;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 800, 500);
 		//Este panel contiene todas las vistas que se iran intercambiando
@@ -165,6 +152,7 @@ public class Marco extends JFrame{
 	public void creaVistaPrincipal(){
 		if(pav == null){
 			pav = new PrincipalAdminView();
+			pav.estableceControlador(this.controlador);
 			vistas.add(pav,PRINCIPAL_ADMIN);
 		}
 		if(pev == null){
@@ -185,6 +173,7 @@ public class Marco extends JFrame{
 	public void creaVistaHotel(){
 		if(hv == null){
 			hv = new NuevoHotelView();
+			hv.estableceControlador(this.controlador);
 			vistas.add(hv,NUEVO_HOTEL);
 		}
 		cl.show(vistas,NUEVO_HOTEL);
@@ -198,22 +187,20 @@ public class Marco extends JFrame{
 		System.out.println("No esta programado");
 	}
 	
-	public void estableceControlador(ControladorPrincipal controlador){
-		this.inicio.addActionListener(controlador);
+	public void estableceControlador(){
+		//this.inicio.addMouseListener(controlador);
+		this.item_verClientes.addActionListener(this.controlador);
+		this.item_nuevoCliente.addActionListener(this.controlador);
+		this.item_verEmpleados.addActionListener(this.controlador);
+		this.item_nuevoEmpleado.addActionListener(this.controlador);
+		this.item_nuevaReserva.addActionListener(this.controlador);
+		this.item_verReservas.addActionListener(this.controlador);
+		this.item_verEstancias.addActionListener(this.controlador);
+		this.item_nuevaEstancia.addActionListener(this.controlador);
+		this.item_verIncidencias.addActionListener(this.controlador);
+		this.item_nuevaIncidencia.addActionListener(this.controlador);
 	}
 	
-	public PrincipalAdminView getPav() {
-		return pav;
-	}
-
-	public PrincipalEmpleadoView getPev() {
-		return pev;
-	}
-
-	public NuevoHotelView getHv() {
-		return hv;
-	}
-
 	public ClientesView getCv() {
 		return cv;
 	}
@@ -226,41 +213,8 @@ public class Marco extends JFrame{
 		return mcv;
 	}
 
-	public EmpleadosView getEv() {
-		return ev;
-	}
-
-	public NuevoEmpleadoView getNev() {
-		return nev;
-	}
-
-	public ModificarEmpleadoView getMev() {
-		return mev;
-	}
-
-	public ReservasView getRv() {
-		return rv;
-	}
-
-	public NuevaReservaView getNrv() {
-		return nrv;
-	}
-
-	public EstanciasView getEsv() {
-		return esv;
-	}
-
-	public NuevaEstanciaView getNesv() {
-		return nesv;
-	}
-
-	public IncidenciasView getIv() {
-		return iv;
-	}
-
-	public NuevaIncidenciaView getNiv() {
-		return niv;
-	}
+	
+	
 	
 	
 }
