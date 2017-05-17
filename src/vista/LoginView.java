@@ -86,13 +86,8 @@ public class LoginView extends JFrame{
 		this.soyAdmin.addActionListener(controlador);
 	}
 
-	public void visualiza() {
-		this.setVisible(true);
-	}
-
 	public JCheckBox getSoyAdmin() {
 		return soyAdmin;
 	}	
-	
 
 }

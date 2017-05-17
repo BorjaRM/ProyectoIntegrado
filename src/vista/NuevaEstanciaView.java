@@ -6,14 +6,19 @@ import javax.swing.JLabel;
 import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.BoxLayout;
 import java.awt.GridLayout;
+import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
+import java.awt.Insets;
 import javax.swing.JRadioButton;
 import java.awt.FlowLayout;
 import java.awt.Font;
 
-public class ModificarEstanciaView extends JPanel {
+public class NuevaEstanciaView extends JPanel {
 	private JTextField txt_Nombre;
 	private JTextField txt_Tipo;
 	private JTextField txt_Plazas;
@@ -24,7 +29,7 @@ public class ModificarEstanciaView extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ModificarEstanciaView() {
+	public NuevaEstanciaView() {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_Textos = new JPanel();
@@ -47,14 +52,11 @@ public class ModificarEstanciaView extends JPanel {
 		JButton btn_NewHabitacion = new JButton("Añadir Habitacion");
 		panel_Botones.add(btn_NewHabitacion);
 		
-		Component horizontalStrut_1 = Box.createHorizontalStrut(40);
+		Component horizontalStrut_1 = Box.createHorizontalStrut(150);
 		panel_Botones.add(horizontalStrut_1);
 		
-		JButton btnModificar = new JButton("Modificar");
-		panel_Botones.add(btnModificar);
-		
-		JButton btnCancelar = new JButton("Cancelar");
-		panel_Botones.add(btnCancelar);
+		JButton btn_Cancelar = new JButton("Cancelar");
+		panel_Botones.add(btn_Cancelar);
 		
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.CENTER);
@@ -139,6 +141,9 @@ public class ModificarEstanciaView extends JPanel {
 		txt_nombre_uso = new JTextField();
 		panel_UsoComun.add(txt_nombre_uso);
 		txt_nombre_uso.setColumns(10);
+		
+		JButton btnAadirEstancia = new JButton("Añadir Estancia");
+		panel_UsoComun.add(btnAadirEstancia);
 
 	}
 

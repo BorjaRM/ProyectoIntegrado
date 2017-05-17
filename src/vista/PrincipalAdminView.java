@@ -10,12 +10,10 @@ import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JList;
-import java.awt.GridLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import javax.swing.JScrollPane;
-import java.awt.Insets;
 import javax.swing.SpringLayout;
+
+import controlador.ControladorPrincipal;
+
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
@@ -25,6 +23,8 @@ public class PrincipalAdminView extends JPanel {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
+	private JButton btn_nuevoHotel;
+	private JButton btn_eliminarHotel;
 
 	/**
 	 * Create the panel.
@@ -49,10 +49,10 @@ public class PrincipalAdminView extends JPanel {
 		JComboBox comboBox = new JComboBox();
 		panel.add(comboBox);
 		
-		JButton btn_nuevoHotel = new JButton("Nuevo Hotel");
+		btn_nuevoHotel = new JButton("Nuevo Hotel");
 		panel.add(btn_nuevoHotel);
 		
-		JButton btn_eliminarHotel = new JButton("Eliminar Hotel");
+		btn_eliminarHotel = new JButton("Eliminar Hotel");
 		panel.add(btn_eliminarHotel);
 		
 		Component verticalStrut_1 = Box.createVerticalStrut(20);
@@ -127,7 +127,9 @@ public class PrincipalAdminView extends JPanel {
 		
 	}
 	
-	public void visualiza(){
-		this.setVisible(true);
+	public void estableceControlador(ControladorPrincipal controlador) {
+		this.btn_nuevoHotel.addActionListener(controlador);
+		this.btn_eliminarHotel.addActionListener(controlador);
 	}
+	
 }
