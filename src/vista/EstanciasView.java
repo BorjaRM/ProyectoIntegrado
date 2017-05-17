@@ -7,13 +7,13 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JTable;
 
-public class ListaEstancias extends JPanel {
+public class EstanciasView extends JPanel {
 	private JTable table;
 
 	/**
 	 * Create the panel.
 	 */
-	public ListaEstancias() {
+	public EstanciasView() {
 		setLayout(new BorderLayout(0, 0));
 		
 		Component horizontalStrut = Box.createHorizontalStrut(40);

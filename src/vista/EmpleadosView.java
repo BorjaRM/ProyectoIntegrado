@@ -8,14 +8,14 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 
-public class ListaEmpleados extends JPanel {
+public class EmpleadosView extends JPanel {
 	private JTextField textField;
 	private JTable table;
 
 	/**
 	 * Create the panel.
 	 */
-	public ListaEmpleados() {
+	public EmpleadosView() {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();

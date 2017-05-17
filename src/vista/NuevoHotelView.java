@@ -1,12 +1,11 @@
 package vista;
 
 import javax.swing.JPanel;
-import java.awt.GridBagLayout;
 import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
-import java.awt.Insets;
-import java.awt.GridLayout;
+
+import controlador.ControladorPrincipal;
+
 import javax.swing.BoxLayout;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
@@ -14,7 +13,7 @@ import javax.swing.JButton;
 import java.awt.Component;
 import javax.swing.Box;
 
-public class HotelView extends JPanel {
+public class NuevoHotelView extends JPanel {
 	private JTextField text_nombre;
 	private JTextField text_telefono;
 	private JTextField text_calle;
@@ -22,11 +21,13 @@ public class HotelView extends JPanel {
 	private JTextField text_numero;
 	private JTextField text_ciudad;
 	private JTextField text_pais;
+	private JButton btnEnviar;
+	private JButton btnCancelar;
 
 	/**
 	 * Create the panel.
 	 */
-	public HotelView() {
+	public NuevoHotelView() {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
@@ -97,10 +98,10 @@ public class HotelView extends JPanel {
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 		add(Botonera, BorderLayout.SOUTH);
 		
-		JButton btnEnviar = new JButton("Enviar");
+		btnEnviar = new JButton("Enviar");
 		Botonera.add(btnEnviar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		Botonera.add(btnCancelar);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(20);
@@ -112,6 +113,11 @@ public class HotelView extends JPanel {
 		Component verticalStrut = Box.createVerticalStrut(20);
 		add(verticalStrut, BorderLayout.NORTH);
 
+	}
+	
+	public void estableceControlador(ControladorPrincipal controlador) {
+		this.btnEnviar.addActionListener(controlador);
+		this.btnCancelar.addActionListener(controlador);
 	}
 
 }

@@ -20,10 +20,10 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.Color;
 
-public class RegistroIncidenciaView extends JPanel {
+public class NuevaIncidenciaView extends JPanel {
 
 	
-	public RegistroIncidenciaView() {
+	public NuevaIncidenciaView() {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();

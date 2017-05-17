@@ -14,11 +14,11 @@ public class Inicio {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BD database = BD.getSingleDBInstance("52.70.251.153","hotel_pi","usuario","Pintegrado2017");
+					BD database = BD.getSingleDBInstance("54.88.246.216","hotel_pi","usuario","Pintegrado2017");
 					LoginView login = new LoginView();
 					ControladorPrincipal controlador = new ControladorPrincipal(database,login);
 					login.estableceControlador(controlador);
-					login.visualiza();		
+					login.setVisible(true);		
 				} catch (Exception e) {
 					e.printStackTrace();
 				} 		

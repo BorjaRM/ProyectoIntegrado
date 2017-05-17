@@ -1,18 +1,18 @@
 package modelo.vo;
 
 public class EmpleadoVO {
-	private int codigo;
+	private String codigo;
 	private String nombre;
 	private String apellido1;
 	private String apellido2;
 	private String identificacion;
 	private String telefono;
-	private int salario;
+	private String salario;
 	private String seguridad_social;
 	private String fecha_alta;
 	private String lugar_trabajo;
 	
-	public EmpleadoVO(int cod, String nom, String ap1, String ap2, String id, String tlf, int salario, String ss, String fAlta, String trabaja){
+	public EmpleadoVO(String cod, String nom, String ap1, String ap2, String id, String tlf, String salario, String ss, String fAlta, String trabaja){
 		codigo=cod;
 		nombre=nom;
 		apellido1=ap1;
@@ -25,7 +25,7 @@ public class EmpleadoVO {
 		lugar_trabajo=trabaja;
 	}
 	
-	public EmpleadoVO(String nom, String ap1, String ap2, String id, String tlf, int salario, String ss, String fAlta, String trabaja){
+	public EmpleadoVO(String nom, String ap1, String ap2, String id, String tlf, String salario, String ss, String fAlta, String trabaja){
 		nombre=nom;
 		apellido1=ap1;
 		apellido2=ap2;
@@ -37,11 +37,11 @@ public class EmpleadoVO {
 		lugar_trabajo=trabaja;
 	}
 
-	public int getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(int codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 
@@ -85,11 +85,11 @@ public class EmpleadoVO {
 		this.telefono = telefono;
 	}
 
-	public int getSalario() {
+	public String getSalario() {
 		return salario;
 	}
 
-	public void setSalario(int salario) {
+	public void setSalario(String salario) {
 		this.salario = salario;
 	}
 

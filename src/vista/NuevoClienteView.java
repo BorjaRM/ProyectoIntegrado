@@ -1,3 +1,4 @@
+
 package vista;
 
 import javax.swing.JPanel;
@@ -8,7 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
-public class ModificarClienteView extends JPanel {
+public class NuevoClienteView extends JPanel {
 	private JTextField txt_Nombre;
 	private JTextField txt_Apellidos;
 	private JTextField txt_Identificacion;
@@ -20,7 +21,7 @@ public class ModificarClienteView extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ModificarClienteView() {
+	public NuevoClienteView() {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_Botones = new JPanel();
@@ -28,8 +29,8 @@ public class ModificarClienteView extends JPanel {
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 		add(panel_Botones, BorderLayout.SOUTH);
 		
-		JButton btnModificar = new JButton("Modificar");
-		panel_Botones.add(btnModificar);
+		JButton btnEnviar = new JButton("Enviar");
+		panel_Botones.add(btnEnviar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		panel_Botones.add(btnCancelar);

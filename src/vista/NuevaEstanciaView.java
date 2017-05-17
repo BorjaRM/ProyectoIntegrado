@@ -18,7 +18,7 @@ import javax.swing.JRadioButton;
 import java.awt.FlowLayout;
 import java.awt.Font;
 
-public class RegistroEstanciaView extends JPanel {
+public class NuevaEstanciaView extends JPanel {
 	private JTextField txt_Nombre;
 	private JTextField txt_Tipo;
 	private JTextField txt_Plazas;
@@ -29,7 +29,7 @@ public class RegistroEstanciaView extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public RegistroEstanciaView() {
+	public NuevaEstanciaView() {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_Textos = new JPanel();
