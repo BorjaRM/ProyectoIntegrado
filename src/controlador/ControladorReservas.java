@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package controlador;
 
 import modelo.BD;
@@ -36,3 +37,11 @@ public class ControladorReservas {
 	}
 	
 }
+=======
+
+package controlador;
+
+public class ControladorReservas {
+
+}
+>>>>>>> 022fb508a18d1369d3285f6c82d759f25d20a3a5

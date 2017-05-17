@@ -13,6 +13,7 @@ import modelo.vo.ReservaVO;
 
 public class ReservaDAO {
 	BD bd;
+	Regimenes rg;
 	ArrayList <ReservaVO> reservas;
 	
 	public void consultaReservas(BD modelo){
@@ -27,11 +28,14 @@ public class ReservaDAO {
 				String inicio = rs.getString("inicio");
 				String fin = rs.getString("fin");
 				String noches = "LMAO";
-				String pension = rs.getString("regimen");
+				Regimenes pension = rs.getString("regimen");
+				
+				ReservaVO r = new ReservaVO(codigo,cliente,habitacion,inicio,fin,noches,pension);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		ReservaVO r = new ReservaVO(codigo,cliente,habitacion,inicio,fin,pension)
+		
+		reservas.add(r);
 	}
 }

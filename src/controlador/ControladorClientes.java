@@ -11,5 +11,20 @@ public class ControladorClientes {
 	private ModificarClienteView mcv;
 	private NuevoClienteView ncv;
 	
+	public ControladorClientes(BD modelo){
+		this.modelo=modelo;
+	}
+	
+	public void setCv(ClientesView cv) {
+		this.cv = cv;
+	}
+
+	public void setMcv(ModificarClienteView mcv) {
+		this.mcv = mcv;
+	}
+
+	public void setNcv(NuevoClienteView ncv) {
+		this.ncv = ncv;
+	}
 
 }
