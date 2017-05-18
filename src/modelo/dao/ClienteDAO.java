@@ -73,7 +73,7 @@ public class ClienteDAO {
 		String codigoString = clientes.get(posicion).getCodigo();
 		try {
 			Statement stmt = bd.getConexion().createStatement();
-			stmt.executeUpdate("UPDATE TABLE cliente SET nombre="+cliente.getNombre()+", apelllidos="+cliente.getApellidos()+", identificacion="+cliente.getIdentificacion()+", fecha_nacimiento="+cliente.getTelefono()+", nacionalidad="+cliente.getNacionalidad()+", email="+cliente.getEmail()+", fecha_alta="+cliente.getFecha_alta()+" WHERE codigo="+codigoString);
+			stmt.executeUpdate("UPDATE TABLE cliente SET nombre='"+cliente.getNombre()+"', apelllidos='"+cliente.getApellidos()+"', identificacion='"+cliente.getIdentificacion()+"', fecha_nacimiento='"+cliente.getTelefono()+"', nacionalidad='"+cliente.getNacionalidad()+"', email='"+cliente.getEmail()+"', fecha_alta='"+cliente.getFecha_alta()+"' WHERE codigo='"+codigoString+"';");
 		} catch (Exception e) {
 			System.err.println("Error modificando cliente.");
 		}
