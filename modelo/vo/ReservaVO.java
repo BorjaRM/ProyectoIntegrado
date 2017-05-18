@@ -1,24 +1,24 @@
 package modelo.vo;
 
+import modelo.dao.TipoRegimenDAO;
+
 public class ReservaVO {
 	private String codigo;
 	private String inicio;
 	private String fin;
-	private Regimenes regimen;
+	private TipoRegimenDAO regimen;
 	private String cod_cliente;
 	private String cod_usuario;
+	private String cod_habitacion;
 	
-	public ReservaVO(String cod, String ini, String fin, Regimenes reg, String cli, String user){
+	public ReservaVO(String cod, String ini, String fin, TipoRegimenDAO reg, String cli, String user, String hab){
 		codigo=cod;
 		inicio=ini;
 		this.fin=fin;
 		regimen=reg;
 		cod_cliente=cli;
 		cod_usuario=user;
-	}
-	
-	private enum Regimenes{
-		ALOJAMIENTO,DESAYUNO,MEDIA,COMPLETA
+		cod_habitacion = hab;
 	}
 	
 	public String getCodigo() {
@@ -45,14 +45,6 @@ public class ReservaVO {
 		this.fin = fin;
 	}
 
-	public Regimenes getRegimen() {
-		return regimen;
-	}
-
-	public void setRegimen(Regimenes regimen) {
-		this.regimen = regimen;
-	}
-
 	public String getCliente() {
 		return cod_cliente;
 	}
@@ -67,6 +59,22 @@ public class ReservaVO {
 
 	public void setUsuario(String usuario) {
 		this.cod_usuario = usuario;
+	}
+
+	public TipoRegimenDAO getRegimen() {
+		return regimen;
+	}
+
+	public void setRegimen(TipoRegimenDAO regimen) {
+		this.regimen = regimen;
+	}
+	
+	public String getHabitacion(){
+		return cod_habitacion;
+	}
+	
+	public void setHabitacion(String habitacion){
+		this.cod_habitacion = habitacion;
 	}
 
 }

@@ -10,7 +10,7 @@ import com.mysql.jdbc.Connection;
 
 import modelo.BD;
 import modelo.vo.ReservaVO;
-import modelo.vo.TipoPension;
+
 
 public class ReservaDAO {
 	BD bd;
@@ -28,9 +28,9 @@ public class ReservaDAO {
 				String inicio = rs.getString("inicio");
 				String fin = rs.getString("fin");
 				String noches = "LMAO";
-				TipoPension pension = null;
+				TipoRegimenDAO pension = null;
 				
-				ReservaVO r = new ReservaVO(codigo,cliente,habitacion,pension,fin,inicio,noches);
+				ReservaVO r = new ReservaVO(codigo,cliente,habitacion,pension,fin,inicio, noches);
 				reservas.add(r);
 			}
 		} catch (SQLException e) {
