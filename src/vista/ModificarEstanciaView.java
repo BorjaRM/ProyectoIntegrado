@@ -8,18 +8,25 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import java.awt.GridLayout;
 import javax.swing.SwingConstants;
+
+import controlador.ControladorEstancias;
+import interfaces.IControladorEstancias;
+
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import javax.swing.BoxLayout;
 
-public class ModificarEstanciaView extends JPanel {
+public class ModificarEstanciaView extends JPanel implements IControladorEstancias{
 	private JTextField txt_Nombre;
 	private JTextField txt_Tipo;
 	private JTextField txt_Plazas;
 	private JTextField txt_Precio;
 	private JTextField txt_Descripcion;
 	private JTextField txt_nombre_uso;
+	private JButton btnModificar;
+	private JButton btnCancelar;
 
 	/**
 	 * Create the panel.
@@ -30,30 +37,24 @@ public class ModificarEstanciaView extends JPanel {
 		JPanel panel_Textos = new JPanel();
 		add(panel_Textos, BorderLayout.NORTH);
 		
-		JLabel lblHabitacin = new JLabel("Habitación");
-		lblHabitacin.setFont(new Font("Lucida Grande", Font.ITALIC, 16));
-		panel_Textos.add(lblHabitacin);
+		JLabel lblHabitacion = new JLabel("Habitacion");
+		lblHabitacion.setFont(new Font("Lucida Grande", Font.ITALIC, 16));
+		panel_Textos.add(lblHabitacion);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(150);
 		panel_Textos.add(horizontalStrut);
 		
-		JLabel lblUsoComn = new JLabel("Uso Común");
+		JLabel lblUsoComn = new JLabel("Uso Comun");
 		lblUsoComn.setFont(new Font("Lucida Grande", Font.ITALIC, 16));
 		panel_Textos.add(lblUsoComn);
 		
 		JPanel panel_Botones = new JPanel();
 		add(panel_Botones, BorderLayout.SOUTH);
 		
-		JButton btn_NewHabitacion = new JButton("Añadir Habitacion");
-		panel_Botones.add(btn_NewHabitacion);
-		
-		Component horizontalStrut_1 = Box.createHorizontalStrut(40);
-		panel_Botones.add(horizontalStrut_1);
-		
-		JButton btnModificar = new JButton("Modificar");
+		btnModificar = new JButton("Modificar");
 		panel_Botones.add(btnModificar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		panel_Botones.add(btnCancelar);
 		
 		JPanel panel = new JPanel();
@@ -62,7 +63,7 @@ public class ModificarEstanciaView extends JPanel {
 		
 		JPanel panel_Habitacion = new JPanel();
 		panel.add(panel_Habitacion);
-		panel_Habitacion.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		panel_Habitacion.setLayout(new BoxLayout(panel_Habitacion, BoxLayout.Y_AXIS));
 		
 		JLabel lblNombre = new JLabel("Nombre:");
 		panel_Habitacion.add(lblNombre);
@@ -92,7 +93,7 @@ public class ModificarEstanciaView extends JPanel {
 		panel_Habitacion.add(txt_Precio);
 		txt_Precio.setColumns(5);
 		
-		JLabel lblDescripcin = new JLabel("Descripción:");
+		JLabel lblDescripcin = new JLabel("Descripcion:");
 		panel_Habitacion.add(lblDescripcin);
 		
 		txt_Descripcion = new JTextField();
@@ -111,7 +112,7 @@ public class ModificarEstanciaView extends JPanel {
 		JPanel panel_1 = new JPanel();
 		panel_Servicios.add(panel_1, BorderLayout.CENTER);
 		
-		JRadioButton rdbtnBaoPrivado = new JRadioButton("Baño Privado");
+		JRadioButton rdbtnBaoPrivado = new JRadioButton("Aseo Privado");
 		panel_1.add(rdbtnBaoPrivado);
 		
 		JRadioButton rdbtnAc = new JRadioButton("A/C            ");
@@ -140,6 +141,12 @@ public class ModificarEstanciaView extends JPanel {
 		panel_UsoComun.add(txt_nombre_uso);
 		txt_nombre_uso.setColumns(10);
 
+	}
+
+	@Override
+	public void estableceControlador(ControladorEstancias controlador) {
+		this.btnModificar.addActionListener(controlador);
+		this.btnCancelar.addActionListener(controlador);
 	}
 
 }

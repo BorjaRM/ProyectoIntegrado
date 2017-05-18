@@ -2,7 +2,12 @@ package vista;
 
 import java.awt.EventQueue;
 
-import controlador.ControladorPrincipal;
+import controlador.ControladorClientes;
+import controlador.ControladorEmpleados;
+import controlador.ControladorEstancias;
+import controlador.ControladorIncidencias;
+import controlador.ControladorUsuarios;
+import controlador.ControladorReservas;
 import modelo.BD;
 
 public class Inicio {
@@ -14,20 +19,21 @@ public class Inicio {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BD database = BD.getSingleDBInstance("54.88.246.216","hotel_pi","usuario","Pintegrado2017");
+					//Creamos la base de datos
+					BD database = BD.getSingleDBInstance("52.90.200.239","hotel_pi","usuario","Pintegrado2017");
+					//Creamos la primera ventana de la aplicacion
 					LoginView login = new LoginView();
-					ControladorPrincipal controlador = new ControladorPrincipal(database,login);
-					login.estableceControlador(controlador);
+					//Creamos el controlador principal
+					ControladorUsuarios cUsuarios = new ControladorUsuarios(database,login);
+					//Asociamos el controlador con la ventana
+					login.estableceControlador(cUsuarios);
+					//Visualizamos la ventana
 					login.setVisible(true);		
 				} catch (Exception e) {
 					e.printStackTrace();
 				} 		
-				
 			}
 		});
 	}
 	
-		
-
-
 }

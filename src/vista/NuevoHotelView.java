@@ -4,7 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import controlador.ControladorPrincipal;
+import controlador.ControladorUsuarios;
 
 import javax.swing.BoxLayout;
 import java.awt.FlowLayout;
@@ -115,7 +115,7 @@ public class NuevoHotelView extends JPanel {
 
 	}
 	
-	public void estableceControlador(ControladorPrincipal controlador) {
+	public void estableceControlador(ControladorUsuarios controlador) {
 		this.btnEnviar.addActionListener(controlador);
 		this.btnCancelar.addActionListener(controlador);
 	}

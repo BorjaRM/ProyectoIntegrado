@@ -12,7 +12,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JList;
 import javax.swing.SpringLayout;
 
-import controlador.ControladorPrincipal;
+import controlador.ControladorUsuarios;
 
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
@@ -127,7 +127,7 @@ public class PrincipalAdminView extends JPanel {
 		
 	}
 	
-	public void estableceControlador(ControladorPrincipal controlador) {
+	public void estableceControlador(ControladorUsuarios controlador) {
 		this.btn_nuevoHotel.addActionListener(controlador);
 		this.btn_eliminarHotel.addActionListener(controlador);
 	}

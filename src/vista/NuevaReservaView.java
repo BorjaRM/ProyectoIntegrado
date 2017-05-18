@@ -4,6 +4,9 @@ import javax.swing.JPanel;
 
 import com.toedter.calendar.JDateChooser;
 
+import controlador.ControladorReservas;
+import interfaces.IControladorReservas;
+
 import java.awt.BorderLayout;
 import javax.swing.JButton;
 import java.awt.FlowLayout;
@@ -14,11 +17,10 @@ import javax.swing.JComboBox;
 import java.awt.Insets;
 import java.util.Date;
 
-import javax.swing.JTextField;
-
-public class NuevaReservaView extends JPanel {
+public class NuevaReservaView extends JPanel implements IControladorReservas{
+	private JButton btnEnviar;
+	private JButton btnCancelar;
 	
-
 	/**
 	 * Create the panel.
 	 */
@@ -30,10 +32,10 @@ public class NuevaReservaView extends JPanel {
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 		add(panel, BorderLayout.SOUTH);
 		
-		JButton btnEnviar = new JButton("Enviar");
+		btnEnviar = new JButton("Enviar");
 		panel.add(btnEnviar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		panel.add(btnCancelar);
 		
 		JPanel panel_1 = new JPanel();
@@ -129,6 +131,12 @@ public class NuevaReservaView extends JPanel {
 		gbc_listaPension.gridy = 5;
 		panel_1.add(listaPension, gbc_listaPension);
 
+	}
+
+	@Override
+	public void estableceControlador(ControladorReservas controlador) {
+		this.btnEnviar.addActionListener(controlador);
+		this.btnCancelar.addActionListener(controlador);
 	}
 
 }

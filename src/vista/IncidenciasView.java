@@ -8,11 +8,15 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
-public class IncidenciasView extends JPanel {
+import controlador.ControladorIncidencias;
+import interfaces.IControladorIncidencias;
+
+public class IncidenciasView extends JPanel implements IControladorIncidencias{
 	private JTable table;
+	private JButton btnNueva;
+	private JButton btnResuelta;
 
 
 	public IncidenciasView() {
@@ -25,13 +29,13 @@ public class IncidenciasView extends JPanel {
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		add(panel, BorderLayout.NORTH);
 		
-		JButton btnNewButton = new JButton("Nueva Incidencia");
-		btnNewButton.setHorizontalAlignment(SwingConstants.LEFT);
-		panel.add(btnNewButton);
+		btnNueva = new JButton("Nueva Incidencia");
+		btnNueva.setActionCommand("Nueva Incidencia");
+		panel.add(btnNueva);
 		
-		JButton btnNewButton_1 = new JButton("Marcar Como Resuelta");
-		btnNewButton_1.setHorizontalAlignment(SwingConstants.LEFT);
-		panel.add(btnNewButton_1);
+		btnResuelta = new JButton("Marcar Como Resuelta");
+		btnResuelta.setActionCommand("Incidencia Resuelta");
+		panel.add(btnResuelta);
 		
 		JPanel panel_1 = new JPanel();
 		add(panel_1, BorderLayout.CENTER);
@@ -51,5 +55,11 @@ public class IncidenciasView extends JPanel {
 		add(panel_2, BorderLayout.SOUTH);
 	}
 
+
+	@Override
+	public void estableceControlador(ControladorIncidencias controlador) {
+		this.btnNueva.addActionListener(controlador);
+		this.btnResuelta.addActionListener(controlador);
+	}
 	
 }

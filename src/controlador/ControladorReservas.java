@@ -1,47 +1,62 @@
-<<<<<<< HEAD
 package controlador;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import modelo.BD;
+import vista.Marco;
 import vista.NuevaReservaView;
 import vista.ReservasView;
 
-public class ControladorReservas {
-
+public class ControladorReservas implements ActionListener {
 	private BD modelo;
-	private NuevaReservaView nr;
+	private Marco frame;
+	private NuevaReservaView nrv;
 	private ReservasView rv;
+	private final boolean esAdministrador;
 	
-	
-	public ControladorReservas(BD modelo){
+	public ControladorReservas(Marco frame, BD modelo, boolean esAdministrador){
+		this.frame=frame;
 		this.modelo = modelo;
-	}
-
-
-	public NuevaReservaView getNr() {
-		return nr;
-	}
-
-
-	public void setNr(NuevaReservaView nr) {
-		this.nr = nr;
-	}
-
-
-	public ReservasView getRv() {
-		return rv;
-	}
-
-
-	public void setRv(ReservasView rv) {
-		this.rv = rv;
+		this.esAdministrador=esAdministrador;
 	}
 	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		System.out.println(e.getActionCommand());
+		switch(e.getActionCommand()){
+			case "Ver Reservas": preparaReservasView(); break;
+			case "Nueva Reserva": preparaNuevaReservaView(); break;
+			case "Anular Reserva": /* **************************************************************************** */ break;
+			case "Enviar": /* **************************************************************************** */ break;
+			case "Cancelar": cancelar(); break;
+		}
+	}
+
+	public void preparaReservasView(){
+		frame.creaReservasView(this);
+		this.rv=frame.getRv();
+		frame.muestraReservasView();
+	}
+	
+	public void preparaNuevaReservaView(){
+		frame.creaNuevaReservaView(this);
+		this.nrv=frame.getNrv();
+		frame.muestraNuevaReservaView();
+	}
+	
+	public void eliminarReserva(){
+		//Eliminar reserva seleccionada y volver a mostar reservasView
+	}
+	
+	public void insertarReserva(){
+		//Insertar reserva y volver a mostrar reservasView
+	}
+	
+	public void cancelar(){
+		if(rv == null){
+			frame.muestraPrincipalView(esAdministrador);
+		}else
+			frame.muestraReservasView();
+	}
 }
-=======
-
-package controlador;
-
-public class ControladorReservas {
-
-}
->>>>>>> 022fb508a18d1369d3285f6c82d759f25d20a3a5

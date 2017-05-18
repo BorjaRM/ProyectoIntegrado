@@ -5,10 +5,14 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import controlador.ControladorClientes;
+import interfaces.IControladorClientes;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
-public class ModificarClienteView extends JPanel {
+public class ModificarClienteView extends JPanel implements IControladorClientes{
 	private JTextField txt_Nombre;
 	private JTextField txt_Apellidos;
 	private JTextField txt_Identificacion;
@@ -16,6 +20,8 @@ public class ModificarClienteView extends JPanel {
 	private JTextField txt_Telefono;
 	private JTextField txt_Email;
 	private JTextField txt_Nacionalidad;
+	private JButton btnModificar;
+	private JButton btnCancelar;
 
 	/**
 	 * Create the panel.
@@ -28,10 +34,12 @@ public class ModificarClienteView extends JPanel {
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 		add(panel_Botones, BorderLayout.SOUTH);
 		
-		JButton btnModificar = new JButton("Modificar");
+		btnModificar = new JButton("Modificar");
+		btnModificar.setActionCommand("Modificar");
 		panel_Botones.add(btnModificar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setActionCommand("Cancelar");
 		panel_Botones.add(btnCancelar);
 		
 		JPanel panel_Informacion = new JPanel();
@@ -89,5 +97,9 @@ public class ModificarClienteView extends JPanel {
 
 	}
 
+	public void estableceControlador(ControladorClientes controlador){
+		this.btnModificar.addActionListener(controlador);
+		this.btnCancelar.addActionListener(controlador);
+	}
 }
 

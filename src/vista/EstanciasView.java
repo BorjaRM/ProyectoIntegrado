@@ -7,8 +7,14 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JTable;
 
-public class EstanciasView extends JPanel {
+import controlador.ControladorEstancias;
+import interfaces.IControladorEstancias;
+
+public class EstanciasView extends JPanel implements IControladorEstancias{
 	private JTable table;
+	private JButton btnNuevaEstancia;
+	private JButton btnEliminarEstancia;
+	private JButton btnModificarEstancia;
 
 	/**
 	 * Create the panel.
@@ -31,24 +37,31 @@ public class EstanciasView extends JPanel {
 		Component verticalStrut_1 = Box.createVerticalStrut(40);
 		panel.add(verticalStrut_1);
 		
-		JButton btnNewButton = new JButton("Nueva Estancia");
-		panel.add(btnNewButton);
+		btnNuevaEstancia = new JButton("Nueva Estancia");
+		panel.add(btnNuevaEstancia);
 		
 		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
 		panel.add(horizontalStrut_2);
 		
-		JButton btnNewButton_1 = new JButton("Eliminar Estancia");
-		panel.add(btnNewButton_1);
+		btnEliminarEstancia = new JButton("Eliminar Estancia");
+		panel.add(btnEliminarEstancia);
 		
 		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
 		panel.add(horizontalStrut_3);
 		
-		JButton btnNewButton_2 = new JButton("Modificar Estancia");
-		panel.add(btnNewButton_2);
+		btnModificarEstancia = new JButton("Modificar Estancia");
+		panel.add(btnModificarEstancia);
 		
 		table = new JTable();
 		add(table, BorderLayout.CENTER);
 
+	}
+
+	@Override
+	public void estableceControlador(ControladorEstancias controlador) {
+		this.btnNuevaEstancia.addActionListener(controlador);
+		this.btnModificarEstancia.addActionListener(controlador);
+		this.btnEliminarEstancia.addActionListener(controlador);
 	}
 
 }

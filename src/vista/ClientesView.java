@@ -7,8 +7,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class ClientesView extends JPanel {
+import controlador.ControladorClientes;
+import interfaces.IControladorClientes;
+
+public class ClientesView extends JPanel implements IControladorClientes{
 	private JTable table;
+	private JButton btnNuevoCliente;
+	private JButton btnEliminarCliente;
+	private JButton btnEditarCliente;
 
 	/**
 	 * Create the panel.
@@ -19,13 +25,16 @@ public class ClientesView extends JPanel {
 		JPanel panel_BotonesArriba = new JPanel();
 		add(panel_BotonesArriba, BorderLayout.NORTH);
 		
-		JButton btnAadirCliente = new JButton("Añadir Cliente");
-		panel_BotonesArriba.add(btnAadirCliente);
+		btnNuevoCliente = new JButton("Nuevo cliente");
+		btnNuevoCliente.setActionCommand("Nuevo cliente");
+		panel_BotonesArriba.add(btnNuevoCliente);
 		
-		JButton btnEliminarCliente = new JButton("Eliminar Cliente");
+		btnEliminarCliente = new JButton("Eliminar cliente");
+		btnEliminarCliente.setActionCommand("Eliminar cliente");
 		panel_BotonesArriba.add(btnEliminarCliente);
 		
-		JButton btnEditarCliente = new JButton("Editar Cliente");
+		btnEditarCliente = new JButton("Editar cliente");
+		btnEditarCliente.setActionCommand("Editar cliente");
 		panel_BotonesArriba.add(btnEditarCliente);
 		
 		JPanel panel_Tabla = new JPanel();
@@ -39,9 +48,16 @@ public class ClientesView extends JPanel {
 		DefaultTableModel table_model = new DefaultTableModel(colHeader,0);
 		table = new JTable(table_model);
 		scrollPane.setViewportView(table);
-
-		
-
+	}
+	
+	public void estableceControlador(ControladorClientes controlador){
+		this.btnNuevoCliente.addActionListener(controlador);
+		this.btnEditarCliente.addActionListener(controlador);
+		this.btnEliminarCliente.addActionListener(controlador);
+	}
+	
+	public void ocultaBotonEliminar(){
+		this.btnEliminarCliente.setVisible(false);
 	}
 
 }

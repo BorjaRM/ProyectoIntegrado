@@ -6,11 +6,18 @@ import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+
+import controlador.ControladorEmpleados;
+import interfaces.IControladorEmpleados;
+
 import javax.swing.JTable;
 
-public class EmpleadosView extends JPanel {
+public class EmpleadosView extends JPanel implements IControladorEmpleados{
 	private JTextField textField;
 	private JTable table;
+	private JButton btnNuevoEmpleado;
+	private JButton btnEliminarEmpleado;
+	private JButton btnModificarEmpleado;
 
 	/**
 	 * Create the panel.
@@ -24,20 +31,23 @@ public class EmpleadosView extends JPanel {
 		Component verticalStrut = Box.createVerticalStrut(40);
 		panel.add(verticalStrut);
 		
-		JButton btnNewButton = new JButton("A\u00F1adir Empleado");
-		panel.add(btnNewButton);
+		btnNuevoEmpleado = new JButton("Nuevo Empleado");
+		btnNuevoEmpleado.setActionCommand("Nuevo Empleado");
+		panel.add(btnNuevoEmpleado);
 		
 		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
 		panel.add(horizontalStrut_2);
 		
-		JButton btnNewButton_1 = new JButton("Eliminar Empleado");
-		panel.add(btnNewButton_1);
+		btnEliminarEmpleado = new JButton("Eliminar Empleado");
+		btnEliminarEmpleado.setActionCommand("Eliminar Empleado");
+		panel.add(btnEliminarEmpleado);
 		
 		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
 		panel.add(horizontalStrut_3);
 		
-		JButton btnNewButton_2 = new JButton("Modificar Empleado");
-		panel.add(btnNewButton_2);
+		btnModificarEmpleado = new JButton("Modificar Empleado");
+		btnModificarEmpleado.setActionCommand("Modificar Empleado");
+		panel.add(btnModificarEmpleado);
 		
 		Component horizontalStrut_4 = Box.createHorizontalStrut(20);
 		panel.add(horizontalStrut_4);
@@ -57,7 +67,13 @@ public class EmpleadosView extends JPanel {
 		
 		table = new JTable();
 		add(table, BorderLayout.CENTER);
+	}
 
+	@Override
+	public void estableceControlador(ControladorEmpleados controlador) {
+		this.btnNuevoEmpleado.addActionListener(controlador);
+		this.btnModificarEmpleado.addActionListener(controlador);
+		this.btnEliminarEmpleado.addActionListener(controlador);
 	}
 
 }
