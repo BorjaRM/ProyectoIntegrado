@@ -41,6 +41,11 @@ public class ControladorEstancias implements ActionListener {
 	public void preparaEstanciasView(){
 		frame.creaEstanciasView(this);
 		this.esv=frame.getEsv();
+		if(!esAdministrador){
+			esv.ocultaBotonNuevaEstancia();
+			esv.ocultaBotonModificarEstancia();
+			esv.ocultaBotonEliminarEstancia();
+		}
 		frame.muestraEstanciasView();
 	}
 	

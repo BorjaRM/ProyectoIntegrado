@@ -24,9 +24,8 @@ public class IncidenciasView extends JPanel implements IControladorIncidencias{
 		
 		JPanel panel = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
-		flowLayout.setVgap(20);
-		flowLayout.setHgap(10);
-		flowLayout.setAlignment(FlowLayout.LEFT);
+		flowLayout.setVgap(15);
+		flowLayout.setHgap(30);
 		add(panel, BorderLayout.NORTH);
 		
 		btnNueva = new JButton("Nueva Incidencia");
@@ -50,9 +49,6 @@ public class IncidenciasView extends JPanel implements IControladorIncidencias{
 		table = new JTable(modeloTabla);
 	
 		scrollPane.setViewportView(table);
-		
-		JPanel panel_2 = new JPanel();
-		add(panel_2, BorderLayout.SOUTH);
 	}
 
 

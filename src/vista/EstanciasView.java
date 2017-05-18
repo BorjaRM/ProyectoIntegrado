@@ -1,20 +1,22 @@
 package vista;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
 import java.awt.BorderLayout;
-import java.awt.Component;
-import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import controlador.ControladorEstancias;
 import interfaces.IControladorEstancias;
+import java.awt.FlowLayout;
 
 public class EstanciasView extends JPanel implements IControladorEstancias{
 	private JTable table;
 	private JButton btnNuevaEstancia;
-	private JButton btnEliminarEstancia;
 	private JButton btnModificarEstancia;
+	private JButton btnEliminarEstancia;
 
 	/**
 	 * Create the panel.
@@ -22,38 +24,32 @@ public class EstanciasView extends JPanel implements IControladorEstancias{
 	public EstanciasView() {
 		setLayout(new BorderLayout(0, 0));
 		
-		Component horizontalStrut = Box.createHorizontalStrut(40);
-		add(horizontalStrut, BorderLayout.EAST);
-		
-		Component horizontalStrut_1 = Box.createHorizontalStrut(40);
-		add(horizontalStrut_1, BorderLayout.WEST);
-		
-		Component verticalStrut = Box.createVerticalStrut(40);
-		add(verticalStrut, BorderLayout.SOUTH);
-		
-		JPanel panel = new JPanel();
-		add(panel, BorderLayout.NORTH);
-		
-		Component verticalStrut_1 = Box.createVerticalStrut(40);
-		panel.add(verticalStrut_1);
+		JPanel botonera = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) botonera.getLayout();
+		flowLayout.setHgap(30);
+		flowLayout.setVgap(15);
+		add(botonera, BorderLayout.NORTH);
 		
 		btnNuevaEstancia = new JButton("Nueva Estancia");
-		panel.add(btnNuevaEstancia);
-		
-		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
-		panel.add(horizontalStrut_2);
+		botonera.add(btnNuevaEstancia);
 		
 		btnEliminarEstancia = new JButton("Eliminar Estancia");
-		panel.add(btnEliminarEstancia);
-		
-		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
-		panel.add(horizontalStrut_3);
+		botonera.add(btnEliminarEstancia);
 		
 		btnModificarEstancia = new JButton("Modificar Estancia");
-		panel.add(btnModificarEstancia);
+		botonera.add(btnModificarEstancia);
 		
-		table = new JTable();
-		add(table, BorderLayout.CENTER);
+		JPanel panel_Tabla = new JPanel();
+		add(panel_Tabla, BorderLayout.CENTER);
+		panel_Tabla.setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane scrollPane = new JScrollPane();
+		panel_Tabla.add(scrollPane);
+		
+		String[] colHeader = {"ID","Nombre","Tipo","Plazas","Camas","Aseo","A/C","Wifi","Precio"};
+		DefaultTableModel table_model = new DefaultTableModel(colHeader,0);
+		table = new JTable(table_model);
+		scrollPane.setViewportView(table);
 
 	}
 
@@ -62,6 +58,18 @@ public class EstanciasView extends JPanel implements IControladorEstancias{
 		this.btnNuevaEstancia.addActionListener(controlador);
 		this.btnModificarEstancia.addActionListener(controlador);
 		this.btnEliminarEstancia.addActionListener(controlador);
+	}
+	
+	public void ocultaBotonNuevaEstancia(){
+		this.btnNuevaEstancia.setVisible(false);
+	}
+	
+	public void ocultaBotonModificarEstancia(){
+		this.btnModificarEstancia.setVisible(false);
+	}
+
+	public void ocultaBotonEliminarEstancia(){
+		this.btnEliminarEstancia.setVisible(false);
 	}
 
 }

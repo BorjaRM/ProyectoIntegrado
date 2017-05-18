@@ -22,6 +22,7 @@ public class NuevaIncidenciaView extends JPanel implements IControladorIncidenci
 	private JComboBox comboBox;
 	private JButton btnEnviar;
 	private JButton btnCancelar;
+	private String[] desplegableEstancias = {"Habitacion 1", "SPA"};
 
 	
 	public NuevaIncidenciaView() {
@@ -34,17 +35,14 @@ public class NuevaIncidenciaView extends JPanel implements IControladorIncidenci
 		JPanel panel_2 = new JPanel();
 		panel.add(panel_2, BorderLayout.NORTH);
 		panel_2.setLayout(new BorderLayout(0, 0));
-		
-		
-		String [] nombresLista = {"Habitacion 1", "SPA"};
-		
+				
 		Component horizontalStrut = Box.createHorizontalStrut(150);
 		panel_2.add(horizontalStrut, BorderLayout.EAST);
 		
 		Component horizontalStrut_1 = Box.createHorizontalStrut(100);
 		panel_2.add(horizontalStrut_1, BorderLayout.WEST);
 		
-		comboBox = new JComboBox(nombresLista);
+		comboBox = new JComboBox(desplegableEstancias);
 		panel_2.add(comboBox, BorderLayout.CENTER);
 		
 		JPanel panel_3 = new JPanel();

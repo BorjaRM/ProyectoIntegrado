@@ -140,6 +140,7 @@ public class Marco extends JFrame{
 			cl.show(vistas,PRINCIPAL_ADMIN);
 		}else{
 			empleados.setVisible(false);
+			item_nuevaEstancia.setVisible(false);
 			cl.show(vistas,PRINCIPAL_EMPLEADO);
 		}
 	}
@@ -287,6 +288,7 @@ public class Marco extends JFrame{
 	
 	public void muestraEstanciasView(){
 		cl.show(vistas, VER_ESTANCIAS);
+
 	}
 	
 	public void creaNuevaEstanciaView(ControladorEstancias controlador){
@@ -394,14 +396,5 @@ public class Marco extends JFrame{
 	public ModificarEstanciaView getMesv() {
 		return mesv;
 	}	
-	
-	
-	
-	
-	
-
-	
-	
-	
 	
 }

@@ -9,6 +9,10 @@ import javax.swing.table.DefaultTableModel;
 
 import controlador.ControladorClientes;
 import interfaces.IControladorClientes;
+import java.awt.Insets;
+import java.awt.Component;
+import javax.swing.Box;
+import java.awt.FlowLayout;
 
 public class ClientesView extends JPanel implements IControladorClientes{
 	private JTable table;
@@ -23,6 +27,9 @@ public class ClientesView extends JPanel implements IControladorClientes{
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_BotonesArriba = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panel_BotonesArriba.getLayout();
+		flowLayout.setVgap(15);
+		flowLayout.setHgap(30);
 		add(panel_BotonesArriba, BorderLayout.NORTH);
 		
 		btnNuevoCliente = new JButton("Nuevo cliente");

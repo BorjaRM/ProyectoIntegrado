@@ -1,16 +1,20 @@
 package vista;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import controlador.ControladorEmpleados;
 import interfaces.IControladorEmpleados;
 
 import javax.swing.JTable;
+import java.awt.FlowLayout;
 
 public class EmpleadosView extends JPanel implements IControladorEmpleados{
 	private JTextField textField;
@@ -26,24 +30,18 @@ public class EmpleadosView extends JPanel implements IControladorEmpleados{
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
+		flowLayout.setVgap(15);
+		flowLayout.setHgap(30);
 		add(panel, BorderLayout.NORTH);
-		
-		Component verticalStrut = Box.createVerticalStrut(40);
-		panel.add(verticalStrut);
 		
 		btnNuevoEmpleado = new JButton("Nuevo Empleado");
 		btnNuevoEmpleado.setActionCommand("Nuevo Empleado");
 		panel.add(btnNuevoEmpleado);
 		
-		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
-		panel.add(horizontalStrut_2);
-		
 		btnEliminarEmpleado = new JButton("Eliminar Empleado");
 		btnEliminarEmpleado.setActionCommand("Eliminar Empleado");
 		panel.add(btnEliminarEmpleado);
-		
-		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
-		panel.add(horizontalStrut_3);
 		
 		btnModificarEmpleado = new JButton("Modificar Empleado");
 		btnModificarEmpleado.setActionCommand("Modificar Empleado");
@@ -56,17 +54,17 @@ public class EmpleadosView extends JPanel implements IControladorEmpleados{
 		panel.add(textField);
 		textField.setColumns(10);
 		
-		Component verticalStrut_1 = Box.createVerticalStrut(40);
-		add(verticalStrut_1, BorderLayout.SOUTH);
+		JPanel panel_Tabla = new JPanel();
+		add(panel_Tabla, BorderLayout.CENTER);
+		panel_Tabla.setLayout(new BorderLayout(0, 0));
 		
-		Component horizontalStrut = Box.createHorizontalStrut(40);
-		add(horizontalStrut, BorderLayout.WEST);
+		JScrollPane scrollPane = new JScrollPane();
+		panel_Tabla.add(scrollPane);
 		
-		Component horizontalStrut_1 = Box.createHorizontalStrut(40);
-		add(horizontalStrut_1, BorderLayout.EAST);
-		
-		table = new JTable();
-		add(table, BorderLayout.CENTER);
+		String[] colHeader = {"ID","Nombre","Apellidos","Telefono","Inicio contrato"};
+		DefaultTableModel table_model = new DefaultTableModel(colHeader,0);
+		table = new JTable(table_model);
+		scrollPane.setViewportView(table);
 	}
 
 	@Override

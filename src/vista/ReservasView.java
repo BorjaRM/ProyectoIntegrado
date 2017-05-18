@@ -12,6 +12,8 @@ import interfaces.IControladorReservas;
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
+import java.awt.Component;
+import javax.swing.Box;
 
 public class ReservasView extends JPanel implements IControladorReservas{
 	private JTable table;
