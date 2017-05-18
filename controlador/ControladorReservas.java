@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import modelo.BD;
+import modelo.dao.ClienteDAO;
 import vista.Marco;
 import vista.NuevaReservaView;
 import vista.ReservasView;
@@ -14,6 +15,7 @@ public class ControladorReservas implements ActionListener {
 	private NuevaReservaView nrv;
 	private ReservasView rv;
 	private final boolean esAdministrador;
+	private ClienteDAO cd;
 	
 	public ControladorReservas(Marco frame, BD modelo, boolean esAdministrador){
 		this.frame=frame;
