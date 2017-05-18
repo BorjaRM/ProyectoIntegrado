@@ -49,7 +49,7 @@ public class ControladorEmpleados implements ActionListener {
 	}
 	
 	public void preparaModificaEmpleadoView(){
-		//Falta añadir que el admin debe seleccionar a un empleado primero
+		//Falta aï¿½adir que el admin debe seleccionar a un empleado primero
 		frame.creaModificarEmpeladoView(this);
 		this.mev=frame.getMev();
 		frame.muestraModificarEmpleadoView();

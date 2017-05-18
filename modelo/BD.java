@@ -21,7 +21,7 @@ public class BD {
 			System.err.println("Error registrando el Driver mysql");
 		}
 		
-		//Realizamos la conexion a la bd con el usuario y contraseña proporcionados
+		//Realizamos la conexion a la bd con el usuario y contraseï¿½a proporcionados
 		try{
 			String cadenaDeConexion = "jdbc:mysql://"+servidor+"/"+bd+"?user="+usuario+"&password="+contrasena;
 			conexion= DriverManager.getConnection(cadenaDeConexion);

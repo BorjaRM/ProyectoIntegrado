@@ -53,7 +53,7 @@ public class ControladorClientes implements ActionListener{
 	}
 	
 	public void preparaModificaClienteView(){
-		//Falta añadir que el usuario debe seleccionar a un cliente primero
+		//Falta aï¿½adir que el usuario debe seleccionar a un cliente primero
 		frame.creaModificarClienteView(this);
 		this.mcv=frame.getMcv();
 		frame.muestraModificarClienteView();
