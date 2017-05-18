@@ -1,26 +1,28 @@
 package vista;
 
 import java.awt.BorderLayout;
-import java.util.ArrayList;
-
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
 import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import controlador.ControladorIncidencias;
+import interfaces.IControladorIncidencias;
+
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.Color;
 
-public class NuevaIncidenciaView extends JPanel {
+public class NuevaIncidenciaView extends JPanel implements IControladorIncidencias{
+	private JComboBox comboBox;
+	private JButton btnEnviar;
+	private JButton btnCancelar;
+	private String[] desplegableEstancias = {"Habitacion 1", "SPA"};
 
 	
 	public NuevaIncidenciaView() {
@@ -33,17 +35,14 @@ public class NuevaIncidenciaView extends JPanel {
 		JPanel panel_2 = new JPanel();
 		panel.add(panel_2, BorderLayout.NORTH);
 		panel_2.setLayout(new BorderLayout(0, 0));
-		
-		
-		String [] nombresLista = {"Habitacion 1", "SPA"};
-		
+				
 		Component horizontalStrut = Box.createHorizontalStrut(150);
 		panel_2.add(horizontalStrut, BorderLayout.EAST);
 		
 		Component horizontalStrut_1 = Box.createHorizontalStrut(100);
 		panel_2.add(horizontalStrut_1, BorderLayout.WEST);
 		
-		JComboBox comboBox = new JComboBox(nombresLista);
+		comboBox = new JComboBox(desplegableEstancias);
 		panel_2.add(comboBox, BorderLayout.CENTER);
 		
 		JPanel panel_3 = new JPanel();
@@ -73,11 +72,13 @@ public class NuevaIncidenciaView extends JPanel {
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 		panel.add(panel_4, BorderLayout.SOUTH);
 		
-		JButton btnNewButton = new JButton("Enviar");
-		panel_4.add(btnNewButton);
+		btnEnviar = new JButton("Enviar");
+		btnEnviar.setActionCommand("Enviar");
+		panel_4.add(btnEnviar);
 		
-		JButton btnNewButton_1 = new JButton("Cancelar");
-		panel_4.add(btnNewButton_1);
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setActionCommand("Cancelar");
+		panel_4.add(btnCancelar);
 		
 		JPanel panel_5 = new JPanel();
 		panel.add(panel_5, BorderLayout.WEST);
@@ -95,6 +96,12 @@ public class NuevaIncidenciaView extends JPanel {
 		JPanel panel_1 = new JPanel();
 		add(panel_1, BorderLayout.NORTH);
 
+	}
+
+	@Override
+	public void estableceControlador(ControladorIncidencias controlador) {
+		this.btnEnviar.addActionListener(controlador);
+		this.btnCancelar.addActionListener(controlador);
 	}
 
 }

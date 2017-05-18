@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import controlador.ControladorPrincipal;
+import controlador.ControladorUsuarios;
 
 import java.awt.Component;
 import javax.swing.Box;
@@ -81,7 +81,7 @@ public class LoginView extends JFrame{
 		botonera.add(bntEntrar);
 	}
 
-	public void estableceControlador(ControladorPrincipal controlador) {
+	public void estableceControlador(ControladorUsuarios controlador) {
 		this.bntEntrar.addActionListener(controlador);
 		this.soyAdmin.addActionListener(controlador);
 	}

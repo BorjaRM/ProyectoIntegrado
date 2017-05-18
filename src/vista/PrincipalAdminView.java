@@ -12,19 +12,16 @@ import javax.swing.BoxLayout;
 import javax.swing.JList;
 import javax.swing.SpringLayout;
 
-import controlador.ControladorPrincipal;
+import controlador.ControladorUsuarios;
 
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 
 public class PrincipalAdminView extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
 	private JButton btn_nuevoHotel;
 	private JButton btn_eliminarHotel;
+	private String[] desplegableHoteles = {"Hotel 1", "Hotel 2"};
 
 	/**
 	 * Create the panel.
@@ -36,27 +33,25 @@ public class PrincipalAdminView extends JPanel {
 		add(panel_2, BorderLayout.NORTH);
 		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.Y_AXIS));
 		
-		Component verticalStrut = Box.createVerticalStrut(20);
-		panel_2.add(verticalStrut);
-		
 		JPanel panel = new JPanel();
 		panel_2.add(panel);
-		panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+		panel.setLayout(new FlowLayout(FlowLayout.LEFT, 30, 15));
 		
-		JLabel lblNewLabel = new JLabel("Hotel");
-		panel.add(lblNewLabel);
+		Box horizontalBox = Box.createHorizontalBox();
+		panel.add(horizontalBox);
 		
-		JComboBox comboBox = new JComboBox();
-		panel.add(comboBox);
+		JLabel lblNewLabel = new JLabel("Selecciona hotel:  ");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		horizontalBox.add(lblNewLabel);
+		
+		JComboBox comboBox = new JComboBox(desplegableHoteles);
+		horizontalBox.add(comboBox);
 		
 		btn_nuevoHotel = new JButton("Nuevo Hotel");
 		panel.add(btn_nuevoHotel);
 		
 		btn_eliminarHotel = new JButton("Eliminar Hotel");
 		panel.add(btn_eliminarHotel);
-		
-		Component verticalStrut_1 = Box.createVerticalStrut(20);
-		panel_2.add(verticalStrut_1);
 		
 		JPanel panel_1 = new JPanel();
 		add(panel_1, BorderLayout.CENTER);
@@ -69,12 +64,6 @@ public class PrincipalAdminView extends JPanel {
 		sl_panel_1.putConstraint(SpringLayout.SOUTH, panel_3, -24, SpringLayout.SOUTH, panel_1);
 		sl_panel_1.putConstraint(SpringLayout.EAST, panel_3, 128, SpringLayout.WEST, panel_1);
 		panel_1.add(panel_3);
-		
-		JList list = new JList();
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		sl_panel_1.putConstraint(SpringLayout.NORTH, list, 24, SpringLayout.NORTH, panel_1);
-		sl_panel_1.putConstraint(SpringLayout.WEST, list, 17, SpringLayout.EAST, panel_3);
-		sl_panel_1.putConstraint(SpringLayout.SOUTH, list, 0, SpringLayout.SOUTH, panel_3);
 		panel_3.setLayout(new BoxLayout(panel_3, BoxLayout.X_AXIS));
 		
 		JPanel panel_4 = new JPanel();
@@ -83,9 +72,6 @@ public class PrincipalAdminView extends JPanel {
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
 		panel_4.add(lblNewLabel_1);
-		
-		Component verticalStrut_2 = Box.createVerticalStrut(20);
-		panel_4.add(verticalStrut_2);
 		
 		JLabel lblNewLabel_2 = new JLabel("New label");
 		panel_4.add(lblNewLabel_2);
@@ -103,33 +89,25 @@ public class PrincipalAdminView extends JPanel {
 		panel_3.add(panel_5);
 		panel_5.setLayout(new BoxLayout(panel_5, BoxLayout.Y_AXIS));
 		
-		textField = new JTextField();
-		panel_5.add(textField);
-		textField.setColumns(10);
+		JLabel lblNewLabel_6 = new JLabel("New label");
+		panel_5.add(lblNewLabel_6);
 		
-		textField_1 = new JTextField();
-		panel_5.add(textField_1);
-		textField_1.setColumns(10);
+		JLabel lblNewLabel_7 = new JLabel("New label");
+		panel_5.add(lblNewLabel_7);
 		
-		textField_4 = new JTextField();
-		panel_5.add(textField_4);
-		textField_4.setColumns(10);
+		JLabel lblNewLabel_9 = new JLabel("New label");
+		panel_5.add(lblNewLabel_9);
 		
-		textField_3 = new JTextField();
-		panel_5.add(textField_3);
-		textField_3.setColumns(10);
+		JLabel lblNewLabel_10 = new JLabel("New label");
+		panel_5.add(lblNewLabel_10);
 		
-		textField_2 = new JTextField();
-		panel_5.add(textField_2);
-		textField_2.setColumns(10);
-		sl_panel_1.putConstraint(SpringLayout.EAST, list, 426, SpringLayout.WEST, panel_1);
-		panel_1.add(list);
+		JLabel lblNewLabel_8 = new JLabel("New label");
+		panel_5.add(lblNewLabel_8);
 		
 	}
 	
-	public void estableceControlador(ControladorPrincipal controlador) {
+	public void estableceControlador(ControladorUsuarios controlador) {
 		this.btn_nuevoHotel.addActionListener(controlador);
 		this.btn_eliminarHotel.addActionListener(controlador);
 	}
-	
 }

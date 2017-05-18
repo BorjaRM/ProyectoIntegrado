@@ -3,22 +3,22 @@ package vista;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import java.awt.GridLayout;
-import java.awt.GridBagLayout;
 import javax.swing.JButton;
-import java.awt.GridBagConstraints;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Insets;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+import controlador.ControladorReservas;
+import interfaces.IControladorReservas;
+
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
+import java.awt.Component;
+import javax.swing.Box;
 
-public class ReservasView extends JPanel {
+public class ReservasView extends JPanel implements IControladorReservas{
 	private JTable table;
+	private JButton btnNuevaReserva;
+	private JButton btnCancelarReserva;
 
 	/**
 	 * Create the panel.
@@ -30,11 +30,12 @@ public class ReservasView extends JPanel {
 		add(panel, BorderLayout.NORTH);
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 15));
 		
-		JButton btnNuevaReserva = new JButton("Nueva Reserva");
-		btnNuevaReserva.setHorizontalAlignment(SwingConstants.LEFT);
+		btnNuevaReserva = new JButton("Nueva Reserva");
+		btnNuevaReserva.setActionCommand("Nueva Reserva");
 		panel.add(btnNuevaReserva);
 		
-		JButton btnCancelarReserva = new JButton("Cancelar Reserva");
+		btnCancelarReserva = new JButton("Anular Reserva");
+		btnCancelarReserva.setActionCommand("Anular Reserva");
 		panel.add(btnCancelarReserva);
 		
 		JPanel panel_1 = new JPanel();
@@ -48,8 +49,12 @@ public class ReservasView extends JPanel {
 		DefaultTableModel table_model = new DefaultTableModel(colHeader,0);
 		table = new JTable(table_model);
 		scrollPane.setViewportView(table);
-		
+	}
 
+	@Override
+	public void estableceControlador(ControladorReservas controlador) {
+		this.btnNuevaReserva.addActionListener(controlador);
+		this.btnCancelarReserva.addActionListener(controlador);
 	}
 
 }

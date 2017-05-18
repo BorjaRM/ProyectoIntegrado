@@ -13,7 +13,7 @@ public class ClienteDAO {
 	BD bd ;
 	ArrayList <ClienteVO> clientes;
 	
-	public ClienteDAO (){
+	public ClienteDAO (BD bd){
 		this.bd = bd;
 		
 	}
@@ -49,14 +49,33 @@ public class ClienteDAO {
 	public void insertaCliente(ClienteVO cliente){
 		try {
 			Statement stmt = bd.getConexion().createStatement();
-			stmt.executeUpdate("INSERT INTO cliente VALUES(null, "+cliente.getNombre()+", "+cliente.getApellidos()+", "+cliente.getIdentificacion()+", "+cliente.getFecha_nacimiento()+", "+cliente.getTelefono()+", "+cliente.getNacionalidad()+", "+cliente.getEmail()+", "+cliente.getFecha_alta()+")");
-
+			stmt.executeUpdate("INSERT INTO cliente VALUES(null, '"+cliente.getNombre()+"', '"+cliente.getApellidos()+"', '"+cliente.getIdentificacion()+"', '"+cliente.getFecha_nacimiento()+"', '"+cliente.getTelefono()+"', '"+cliente.getNacionalidad()+"', '"+cliente.getEmail()+"', '"+cliente.getFecha_alta()+"');");
+			
 		} catch (SQLException e) {
 			System.err.println("Error insertant client");
 		}
 	}
 	
-	public void eliminarCliente(){
-		
+	public void eliminarCliente(int posicion){
+		clientes = rellenaYConsigueArrayClientes();
+		String codigoString = clientes.get(posicion).getCodigo();
+		try {
+			Statement stmt = bd.getConexion().createStatement();
+			stmt.executeUpdate("DELETE FROM cliente WHERE codigo = '"+codigoString+"';");
+			
+		} catch (SQLException e) {
+			System.err.println("Error al eliminar cliente");
+		}
+	}
+	
+	public void modificarCliente(int posicion, ClienteVO cliente){
+		clientes = rellenaYConsigueArrayClientes();
+		String codigoString = clientes.get(posicion).getCodigo();
+		try {
+			Statement stmt = bd.getConexion().createStatement();
+			stmt.executeUpdate("UPDATE TABLE cliente SET nombre="+cliente.getNombre()+", apelllidos="+cliente.getApellidos()+", identificacion="+cliente.getIdentificacion()+", fecha_nacimiento="+cliente.getTelefono()+", nacionalidad="+cliente.getNacionalidad()+", email="+cliente.getEmail()+", fecha_alta="+cliente.getFecha_alta()+" WHERE codigo="+codigoString);
+		} catch (Exception e) {
+			System.err.println("Error modificando cliente.");
+		}
 	}
 }

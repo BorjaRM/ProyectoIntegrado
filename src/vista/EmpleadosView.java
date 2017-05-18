@@ -1,16 +1,27 @@
 package vista;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JTextField;
-import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
-public class EmpleadosView extends JPanel {
+import controlador.ControladorEmpleados;
+import interfaces.IControladorEmpleados;
+
+import javax.swing.JTable;
+import java.awt.FlowLayout;
+
+public class EmpleadosView extends JPanel implements IControladorEmpleados{
 	private JTextField textField;
 	private JTable table;
+	private JButton btnNuevoEmpleado;
+	private JButton btnEliminarEmpleado;
+	private JButton btnModificarEmpleado;
 
 	/**
 	 * Create the panel.
@@ -19,25 +30,22 @@ public class EmpleadosView extends JPanel {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
+		flowLayout.setVgap(15);
+		flowLayout.setHgap(30);
 		add(panel, BorderLayout.NORTH);
 		
-		Component verticalStrut = Box.createVerticalStrut(40);
-		panel.add(verticalStrut);
+		btnNuevoEmpleado = new JButton("Nuevo Empleado");
+		btnNuevoEmpleado.setActionCommand("Nuevo Empleado");
+		panel.add(btnNuevoEmpleado);
 		
-		JButton btnNewButton = new JButton("A\u00F1adir Empleado");
-		panel.add(btnNewButton);
+		btnEliminarEmpleado = new JButton("Eliminar Empleado");
+		btnEliminarEmpleado.setActionCommand("Eliminar Empleado");
+		panel.add(btnEliminarEmpleado);
 		
-		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
-		panel.add(horizontalStrut_2);
-		
-		JButton btnNewButton_1 = new JButton("Eliminar Empleado");
-		panel.add(btnNewButton_1);
-		
-		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
-		panel.add(horizontalStrut_3);
-		
-		JButton btnNewButton_2 = new JButton("Modificar Empleado");
-		panel.add(btnNewButton_2);
+		btnModificarEmpleado = new JButton("Modificar Empleado");
+		btnModificarEmpleado.setActionCommand("Modificar Empleado");
+		panel.add(btnModificarEmpleado);
 		
 		Component horizontalStrut_4 = Box.createHorizontalStrut(20);
 		panel.add(horizontalStrut_4);
@@ -46,18 +54,24 @@ public class EmpleadosView extends JPanel {
 		panel.add(textField);
 		textField.setColumns(10);
 		
-		Component verticalStrut_1 = Box.createVerticalStrut(40);
-		add(verticalStrut_1, BorderLayout.SOUTH);
+		JPanel panel_Tabla = new JPanel();
+		add(panel_Tabla, BorderLayout.CENTER);
+		panel_Tabla.setLayout(new BorderLayout(0, 0));
 		
-		Component horizontalStrut = Box.createHorizontalStrut(40);
-		add(horizontalStrut, BorderLayout.WEST);
+		JScrollPane scrollPane = new JScrollPane();
+		panel_Tabla.add(scrollPane);
 		
-		Component horizontalStrut_1 = Box.createHorizontalStrut(40);
-		add(horizontalStrut_1, BorderLayout.EAST);
-		
-		table = new JTable();
-		add(table, BorderLayout.CENTER);
+		String[] colHeader = {"ID","Nombre","Apellidos","Telefono","Inicio contrato"};
+		DefaultTableModel table_model = new DefaultTableModel(colHeader,0);
+		table = new JTable(table_model);
+		scrollPane.setViewportView(table);
+	}
 
+	@Override
+	public void estableceControlador(ControladorEmpleados controlador) {
+		this.btnNuevoEmpleado.addActionListener(controlador);
+		this.btnModificarEmpleado.addActionListener(controlador);
+		this.btnEliminarEmpleado.addActionListener(controlador);
 	}
 
 }

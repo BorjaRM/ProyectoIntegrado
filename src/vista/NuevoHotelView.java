@@ -1,15 +1,11 @@
 package vista;
 
 import javax.swing.JPanel;
-import java.awt.GridBagLayout;
 import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 
-import controlador.ControladorPrincipal;
+import controlador.ControladorUsuarios;
 
-import java.awt.Insets;
-import java.awt.GridLayout;
 import javax.swing.BoxLayout;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
@@ -119,7 +115,7 @@ public class NuevoHotelView extends JPanel {
 
 	}
 	
-	public void estableceControlador(ControladorPrincipal controlador) {
+	public void estableceControlador(ControladorUsuarios controlador) {
 		this.btnEnviar.addActionListener(controlador);
 		this.btnCancelar.addActionListener(controlador);
 	}

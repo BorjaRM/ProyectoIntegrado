@@ -10,9 +10,23 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class NuevoEmpleadoView extends JPanel {
+import controlador.ControladorEmpleados;
+import interfaces.IControladorEmpleados;
+import javax.swing.JPasswordField;
+
+public class NuevoEmpleadoView extends JPanel implements IControladorEmpleados{
 	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txtUsuario;
+	private JTextField txtHotel;
+	private JTextField txtInicio;
+	private JTextField txtTlf;
+	private JTextField txtId;
+	private JTextField txtNombre;
+	private JTextField txtApellidos;
+	private JButton btnEnviar;
+	private JButton btnCancelar;
+	private JPasswordField txtPass;
+	
 	/**
 	 * Create the panel.
 	 */
@@ -37,9 +51,9 @@ public class NuevoEmpleadoView extends JPanel {
 		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
 		panel_3.add(horizontalStrut_2);
 		
-		textField = new JTextField();
-		panel_3.add(textField);
-		textField.setColumns(10);
+		txtNombre = new JTextField();
+		panel_3.add(txtNombre);
+		txtNombre.setColumns(10);
 		
 		Component verticalStrut_2 = Box.createVerticalStrut(10);
 		panel_2.add(verticalStrut_2);
@@ -54,9 +68,9 @@ public class NuevoEmpleadoView extends JPanel {
 		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
 		panel_4.add(horizontalStrut_3);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		panel_4.add(textField_1);
+		txtApellidos = new JTextField();
+		txtApellidos.setColumns(10);
+		panel_4.add(txtApellidos);
 		
 		Component verticalStrut_3 = Box.createVerticalStrut(10);
 		panel_2.add(verticalStrut_3);
@@ -71,9 +85,9 @@ public class NuevoEmpleadoView extends JPanel {
 		Component horizontalStrut_4 = Box.createHorizontalStrut(20);
 		panel_5.add(horizontalStrut_4);
 		
-		textField = new JTextField();
-		panel_5.add(textField);
-		textField.setColumns(10);
+		txtId = new JTextField();
+		panel_5.add(txtId);
+		txtId.setColumns(10);
 		
 		Component verticalStrut_4 = Box.createVerticalStrut(10);
 		panel_2.add(verticalStrut_4);
@@ -88,9 +102,9 @@ public class NuevoEmpleadoView extends JPanel {
 		Component horizontalStrut_5 = Box.createHorizontalStrut(20);
 		panel6.add(horizontalStrut_5);
 		
-		textField = new JTextField();
-		panel6.add(textField);
-		textField.setColumns(10);
+		txtTlf = new JTextField();
+		panel6.add(txtTlf);
+		txtTlf.setColumns(10);
 		
 		Component verticalStrut_5 = Box.createVerticalStrut(10);
 		panel_2.add(verticalStrut_5);
@@ -105,9 +119,9 @@ public class NuevoEmpleadoView extends JPanel {
 		Component horizontalStrut_6 = Box.createHorizontalStrut(20);
 		panel7.add(horizontalStrut_6);
 		
-		textField = new JTextField();
-		panel7.add(textField);
-		textField.setColumns(10);
+		txtInicio = new JTextField();
+		panel7.add(txtInicio);
+		txtInicio.setColumns(10);
 		
 		Component verticalStrut_6 = Box.createVerticalStrut(10);
 		panel_2.add(verticalStrut_6);
@@ -122,9 +136,9 @@ public class NuevoEmpleadoView extends JPanel {
 		Component horizontalStrut_9 = Box.createHorizontalStrut(20);
 		panel8.add(horizontalStrut_9);
 		
-		textField = new JTextField();
-		panel8.add(textField);
-		textField.setColumns(10);
+		txtHotel = new JTextField();
+		panel8.add(txtHotel);
+		txtHotel.setColumns(10);
 		
 		Component verticalStrut_7 = Box.createVerticalStrut(10);
 		panel_2.add(verticalStrut_7);
@@ -140,9 +154,9 @@ public class NuevoEmpleadoView extends JPanel {
 		Component horizontalStrut_7 = Box.createHorizontalStrut(20);
 		panel9.add(horizontalStrut_7);
 		
-		textField = new JTextField();
-		panel9.add(textField);
-		textField.setColumns(10);
+		txtUsuario = new JTextField();
+		panel9.add(txtUsuario);
+		txtUsuario.setColumns(10);
 		
 		Component verticalStrut_8 = Box.createVerticalStrut(10);
 		panel_2.add(verticalStrut_8);
@@ -158,9 +172,8 @@ public class NuevoEmpleadoView extends JPanel {
 		Component horizontalStrut_8 = Box.createHorizontalStrut(20);
 		panel10.add(horizontalStrut_8);
 		
-		textField = new JTextField();
-		panel10.add(textField);
-		textField.setColumns(10);
+		txtPass = new JPasswordField();
+		panel10.add(txtPass);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(20);
 		formulario.add(horizontalStrut, BorderLayout.WEST);
@@ -179,12 +192,18 @@ public class NuevoEmpleadoView extends JPanel {
 		fl_botonera.setAlignment(FlowLayout.RIGHT);
 		add(botonera, BorderLayout.SOUTH);
 		
-		JButton btnEnviar = new JButton("Enviar");
+		btnEnviar = new JButton("Enviar");
 		botonera.add(btnEnviar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		botonera.add(btnCancelar);
 
+	}
+	
+	@Override
+	public void estableceControlador(ControladorEmpleados controlador) {
+		this.btnEnviar.addActionListener(controlador);
+		this.btnCancelar.addActionListener(controlador);
 	}
 
 }

@@ -1,4 +1,3 @@
-
 package vista;
 
 import javax.swing.JPanel;
@@ -6,10 +5,14 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import controlador.ControladorClientes;
+import interfaces.IControladorClientes;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
-public class NuevoClienteView extends JPanel {
+public class NuevoClienteView extends JPanel  implements IControladorClientes{
 	private JTextField txt_Nombre;
 	private JTextField txt_Apellidos;
 	private JTextField txt_Identificacion;
@@ -17,6 +20,8 @@ public class NuevoClienteView extends JPanel {
 	private JTextField txt_Telefono;
 	private JTextField txt_Email;
 	private JTextField txt_Nacionalidad;
+	private JButton btnEnviar;
+	private JButton btnCancelar;
 
 	/**
 	 * Create the panel.
@@ -29,10 +34,12 @@ public class NuevoClienteView extends JPanel {
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 		add(panel_Botones, BorderLayout.SOUTH);
 		
-		JButton btnEnviar = new JButton("Enviar");
+		btnEnviar = new JButton("Enviar");
+		btnEnviar.setActionCommand("Enviar");
 		panel_Botones.add(btnEnviar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setActionCommand("Cancelar");
 		panel_Botones.add(btnCancelar);
 		
 		JPanel panel_Informacion = new JPanel();
@@ -87,7 +94,11 @@ public class NuevoClienteView extends JPanel {
 		txt_Nacionalidad = new JTextField();
 		panel_Informacion.add(txt_Nacionalidad);
 		txt_Nacionalidad.setColumns(10);
-
+	}
+	
+	public void estableceControlador(ControladorClientes controlador){
+		this.btnEnviar.addActionListener(controlador);
+		this.btnCancelar.addActionListener(controlador);
 	}
 
 }

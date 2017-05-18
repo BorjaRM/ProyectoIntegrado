@@ -23,7 +23,7 @@ public class ClienteVO {
 		fecha_alta=fAlta;
 	}
 	
-	//Para añadir a la BD (codigo es auto_increment)
+	//Para aï¿½adir a la BD (codigo es auto_increment)
 	public ClienteVO(String nom, String aps, String id, String fNac, String tlf, String nac, String email, String fAlta){
 		nombre=nom;
 		apellidos=aps;
