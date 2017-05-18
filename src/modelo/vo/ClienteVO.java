@@ -1,7 +1,7 @@
 package modelo.vo;
 
 public class ClienteVO {
-	private int codigo;
+	private String codigo;
 	private String nombre;
 	private String apellidos;
 	private String identificacion;
@@ -11,7 +11,7 @@ public class ClienteVO {
 	private String email;
 	private String fecha_alta;
 	
-	public ClienteVO(int cod, String nom, String aps, String id, String fNac, String tlf, String nac, String email, String fAlta){
+	public ClienteVO(String cod, String nom, String aps, String id, String fNac, String tlf, String nac, String email, String fAlta){
 		codigo=cod;
 		nombre=nom;
 		apellidos=aps;
@@ -35,11 +35,11 @@ public class ClienteVO {
 		fecha_alta=fAlta;
 	}
 
-	public int getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(int codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 
