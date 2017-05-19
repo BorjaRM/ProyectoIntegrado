@@ -97,7 +97,7 @@ public class LoginView extends JFrame{
 		try{
 			String nombre=this.text_usuario.getText();
 			String passText = new String(passwordField.getPassword());
-			u=new UsuarioVO(nombre,passText,"");
+			u=new UsuarioVO(nombre,passText,0);
 		}catch (Exception e){
 			e.printStackTrace();
 		}

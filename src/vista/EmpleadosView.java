@@ -66,6 +66,8 @@ public class EmpleadosView extends JPanel implements IControladorEmpleados{
 		table = new JTable(table_model);
 		scrollPane.setViewportView(table);
 	}
+	
+	
 
 	@Override
 	public void estableceControlador(ControladorEmpleados controlador) {
