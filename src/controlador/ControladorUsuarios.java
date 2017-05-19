@@ -2,6 +2,8 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.JOptionPane;
 
@@ -11,7 +13,7 @@ import modelo.dao.UsuarioDAO;
 import vista.LoginView;
 import vista.Marco;
 
-public class ControladorUsuarios implements ActionListener{
+public class ControladorUsuarios implements ActionListener, ItemListener{
 	private BD modelo;
 	private boolean esAdministrador;
 	private LoginView vistaLogin;
@@ -148,6 +150,13 @@ public class ControladorUsuarios implements ActionListener{
 	public void eliminar(){
 		consultasHotel.eliminaHotel(refHotel);
 		preparaDesplegableHotelView();
+	}
+
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		System.out.println(e.getItemSelectable());
+		// TODO Auto-generated method stub
+		
 	}
 
 }
