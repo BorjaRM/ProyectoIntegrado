@@ -10,6 +10,11 @@ public class UsuarioVO {
 		contrasena=pwd;
 		cod_empleado=emp;
 	}
+	
+	public UsuarioVO(String nom,String pwd){
+		nombre=nom;
+		contrasena=pwd;
+	}
 
 	public String getNombre() {
 		return nombre;

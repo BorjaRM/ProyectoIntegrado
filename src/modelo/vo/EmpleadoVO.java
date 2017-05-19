@@ -24,18 +24,6 @@ public class EmpleadoVO {
 		fecha_alta=fAlta;
 		lugar_trabajo=trabaja;
 	}
-	
-	public EmpleadoVO(String nom, String ap1, String ap2, String id, String tlf, int salario, String ss, String fAlta, int trabaja){
-		nombre=nom;
-		apellido1=ap1;
-		apellido2=ap2;
-		identificacion=id;
-		telefono=tlf;
-		this.salario=salario;
-		seguridad_social=ss;
-		fecha_alta=fAlta;
-		lugar_trabajo=trabaja;
-	}
 
 	public int getCodigo() {
 		return codigo;
@@ -116,5 +104,6 @@ public class EmpleadoVO {
 	public void setLugar_trabajo(int lugar_trabajo) {
 		this.lugar_trabajo = lugar_trabajo;
 	}
-
+	
+	
 }

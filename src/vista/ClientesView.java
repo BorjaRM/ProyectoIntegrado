@@ -1,6 +1,10 @@
 package vista;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.util.ArrayList;
+
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -9,10 +13,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controlador.ControladorClientes;
 import interfaces.IControladorClientes;
-import java.awt.Insets;
-import java.awt.Component;
-import javax.swing.Box;
-import java.awt.FlowLayout;
+import modelo.vo.ClienteVO;
 
 public class ClientesView extends JPanel implements IControladorClientes{
 	private JTable table;
@@ -65,6 +66,23 @@ public class ClientesView extends JPanel implements IControladorClientes{
 	
 	public void ocultaBotonEliminar(){
 		this.btnEliminarCliente.setVisible(false);
+	}
+	public void rellenaListaClientes(ArrayList <ClienteVO> cliente){
+		DefaultTableModel modeloTabla = (DefaultTableModel) table.getModel();
+		Object[] fila = new Object[modeloTabla.getColumnCount()];
+		
+		for (int i = 0 ; i < cliente.size(); i++ ){
+			fila[0] = cliente.get(i).getIdentificacion();
+			fila[1] = cliente.get(i).getNombre();
+			fila[2] = cliente.get(i).getApellidos();
+			fila[3] = cliente.get(i).getFecha_nacimiento();
+			fila[4] = cliente.get(i).getTelefono();
+			fila[5] = cliente.get(i).getEmail();
+			fila[6] = cliente.get(i).getNacionalidad();
+			modeloTabla.addRow(fila);
+		}
+		table.setModel(modeloTabla);
+			
 	}
 
 }
