@@ -2,6 +2,7 @@ package vista;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 
 import java.awt.BorderLayout;
 import javax.swing.JButton;
@@ -10,7 +11,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controlador.ControladorEstancias;
 import interfaces.IControladorEstancias;
-import modelo.vo.EstanciaVO;
+import modelo.vo.HabitacionVO;
 
 import java.awt.FlowLayout;
 import java.util.ArrayList;
@@ -45,24 +46,26 @@ public class EstanciasView extends JPanel implements IControladorEstancias{
 		
 		JPanel panel_Tabla = new JPanel();
 		add(panel_Tabla, BorderLayout.CENTER);
-		panel_Tabla.setLayout(new BorderLayout(0, 0));
 		
+		//Creamos la tabla que contiene las habitaciones
 		JScrollPane scrollPane = new JScrollPane();
+		String[] habitaciones_head = {"Nombre","Tipo","Camas","Aseo","A/C","Wifi","Precio"};
+		DefaultTableModel habitaciones_model = new DefaultTableModel(habitaciones_head,0);
+		tabla_habitaciones = new JTable(habitaciones_model);
+		scrollPane.setViewportView(tabla_habitaciones);		
 		panel_Tabla.add(scrollPane);
-		
-		/*String[] colHeader = {"Nombre","Tipo","Camas","Aseo","A/C","Wifi","Precio"};
-		DefaultTableModel table_model = new DefaultTableModel(colHeader,0);*/
-		
-		tabla_habitaciones = new JTable();
-		scrollPane.setViewportView(tabla_habitaciones);
-		
+
+		//Creamos la tabla que contiene el resto de estancias
 		JScrollPane scrollPane_1 = new JScrollPane();
-		panel_Tabla.add(scrollPane_1, BorderLayout.NORTH);
-		
-		tabla_estancias = new JTable();
+		String[] estancias_head = {"Nombre"};
+		DefaultTableModel estancias_model = new DefaultTableModel(estancias_head,0);
+		tabla_estancias = new JTable(estancias_model);
 		scrollPane_1.setViewportView(tabla_estancias);
+		panel_Tabla.add(scrollPane_1);
 
-
+		JSplitPane splitPane_10 = new JSplitPane(JSplitPane.VERTICAL_SPLIT,scrollPane,scrollPane_1);
+		add(splitPane_10);
+		
 	}
 
 	@Override
@@ -84,15 +87,21 @@ public class EstanciasView extends JPanel implements IControladorEstancias{
 		this.btnEliminarEstancia.setVisible(false);
 	}
 	
-	public void muestraTablaEstancias(ArrayList<EstanciaVO> estancias){
-		String[] cabecero = {"Nombre","Tipo","Camas","Aseo","A/C","Wifi","Precio"};
-		DefaultTableModel dtm = new DefaultTableModel(cabecero,0);
+	public void rellenaTablahabitaciones(ArrayList<HabitacionVO> estancias){
+		DefaultTableModel modeloTabla = (DefaultTableModel) tabla_habitaciones.getModel();
+		Object[] fila = new Object[modeloTabla.getColumnCount()];
 		
-		//añadimos cada fila de datos a la tabla
-		for(EstanciaVO e: estancias){
-			// falta programar
+		for (int i = 0 ; i < estancias.size(); i++ ){
+			fila[0] = estancias.get(i).getId();
+			fila[1] = estancias.get(i).getNombre();
+			fila[2] = estancias.get(i).getTipo();
+			fila[3] = estancias.get(i).getPlazas();
+			fila[4] = estancias.get(i).getPrecio();
+			fila[5] = estancias.get(i).getDescripcion();
+			fila[6] = estancias.get(i).getCod_reserva();
+			modeloTabla.addRow(fila);
 		}
-		tabla_habitaciones.setModel(dtm);
+		tabla_habitaciones.setModel(modeloTabla);
 	}
 
 }
