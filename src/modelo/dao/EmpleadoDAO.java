@@ -46,7 +46,6 @@ public class EmpleadoDAO {
 						seguridad_social, fecha_alta, lugar_trabajo);
 				empleados.add(em);
 			}
-			bd.getConexion().close();
 		} catch (Exception e) {
 			System.err.println("Error rellenando el array de empleados");
 		}
@@ -68,7 +67,6 @@ public class EmpleadoDAO {
 				UsuarioVO u = new UsuarioVO(nombre, contrasena, cod_empleado);
 				usuarios.add(u);
 			}
-			bd.getConexion().close();
 		} catch (Exception e) {
 			System.err.println("Error rellenando el array de empleados");
 		}

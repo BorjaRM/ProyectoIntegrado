@@ -20,6 +20,11 @@ public class HotelVO {
 		this.ciudad=ciudad;
 		this.pais=pais;
 	}
+	
+	@Override
+	public String toString(){
+		return nombre.toUpperCase();
+	}
 
 	public int getCodigo() {
 		return codigo;

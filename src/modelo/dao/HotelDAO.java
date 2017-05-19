@@ -49,16 +49,24 @@ public class HotelDAO {
 		}
 	}
 	
-	public ArrayList<String> getNombresHoteles(){
-		ArrayList<String> nombresHoteles = new ArrayList<String>();
-		String nombre;
-		String sql = ("SELECT nombre FROM hotel ORDER BY codigo;");
+	public ArrayList<HotelVO> getHoteles(){
+		ArrayList<HotelVO> nombresHoteles = new ArrayList<HotelVO>();
+		String nombre,telefono,calle,ciudad,pais;
+		int codigo,numero,cp;
+		String sql = ("SELECT * FROM hotel ORDER BY nombre;");
 		try{
 			Statement consulta = this.modelo.getConexion().createStatement();
 			ResultSet resultadoConsulta = consulta.executeQuery(sql);
 			while(resultadoConsulta.next()){
-				nombre=resultadoConsulta.getString(1);
-				nombresHoteles.add(nombre);
+				codigo=resultadoConsulta.getInt(1);
+				nombre=resultadoConsulta.getString(2);
+				telefono=resultadoConsulta.getString(3);
+				calle=resultadoConsulta.getString(4);
+				numero=resultadoConsulta.getInt(5);
+				cp=resultadoConsulta.getInt(6);
+				ciudad=resultadoConsulta.getString(7);
+				pais=resultadoConsulta.getString(8);
+				nombresHoteles.add(new HotelVO(codigo,nombre,telefono,calle,numero,cp,ciudad,pais));
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();

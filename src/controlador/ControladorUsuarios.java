@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import modelo.BD;
 import modelo.dao.HotelDAO;
 import modelo.dao.UsuarioDAO;
+import modelo.vo.HotelVO;
 import vista.LoginView;
 import vista.Marco;
 
@@ -66,7 +67,6 @@ public class ControladorUsuarios implements ActionListener, ItemListener{
 	public boolean compruebaLoginEmpleado(){
 		UsuarioDAO consultasUsuario = new UsuarioDAO(modelo);
 		return consultasUsuario.compruebaUsuario(vistaLogin.recogeDatos());			
-		
 	}
 	
 	public void preparaPrincipalAdminView(){
@@ -77,7 +77,6 @@ public class ControladorUsuarios implements ActionListener, ItemListener{
 		frame.muestraPrincipalAdminView();
 		preparaControladores();
 		frame.setVisible(true);
-
 	}
 	
 	public void preparaPrincipalEmpleadoView(){
@@ -118,13 +117,13 @@ public class ControladorUsuarios implements ActionListener, ItemListener{
 	}	
 	
 	public void preparaDesplegableHotelView(){
-		frame.getPav().rellenaDesplegableHoteles(consultasHotel.getNombresHoteles());
+		frame.getPav().rellenaDesplegableHoteles(consultasHotel.getHoteles());
 	}
 	
 	public void estableceReferenciaHotel(){
 		if(esAdministrador){
-			String nombre= (String) frame.getPav().getNombresHoteles().getSelectedItem();
-			this.refHotel=consultasHotel.getCodigoHotel(nombre);
+			HotelVO hotelSeleccionado = (HotelVO) frame.getPav().getNombresHoteles().getSelectedItem();
+			this.refHotel= hotelSeleccionado.getCodigo();
 			System.out.println("referencia hotel:" +refHotel);
 		}else{
 			UsuarioDAO consultasUsuario = new UsuarioDAO(modelo);
@@ -156,21 +155,13 @@ public class ControladorUsuarios implements ActionListener, ItemListener{
 
 	@Override
 	public void itemStateChanged(ItemEvent e) {
-		if (e.getStateChange() == 1) { 
-			switch ((String)e.getItem()) {
-			
-			case "Español":
-				bundle = ResourceBundle.getBundle("idiomas/es_ES");
-				break;
-			case "English":
-				bundle = ResourceBundle.getBundle("idiomas/en_UK");
-				break;
-			default:
-				bundle = ResourceBundle.getBundle("idiomas/es_ES");
-				break;
+		if(e.getStateChange() == 1){ 
+			switch ((String)e.getItem()){
+				//case "Español": bundle = ResourceBundle.getBundle("idiomas/es_ES"); break;
+				case "English": bundle = ResourceBundle.getBundle("idiomas/en_UK"); break;
+				default: bundle = ResourceBundle.getBundle("idiomas/es_ES"); break;
 			}
 		}
-		
 	}
 
 	

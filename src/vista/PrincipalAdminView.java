@@ -13,13 +13,14 @@ import javax.swing.BoxLayout;
 import javax.swing.SpringLayout;
 
 import controlador.ControladorUsuarios;
+import modelo.vo.HotelVO;
 
 import javax.swing.SwingConstants;
 
 public class PrincipalAdminView extends JPanel {
 	private JButton btn_nuevoHotel;
 	private JButton btn_eliminarHotel;
-	private JComboBox<String> desplegableHoteles;
+	private JComboBox<HotelVO> desplegableHoteles;
 
 	/**
 	 * Create the panel.
@@ -42,7 +43,7 @@ public class PrincipalAdminView extends JPanel {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		horizontalBox.add(lblNewLabel);
 		
-		desplegableHoteles = new JComboBox<String>();
+		desplegableHoteles = new JComboBox<HotelVO>();
 		horizontalBox.add(desplegableHoteles);
 		
 		btn_nuevoHotel = new JButton("Nuevo Hotel");
@@ -110,14 +111,14 @@ public class PrincipalAdminView extends JPanel {
 		this.desplegableHoteles.addActionListener(controlador);
 	}
 	
-	public void rellenaDesplegableHoteles(ArrayList<String> hoteles){
+	public void rellenaDesplegableHoteles(ArrayList<HotelVO> hoteles){
 		desplegableHoteles.removeAllItems();
-		for(String nombre: hoteles){
+		for(HotelVO nombre: hoteles){
 			this.desplegableHoteles.addItem(nombre);
 		}
 	}
 
-	public JComboBox<String> getNombresHoteles() {
+	public JComboBox<HotelVO> getNombresHoteles() {
 		return desplegableHoteles;
 	}	
 	

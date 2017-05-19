@@ -70,7 +70,7 @@ public class PrincipalEmpleadoView extends JPanel {
 
 		//Creamos la lista de incidencias
 		JScrollPane scrollIncidencias = new JScrollPane();
-		JList listaIncidencias = new JList();
+		JList<String> listaIncidencias = new JList<String>();
 		listaIncidencias.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollIncidencias.setViewportView(listaIncidencias);
 		habitaciones_e_incidencias.add(scrollIncidencias);

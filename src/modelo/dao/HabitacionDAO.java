@@ -38,7 +38,7 @@ public class HabitacionDAO {
 	}
 	
 	public ArrayList<HabitacionVO> getHabitaciones(int refHotel){
-		ArrayList<HabitacionVO> estancias = new ArrayList<HabitacionVO>();
+		ArrayList<HabitacionVO> habitaciones = new ArrayList<HabitacionVO>();
 		int id_estancia,cod_hotel,plazas,precio,cod_reserva;
 		String tipo_hab,nombre,clasificacion,descripcion;
 		
@@ -60,12 +60,12 @@ public class HabitacionDAO {
 				descripcion=resultadoConsulta.getString("descripcion");
 				cod_reserva=resultadoConsulta.getInt("cod_reserva");
 				//Creamos un objeto Habitacion y lo añadimos al Arraylist
-				estancias.add(new HabitacionVO(id_estancia,cod_hotel,nombre,tipo_hab,clasificacion,plazas,precio,descripcion,cod_reserva));		
-		}
+				habitaciones.add(new HabitacionVO(id_estancia,cod_hotel,nombre,tipo_hab,clasificacion,plazas,precio,descripcion,cod_reserva));		
+			}
 		}catch (SQLException e) {
 			e.printStackTrace();
 		} 		
-		return estancias;		
+		return habitaciones;		
 	}
 			
 }
