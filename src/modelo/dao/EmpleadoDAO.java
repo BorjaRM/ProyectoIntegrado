@@ -1,5 +1,6 @@
 package modelo.dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.SQLException;
@@ -10,33 +11,35 @@ import modelo.vo.EmpleadoVO;
 import modelo.vo.UsuarioVO;
 
 public class EmpleadoDAO {
-
 	BD bd;
 	ArrayList<EmpleadoVO> empleados;
 	ArrayList<UsuarioVO> usuarios;
-
+	int numero_hotel;
 	public EmpleadoDAO(BD bd) {
 		this.bd = bd;
 	}
 
 	// Metodo que recoja la informacion de un empleado y la guarde en un
 	// ArrayList
-	public ArrayList<EmpleadoVO> rellenarYConseguirArrayEmpleados() {
+	public ArrayList<EmpleadoVO> rellenarYConseguirArrayEmpleados(int numero_hotel) {
+		this.numero_hotel = numero_hotel;
 		empleados = new ArrayList<EmpleadoVO>();
 		try {
-			Statement st = bd.getConexion().createStatement();
-			ResultSet rs = st.executeQuery("SELECT * FROM Empleado;");
+			String sql = "SELECT * FROM Empleado WHERE lugar_trabajo=?;";
+			PreparedStatement ps = this.bd.getConexion().prepareStatement(sql);
+			ps.setInt(1, numero_hotel);
+			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				String codigo = rs.getString("codigo");
+				int codigo = rs.getInt("codigo");
 				String nombre = rs.getString("nombre");
 				String apellido1 = rs.getString("apellido1");
 				String apellido2 = rs.getString("apellido2");
 				String identificacion = rs.getString("identificacion");
 				String telefono = rs.getString("telefono");
-				String salario = rs.getString("salario");
+				int salario = rs.getInt("salario");
 				String seguridad_social = rs.getString("seguridad_social");
 				String fecha_alta = rs.getString("fecha_alta");
-				String lugar_trabajo = rs.getString("lugar_trabajo");
+				int lugar_trabajo = rs.getInt("lugar_trabajo");
 				EmpleadoVO em = new EmpleadoVO(codigo, nombre, apellido1, apellido2, identificacion, telefono, salario,
 						seguridad_social, fecha_alta, lugar_trabajo);
 				empleados.add(em);
@@ -92,8 +95,8 @@ public class EmpleadoDAO {
 	// Metodo que te permita eliminar empleado a partir de su codigo.
 
 	public void eliminarEmpleado(int posicion) {
-		empleados = rellenarYConseguirArrayEmpleados();
-		String codigo = empleados.get(posicion).getCodigo();
+		empleados = rellenarYConseguirArrayEmpleados(numero_hotel);
+		int codigo = empleados.get(posicion).getCodigo();
 
 		try {
 			Statement stmt = bd.getConexion().createStatement();

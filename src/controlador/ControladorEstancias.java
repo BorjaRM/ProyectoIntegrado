@@ -33,7 +33,7 @@ public class ControladorEstancias implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		System.out.println(e.getActionCommand());
 		switch(e.getActionCommand()){
-			case "Ver Estancias": preparaEstanciasView(); preparaInfoEstancias(); break;
+			case "Ver Estancias": preparaEstanciasView(); preparaInfoHabitaciones(); break;
 			case "Nueva Estancia": preparaNuevaEstanciaView(); break;
 			case "Modificar Estancia": preparaModificarEstanciaView(); break;
 			case "Eliminar Estancia":/* **************************************************************************** */ break;
@@ -55,24 +55,18 @@ public class ControladorEstancias implements ActionListener {
 		frame.muestraEstanciasView();
 	}
 	
-	public ArrayList<EstanciaVO> preparaInfoEstancias(){
-		//PONER DOS TABLAS UNA PARA HABITACIONES Y OTRA PARA ESTANCIAS
-		EstanciaDAO estanciaConsultas = new EstanciaDAO(modelo);
+	public void preparaInfoHabitaciones(){
 		HabitacionDAO habitacionConsultas = new HabitacionDAO(modelo);
-		
-		ArrayList<EstanciaVO> estanciasHab = habitacionConsultas.getHabitaciones(refHotel);
-		ArrayList<EstanciaVO> estanciasUC = estanciaConsultas.getEstanciasUsoComun(refHotel);
-		estanciasHab.addAll(estanciasUC);
-		
-		String[][] estancias = new String[estanciasHab.size()][];
-		
-		for(int i=0;i<estancias.length;i++){
-			EstanciaVO e = estanciasHab.get(i);
-			for(int j=0;j<estancias[i].length;j++){
 
+		String[][] h = habitacionConsultas.getMatrizHabitaciones(1);
+		
+		for(int i=0;i<h.length;i++){
+			for(int j=0;j<h[i].length;j++){
+				System.out.println(h[i][j]);
 			}
 		}
-		return estanciasHab;
+		
+	
 	}
 	
 	public void preparaNuevaEstanciaView(){

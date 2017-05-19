@@ -16,10 +16,11 @@ import java.awt.FlowLayout;
 import java.util.ArrayList;
 
 public class EstanciasView extends JPanel implements IControladorEstancias{
-	private JTable table;
+	private JTable tabla_habitaciones;
 	private JButton btnNuevaEstancia;
 	private JButton btnModificarEstancia;
 	private JButton btnEliminarEstancia;
+	private JTable tabla_estancias;
 
 	/**
 	 * Create the panel.
@@ -51,8 +52,16 @@ public class EstanciasView extends JPanel implements IControladorEstancias{
 		
 		/*String[] colHeader = {"Nombre","Tipo","Camas","Aseo","A/C","Wifi","Precio"};
 		DefaultTableModel table_model = new DefaultTableModel(colHeader,0);*/
-		table = new JTable();
-		scrollPane.setViewportView(table);
+		
+		tabla_habitaciones = new JTable();
+		scrollPane.setViewportView(tabla_habitaciones);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		panel_Tabla.add(scrollPane_1, BorderLayout.NORTH);
+		
+		tabla_estancias = new JTable();
+		scrollPane_1.setViewportView(tabla_estancias);
+
 
 	}
 
@@ -83,8 +92,7 @@ public class EstanciasView extends JPanel implements IControladorEstancias{
 		for(EstanciaVO e: estancias){
 			// falta programar
 		}
-
-
+		tabla_habitaciones.setModel(dtm);
 	}
 
 }
