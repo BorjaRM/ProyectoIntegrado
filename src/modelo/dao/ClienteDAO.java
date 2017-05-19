@@ -38,7 +38,7 @@ public class ClienteDAO {
 			ClienteVO c = new ClienteVO(codigo, nombre, apellidos, identificacion, fecha_nacimiento, telefono, nacionalidad, Email, fecha_alta);
 			clientes.add(c);
 		}
-		bd.getConexion().close();
+
 		
 		}
 		catch(Exception e){
@@ -55,6 +55,7 @@ public class ClienteDAO {
 			
 		} catch (SQLException e) {
 			System.err.println("Error insertant client");
+			e.printStackTrace();
 		}
 	}
 	
