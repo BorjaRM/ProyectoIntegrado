@@ -58,7 +58,7 @@ public class EmpleadoDAO {
 			while (rs.next()) {
 				String nombre = rs.getString("nombre");
 				String contrasena = rs.getString("contrasena");
-				String cod_empleado = rs.getString("cod_empleado");
+				int cod_empleado = rs.getInt("cod_empleado");
 
 				UsuarioVO u = new UsuarioVO(nombre, contrasena, cod_empleado);
 				usuarios.add(u);

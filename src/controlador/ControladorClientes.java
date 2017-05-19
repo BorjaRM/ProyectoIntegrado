@@ -2,8 +2,13 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
 
 import modelo.BD;
+import modelo.dao.ClienteDAO;
+import modelo.vo.ClienteVO;
 import vista.ClientesView;
 import vista.Marco;
 import vista.ModificarClienteView;
@@ -34,17 +39,32 @@ public class ControladorClientes implements ActionListener{
 			case "Nuevo cliente": preparaNuevoClienteView(); break;
 			case "Editar cliente": preparaModificaClienteView(); break;
 			case "Eliminar cliente": /* **************************************************************************** */ break;
-			case "Enviar": /* **************************************************************************** */ break;
+			case "Enviar": insertaCliente(); break;
 			case "Modificar": /* **************************************************************************** */ break;
 			case "Cancelar": cancelar(); break;
 		}
 	}
 	
+	private void insertaCliente() {
+		ClienteDAO modeloCliente = new ClienteDAO(modelo, refHotel);
+		ClienteVO cliente = new ClienteVO("",ncv.getTxt_Nombre().getText(),ncv.getTxt_Apellidos().getText(),ncv.getTxt_Identificacion().getText(),ncv.getTxt_FechaNacimiento().getText(),ncv.getTxt_Telefono().getText(),ncv.getTxt_Nacionalidad().getText(),ncv.getTxt_Email().getText(),"");
+
+		if(ncv.getTxt_Apellidos().getText().equals("") || ncv.getTxt_Nombre().getText().equals("") || ncv.getTxt_Email().getText().equals("") || ncv.getTxt_FechaNacimiento().getText().equals("") || ncv.getTxt_Identificacion().getText().equals("") || ncv.getTxt_Telefono().getText().equals("")){
+			JOptionPane.showMessageDialog(null, "Faltan datos por rellenar, Error");	
+		}else{			
+			modeloCliente.insertaCliente(cliente);
+		}
+		
+	}
+
 	public void preparaClientesView(){
 		frame.creaClientesView(this);
 		this.cv=frame.getCv();
 		if(!esAdministrador)
 			cv.ocultaBotonEliminar();
+		ClienteDAO modeloCliente = new ClienteDAO(modelo, refHotel);
+		ArrayList <ClienteVO> clientes = modeloCliente.rellenaYConsigueArrayClientes();
+		cv.rellenaListaClientes(clientes);
 		frame.muestraClientesView();
 	}
 	

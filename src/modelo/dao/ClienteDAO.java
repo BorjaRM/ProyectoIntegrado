@@ -12,9 +12,11 @@ public class ClienteDAO {
 
 	BD bd ;
 	ArrayList <ClienteVO> clientes;
+	int referenciaHotel;
 	
-	public ClienteDAO (BD bd){
+	public ClienteDAO (BD bd, int refernciaHotel){
 		this.bd = bd;
+		this.referenciaHotel = referenciaHotel;
 		
 	}
 	
@@ -49,7 +51,7 @@ public class ClienteDAO {
 	public void insertaCliente(ClienteVO cliente){
 		try {
 			Statement stmt = bd.getConexion().createStatement();
-			stmt.executeUpdate("INSERT INTO cliente VALUES(null, '"+cliente.getNombre()+"', '"+cliente.getApellidos()+"', '"+cliente.getIdentificacion()+"', '"+cliente.getFecha_nacimiento()+"', '"+cliente.getTelefono()+"', '"+cliente.getNacionalidad()+"', '"+cliente.getEmail()+"', '"+cliente.getFecha_alta()+"');");
+			stmt.executeUpdate("INSERT INTO cliente VALUES(null, '"+cliente.getNombre()+"', '"+cliente.getApellidos()+"', '"+cliente.getIdentificacion()+"', '"+cliente.getFecha_nacimiento()+"', '"+cliente.getTelefono()+"', '"+cliente.getNacionalidad()+"', '"+cliente.getEmail()+"', '2032-02-03');");
 			
 		} catch (SQLException e) {
 			System.err.println("Error insertant client");
@@ -73,7 +75,7 @@ public class ClienteDAO {
 		String codigoString = clientes.get(posicion).getCodigo();
 		try {
 			Statement stmt = bd.getConexion().createStatement();
-			stmt.executeUpdate("UPDATE TABLE cliente SET nombre='"+cliente.getNombre()+"', apelllidos='"+cliente.getApellidos()+"', identificacion='"+cliente.getIdentificacion()+"', fecha_nacimiento='"+cliente.getTelefono()+"', nacionalidad='"+cliente.getNacionalidad()+"', email='"+cliente.getEmail()+"', fecha_alta='"+cliente.getFecha_alta()+"' WHERE codigo='"+codigoString+"';");
+			stmt.executeUpdate("UPDATE cliente SET nombre='"+cliente.getNombre()+"', apelllidos='"+cliente.getApellidos()+"', identificacion='"+cliente.getIdentificacion()+"', fecha_nacimiento='"+cliente.getTelefono()+"', nacionalidad='"+cliente.getNacionalidad()+"', email='"+cliente.getEmail()+"', fecha_alta='"+cliente.getFecha_alta()+"' WHERE codigo='"+codigoString+"';");
 		} catch (Exception e) {
 			System.err.println("Error modificando cliente.");
 		}
