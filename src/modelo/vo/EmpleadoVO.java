@@ -1,18 +1,18 @@
 package modelo.vo;
 
 public class EmpleadoVO {
-	private String codigo;
+	private int codigo;
 	private String nombre;
 	private String apellido1;
 	private String apellido2;
 	private String identificacion;
 	private String telefono;
-	private String salario;
+	private int salario;
 	private String seguridad_social;
 	private String fecha_alta;
-	private String lugar_trabajo;
+	private int lugar_trabajo;
 	
-	public EmpleadoVO(String cod, String nom, String ap1, String ap2, String id, String tlf, String salario, String ss, String fAlta, String trabaja){
+	public EmpleadoVO(int cod, String nom, String ap1, String ap2, String id, String tlf, int salario, String ss, String fAlta, int trabaja){
 		codigo=cod;
 		nombre=nom;
 		apellido1=ap1;
@@ -25,7 +25,7 @@ public class EmpleadoVO {
 		lugar_trabajo=trabaja;
 	}
 	
-	public EmpleadoVO(String nom, String ap1, String ap2, String id, String tlf, String salario, String ss, String fAlta, String trabaja){
+	public EmpleadoVO(String nom, String ap1, String ap2, String id, String tlf, int salario, String ss, String fAlta, int trabaja){
 		nombre=nom;
 		apellido1=ap1;
 		apellido2=ap2;
@@ -37,11 +37,11 @@ public class EmpleadoVO {
 		lugar_trabajo=trabaja;
 	}
 
-	public String getCodigo() {
+	public int getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(String codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 
@@ -85,11 +85,11 @@ public class EmpleadoVO {
 		this.telefono = telefono;
 	}
 
-	public String getSalario() {
+	public int getSalario() {
 		return salario;
 	}
 
-	public void setSalario(String salario) {
+	public void setSalario(int salario) {
 		this.salario = salario;
 	}
 
@@ -109,11 +109,11 @@ public class EmpleadoVO {
 		this.fecha_alta = fecha_alta;
 	}
 
-	public String getLugar_trabajo() {
+	public int getLugar_trabajo() {
 		return lugar_trabajo;
 	}
 
-	public void setLugar_trabajo(String lugar_trabajo) {
+	public void setLugar_trabajo(int lugar_trabajo) {
 		this.lugar_trabajo = lugar_trabajo;
 	}
 
