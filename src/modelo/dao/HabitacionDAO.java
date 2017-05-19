@@ -25,7 +25,6 @@ public class HabitacionDAO {
 					+ "AND estancia.tipo='Habitacion';";
 			PreparedStatement ps = this.modelo.getConexion().prepareStatement(sql);
 			ps.setInt(1, refHotel);
-			//ps.executeQuery();
 			ResultSet resultadoConsulta = ps.executeQuery(sql);
 			//Transformamos el resultset en un arraylist
 			while(resultadoConsulta.next()){
