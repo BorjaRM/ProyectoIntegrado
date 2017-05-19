@@ -33,7 +33,7 @@ public class ControladorEstancias implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		System.out.println(e.getActionCommand());
 		switch(e.getActionCommand()){
-			case "Ver Estancias": preparaEstanciasView(); preparaInfoHabitaciones(); break;
+			case "Ver Estancias": preparaEstanciasView(); break; //preparaInfoHabitaciones(); 
 			case "Nueva Estancia": preparaNuevaEstanciaView(); break;
 			case "Modificar Estancia": preparaModificarEstanciaView(); break;
 			case "Eliminar Estancia":/* **************************************************************************** */ break;
@@ -55,19 +55,19 @@ public class ControladorEstancias implements ActionListener {
 		frame.muestraEstanciasView();
 	}
 	
-	public void preparaInfoHabitaciones(){
-		HabitacionDAO habitacionConsultas = new HabitacionDAO(modelo);
-
-		String[][] h = habitacionConsultas.getMatrizHabitaciones(1);
-		
-		for(int i=0;i<h.length;i++){
-			for(int j=0;j<h[i].length;j++){
-				System.out.println(h[i][j]);
-			}
-		}
-		
-	
-	}
+//	public void preparaInfoHabitaciones(){
+//		HabitacionDAO habitacionConsultas = new HabitacionDAO(modelo);
+//
+//		String[][] h = habitacionConsultas.getMatrizHabitaciones(1);
+//		
+//		for(int i=0;i<h.length;i++){
+//			for(int j=0;j<h[i].length;j++){
+//				System.out.println(h[i][j]);
+//			}
+//		}
+//		
+//	
+//	}
 	
 	public void preparaNuevaEstanciaView(){
 		frame.creaNuevaEstanciaView(this);

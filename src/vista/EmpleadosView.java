@@ -12,9 +12,13 @@ import javax.swing.table.DefaultTableModel;
 
 import controlador.ControladorEmpleados;
 import interfaces.IControladorEmpleados;
+import modelo.vo.ClienteVO;
+import modelo.vo.EmpleadoVO;
 
 import javax.swing.JTable;
 import java.awt.FlowLayout;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 public class EmpleadosView extends JPanel implements IControladorEmpleados{
 	private JTextField textField;
@@ -65,6 +69,22 @@ public class EmpleadosView extends JPanel implements IControladorEmpleados{
 		DefaultTableModel table_model = new DefaultTableModel(colHeader,0);
 		table = new JTable(table_model);
 		scrollPane.setViewportView(table);
+		}
+	
+	public void rellenaListaEmpleados(ArrayList <EmpleadoVO> empleados){
+		DefaultTableModel modeloTabla = (DefaultTableModel) table.getModel();
+		Object[] fila = new Object[modeloTabla.getColumnCount()];
+		
+		for (int i = 0 ; i < empleados.size(); i++ ){
+			fila[0] = empleados.get(i).getIdentificacion();
+			fila[1] = empleados.get(i).getNombre();
+			fila[2] = empleados.get(i).getApellido1();
+			fila[3] = empleados.get(i).getTelefono();
+			fila[4] = empleados.get(i).getFecha_alta();
+			modeloTabla.addRow(fila);
+		}
+		table.setModel(modeloTabla);
+			
 	}
 	
 	
