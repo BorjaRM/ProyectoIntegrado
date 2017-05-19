@@ -2,9 +2,11 @@ package vista;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import controlador.ControladorUsuarios;
+import modelo.vo.HotelVO;
 
 import javax.swing.BoxLayout;
 import java.awt.FlowLayout;
@@ -118,6 +120,23 @@ public class NuevoHotelView extends JPanel {
 	public void estableceControlador(ControladorUsuarios controlador) {
 		this.btnEnviar.addActionListener(controlador);
 		this.btnCancelar.addActionListener(controlador);
+	}
+	
+	public HotelVO enviarDatos(){
+		HotelVO h = null;
+		try{
+			String nombre=this.text_nombre.getText();
+			String telefono=this.text_telefono.getText();
+			String calle=this.text_calle.getText();
+			int numero=Integer.parseInt(this.text_numero.getText());
+			int cp=Integer.parseInt(this.text_cp.getText());
+			String ciudad=this.text_ciudad.getText();
+			String pais=this.text_pais.getText();
+			h = new HotelVO(0,nombre,telefono,calle,numero,cp,ciudad,pais);
+		}catch (Exception e){
+			JOptionPane.showMessageDialog(null, "No se ha podido insertar el hotel");
+		}
+		return h;
 	}
 
 }

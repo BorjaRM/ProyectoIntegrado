@@ -5,23 +5,21 @@ import javax.swing.JButton;
 import java.awt.BorderLayout;
 import javax.swing.JComboBox;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
+
 import javax.swing.JLabel;
-import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JList;
 import javax.swing.SpringLayout;
 
 import controlador.ControladorUsuarios;
 
-import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
 public class PrincipalAdminView extends JPanel {
 	private JButton btn_nuevoHotel;
 	private JButton btn_eliminarHotel;
-	private String[] desplegableHoteles = {"Hotel 1", "Hotel 2"};
+	private JComboBox<String> desplegableHoteles;
 
 	/**
 	 * Create the panel.
@@ -44,8 +42,8 @@ public class PrincipalAdminView extends JPanel {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		horizontalBox.add(lblNewLabel);
 		
-		JComboBox comboBox = new JComboBox(desplegableHoteles);
-		horizontalBox.add(comboBox);
+		desplegableHoteles = new JComboBox<String>();
+		horizontalBox.add(desplegableHoteles);
 		
 		btn_nuevoHotel = new JButton("Nuevo Hotel");
 		panel.add(btn_nuevoHotel);
@@ -109,5 +107,18 @@ public class PrincipalAdminView extends JPanel {
 	public void estableceControlador(ControladorUsuarios controlador) {
 		this.btn_nuevoHotel.addActionListener(controlador);
 		this.btn_eliminarHotel.addActionListener(controlador);
+		this.desplegableHoteles.addActionListener(controlador);
 	}
+	
+	public void rellenaDesplegableHoteles(ArrayList<String> hoteles){
+		desplegableHoteles.removeAllItems();
+		for(String nombre: hoteles){
+			this.desplegableHoteles.addItem(nombre);
+		}
+	}
+
+	public JComboBox<String> getNombresHoteles() {
+		return desplegableHoteles;
+	}	
+	
 }

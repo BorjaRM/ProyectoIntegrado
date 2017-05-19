@@ -1,9 +1,5 @@
 package modelo.vo;
 
-/* En principio los servicios disponibles vendran predeterminados en la aplicacion,
- * como lo hago?
- */
-
 public class ServicioVO {
 	private int codigo;
 	private String nombre;

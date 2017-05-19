@@ -10,6 +10,7 @@ import com.mysql.jdbc.Connection;
 
 import modelo.BD;
 import modelo.vo.ReservaVO;
+import modelo.vo.TipoRegimen;
 
 
 public class ReservaDAO {
@@ -28,7 +29,7 @@ public class ReservaDAO {
 				String inicio = rs.getString("inicio");
 				String fin = rs.getString("fin");
 				String noches = "LMAO";
-				TipoRegimenDAO pension = null;
+				TipoRegimen pension = null;
 				
 				ReservaVO r = new ReservaVO(codigo,cliente,habitacion,pension,fin,inicio, noches);
 				reservas.add(r);

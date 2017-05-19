@@ -7,12 +7,14 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controlador.ControladorUsuarios;
+import modelo.vo.UsuarioVO;
 
 import java.awt.Component;
 import javax.swing.Box;
 import java.awt.Color;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
@@ -89,5 +91,17 @@ public class LoginView extends JFrame{
 	public JCheckBox getSoyAdmin() {
 		return soyAdmin;
 	}	
+	
+	public UsuarioVO recogeDatos(){
+		UsuarioVO u = null;
+		try{
+			String nombre=this.text_usuario.getText();
+			String passText = new String(passwordField.getPassword());
+			u=new UsuarioVO(nombre,passText,0);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return u;
+	}
 
 }

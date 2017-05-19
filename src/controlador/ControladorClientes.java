@@ -16,12 +16,14 @@ public class ControladorClientes implements ActionListener{
 	private NuevoClienteView ncv;
 	private ModificarClienteView mcv;
 	private final boolean esAdministrador;
-;
+	private int refHotel;
+
 	
-	public ControladorClientes(Marco frame, BD modelo, boolean esAdministrador){
+	public ControladorClientes(Marco frame, BD modelo, boolean esAdministrador, int refHotel){
 		this.frame=frame;
 		this.modelo=modelo;
 		this.esAdministrador=esAdministrador;
+		this.refHotel=refHotel;
 	}
 	
 	@Override
@@ -73,7 +75,10 @@ public class ControladorClientes implements ActionListener{
 
 	public void cancelar(){
 		if(cv == null){
-			frame.muestraPrincipalView(esAdministrador);
+			if(esAdministrador)
+				frame.muestraPrincipalAdminView();		
+			else
+				frame.muestraPrincipalEmpleadoView();
 		}else
 			frame.muestraClientesView();
 	}

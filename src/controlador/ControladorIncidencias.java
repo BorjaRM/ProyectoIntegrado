@@ -14,11 +14,13 @@ public class ControladorIncidencias implements ActionListener {
 	private IncidenciasView iv;
 	private NuevaIncidenciaView niv;
 	private final boolean esAdministrador;
-	
-	public ControladorIncidencias(Marco frame, BD modelo, boolean esAdministrador){
+	private int refHotel;
+
+	public ControladorIncidencias(Marco frame, BD modelo, boolean esAdministrador, int refHotel){
 		this.frame=frame;
 		this.modelo=modelo;
 		this.esAdministrador=esAdministrador;
+		this.refHotel=refHotel;
 	}
 	
 	@Override
@@ -47,7 +49,10 @@ public class ControladorIncidencias implements ActionListener {
 	
 	public void cancelar(){
 		if(iv == null){
-			frame.muestraPrincipalView(esAdministrador);
+			if(esAdministrador)
+				frame.muestraPrincipalAdminView();		
+			else
+				frame.muestraPrincipalEmpleadoView();
 		}else
 			frame.muestraIncidenciasView();
 	}

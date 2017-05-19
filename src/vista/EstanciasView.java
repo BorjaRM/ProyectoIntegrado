@@ -10,7 +10,10 @@ import javax.swing.table.DefaultTableModel;
 
 import controlador.ControladorEstancias;
 import interfaces.IControladorEstancias;
+import modelo.vo.EstanciaVO;
+
 import java.awt.FlowLayout;
+import java.util.ArrayList;
 
 public class EstanciasView extends JPanel implements IControladorEstancias{
 	private JTable table;
@@ -46,9 +49,9 @@ public class EstanciasView extends JPanel implements IControladorEstancias{
 		JScrollPane scrollPane = new JScrollPane();
 		panel_Tabla.add(scrollPane);
 		
-		String[] colHeader = {"ID","Nombre","Tipo","Plazas","Camas","Aseo","A/C","Wifi","Precio"};
-		DefaultTableModel table_model = new DefaultTableModel(colHeader,0);
-		table = new JTable(table_model);
+		/*String[] colHeader = {"Nombre","Tipo","Camas","Aseo","A/C","Wifi","Precio"};
+		DefaultTableModel table_model = new DefaultTableModel(colHeader,0);*/
+		table = new JTable();
 		scrollPane.setViewportView(table);
 
 	}
@@ -70,6 +73,18 @@ public class EstanciasView extends JPanel implements IControladorEstancias{
 
 	public void ocultaBotonEliminarEstancia(){
 		this.btnEliminarEstancia.setVisible(false);
+	}
+	
+	public void muestraTablaEstancias(ArrayList<EstanciaVO> estancias){
+		String[] cabecero = {"Nombre","Tipo","Camas","Aseo","A/C","Wifi","Precio"};
+		DefaultTableModel dtm = new DefaultTableModel(cabecero,0);
+		
+		//añadimos cada fila de datos a la tabla
+		for(EstanciaVO e: estancias){
+			// falta programar
+		}
+
+
 	}
 
 }

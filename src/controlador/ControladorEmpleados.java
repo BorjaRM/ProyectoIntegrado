@@ -16,10 +16,12 @@ public class ControladorEmpleados implements ActionListener {
 	private EmpleadosView ev;
 	private ModificarEmpleadoView mev;
 	private NuevoEmpleadoView nev;
-	
-	public ControladorEmpleados(Marco frame, BD modelo){
+	private int refHotel;
+
+	public ControladorEmpleados(Marco frame, BD modelo, int refHotel){
 		this.frame=frame;
 		this.modelo=modelo;
+		this.refHotel=refHotel;
 	}
 	
 	@Override
@@ -69,7 +71,7 @@ public class ControladorEmpleados implements ActionListener {
 
 	public void cancelar(){
 		if(ev == null){
-			frame.muestraPrincipalView(true);
+			frame.muestraPrincipalAdminView();
 		}else
 			frame.muestraEmpleadosView();
 	}

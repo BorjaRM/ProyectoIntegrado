@@ -1,37 +1,24 @@
 package modelo.vo;
 
-import modelo.dao.TipoRegimenDAO;
-
 public class ReservaVO {
 	private String codigo;
 	private String inicio;
 	private String fin;
-<<<<<<< HEAD:src/modelo/vo/ReservaVO.java
 	private String regimen;
-=======
-	private TipoRegimenDAO regimen;
->>>>>>> 50a670c23ab8003e55645b05d4c0d0d4c19b1ddf:modelo/vo/ReservaVO.java
 	private String cod_cliente;
 	private String cod_usuario;
 	private String cod_habitacion;
 	
-<<<<<<< HEAD:src/modelo/vo/ReservaVO.java
-	public ReservaVO(String cod, String ini, String fin, String reg, String cli, String user){
-=======
-	public ReservaVO(String cod, String ini, String fin, TipoRegimenDAO reg, String cli, String user, String hab){
->>>>>>> 50a670c23ab8003e55645b05d4c0d0d4c19b1ddf:modelo/vo/ReservaVO.java
+	public ReservaVO(String cod, String ini, String fin, String reg, String cli, String user,String hab){
 		codigo=cod;
 		inicio=ini;
 		this.fin=fin;
 		regimen=reg;
 		cod_cliente=cli;
 		cod_usuario=user;
-<<<<<<< HEAD:src/modelo/vo/ReservaVO.java
-=======
 		cod_habitacion = hab;
->>>>>>> 50a670c23ab8003e55645b05d4c0d0d4c19b1ddf:modelo/vo/ReservaVO.java
 	}
-	
+
 	public String getCodigo() {
 		return codigo;
 	}
@@ -56,7 +43,6 @@ public class ReservaVO {
 		this.fin = fin;
 	}
 
-<<<<<<< HEAD:src/modelo/vo/ReservaVO.java
 	public String getRegimen() {
 		return regimen;
 	}
@@ -65,38 +51,28 @@ public class ReservaVO {
 		this.regimen = regimen;
 	}
 
-=======
->>>>>>> 50a670c23ab8003e55645b05d4c0d0d4c19b1ddf:modelo/vo/ReservaVO.java
-	public String getCliente() {
+	public String getCod_cliente() {
 		return cod_cliente;
 	}
 
-	public void setCliente(String cliente) {
-		this.cod_cliente = cliente;
+	public void setCod_cliente(String cod_cliente) {
+		this.cod_cliente = cod_cliente;
 	}
 
-	public String getUsuario() {
+	public String getCod_usuario() {
 		return cod_usuario;
 	}
 
-	public void setUsuario(String usuario) {
-		this.cod_usuario = usuario;
+	public void setCod_usuario(String cod_usuario) {
+		this.cod_usuario = cod_usuario;
 	}
 
-	public TipoRegimenDAO getRegimen() {
-		return regimen;
-	}
-
-	public void setRegimen(TipoRegimenDAO regimen) {
-		this.regimen = regimen;
-	}
-	
-	public String getHabitacion(){
+	public String getCod_habitacion() {
 		return cod_habitacion;
 	}
-	
-	public void setHabitacion(String habitacion){
-		this.cod_habitacion = habitacion;
+
+	public void setCod_habitacion(String cod_habitacion) {
+		this.cod_habitacion = cod_habitacion;
 	}
 
 }

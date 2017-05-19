@@ -2,8 +2,12 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import modelo.BD;
+import modelo.dao.EstanciaDAO;
+import modelo.dao.HabitacionDAO;
+import modelo.vo.EstanciaVO;
 import vista.EstanciasView;
 import vista.Marco;
 import vista.ModificarEstanciaView;
@@ -16,18 +20,20 @@ public class ControladorEstancias implements ActionListener {
 	private NuevaEstanciaView nesv;
 	private ModificarEstanciaView mesv;
 	private final boolean esAdministrador;
-	
-	public ControladorEstancias(Marco frame, BD modelo, boolean esAdministrador){
+	private int refHotel;
+
+	public ControladorEstancias(Marco frame, BD modelo, boolean esAdministrador, int refHotel){
 		this.frame=frame;
 		this.modelo=modelo;
 		this.esAdministrador=esAdministrador;
+		this.refHotel=refHotel;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.out.println(e.getActionCommand());
 		switch(e.getActionCommand()){
-			case "Ver Estancias": preparaEstanciasView(); break;
+			case "Ver Estancias": preparaEstanciasView(); preparaInfoEstancias(); break;
 			case "Nueva Estancia": preparaNuevaEstanciaView(); break;
 			case "Modificar Estancia": preparaModificarEstanciaView(); break;
 			case "Eliminar Estancia":/* **************************************************************************** */ break;
@@ -47,6 +53,26 @@ public class ControladorEstancias implements ActionListener {
 			esv.ocultaBotonEliminarEstancia();
 		}
 		frame.muestraEstanciasView();
+	}
+	
+	public ArrayList<EstanciaVO> preparaInfoEstancias(){
+		//PONER DOS TABLAS UNA PARA HABITACIONES Y OTRA PARA ESTANCIAS
+		EstanciaDAO estanciaConsultas = new EstanciaDAO(modelo);
+		HabitacionDAO habitacionConsultas = new HabitacionDAO(modelo);
+		
+		ArrayList<EstanciaVO> estanciasHab = habitacionConsultas.getHabitaciones(refHotel);
+		ArrayList<EstanciaVO> estanciasUC = estanciaConsultas.getEstanciasUsoComun(refHotel);
+		estanciasHab.addAll(estanciasUC);
+		
+		String[][] estancias = new String[estanciasHab.size()][];
+		
+		for(int i=0;i<estancias.length;i++){
+			EstanciaVO e = estanciasHab.get(i);
+			for(int j=0;j<estancias[i].length;j++){
+
+			}
+		}
+		return estanciasHab;
 	}
 	
 	public void preparaNuevaEstanciaView(){
@@ -79,7 +105,10 @@ public class ControladorEstancias implements ActionListener {
 	
 	public void cancelar(){
 		if(esv == null){
-			frame.muestraPrincipalView(esAdministrador);
+			if(esAdministrador)
+				frame.muestraPrincipalAdminView();		
+			else
+				frame.muestraPrincipalEmpleadoView();
 		}else
 			frame.muestraEstanciasView();
 	}

@@ -16,11 +16,13 @@ public class ControladorReservas implements ActionListener {
 	private ReservasView rv;
 	private final boolean esAdministrador;
 	private ClienteDAO cd;
-	
-	public ControladorReservas(Marco frame, BD modelo, boolean esAdministrador){
+	private int refHotel;
+
+	public ControladorReservas(Marco frame, BD modelo, boolean esAdministrador, int refHotel){
 		this.frame=frame;
 		this.modelo = modelo;
 		this.esAdministrador=esAdministrador;
+		this.refHotel=refHotel;
 	}
 	
 	@Override
@@ -57,7 +59,10 @@ public class ControladorReservas implements ActionListener {
 	
 	public void cancelar(){
 		if(rv == null){
-			frame.muestraPrincipalView(esAdministrador);
+			if(esAdministrador)
+				frame.muestraPrincipalAdminView();		
+			else
+				frame.muestraPrincipalEmpleadoView();
 		}else
 			frame.muestraReservasView();
 	}

@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import modelo.BD;
+import modelo.vo.EstanciaVO;
 import modelo.vo.HabitacionVO;
 
 public class HabitacionDAO {
@@ -24,7 +25,7 @@ public class HabitacionDAO {
 					+ "AND estancia.tipo='Habitacion';";
 			PreparedStatement ps = this.modelo.getConexion().prepareStatement(sql);
 			ps.setInt(1, refHotel);
-			ps.executeQuery();
+			//ps.executeQuery();
 			ResultSet resultadoConsulta = ps.executeQuery(sql);
 			//Transformamos el resultset en un arraylist
 			while(resultadoConsulta.next()){
@@ -37,18 +38,17 @@ public class HabitacionDAO {
 		return habitaciones;		
 	}
 	
-	public ArrayList<HabitacionVO> getHabitaciones(int refHotel){
-		ArrayList<HabitacionVO> estancias = new ArrayList<HabitacionVO>();
+	public ArrayList<EstanciaVO> getHabitaciones(int refHotel){
+		ArrayList<EstanciaVO> estancias = new ArrayList<EstanciaVO>();
 		int id_estancia,cod_hotel,plazas,precio,cod_reserva;
 		String tipo_hab,nombre,clasificacion,descripcion;
 		
 		try{
-			String sql = "SELECT estancia.cod_hotel,estancia.tipo,estancia.nombre,habitacion.* FROM estancia INNER JOIN "
-					+ "habitacion ON estancia.id=habitacion.id_estancia AND estancia.cod_hotel = ?;";
+			String sql = "SELECT * FROM estancia INNER JOIN habitacion ON "
+					+ "estancia.id=habitacion.id_estancia AND estancia.cod_hotel = ? AND estancia.tipo='habitacion';";
 			PreparedStatement ps = this.modelo.getConexion().prepareStatement(sql);
 			ps.setInt(1, refHotel);
-			ps.executeQuery();
-			ResultSet resultadoConsulta = ps.executeQuery(sql);
+			ResultSet resultadoConsulta = ps.executeQuery();
 			//Transformamos el resultset en un arraylist
 			while(resultadoConsulta.next()){
 				cod_hotel=resultadoConsulta.getInt("cod_hotel");
@@ -60,8 +60,8 @@ public class HabitacionDAO {
 				precio=resultadoConsulta.getInt("precio");
 				descripcion=resultadoConsulta.getString("descripcion");
 				cod_reserva=resultadoConsulta.getInt("cod_reserva");
-				//Creamos un objeto Estancia y lo añadimos al Arraylist
-				estancias.add(new HabitacionVO(id_estancia,cod_hotel,tipo_hab,nombre,clasificacion,plazas,precio,descripcion,cod_reserva));		
+				//Creamos un objeto Habitacion y lo añadimos al Arraylist
+				estancias.add(new HabitacionVO(id_estancia,cod_hotel,nombre,tipo_hab,clasificacion,plazas,precio,descripcion,cod_reserva));		
 		}
 		}catch (SQLException e) {
 			e.printStackTrace();

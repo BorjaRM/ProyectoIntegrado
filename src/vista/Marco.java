@@ -123,26 +123,29 @@ public class Marco extends JFrame{
 		vistas.setLayout(cl);				
 	}
 	
-	public void creaPrincipalView(ControladorUsuarios controlador){
+	public void creaPrincipalAdminView(ControladorUsuarios controlador){
 		if(pav == null){
 			pav = new PrincipalAdminView();
 			pav.estableceControlador(controlador);
 			vistas.add(pav,PRINCIPAL_ADMIN);
 		}
+	}
+	
+	public void muestraPrincipalAdminView(){
+		cl.show(vistas,PRINCIPAL_ADMIN);
+	}
+	
+	public void creaPrincipalEmpleadoView(){
 		if(pev == null){
 			pev = new PrincipalEmpleadoView();
 			vistas.add(pev,PRINCIPAL_EMPLEADO);
 		}
 	}
 	
-	public void muestraPrincipalView(boolean esAdministrador){
-		if(esAdministrador){
-			cl.show(vistas,PRINCIPAL_ADMIN);
-		}else{
-			empleados.setVisible(false);
-			item_nuevaEstancia.setVisible(false);
-			cl.show(vistas,PRINCIPAL_EMPLEADO);
-		}
+	public void muestraPrincipalEmpleadoView(){
+		empleados.setVisible(false);
+		item_nuevaEstancia.setVisible(false);
+		cl.show(vistas,PRINCIPAL_EMPLEADO);
 	}
 	
 	public void creaHotelView(ControladorUsuarios controlador){
@@ -395,6 +398,14 @@ public class Marco extends JFrame{
 
 	public ModificarEstanciaView getMesv() {
 		return mesv;
+	}
+
+	public PrincipalAdminView getPav() {
+		return pav;
+	}
+
+	public NuevoHotelView getHv() {
+		return hv;
 	}	
 	
 }
