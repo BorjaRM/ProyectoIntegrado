@@ -49,7 +49,7 @@ public class ControladorClientes implements ActionListener{
 		ClienteDAO modeloCliente = new ClienteDAO(modelo, refHotel);
 		ClienteVO cliente = new ClienteVO("",ncv.getTxt_Nombre().getText(),ncv.getTxt_Apellidos().getText(),ncv.getTxt_Identificacion().getText(),ncv.getTxt_FechaNacimiento().getText(),ncv.getTxt_Telefono().getText(),ncv.getTxt_Nacionalidad().getText(),ncv.getTxt_Email().getText(),"");
 
-		if(ncv.getTxt_Apellidos().getText().equals("") || ncv.getTxt_Nombre().getText().equals("") || ncv.getTxt_Email().getText().equals("") || ncv.getTxt_FechaNacimiento().getText().equals("") || ncv.getTxt_Identificacion().getText().equals("") || ncv.getTxt_Telefono().getText().equals("")){
+		if(ncv.getTxt_Apellidos().getText().isEmpty() || ncv.getTxt_Nombre().getText().isEmpty() || ncv.getTxt_Email().getText().isEmpty() || ncv.getTxt_FechaNacimiento().getText().isEmpty() || ncv.getTxt_Identificacion().getText().isEmpty() || ncv.getTxt_Telefono().getText().isEmpty() || ncv.getTxt_Nacionalidad().getText().isEmpty()){
 			JOptionPane.showMessageDialog(null, "Faltan datos por rellenar, Error");	
 		}else{			
 			modeloCliente.insertaCliente(cliente);
