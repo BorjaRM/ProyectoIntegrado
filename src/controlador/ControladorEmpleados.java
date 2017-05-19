@@ -2,9 +2,19 @@
 package controlador;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import javax.swing.DefaultListModel;
 
 import modelo.BD;
+import modelo.dao.ClienteDAO;
+import modelo.dao.EmpleadoDAO;
+import modelo.vo.ClienteVO;
+import modelo.vo.EmpleadoVO;
 import vista.EmpleadosView;
 import vista.Marco;
 import vista.ModificarEmpleadoView;
@@ -22,6 +32,7 @@ public class ControladorEmpleados implements ActionListener {
 		this.frame=frame;
 		this.modelo=modelo;
 		this.refHotel=refHotel;
+
 	}
 	
 	@Override
@@ -41,8 +52,12 @@ public class ControladorEmpleados implements ActionListener {
 	public void preparaEmpleadosView(){
 		frame.creaEmpleadosView(this);
 		this.ev=frame.getEv();
+		EmpleadoDAO modeloEmpleado = new EmpleadoDAO(modelo, refHotel);
+		ArrayList <EmpleadoVO> empleados = modeloEmpleado.rellenarYConseguirArrayEmpleados();
+		ev.rellenaListaEmpleados(empleados);
 		frame.muestraEmpleadosView();
 	}
+
 
 	public void preparaNuevoEmpleadoView(){
 		frame.creaNuevoEmpleadoView(this);
@@ -51,7 +66,7 @@ public class ControladorEmpleados implements ActionListener {
 	}
 	
 	public void preparaModificaEmpleadoView(){
-		//Falta a�adir que el admin debe seleccionar a un empleado primero
+		//Falta añadir que el admin debe seleccionar a un empleado primero
 		frame.creaModificarEmpeladoView(this);
 		this.mev=frame.getMev();
 		frame.muestraModificarEmpleadoView();
@@ -63,6 +78,7 @@ public class ControladorEmpleados implements ActionListener {
 	
 	public void insertarEmpleado(){
 		//Insertar empleado y volver a mostar empleadosView
+		
 	}
 
 	public void modificarEmpleado(){
@@ -75,5 +91,6 @@ public class ControladorEmpleados implements ActionListener {
 		}else
 			frame.muestraEmpleadosView();
 	}
+
 
 }
