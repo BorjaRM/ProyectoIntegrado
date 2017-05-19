@@ -12,11 +12,13 @@ import controlador.ControladorReservas;
 import modelo.BD;
 
 public class Inicio {
+	
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

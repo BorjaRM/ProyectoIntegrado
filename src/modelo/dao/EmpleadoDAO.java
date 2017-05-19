@@ -15,14 +15,16 @@ public class EmpleadoDAO {
 	ArrayList<EmpleadoVO> empleados;
 	ArrayList<UsuarioVO> usuarios;
 	int numero_hotel;
-	public EmpleadoDAO(BD bd) {
+	public EmpleadoDAO(BD bd, int numero_hotel) {
 		this.bd = bd;
+		this.numero_hotel = numero_hotel;
+		
 	}
 
 	// Metodo que recoja la informacion de un empleado y la guarde en un
 	// ArrayList
-	public ArrayList<EmpleadoVO> rellenarYConseguirArrayEmpleados(int numero_hotel) {
-		this.numero_hotel = numero_hotel;
+	public ArrayList<EmpleadoVO> rellenarYConseguirArrayEmpleados() {
+	
 		empleados = new ArrayList<EmpleadoVO>();
 		try {
 			String sql = "SELECT * FROM Empleado WHERE lugar_trabajo=?;";
@@ -95,7 +97,7 @@ public class EmpleadoDAO {
 	// Metodo que te permita eliminar empleado a partir de su codigo.
 
 	public void eliminarEmpleado(int posicion) {
-		empleados = rellenarYConseguirArrayEmpleados(numero_hotel);
+		empleados = rellenarYConseguirArrayEmpleados();
 		int codigo = empleados.get(posicion).getCodigo();
 
 		try {

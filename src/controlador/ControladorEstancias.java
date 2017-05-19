@@ -2,12 +2,8 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
 import modelo.BD;
-import modelo.dao.EstanciaDAO;
 import modelo.dao.HabitacionDAO;
-import modelo.vo.EstanciaVO;
 import vista.EstanciasView;
 import vista.Marco;
 import vista.ModificarEstanciaView;
@@ -33,7 +29,6 @@ public class ControladorEstancias implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		System.out.println(e.getActionCommand());
 		switch(e.getActionCommand()){
-			case "Ver Estancias": preparaEstanciasView(); break;
 			case "Nueva Estancia": preparaNuevaEstanciaView(); break;
 			case "Modificar Estancia": preparaModificarEstanciaView(); break;
 			case "Eliminar Estancia":/* **************************************************************************** */ break;
@@ -55,8 +50,6 @@ public class ControladorEstancias implements ActionListener {
 		frame.getEsv().rellenaTablahabitaciones(new HabitacionDAO(modelo).getHabitaciones(refHotel));
 		frame.muestraEstanciasView();
 	}
-	
-	
 	
 	public void preparaNuevaEstanciaView(){
 		frame.creaNuevaEstanciaView(this);
