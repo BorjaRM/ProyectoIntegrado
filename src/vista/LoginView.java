@@ -19,6 +19,8 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class LoginView extends JFrame{
 
@@ -27,6 +29,7 @@ public class LoginView extends JFrame{
 	private JPasswordField passwordField;
 	private JButton bntEntrar;
 	private JCheckBox soyAdmin;
+	private JComboBox comboBox;
 
 	/**
 	 * Create the frame.
@@ -41,9 +44,6 @@ public class LoginView extends JFrame{
 		
 		Component horizontalStrut = Box.createHorizontalStrut(250);
 		contentPane.add(horizontalStrut, BorderLayout.WEST);
-		
-		Component verticalStrut = Box.createVerticalStrut(100);
-		contentPane.add(verticalStrut, BorderLayout.NORTH);
 		
 		Component horizontalStrut_1 = Box.createHorizontalStrut(250);
 		contentPane.add(horizontalStrut_1, BorderLayout.EAST);
@@ -60,6 +60,9 @@ public class LoginView extends JFrame{
 		panel.add(panel_1);
 		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
 		
+		Component verticalStrut = Box.createVerticalStrut(110);
+		panel_1.add(verticalStrut);
+		
 		JLabel lbl_usuario = new JLabel("Usuario:");
 		panel_1.add(lbl_usuario);
 		
@@ -67,11 +70,17 @@ public class LoginView extends JFrame{
 		panel_1.add(text_usuario);
 		text_usuario.setColumns(10);
 		
+		Component verticalStrut_2 = Box.createVerticalStrut(20);
+		panel_1.add(verticalStrut_2);
+		
 		JLabel lbl_pass = new JLabel("Contrasenya:");
 		panel_1.add(lbl_pass);
 		
 		passwordField = new JPasswordField();
 		panel_1.add(passwordField);
+		
+		Component verticalStrut_3 = Box.createVerticalStrut(20);
+		panel_1.add(verticalStrut_3);
 		
 		soyAdmin = new JCheckBox("Entrar como administrador");
 		panel_1.add(soyAdmin);
@@ -81,11 +90,23 @@ public class LoginView extends JFrame{
 		
 		bntEntrar = new JButton("Entrar");
 		botonera.add(bntEntrar);
+		
+		JPanel panel_2 = new JPanel();
+		contentPane.add(panel_2, BorderLayout.NORTH);
+		
+		comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Seleciona un idioma ...", "Espa\u00F1ol", "English"}));
+		panel_2.add(comboBox);
+		
+		Component horizontalStrut_2 = Box.createHorizontalStrut(600);
+		panel_2.add(horizontalStrut_2);
 	}
 
 	public void estableceControlador(ControladorUsuarios controlador) {
 		this.bntEntrar.addActionListener(controlador);
 		this.soyAdmin.addActionListener(controlador);
+		this.comboBox.addActionListener(controlador);
+		
 	}
 
 	public JCheckBox getSoyAdmin() {
