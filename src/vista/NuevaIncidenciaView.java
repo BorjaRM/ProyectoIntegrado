@@ -1,29 +1,30 @@
 package vista;
 
 import java.awt.BorderLayout;
-import javax.swing.JPanel;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.util.ArrayList;
+
 import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JTextArea;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 import controlador.ControladorIncidencias;
 import interfaces.IControladorIncidencias;
-
-import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
-import java.awt.Font;
-import javax.swing.JButton;
-import java.awt.Color;
+import modelo.vo.EstanciaVO;
 
 public class NuevaIncidenciaView extends JPanel implements IControladorIncidencias{
 	private JComboBox comboBox;
 	private JButton btnEnviar;
 	private JButton btnCancelar;
-	private String[] desplegableEstancias = {"Habitacion 1", "SPA"};
-
+	private JTextArea textArea;
 	
 	public NuevaIncidenciaView() {
 		setLayout(new BorderLayout(0, 0));
@@ -42,7 +43,7 @@ public class NuevaIncidenciaView extends JPanel implements IControladorIncidenci
 		Component horizontalStrut_1 = Box.createHorizontalStrut(100);
 		panel_2.add(horizontalStrut_1, BorderLayout.WEST);
 		
-		comboBox = new JComboBox(desplegableEstancias);
+		comboBox = new JComboBox();
 		panel_2.add(comboBox, BorderLayout.CENTER);
 		
 		JPanel panel_3 = new JPanel();
@@ -57,7 +58,7 @@ public class NuevaIncidenciaView extends JPanel implements IControladorIncidenci
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_3.add(lblNewLabel);
 		
-		JTextArea textArea = new JTextArea();
+		textArea = new JTextArea();
 		textArea.setAlignmentX(Component.LEFT_ALIGNMENT);
 		textArea.setBackground(Color.WHITE);
 		textArea.setTabSize(0);
@@ -103,5 +104,30 @@ public class NuevaIncidenciaView extends JPanel implements IControladorIncidenci
 		this.btnEnviar.addActionListener(controlador);
 		this.btnCancelar.addActionListener(controlador);
 	}
+	public void rellenaComboBox(ArrayList <EstanciaVO> Estancias){
+		
+		for (int i = 0 ; i < Estancias.size(); i++){
+			System.err.println(Estancias.get(i).getNombre());
+			comboBox.addItem(Estancias.get(i));
+
+		}
+	}
+
+	public JComboBox getComboBox() {
+		return comboBox;
+	}
+
+	public void setComboBox(JComboBox comboBox) {
+		this.comboBox = comboBox;
+	}
+
+	public JTextArea getTextArea() {
+		return textArea;
+	}
+
+	public void setTextArea(JTextArea textArea) {
+		this.textArea = textArea;
+	}
+	
 
 }

@@ -3,21 +3,23 @@ package modelo.vo;
 public class IncidenciaVO {
 	private int codigo;
 	private String descripcion;
-	private String estado;
+	private boolean estado;
 	private String fecha;
+	private int cod_estancia;
 	
-	public IncidenciaVO(int cod, String desc, String est, String fe){
+	public IncidenciaVO(int cod, String desc, boolean est, String fe, int codE){
 		codigo=cod;
 		descripcion=desc;
 		estado=est;
 		fecha=fe;
+		cod_estancia=codE;
 	}
 	
-	public String getEstado() {
+	public boolean getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
 
@@ -43,6 +45,14 @@ public class IncidenciaVO {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public int getCod_estancia() {
+		return cod_estancia;
+	}
+
+	public void setCod_estancia(int cod_estancia) {
+		this.cod_estancia = cod_estancia;
 	}
 	
 }

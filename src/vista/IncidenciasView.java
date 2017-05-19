@@ -57,5 +57,11 @@ public class IncidenciasView extends JPanel implements IControladorIncidencias{
 		this.btnNueva.addActionListener(controlador);
 		this.btnResuelta.addActionListener(controlador);
 	}
+
+
+	public void rellenaComboBox() {
+		
+		
+	}
 	
 }
