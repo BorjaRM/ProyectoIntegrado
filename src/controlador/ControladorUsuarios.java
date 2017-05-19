@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
@@ -27,6 +28,7 @@ public class ControladorUsuarios implements ActionListener, ItemListener{
 	private ControladorReservas cReservas;
 	private ControladorEstancias cEstancias;
 	private ControladorIncidencias cIncidencias;
+	private ResourceBundle bundle;
 	
 	public ControladorUsuarios(BD modelo, LoginView login){
 		this.modelo=modelo;
@@ -154,9 +156,22 @@ public class ControladorUsuarios implements ActionListener, ItemListener{
 
 	@Override
 	public void itemStateChanged(ItemEvent e) {
-		System.out.println(e.getItemSelectable());
-		// TODO Auto-generated method stub
+		if (e.getStateChange() == 1) { 
+			switch ((String)e.getItem()) {
+			
+			case "Español":
+				bundle = ResourceBundle.getBundle("idiomas/es_ES");
+				break;
+			case "English":
+				bundle = ResourceBundle.getBundle("idiomas/en_UK");
+				break;
+			default:
+				bundle = ResourceBundle.getBundle("idiomas/es_ES");
+				break;
+			}
+		}
 		
 	}
 
+	
 }

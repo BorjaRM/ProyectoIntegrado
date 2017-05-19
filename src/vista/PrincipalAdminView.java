@@ -107,7 +107,7 @@ public class PrincipalAdminView extends JPanel {
 	public void estableceControlador(ControladorUsuarios controlador) {
 		this.btn_nuevoHotel.addActionListener(controlador);
 		this.btn_eliminarHotel.addActionListener(controlador);
-		this.desplegableHoteles.addItemListener(controlador);
+		this.desplegableHoteles.addActionListener(controlador);
 	}
 	
 	public void rellenaDesplegableHoteles(ArrayList<String> hoteles){

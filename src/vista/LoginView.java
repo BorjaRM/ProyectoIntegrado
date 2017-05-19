@@ -105,7 +105,7 @@ public class LoginView extends JFrame{
 	public void estableceControlador(ControladorUsuarios controlador) {
 		this.bntEntrar.addActionListener(controlador);
 		this.soyAdmin.addActionListener(controlador);
-		this.comboBox.addActionListener(controlador);
+		this.comboBox.addItemListener(controlador);
 		
 	}
 
