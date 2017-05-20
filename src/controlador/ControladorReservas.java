@@ -9,20 +9,13 @@ import vista.Marco;
 import vista.NuevaReservaView;
 import vista.ReservasView;
 
-public class ControladorReservas implements ActionListener {
-	private BD modelo;
-	private Marco frame;
+public class ControladorReservas extends Controlador{
 	private NuevaReservaView nrv;
 	private ReservasView rv;
-	private final boolean esAdministrador;
 	private ClienteDAO cd;
-	private int refHotel;
 
-	public ControladorReservas(Marco frame, BD modelo, boolean esAdministrador, int refHotel){
-		this.frame=frame;
-		this.modelo = modelo;
-		this.esAdministrador=esAdministrador;
-		this.refHotel=refHotel;
+	public ControladorReservas(){
+		frame.estableceControlador(this);
 	}
 	
 	@Override

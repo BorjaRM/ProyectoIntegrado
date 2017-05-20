@@ -20,19 +20,13 @@ import vista.Marco;
 import vista.ModificarEmpleadoView;
 import vista.NuevoEmpleadoView;
 
-public class ControladorEmpleados implements ActionListener {
-	private BD modelo;
-	private Marco frame;
+public class ControladorEmpleados extends Controlador{
 	private EmpleadosView ev;
 	private ModificarEmpleadoView mev;
 	private NuevoEmpleadoView nev;
-	private int refHotel;
 
-	public ControladorEmpleados(Marco frame, BD modelo, int refHotel){
-		this.frame=frame;
-		this.modelo=modelo;
-		this.refHotel=refHotel;
-
+	public ControladorEmpleados(){
+		frame.estableceControlador(this);
 	}
 	
 	@Override

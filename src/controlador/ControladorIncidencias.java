@@ -13,19 +13,12 @@ import vista.IncidenciasView;
 import vista.Marco;
 import vista.NuevaIncidenciaView;
 
-public class ControladorIncidencias implements ActionListener {
-	private BD modelo;
-	private Marco frame;
+public class ControladorIncidencias extends Controlador{
 	private IncidenciasView iv;
 	private NuevaIncidenciaView niv;
-	private final boolean esAdministrador;
-	private int refHotel;
 
-	public ControladorIncidencias(Marco frame, BD modelo, boolean esAdministrador, int refHotel){
-		this.frame=frame;
-		this.modelo=modelo;
-		this.esAdministrador=esAdministrador;
-		this.refHotel=refHotel;
+	public ControladorIncidencias(){
+		frame.estableceControlador(this);
 	}
 	
 	@Override

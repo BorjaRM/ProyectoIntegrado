@@ -15,26 +15,13 @@ import modelo.vo.HotelVO;
 import vista.LoginView;
 import vista.Marco;
 
-public class ControladorUsuarios implements ActionListener, ItemListener{
-	private BD modelo;
-	private boolean esAdministrador;
+public class ControladorUsuarios extends Controlador{
 	private LoginView vistaLogin;
-	private Marco frame;
-	private int refHotel;
-	private String elEmpleado;
-	private String idioma; /* ************** terminar de programar ************************* */
 	private HotelDAO consultasHotel;
-	private ControladorClientes cClientes;
-	private ControladorEmpleados cEmpleados;
-	private ControladorReservas cReservas;
-	private ControladorEstancias cEstancias;
-	private ControladorIncidencias cIncidencias;
-	private ResourceBundle bundle;
 	
-	public ControladorUsuarios(BD modelo, LoginView login){
-		this.modelo=modelo;
+	public ControladorUsuarios(LoginView login){
 		vistaLogin=login;
-		consultasHotel = new HotelDAO(modelo);
+		consultasHotel = new HotelDAO(Controlador.modelo);
 	}
 
 	@Override
@@ -46,15 +33,14 @@ public class ControladorUsuarios implements ActionListener, ItemListener{
 			case "Cancelar": cancelar(); break;
 			case "Nuevo Hotel": preparaNuevoHotelView(); break;
 			case "Eliminar Hotel": eliminar(); break;
-			case "comboBoxChanged": estableceReferenciaHotel(); break;
 		}
 	}
 	
 	public void verificaAcceso(){
-		this.esAdministrador = this.vistaLogin.getSoyAdmin().isSelected();
-		if(!esAdministrador){
+		if(!Controlador.esAdministrador){
 			if(compruebaLoginEmpleado()){
-				this.elEmpleado=vistaLogin.recogeDatos().getNombre();
+				String elEmpleado=vistaLogin.recogeDatos().getNombre();
+				this.estableceReferenciaHotelEmpleado(elEmpleado);
 				preparaPrincipalEmpleadoView();
 			}else
 				JOptionPane.showMessageDialog(null, "Datos incorrectos, Acceso denegado");			
@@ -65,15 +51,16 @@ public class ControladorUsuarios implements ActionListener, ItemListener{
 	}
 	
 	public boolean compruebaLoginEmpleado(){
-		UsuarioDAO consultasUsuario = new UsuarioDAO(modelo);
+		UsuarioDAO consultasUsuario = new UsuarioDAO(Controlador.modelo);
 		return consultasUsuario.compruebaUsuario(vistaLogin.recogeDatos());			
 	}
 	
 	public void preparaPrincipalAdminView(){
 		frame = new Marco();
-		frame.creaPrincipalAdminView(this);
+		//Puedo hacer un new Controlador aqui? no se como pasar el Controlador de otra forma
+		Controlador.frame.creaPrincipalAdminView(new Controlador(),this);
 		preparaDesplegableHotelView();
-		estableceReferenciaHotel();
+		actualizaReferenciaHotelAdmin();
 		frame.muestraPrincipalAdminView();
 		preparaControladores();
 		frame.setVisible(true);
@@ -82,7 +69,6 @@ public class ControladorUsuarios implements ActionListener, ItemListener{
 	public void preparaPrincipalEmpleadoView(){
 		frame = new Marco();
 		frame.creaPrincipalEmpleadoView();
-		estableceReferenciaHotel();
 		frame.muestraPrincipalEmpleadoView();
 		preparaControladores();
 		frame.setVisible(true);
@@ -90,19 +76,15 @@ public class ControladorUsuarios implements ActionListener, ItemListener{
 
 	public void preparaControladores(){
 		creaControladoresVistas();
-		estableceControladoresMenu();
 	}
 	
 	public void creaControladoresVistas(){
 		//Creamos los controladores para cada modulo
-		cClientes = new ControladorClientes(frame,modelo,esAdministrador, refHotel);
-		cEmpleados = new ControladorEmpleados(frame,modelo, refHotel);
-		cReservas = new ControladorReservas(frame,modelo,esAdministrador, refHotel);
-		cEstancias = new ControladorEstancias(frame,modelo,esAdministrador, refHotel);
-		cIncidencias = new ControladorIncidencias(frame,modelo,esAdministrador, refHotel);
-	}
-	
-	public void estableceControladoresMenu(){
+		ControladorClientes cClientes = new ControladorClientes();
+		ControladorEmpleados cEmpleados = new ControladorEmpleados();
+		ControladorReservas cReservas = new ControladorReservas();
+		ControladorEstancias cEstancias = new ControladorEstancias();
+		ControladorIncidencias cIncidencias = new ControladorIncidencias();
 		frame.estableceControlador(this);
 		frame.estableceControlador(cClientes);
 		frame.estableceControlador(cEmpleados);
@@ -118,18 +100,6 @@ public class ControladorUsuarios implements ActionListener, ItemListener{
 	
 	public void preparaDesplegableHotelView(){
 		frame.getPav().rellenaDesplegableHoteles(consultasHotel.getHoteles());
-	}
-	
-	public void estableceReferenciaHotel(){
-		if(esAdministrador){
-			HotelVO hotelSeleccionado = (HotelVO) frame.getPav().getNombresHoteles().getSelectedItem();
-			this.refHotel= hotelSeleccionado.getCodigo();
-			System.out.println("referencia hotel:" +refHotel);
-		}else{
-			UsuarioDAO consultasUsuario = new UsuarioDAO(modelo);
-			this.refHotel=consultasUsuario.getReferenciaHotel(consultasUsuario.getReferenciaEmpleado(elEmpleado));
-			System.out.println("referencia hotel:" +refHotel);
-		}
 	}
 	
 	public void enviar(){
@@ -152,17 +122,5 @@ public class ControladorUsuarios implements ActionListener, ItemListener{
 		consultasHotel.eliminaHotel(refHotel);
 		preparaDesplegableHotelView();
 	}
-
-	@Override
-	public void itemStateChanged(ItemEvent e) {
-		if(e.getStateChange() == 1){ 
-			switch ((String)e.getItem()){
-				//case "Español": bundle = ResourceBundle.getBundle("idiomas/es_ES"); break;
-				case "English": bundle = ResourceBundle.getBundle("idiomas/en_UK"); break;
-				default: bundle = ResourceBundle.getBundle("idiomas/es_ES"); break;
-			}
-		}
-	}
-
 	
 }

@@ -6,6 +6,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controlador.Controlador;
 import controlador.ControladorClientes;
 import controlador.ControladorEmpleados;
 import controlador.ControladorEstancias;
@@ -63,7 +64,7 @@ public class Marco extends JFrame{
 	 * Create the frame.
 	 */
 	public Marco() {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 500);
 		//Este panel contiene todas las vistas que se iran intercambiando
 		vistas = new JPanel();
@@ -123,10 +124,11 @@ public class Marco extends JFrame{
 		vistas.setLayout(cl);				
 	}
 	
-	public void creaPrincipalAdminView(ControladorUsuarios controlador){
+	public void creaPrincipalAdminView(Controlador c1,ControladorUsuarios c2){
 		if(pav == null){
 			pav = new PrincipalAdminView();
-			pav.estableceControlador(controlador);
+			pav.estableceControlador(c1);
+			pav.estableceControlador(c2);
 			vistas.add(pav,PRINCIPAL_ADMIN);
 		}
 	}

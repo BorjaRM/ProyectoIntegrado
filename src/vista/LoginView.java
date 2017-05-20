@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controlador.Controlador;
 import controlador.ControladorUsuarios;
 import modelo.vo.UsuarioVO;
 
@@ -22,7 +23,6 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.FlowLayout;
 
 public class LoginView extends JFrame{
-
 	private JPanel contentPane;
 	private JTextField text_usuario;
 	private JPasswordField passwordField;
@@ -74,6 +74,7 @@ public class LoginView extends JFrame{
 		panel_1.add(Box.createVerticalStrut(20));
 		
 		soyAdmin = new JCheckBox("Entrar como administrador");
+		soyAdmin.setActionCommand("Obtener permisos");
 		panel_1.add(soyAdmin);
 		
 		JPanel botonera = new JPanel();
@@ -93,9 +94,11 @@ public class LoginView extends JFrame{
 
 	public void estableceControlador(ControladorUsuarios controlador) {
 		this.bntEntrar.addActionListener(controlador);
+	}
+	
+	public void estableceControlador(Controlador controlador){
 		this.soyAdmin.addActionListener(controlador);
 		this.desplegableIdioma.addItemListener(controlador);
-		
 	}
 
 	public JCheckBox getSoyAdmin() {

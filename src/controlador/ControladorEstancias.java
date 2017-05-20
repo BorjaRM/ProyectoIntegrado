@@ -10,20 +10,13 @@ import vista.Marco;
 import vista.ModificarEstanciaView;
 import vista.NuevaEstanciaView;
 
-public class ControladorEstancias implements ActionListener {
-	private BD modelo;
-	private Marco frame;
+public class ControladorEstancias extends Controlador{
 	private EstanciasView esv;
 	private NuevaEstanciaView nesv;
 	private ModificarEstanciaView mesv;
-	private final boolean esAdministrador;
-	private int refHotel;
 
-	public ControladorEstancias(Marco frame, BD modelo, boolean esAdministrador, int refHotel){
-		this.frame=frame;
-		this.modelo=modelo;
-		this.esAdministrador=esAdministrador;
-		this.refHotel=refHotel;
+	public ControladorEstancias(){
+		frame.estableceControlador(this);
 	}
 	
 	@Override

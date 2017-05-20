@@ -12,6 +12,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.SpringLayout;
 
+import controlador.Controlador;
 import controlador.ControladorUsuarios;
 import modelo.vo.HotelVO;
 
@@ -44,6 +45,7 @@ public class PrincipalAdminView extends JPanel {
 		horizontalBox.add(lblNewLabel);
 		
 		desplegableHoteles = new JComboBox<HotelVO>();
+		desplegableHoteles.setActionCommand("Nueva referencia hotel");
 		horizontalBox.add(desplegableHoteles);
 		
 		btn_nuevoHotel = new JButton("Nuevo Hotel");
@@ -108,6 +110,9 @@ public class PrincipalAdminView extends JPanel {
 	public void estableceControlador(ControladorUsuarios controlador) {
 		this.btn_nuevoHotel.addActionListener(controlador);
 		this.btn_eliminarHotel.addActionListener(controlador);
+	}
+	
+	public void estableceControlador(Controlador controlador) {
 		this.desplegableHoteles.addActionListener(controlador);
 	}
 	

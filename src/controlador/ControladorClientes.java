@@ -14,21 +14,14 @@ import vista.Marco;
 import vista.ModificarClienteView;
 import vista.NuevoClienteView;
 
-public class ControladorClientes implements ActionListener{
-	private BD modelo;
-	private Marco frame;
+public class ControladorClientes extends Controlador{
 	private ClientesView cv;
 	private NuevoClienteView ncv;
 	private ModificarClienteView mcv;
-	private final boolean esAdministrador;
-	private int refHotel;
 
 	
-	public ControladorClientes(Marco frame, BD modelo, boolean esAdministrador, int refHotel){
-		this.frame=frame;
-		this.modelo=modelo;
-		this.esAdministrador=esAdministrador;
-		this.refHotel=refHotel;
+	public ControladorClientes(){
+		frame.estableceControlador(this);
 	}
 	
 	@Override
