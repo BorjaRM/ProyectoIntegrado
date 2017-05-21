@@ -8,10 +8,13 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import controlador.ControladorReservas;
 import interfaces.IControladorReservas;
+import modelo.vo.ClienteVO;
+import modelo.vo.ReservaVO;
 
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
 import java.awt.Component;
 import javax.swing.Box;
 
@@ -55,6 +58,24 @@ public class ReservasView extends JPanel implements IControladorReservas{
 	public void estableceControlador(ControladorReservas controlador) {
 		this.btnNuevaReserva.addActionListener(controlador);
 		this.btnCancelarReserva.addActionListener(controlador);
+	}
+	
+	public void rellenaListaReservas(ArrayList <ReservaVO> reserva){
+		DefaultTableModel modeloTabla = (DefaultTableModel) table.getModel();
+		Object[] fila = new Object[modeloTabla.getColumnCount()];
+		
+		for (int i = 0 ; i < reserva.size(); i++ ){
+			fila[0] = reserva.get(i).getCodigo();
+			fila[1] = reserva.get(i).getInicio();
+			fila[2] = reserva.get(i).getFin();
+			fila[3] = reserva.get(i).getRegimen();
+			fila[4] = reserva.get(i).getCod_cliente();
+			fila[5] = reserva.get(i).getCod_usuario();
+			fila[6] = reserva.get(i).getCod_habitacion();
+			modeloTabla.addRow(fila);
+		}
+		table.setModel(modeloTabla);
+			
 	}
 
 }

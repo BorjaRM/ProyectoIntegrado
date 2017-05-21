@@ -6,6 +6,9 @@ import com.toedter.calendar.JDateChooser;
 
 import controlador.ControladorReservas;
 import interfaces.IControladorReservas;
+import modelo.vo.ClienteVO;
+import modelo.vo.EstanciaVO;
+import modelo.vo.HabitacionVO;
 
 import java.awt.BorderLayout;
 import javax.swing.JButton;
@@ -15,11 +18,14 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
 import java.awt.Insets;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class NuevaReservaView extends JPanel implements IControladorReservas{
 	private JButton btnEnviar;
 	private JButton btnCancelar;
+	private JComboBox listaClientes;
+	private JComboBox listaHabitaciones;
 	
 	/**
 	 * Create the panel.
@@ -137,6 +143,40 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 	public void estableceControlador(ControladorReservas controlador) {
 		this.btnEnviar.addActionListener(controlador);
 		this.btnCancelar.addActionListener(controlador);
+	}
+	
+	public void rellenaComboBoxClientes(ArrayList <ClienteVO> clientes){
+		
+		for (int i = 0 ; i < clientes.size(); i++){
+			System.err.println(clientes.get(i).getNombre());
+			listaClientes.addItem(clientes.get(i));
+
+		}
+	}
+
+	public JComboBox getComboBoxClientes() {
+		return listaClientes;
+	}
+
+	public void setComboBoxClientes(JComboBox comboBoxClientes) {
+		this.listaClientes = comboBoxClientes;
+	}
+	
+	public void rellenaComboBoxHabitaciones(ArrayList <HabitacionVO> habitaciones){
+		
+		for (int i = 0 ; i < habitaciones.size(); i++){
+			System.err.println(habitaciones.get(i).getNombre());
+			listaHabitaciones.addItem(habitaciones.get(i));
+
+		}
+	}
+
+	public JComboBox getComboBoxHabitaciones() {
+		return listaHabitaciones;
+	}
+
+	public void setComboBoxHabitaciones(JComboBox comboBoxHabitaciones) {
+		this.listaHabitaciones = comboBoxHabitaciones;
 	}
 
 }
