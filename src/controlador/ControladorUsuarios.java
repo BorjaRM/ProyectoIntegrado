@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
@@ -56,66 +58,41 @@ public class ControladorUsuarios extends Controlador{
 	}
 	
 	public void preparaPrincipalAdminView(){
-		frame = new Marco();
+		super.creaMarco();
 		//Puedo hacer un new Controlador aqui? no se como pasar el Controlador de otra forma
-		Controlador.frame.creaPrincipalAdminView(new Controlador(),this);
+		frame.creaPrincipalAdminView(this); 
 		preparaDesplegableHotelView();
 		actualizaReferenciaHotelAdmin();
 		frame.muestraPrincipalAdminView();
-		preparaControladores();
+		creaControladoresVistas();
 		frame.setVisible(true);
 	}
 	
 	public void preparaPrincipalEmpleadoView(){
-		frame = new Marco();
+		super.creaMarco();
 		frame.creaPrincipalEmpleadoView();
 		frame.muestraPrincipalEmpleadoView();
-		preparaControladores();
-		frame.setVisible(true);
-	}
-
-	public void preparaControladores(){
 		creaControladoresVistas();
-	}
-	
-	public void creaControladoresVistas(){
-		//Creamos los controladores para cada modulo
-		ControladorClientes cClientes = new ControladorClientes();
-		ControladorEmpleados cEmpleados = new ControladorEmpleados();
-		ControladorReservas cReservas = new ControladorReservas();
-		ControladorEstancias cEstancias = new ControladorEstancias();
-		ControladorIncidencias cIncidencias = new ControladorIncidencias();
-		frame.estableceControlador(this);
-		frame.estableceControlador(cClientes);
-		frame.estableceControlador(cEmpleados);
-		frame.estableceControlador(cReservas);
-		frame.estableceControlador(cEstancias);
-		frame.estableceControlador(cIncidencias);
+		frame.setVisible(true);
 	}
 	
 	public void preparaNuevoHotelView(){
-		frame.creaHotelView(this);
-		frame.muestraHotelView();
+		Controlador.frame.creaHotelView(this);
+		Controlador.frame.muestraHotelView();
 	}	
 	
 	public void preparaDesplegableHotelView(){
-		frame.getPav().rellenaDesplegableHoteles(consultasHotel.getHoteles());
+		Controlador.frame.getPav().rellenaDesplegableHoteles(consultasHotel.getHoteles());
 	}
 	
 	public void enviar(){
-		consultasHotel.insertaHotel(frame.getHv().enviarDatos());
+		consultasHotel.insertaHotel(Controlador.frame.getHv().enviarDatos());
 		preparaDesplegableHotelView();
-		if(esAdministrador)
-			frame.muestraPrincipalAdminView();		
-		else
-			frame.muestraPrincipalEmpleadoView();
+		Controlador.frame.muestraPrincipalAdminView();		
 	}
 	
 	public void cancelar(){
-		if(esAdministrador)
-			frame.muestraPrincipalAdminView();		
-		else
-			frame.muestraPrincipalEmpleadoView();
+		Controlador.frame.muestraPrincipalAdminView();		
 	}
 	
 	public void eliminar(){

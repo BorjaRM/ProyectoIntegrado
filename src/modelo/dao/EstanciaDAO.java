@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import modelo.BD;
 import modelo.vo.EstanciaVO;
 
@@ -34,10 +36,26 @@ public class EstanciaDAO {
 				//Creamos un objeto Estancia y lo añadimos al Arraylist
 				estancias.add(new EstanciaVO(id_estancia,cod_hotel,nombre,tipo));
 			}
-		}catch (SQLException e) {
+		}catch(SQLException e){
 			e.printStackTrace();
 		} 		
 		return estancias;
+	}
+	
+	public void insertEstancia(EstanciaVO estancia){
+		if(estancia != null){
+			String sql = ("INSERT INTO estancia (cod_hotel,nombre,tipo) VALUES (?,?,?);");
+			try{
+				PreparedStatement consulta = this.modelo.getConexion().prepareStatement(sql);
+				consulta.setInt(1, estancia.getCod_hotel());
+				consulta.setString(2, estancia.getNombre());
+				consulta.setString(3, estancia.getTipo());
+				consulta.executeUpdate();
+			}catch(SQLException e){
+				JOptionPane.showMessageDialog(null, "Ya existe una estancia con ese nombre", "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		
 	}
 	
 	

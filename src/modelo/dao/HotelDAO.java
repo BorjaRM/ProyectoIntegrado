@@ -43,7 +43,6 @@ public class HotelDAO {
 			PreparedStatement consulta = this.modelo.getConexion().prepareStatement(sql);
 			consulta.setInt(1, refHotel);
 			consulta.executeUpdate();
-			System.out.println("hecho");
 		}catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "No se puede eliminar este hotel");
 		}

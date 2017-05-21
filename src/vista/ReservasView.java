@@ -45,7 +45,7 @@ public class ReservasView extends JPanel implements IControladorReservas{
 		JScrollPane scrollPane = new JScrollPane();
 		panel_1.add(scrollPane);
 		
-		String[] colHeader = {"ID","Cliente","Habitaci�n","Check-In","Check-Out","Noches","Pensi�n"};
+		String[] colHeader = {"ID","Cliente","Habitacion","Check-In","Check-Out","Noches","Pension"};
 		DefaultTableModel table_model = new DefaultTableModel(colHeader,0);
 		table = new JTable(table_model);
 		scrollPane.setViewportView(table);

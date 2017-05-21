@@ -18,10 +18,22 @@ public class Controlador implements ActionListener, ItemListener{
 	protected static boolean esAdministrador;
 	protected static int refHotel;
 	protected static ResourceBundle bundle;
-	private String a;
 	
 	public Controlador(){
 		modelo = BD.getSingleDBInstance("52.90.200.239","hotel_pi","usuario","Pintegrado2017");	
+	}
+	
+	public void creaMarco(){
+		frame = new Marco(this);
+	}
+	
+	public void creaControladoresVistas(){
+		//Creamos los controladores para cada modulo
+		new ControladorClientes();
+		new ControladorEmpleados();
+		new ControladorReservas();
+		new ControladorEstancias();
+		new ControladorIncidencias();
 	}
 
 	@Override
@@ -57,8 +69,9 @@ public class Controlador implements ActionListener, ItemListener{
 	}
 	
 	public void actualizaReferenciaHotelAdmin(){
-		HotelVO hotelSeleccionado = (HotelVO) frame.getPav().getNombresHoteles().getSelectedItem();
-		Controlador.refHotel= hotelSeleccionado.getCodigo();
+		HotelVO hotelSeleccionado = (HotelVO) frame.getPav().getDesplegableHoteles().getSelectedItem();
+		if(hotelSeleccionado != null)
+			Controlador.refHotel= hotelSeleccionado.getCodigo();
 		System.out.println("referencia hotel:" +refHotel);
 	}
 	

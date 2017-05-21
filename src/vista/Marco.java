@@ -19,6 +19,7 @@ import javax.swing.Box;
 import javax.swing.JMenuItem;
 
 public class Marco extends JFrame{
+	private Controlador controlador;
 	private JPanel vistas;
 	private CardLayout cl;
 	//Referencias a las vistas
@@ -62,8 +63,10 @@ public class Marco extends JFrame{
 	
 	/**
 	 * Create the frame.
+	 * @param controlador 
 	 */
-	public Marco() {
+	public Marco(Controlador controlador) {
+		this.controlador=controlador;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 500);
 		//Este panel contiene todas las vistas que se iran intercambiando
@@ -124,10 +127,10 @@ public class Marco extends JFrame{
 		vistas.setLayout(cl);				
 	}
 	
-	public void creaPrincipalAdminView(Controlador c1,ControladorUsuarios c2){
+	public void creaPrincipalAdminView(ControladorUsuarios c2){
 		if(pav == null){
 			pav = new PrincipalAdminView();
-			pav.estableceControlador(c1);
+			pav.estableceControlador(this.controlador);
 			pav.estableceControlador(c2);
 			vistas.add(pav,PRINCIPAL_ADMIN);
 		}

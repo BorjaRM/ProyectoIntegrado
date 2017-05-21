@@ -134,7 +134,8 @@ public class NuevoHotelView extends JPanel {
 			String pais=this.text_pais.getText();
 			h = new HotelVO(0,nombre,telefono,calle,numero,cp,ciudad,pais);
 		}catch (Exception e){
-			JOptionPane.showMessageDialog(null, "No se ha podido insertar el hotel");
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Faltan datos o son incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		return h;
 	}

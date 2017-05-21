@@ -2,9 +2,21 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.DefaultListSelectionModel;
+import javax.swing.JTable;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+
 import modelo.BD;
 import modelo.dao.EstanciaDAO;
 import modelo.dao.HabitacionDAO;
+import modelo.vo.EstanciaVO;
+import modelo.vo.HabitacionVO;
 import vista.EstanciasView;
 import vista.Marco;
 import vista.ModificarEstanciaView;
@@ -14,9 +26,13 @@ public class ControladorEstancias extends Controlador{
 	private EstanciasView esv;
 	private NuevaEstanciaView nesv;
 	private ModificarEstanciaView mesv;
+	private HabitacionDAO consultasHabitacion;
+	private EstanciaDAO consultasEstancia;
 
 	public ControladorEstancias(){
-		frame.estableceControlador(this);
+		Controlador.frame.estableceControlador(this);
+		consultasHabitacion = new HabitacionDAO(Controlador.modelo);
+		consultasEstancia = new EstanciaDAO(Controlador.modelo);
 	}
 	
 	@Override
@@ -26,9 +42,9 @@ public class ControladorEstancias extends Controlador{
 			case "Ver Estancias": preparaEstanciasView(); break;
 			case "Nueva Estancia": preparaNuevaEstanciaView(); break;
 			case "Modificar Estancia": preparaModificarEstanciaView(); break;
-			case "Eliminar Estancia":/* **************************************************************************** */ break;
-			case "Nueva zona comun":/* **************************************************************************** */ break;
-			case "Nueva habitacion":/* **************************************************************************** */ break;
+			case "Eliminar Estancia": eliminarEstancia(); break;
+			case "Nueva zona comun": insertarZonaComun(); break;
+			case "Nueva habitacion": insertarHabitacion(); break;
 			case "Modificar": /* **************************************************************************** */ break;
 			case "Cancelar": cancelar(); break;
 		}
@@ -42,8 +58,8 @@ public class ControladorEstancias extends Controlador{
 			esv.ocultaBotonModificarEstancia();
 			esv.ocultaBotonEliminarEstancia();
 		}
-		frame.getEsv().rellenaTablahabitaciones(new HabitacionDAO(modelo).getHabitaciones(refHotel));
-		frame.getEsv().rellenaTablaEstancias(new EstanciaDAO(modelo).getEstanciasUsoComun(refHotel));
+		frame.getEsv().rellenaTablahabitaciones(consultasHabitacion.getHabitaciones(refHotel));
+		frame.getEsv().rellenaTablaEstancias(consultasEstancia.getEstanciasUsoComun(refHotel));
 		frame.muestraEstanciasView();
 	}
 	
@@ -54,11 +70,16 @@ public class ControladorEstancias extends Controlador{
 	}
 	
 	public void insertarHabitacion(){
-		
+		HabitacionVO habitacion = frame.getNesv().enviarDatosHabitacion();
+		habitacion.setCod_hotel(refHotel);
+		consultasEstancia.insertEstancia(habitacion);
+		consultasHabitacion.insertHabitacion(habitacion);
 	}
 	
 	public void insertarZonaComun(){
-		
+		EstanciaVO estancia = frame.getNesv().enviarDatosUsoComun();
+		estancia.setCod_hotel(refHotel);
+		consultasEstancia.insertEstancia(estancia);
 	}
 	
 	public void preparaModificarEstanciaView(){
@@ -68,22 +89,18 @@ public class ControladorEstancias extends Controlador{
 	}
 	
 	public void modificarEstancia(){
-		
+		System.out.println("quieres modificar");
 	}
 	
 	public void eliminarEstancia(){
-		
+		System.out.println("quieres borrar");
+		System.out.println(esv.getTabla_habitaciones().getSelectedRow());
 	}
 	
 	public void cancelar(){
-		if(esv == null){
-			if(esAdministrador)
-				frame.muestraPrincipalAdminView();		
-			else
-				frame.muestraPrincipalEmpleadoView();
-		}else
+		if(esv == null)
+			frame.muestraPrincipalAdminView();		
+		else
 			frame.muestraEstanciasView();
 	}
-
-
 }

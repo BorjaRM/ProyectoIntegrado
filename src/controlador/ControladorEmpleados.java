@@ -26,7 +26,7 @@ public class ControladorEmpleados extends Controlador{
 	private NuevoEmpleadoView nev;
 
 	public ControladorEmpleados(){
-		frame.estableceControlador(this);
+		Controlador.frame.estableceControlador(this);
 	}
 	
 	@Override
@@ -44,26 +44,26 @@ public class ControladorEmpleados extends Controlador{
 	}
 	
 	public void preparaEmpleadosView(){
-		frame.creaEmpleadosView(this);
-		this.ev=frame.getEv();
+		Controlador.frame.creaEmpleadosView(this);
+		this.ev=Controlador.frame.getEv();
 		EmpleadoDAO modeloEmpleado = new EmpleadoDAO(modelo, refHotel);
 		ArrayList <EmpleadoVO> empleados = modeloEmpleado.rellenarYConseguirArrayEmpleados();
 		ev.rellenaListaEmpleados(empleados);
-		frame.muestraEmpleadosView();
+		Controlador.frame.muestraEmpleadosView();
 	}
 
 
 	public void preparaNuevoEmpleadoView(){
-		frame.creaNuevoEmpleadoView(this);
-		this.nev=frame.getNev();
-		frame.muestraNuevoEmpleadoView();
+		Controlador.frame.creaNuevoEmpleadoView(this);
+		this.nev=Controlador.frame.getNev();
+		Controlador.frame.muestraNuevoEmpleadoView();
 	}
 	
 	public void preparaModificaEmpleadoView(){
 		//Falta añadir que el admin debe seleccionar a un empleado primero
-		frame.creaModificarEmpeladoView(this);
-		this.mev=frame.getMev();
-		frame.muestraModificarEmpleadoView();
+		Controlador.frame.creaModificarEmpeladoView(this);
+		this.mev=Controlador.frame.getMev();
+		Controlador.frame.muestraModificarEmpleadoView();
 	}
 	
 	public void eliminarEmpleado(){
@@ -81,9 +81,9 @@ public class ControladorEmpleados extends Controlador{
 
 	public void cancelar(){
 		if(ev == null){
-			frame.muestraPrincipalAdminView();
+			Controlador.frame.muestraPrincipalAdminView();
 		}else
-			frame.muestraEmpleadosView();
+			Controlador.frame.muestraEmpleadosView();
 	}
 
 

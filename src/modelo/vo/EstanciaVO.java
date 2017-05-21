@@ -9,8 +9,8 @@ public class EstanciaVO {
 	public EstanciaVO(int id, int cod, String nombre,String tipo){
 		this.id=id;
 		cod_hotel=cod;
-		this.nombre=nombre;
-		this.tipo=tipo;
+		this.nombre=nombre.toUpperCase();
+		this.tipo=tipo.toLowerCase();
 	}
 
 	public int getId() {

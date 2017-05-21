@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import modelo.BD;
 import modelo.vo.EstanciaVO;
 import modelo.vo.HabitacionVO;
@@ -16,7 +18,7 @@ public class HabitacionDAO {
 		this.modelo=modelo;
 	}
 	
-	public ArrayList<String> getNombresHabitaciones(int refHotel){
+	/*public ArrayList<String> getNombresHabitaciones(int refHotel){
 		ArrayList<String> habitaciones = new ArrayList<String>();
 		String nombre;
 		
@@ -35,11 +37,11 @@ public class HabitacionDAO {
 			e.printStackTrace();
 		} 		
 		return habitaciones;		
-	}
+	}*/
 	
 	public ArrayList<HabitacionVO> getHabitaciones(int refHotel){
 		ArrayList<HabitacionVO> habitaciones = new ArrayList<HabitacionVO>();
-		int id_estancia,cod_hotel,plazas,precio,cod_reserva;
+		int id_estancia,cod_hotel,plazas,precio;
 		String tipo_hab,nombre,clasificacion,descripcion;
 		
 		try{
@@ -58,14 +60,29 @@ public class HabitacionDAO {
 				plazas=resultadoConsulta.getInt("plazas");
 				precio=resultadoConsulta.getInt("precio");
 				descripcion=resultadoConsulta.getString("descripcion");
-				cod_reserva=resultadoConsulta.getInt("cod_reserva");
 				//Creamos un objeto Habitacion y lo añadimos al Arraylist
-				habitaciones.add(new HabitacionVO(id_estancia,cod_hotel,nombre,tipo_hab,clasificacion,plazas,precio,descripcion,cod_reserva));		
+				habitaciones.add(new HabitacionVO(id_estancia,cod_hotel,nombre,tipo_hab,clasificacion,plazas,precio,descripcion));		
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();
 		} 		
 		return habitaciones;		
+	}
+	
+	public void insertHabitacion(HabitacionVO habitacion){
+		if(habitacion != null){
+			String sql = ("INSERT INTO habitacion (id_estancia,clasificacion,plazas,precio,descripcion) VALUES (0,?,?,?,?);");
+			try{
+				PreparedStatement consulta = this.modelo.getConexion().prepareStatement(sql);
+				consulta.setString(1, habitacion.getClasificacion());
+				consulta.setInt(2, habitacion.getPlazas());
+				consulta.setInt(3, habitacion.getPrecio());
+				consulta.setString(4, habitacion.getDescripcion());
+				consulta.executeUpdate();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
 	}
 			
 }
