@@ -14,12 +14,14 @@ import javax.swing.table.DefaultTableModel;
 import controlador.ControladorClientes;
 import interfaces.IControladorClientes;
 import modelo.vo.ClienteVO;
+import javax.swing.ListSelectionModel;
 
 public class ClientesView extends JPanel implements IControladorClientes{
 	private JTable table;
 	private JButton btnNuevoCliente;
 	private JButton btnEliminarCliente;
 	private JButton btnEditarCliente;
+	JScrollPane scrollPane;
 
 	/**
 	 * Create the panel.
@@ -49,13 +51,10 @@ public class ClientesView extends JPanel implements IControladorClientes{
 		add(panel_Tabla, BorderLayout.CENTER);
 		panel_Tabla.setLayout(new BorderLayout(0, 0));
 		
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		panel_Tabla.add(scrollPane);
 		
-		String[] colHeader = {"ID","Nombre","Apellidos","F.Nacimiento","Telefono","Email","Nacionalidad"};
-		DefaultTableModel table_model = new DefaultTableModel(colHeader,0);
-		table = new JTable(table_model);
-		scrollPane.setViewportView(table);
+	
 	}
 	
 	public void estableceControlador(ControladorClientes controlador){
@@ -68,6 +67,11 @@ public class ClientesView extends JPanel implements IControladorClientes{
 		this.btnEliminarCliente.setVisible(false);
 	}
 	public void rellenaListaClientes(ArrayList <ClienteVO> cliente){
+		String[] colHeader = {"ID","Nombre","Apellidos","F.Nacimiento","Telefono","Email","Nacionalidad"};
+		DefaultTableModel table_model = new DefaultTableModel(colHeader,0);
+		table = new JTable(table_model);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane.setViewportView(table);
 		DefaultTableModel modeloTabla = (DefaultTableModel) table.getModel();
 		Object[] fila = new Object[modeloTabla.getColumnCount()];
 		
@@ -84,6 +88,18 @@ public class ClientesView extends JPanel implements IControladorClientes{
 		table.setModel(modeloTabla);
 			
 	}
+	public void limpiaLista(){
+		
+	}
+
+	public JTable getTable() {
+		return table;
+	}
+
+	public void setTable(JTable table) {
+		this.table = table;
+	}
+	
 
 }
 

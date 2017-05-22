@@ -31,11 +31,20 @@ public class ControladorClientes extends Controlador{
 			case "Ver clientes": preparaClientesView(); break;
 			case "Nuevo cliente": preparaNuevoClienteView(); break;
 			case "Editar cliente": preparaModificaClienteView(); break;
-			case "Eliminar cliente": /* **************************************************************************** */ break;
-			case "Enviar": insertaCliente(); break;
+			case "Eliminar cliente": eliminaCliente(); break;
+			case "Enviar": insertaCliente();
+						   preparaClientesView(); break;
 			case "Modificar": /* **************************************************************************** */ break;
 			case "Cancelar": cancelar(); break;
 		}
+	}
+	
+	private void eliminaCliente(){
+		int posicionParaEliminar = cv.getTable().getSelectedRow();
+		ClienteDAO modeloCliente = new ClienteDAO(modelo, refHotel);
+		System.out.println(posicionParaEliminar);
+		modeloCliente.eliminarCliente(posicionParaEliminar);
+		rellenaTabla();
 	}
 	
 	private void insertaCliente() {
@@ -55,10 +64,14 @@ public class ControladorClientes extends Controlador{
 		this.cv=frame.getCv();
 		if(!esAdministrador)
 			cv.ocultaBotonEliminar();
+		rellenaTabla();
+		frame.muestraClientesView();
+	}
+	
+	public void rellenaTabla(){
 		ClienteDAO modeloCliente = new ClienteDAO(modelo, refHotel);
 		ArrayList <ClienteVO> clientes = modeloCliente.rellenaYConsigueArrayClientes();
 		cv.rellenaListaClientes(clientes);
-		frame.muestraClientesView();
 	}
 	
 	public void preparaNuevoClienteView(){

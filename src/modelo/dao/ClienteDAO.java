@@ -78,6 +78,7 @@ public class ClienteDAO {
 	public void eliminarCliente(int posicion){
 		clientes = rellenaYConsigueArrayClientes();
 		String codigoString = clientes.get(posicion).getCodigo();
+		System.out.println(codigoString);
 		try {
 			Statement stmt = bd.getConexion().createStatement();
 			stmt.executeUpdate("DELETE FROM cliente WHERE codigo = '"+codigoString+"';");
