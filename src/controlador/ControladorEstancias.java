@@ -12,6 +12,7 @@ import modelo.dao.HabitacionDAO;
 import modelo.vo.EstanciaVO;
 import modelo.vo.HabitacionVO;
 import modelo.vo.TipoEstancia;
+import modelo.vo.TipoHabitacion;
 import vista.EstanciasView;
 import vista.ModificarEstanciaView;
 import vista.NuevaEstanciaView;
@@ -23,7 +24,6 @@ public class ControladorEstancias extends Controlador implements ListSelectionLi
 	private HabitacionDAO consultasHabitacion;
 	private EstanciaDAO consultasEstancia;
 	private TipoEstancia tipoEstanciaSeleccionada;
-	private HabitacionVO habitacionSeleccionada;
 	private EstanciaVO estanciaSeleccionada;
 
 	public ControladorEstancias(){
@@ -42,7 +42,7 @@ public class ControladorEstancias extends Controlador implements ListSelectionLi
 			case "Eliminar Estancia": eliminarEstancia(); break;
 			case "Nueva zona comun": insertarZonaComun(); break;
 			case "Nueva habitacion": insertarHabitacion(); break;
-			case "Modificar": /* **************************************************************************** */ break;
+			case "Modificar": modificarEstancia(); break;
 			case "Cancelar": cancelar(); break;
 		}
 	}
@@ -84,13 +84,13 @@ public class ControladorEstancias extends Controlador implements ListSelectionLi
 	public void preparaModificarEstanciaView(){
 		frame.creaModificaEstanciaView(this);
 		this.mesv=frame.getMesv();
-		removeData();
-		bloqueaCampos();
+		removePreviousData();
+		disableFields();
 		rellenaDatosParaEditar();
 		frame.muestraModificaEstancia();
 	}
 	
-	public void removeData(){
+	public void removePreviousData(){
 		mesv.getTxt_Nombre().setText("");
 		mesv.getDesplegable_tipo().setSelectedIndex(0);
 		mesv.getSpinner_plazas().setValue(0);
@@ -99,7 +99,7 @@ public class ControladorEstancias extends Controlador implements ListSelectionLi
 		mesv.getTxt_nombre_uso().setText("");
 	}
 	
-	public void bloqueaCampos(){
+	public void disableFields(){
 		if(tipoEstanciaSeleccionada == TipoEstancia.USO_COMUN){
 			mesv.getTxt_Nombre().setEnabled(false);
 			mesv.getDesplegable_tipo().setEnabled(false);
@@ -119,26 +119,43 @@ public class ControladorEstancias extends Controlador implements ListSelectionLi
 	
 	public void rellenaDatosParaEditar(){
 		if(tipoEstanciaSeleccionada == TipoEstancia.HABITACION){
-			mesv.getTxt_Nombre().setText(this.habitacionSeleccionada.getNombre());
+			mesv.getTxt_Nombre().setText(this.estanciaSeleccionada.getNombre());
 			//EL DESPLEGABLE NO SE RELLENA, COMPROBAR TIPOS STRING - ENUM
-			//mesv.getDesplegable_tipo().setSelectedItem(this.habitacionSeleccionada.getClasificacion());
-			mesv.getSpinner_plazas().setValue(this.habitacionSeleccionada.getPlazas());
-			mesv.getSpinner_precio().setValue(this.habitacionSeleccionada.getPrecio());
-			mesv.getText_descripcion().setText(this.habitacionSeleccionada.getDescripcion());			
+			//mesv.getDesplegable_tipo().setSelectedItem(this.estanciaSeleccionada.getTipo());
+			mesv.getSpinner_plazas().setValue(((HabitacionVO) this.estanciaSeleccionada).getPlazas());
+			mesv.getSpinner_precio().setValue(((HabitacionVO) this.estanciaSeleccionada).getPrecio());
+			mesv.getText_descripcion().setText(((HabitacionVO) this.estanciaSeleccionada).getDescripcion());			
 		}else if(tipoEstanciaSeleccionada == TipoEstancia.USO_COMUN){
 			mesv.getTxt_nombre_uso().setText(this.estanciaSeleccionada.getNombre());
 		}
+	}
+	
+	public void modificarEstancia(){
+		if(tipoEstanciaSeleccionada == TipoEstancia.HABITACION){
+			HabitacionVO h = (HabitacionVO) estanciaSeleccionada;
+			h.setNombre(mesv.getTxt_Nombre().getText());
+			h.setClasificacion(mesv.getDesplegable_tipo().getSelectedItem().toString());
+			h.setPlazas((Integer) mesv.getSpinner_plazas().getValue());
+			h.setPrecio((Integer) mesv.getSpinner_precio().getValue());
+			h.setDescripcion(mesv.getText_descripcion().getText());
+			consultasEstancia.updateEstancia(estanciaSeleccionada);
+			consultasHabitacion.updateHabitacion(estanciaSeleccionada);
+		}else if(tipoEstanciaSeleccionada == TipoEstancia.USO_COMUN){
+			estanciaSeleccionada.setNombre(mesv.getTxt_nombre_uso().getText());
+			consultasEstancia.updateEstancia(estanciaSeleccionada);
+		}
+		preparaEstanciasView();
 	}
 	
 	public void eliminarEstancia(){
 		int eleccion = JOptionPane.showConfirmDialog(null, "Confirma que deseas eliminar esta estancia", "Borrar registro", JOptionPane.YES_NO_OPTION);
 		if(eleccion == JOptionPane.YES_OPTION) {
 			if(tipoEstanciaSeleccionada == TipoEstancia.HABITACION){
-				JOptionPane.showMessageDialog(null, habitacionSeleccionada.getNombre()+" eliminada");
-				new EstanciaDAO(Controlador.modelo).eliminarEstancia(this.habitacionSeleccionada);
+				JOptionPane.showMessageDialog(null, estanciaSeleccionada.getNombre()+" eliminada");
+				consultasEstancia.eliminarEstancia(this.estanciaSeleccionada);
 			}else if(tipoEstanciaSeleccionada == TipoEstancia.USO_COMUN){
 				JOptionPane.showMessageDialog(null, estanciaSeleccionada.getNombre()+" eliminada");
-				new EstanciaDAO(Controlador.modelo).eliminarEstancia(this.estanciaSeleccionada);
+				consultasEstancia.eliminarEstancia(this.estanciaSeleccionada);
 			}
 			preparaEstanciasView();
 		}else{
@@ -160,28 +177,24 @@ public class ControladorEstancias extends Controlador implements ListSelectionLi
 			int refTablaSeleccionada = dlsm.hashCode();
 			int refTablaHabitacion = esv.getTabla_habitaciones().getSelectionModel().hashCode();
 			int refTablaUsoComun = esv.getTabla_estancias().getSelectionModel().hashCode();
-			int seleccion;
+			int filaSeleccionada;
 			
+			//Ha seleccionado una habitacion
 			if(refTablaHabitacion == refTablaSeleccionada){
 				this.tipoEstanciaSeleccionada = TipoEstancia.HABITACION;
-				seleccion = esv.getTabla_habitaciones().getSelectedRow();
-				System.out.println(seleccion);
-				if(seleccion > -1){
-					this.estanciaSeleccionada = null;
+				filaSeleccionada = esv.getTabla_habitaciones().getSelectedRow();
+				if(filaSeleccionada > -1){
 					ArrayList<HabitacionVO> habs = consultasHabitacion.getHabitaciones(refHotel);
-					this.habitacionSeleccionada = habs.get(esv.getTabla_habitaciones().convertRowIndexToModel(seleccion));
-					System.out.println("Fila: "+seleccion+" "+habitacionSeleccionada.getNombre());
+					this.estanciaSeleccionada = habs.get(esv.getTabla_habitaciones().convertRowIndexToModel(filaSeleccionada));
 				}else
-					this.habitacionSeleccionada = null;
+					this.estanciaSeleccionada = null;
+			//Ha seleccionado una estancia de uso comun
 			}else if(refTablaUsoComun == refTablaSeleccionada){
 				this.tipoEstanciaSeleccionada = TipoEstancia.USO_COMUN;
-				seleccion = esv.getTabla_estancias().getSelectedRow();
-				System.out.println(seleccion);
-				if(seleccion > -1){
-					this.habitacionSeleccionada = null;
+				filaSeleccionada = esv.getTabla_estancias().getSelectedRow();
+				if(filaSeleccionada > -1){
 					ArrayList<EstanciaVO> estancias = consultasEstancia.getEstanciasUsoComun(refHotel);
-					this.estanciaSeleccionada = estancias.get(esv.getTabla_estancias().convertRowIndexToModel(seleccion));
-					System.out.println("Fila: "+seleccion+" "+estanciaSeleccionada.getNombre());
+					this.estanciaSeleccionada = estancias.get(esv.getTabla_estancias().convertRowIndexToModel(filaSeleccionada));
 				}else
 					this.estanciaSeleccionada = null;
 			}

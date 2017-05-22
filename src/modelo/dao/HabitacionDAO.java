@@ -63,5 +63,23 @@ public class HabitacionDAO {
 			}
 		}
 	}
+	
+	public void updateHabitacion(EstanciaVO estancia){
+		if(estancia != null){
+			HabitacionVO h = (HabitacionVO) estancia;
+			String sql = ("UPDATE habitacion SET clasificacion=?,plazas=? ,precio=?, descripcion=? WHERE id_estancia=?;");
+			try{
+				PreparedStatement consulta = this.modelo.getConexion().prepareStatement(sql);
+				consulta.setString(1, h.getClasificacion());
+				consulta.setInt(2, h.getPlazas());
+				consulta.setInt(3, h.getPrecio());
+				consulta.setString(4, h.getDescripcion());
+				consulta.setInt(5, h.getId());
+				consulta.executeUpdate();
+			}catch(SQLException e){
+				JOptionPane.showMessageDialog(null, "Ya existe una estancia con ese nombre", "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+	}
 			
 }

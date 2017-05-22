@@ -57,6 +57,20 @@ public class EstanciaDAO {
 		}
 	}
 	
+	public void updateEstancia(EstanciaVO estancia){
+		if(estancia != null){
+			String sql = ("UPDATE estancia SET nombre=? WHERE id=?;");
+			try{
+				PreparedStatement consulta = this.modelo.getConexion().prepareStatement(sql);
+				consulta.setString(1, estancia.getNombre());
+				consulta.setInt(2, estancia.getId());
+				consulta.executeUpdate();
+			}catch(SQLException e){
+				JOptionPane.showMessageDialog(null, "Ya existe una estancia con ese nombre", "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+	}
+	
 	public void eliminarEstancia(EstanciaVO estancia){
 		if(estancia != null){
 			String sql = ("DELETE FROM estancia WHERE id=?");
