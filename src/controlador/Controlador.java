@@ -39,9 +39,9 @@ public class Controlador implements ActionListener, ItemListener{
 	@Override
 	public void actionPerformed(ActionEvent e){
 		System.out.println(e.getActionCommand());
-		switch(e.getActionCommand()){
-			case "Obtener permisos": setPermisos((JCheckBox) e.getSource()); break;
-			case "Nueva referencia hotel": actualizaReferenciaHotelAdmin(); break;
+		switch(e.getActionCommand().toLowerCase()){
+			case "obtener permisos": setPermisos((JCheckBox) e.getSource()); break;
+			case "nueva referencia hotel": actualizaReferenciaHotelAdmin(); break;
 		}				
 	}
 	
@@ -55,7 +55,7 @@ public class Controlador implements ActionListener, ItemListener{
 		if(e.getStateChange() == 1){ 
 			System.out.println("Has cambiado idioma:" +e.getItem());			
 			switch ((String)e.getItem()){
-				//case "Español": bundle = ResourceBundle.getBundle("idiomas/es_ES"); break;
+				case "Español": bundle = ResourceBundle.getBundle("idiomas/es_ES"); break;
 				case "English": bundle = ResourceBundle.getBundle("idiomas/en_UK"); break;
 				default: bundle = ResourceBundle.getBundle("idiomas/es_ES"); break;
 			}

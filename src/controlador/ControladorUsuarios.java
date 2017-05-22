@@ -28,13 +28,13 @@ public class ControladorUsuarios extends Controlador{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(e.getActionCommand());
-		switch(e.getActionCommand()){
-			case "Entrar": verificaAcceso(); break;
-			case "Enviar": enviar(); break;
-			case "Cancelar": cancelar(); break;
-			case "Nuevo Hotel": preparaNuevoHotelView(); break;
-			case "Eliminar Hotel": eliminar(); break;
+		System.out.println(e.getActionCommand().toLowerCase());
+		switch(e.getActionCommand().toLowerCase()){
+			case "entrar": verificaAcceso(); break;
+			case "enviar": enviar(); break;
+			case "cancelar": cancelar(); break;
+			case "nuevo hotel": preparaNuevoHotelView(); break;
+			case "eliminar hotel": eliminar(); break;
 		}
 	}
 	
@@ -96,8 +96,11 @@ public class ControladorUsuarios extends Controlador{
 	}
 	
 	public void eliminar(){
-		consultasHotel.eliminaHotel(refHotel);
-		preparaDesplegableHotelView();
+		int eleccion = JOptionPane.showConfirmDialog(null, "Confirma que deseas eliminar este hotel", "Borrar registro", JOptionPane.YES_NO_OPTION);
+		if(eleccion == JOptionPane.YES_OPTION) {
+			consultasHotel.eliminaHotel(refHotel);
+			preparaDesplegableHotelView();
+		}
 	}
 	
 }

@@ -32,14 +32,14 @@ public class ControladorEmpleados extends Controlador{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.out.println(e.getActionCommand());
-		switch(e.getActionCommand()){
-			case "Ver Empleados": preparaEmpleadosView(); break;
-			case "Nuevo Empleado": preparaNuevoEmpleadoView(); break;
-			case "Modificar Empleado": preparaModificaEmpleadoView(); break;
-			case "Eliminar Empleado": /* **************************************************************************** */ break;
-			case "Enviar": /* **************************************************************************** */ break;
-			case "Modificar": /* **************************************************************************** */ break;
-			case "Cancelar": cancelar(); break;
+		switch(e.getActionCommand().toLowerCase()){
+			case "ver empleados": preparaEmpleadosView(); break;
+			case "nuevo empleado": preparaNuevoEmpleadoView(); break;
+			case "modificar empleado": preparaModificaEmpleadoView(); break;
+			case "eliminar empleado": /* **************************************************************************** */ break;
+			case "enviar": /* **************************************************************************** */ break;
+			case "modificar": /* **************************************************************************** */ break;
+			case "cancelar": cancelar(); break;
 		}
 	}
 	

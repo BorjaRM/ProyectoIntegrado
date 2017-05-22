@@ -24,12 +24,12 @@ public class ControladorIncidencias extends Controlador{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.out.println(e.getActionCommand());
-		switch(e.getActionCommand()){
-			case "Ver Incidencias": preparaIncidenciasView(); break;
-			case "Nueva Incidencia": preparaNuevaIncidenciaView(); break;
-			case "Incidencia Resuelta": /* **************************************************************************** */ break;
-			case "Enviar": preparaInsertarIncidencia(); break;
-			case "Cancelar": cancelar(); break;
+		switch(e.getActionCommand().toLowerCase()){
+			case "ver incidencias": preparaIncidenciasView(); break;
+			case "nueva incidencia": preparaNuevaIncidenciaView(); break;
+			case "incidencia resuelta": /* **************************************************************************** */ break;
+			case "enviar": preparaInsertarIncidencia(); break;
+			case "cancelar": cancelar(); break;
 		}
 	}
 	

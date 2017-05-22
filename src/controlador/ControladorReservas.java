@@ -21,12 +21,12 @@ public class ControladorReservas extends Controlador{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.out.println(e.getActionCommand());
-		switch(e.getActionCommand()){
-			case "Ver Reservas": preparaReservasView(); break;
-			case "Nueva Reserva": preparaNuevaReservaView(); break;
-			case "Anular Reserva": /* **************************************************************************** */ break;
-			case "Enviar": /* **************************************************************************** */ break;
-			case "Cancelar": cancelar(); break;
+		switch(e.getActionCommand().toLowerCase()){
+			case "ver reservas": preparaReservasView(); break;
+			case "nueva reserva": preparaNuevaReservaView(); break;
+			case "anular reserva": /* **************************************************************************** */ break;
+			case "enviar": /* **************************************************************************** */ break;
+			case "cancelar": cancelar(); break;
 		}
 	}
 

@@ -88,40 +88,45 @@ public class Marco extends JFrame{
 		
 		barraSuperior.add(inicio);
 		barraSuperior.add(clientes);
-		
 		item_verClientes = new JMenuItem(bundle.getString("jMenuClientesVer"));
+		item_verClientes.setActionCommand("Ver clientes");
 		clientes.add(item_verClientes);
-		
 		item_nuevoCliente = new JMenuItem(bundle.getString("jMenuClientesNew"));
+		item_nuevoCliente.setActionCommand("Nuevo cliente");
 		clientes.add(item_nuevoCliente);
+		
 		barraSuperior.add(empleados);
-		
 		item_verEmpleados = new JMenuItem(bundle.getString("jMenuEmpleadosVer"));
+		item_verEmpleados.setActionCommand("Ver empleados");
 		empleados.add(item_verEmpleados);
-		
 		item_nuevoEmpleado = new JMenuItem(bundle.getString("jMenuEmpleadosNew"));
+		item_nuevoEmpleado.setActionCommand("Nuevo empleado");
 		empleados.add(item_nuevoEmpleado);
+		
 		barraSuperior.add(reservas);
-		
 		item_verReservas = new JMenuItem(bundle.getString("jMenuReservasVer"));
+		item_verReservas.setActionCommand("Ver reservas");
 		reservas.add(item_verReservas);
-		
 		item_nuevaReserva = new JMenuItem(bundle.getString("jMenuReservasNew"));
+		item_nuevaReserva.setActionCommand("Nueva reserva");
 		reservas.add(item_nuevaReserva);
+		
 		barraSuperior.add(estancias);
-		
 		item_verEstancias = new JMenuItem(bundle.getString("jMenuEstanciasVer"));
+		item_verEstancias.setActionCommand("Ver estancias");
 		estancias.add(item_verEstancias);
-		
 		item_nuevaEstancia = new JMenuItem(bundle.getString("jMenuEstanciasNew"));
+		item_nuevaEstancia.setActionCommand("Nueva estancia");
 		estancias.add(item_nuevaEstancia);
+		
 		barraSuperior.add(incidencias);
-		
 		item_verIncidencias = new JMenuItem(bundle.getString("jMenuIncidenciasVer"));
+		item_verIncidencias.setActionCommand("Ver incidencias");
 		incidencias.add(item_verIncidencias);
-		
 		item_nuevaIncidencia = new JMenuItem(bundle.getString("jMenuIncidenciasNew"));
+		item_nuevaIncidencia.setActionCommand("Nueva incidencia");
 		incidencias.add(item_nuevaIncidencia);
+		
 		barraSuperior.add(Box.createHorizontalGlue());
 								
 		//Creamos el cardLayout

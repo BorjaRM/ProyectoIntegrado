@@ -27,15 +27,14 @@ public class ControladorClientes extends Controlador{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.out.println(e.getActionCommand());
-		switch(e.getActionCommand()){
-			case "Ver clientes": preparaClientesView(); break;
-			case "Nuevo cliente": preparaNuevoClienteView(); break;
-			case "Editar cliente": preparaModificaClienteView(); break;
-			case "Eliminar cliente": eliminaCliente(); break;
-			case "Enviar": insertaCliente();
-						   preparaClientesView(); break;
-			case "Modificar": /* **************************************************************************** */ break;
-			case "Cancelar": cancelar(); break;
+		switch(e.getActionCommand().toLowerCase()){
+			case "ver clientes": preparaClientesView(); break;
+			case "nuevo cliente": preparaNuevoClienteView(); break;
+			case "editar cliente": preparaModificaClienteView(); break;
+			case "eliminar cliente": eliminaCliente(); break;
+			case "enviar": insertaCliente(); preparaClientesView(); break;
+			case "modificar": /* **************************************************************************** */ break;
+			case "cancelar": cancelar(); break;
 		}
 	}
 	
@@ -56,7 +55,6 @@ public class ControladorClientes extends Controlador{
 		}else{			
 			modeloCliente.insertaCliente(cliente);
 		}
-		
 	}
 
 	public void preparaClientesView(){
