@@ -1,28 +1,18 @@
 package controlador;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListSelectionModel;
-import javax.swing.JList;
-import javax.swing.JTable;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
-
-import modelo.BD;
 import modelo.dao.EstanciaDAO;
 import modelo.dao.HabitacionDAO;
 import modelo.vo.EstanciaVO;
 import modelo.vo.HabitacionVO;
 import modelo.vo.TipoEstancia;
-import modelo.vo.TipoHabitacion;
 import vista.EstanciasView;
-import vista.Marco;
 import vista.ModificarEstanciaView;
 import vista.NuevaEstanciaView;
 
@@ -81,12 +71,14 @@ public class ControladorEstancias extends Controlador implements ListSelectionLi
 		habitacion.setCod_hotel(refHotel);
 		consultasEstancia.insertEstancia(habitacion);
 		consultasHabitacion.insertHabitacion(habitacion);
+		preparaEstanciasView();
 	}
 	
 	public void insertarZonaComun(){
 		EstanciaVO estancia = frame.getNesv().enviarDatosUsoComun();
 		estancia.setCod_hotel(refHotel);
 		consultasEstancia.insertEstancia(estancia);
+		preparaEstanciasView();
 	}
 	
 	public void preparaModificarEstanciaView(){
@@ -139,7 +131,19 @@ public class ControladorEstancias extends Controlador implements ListSelectionLi
 	}
 	
 	public void eliminarEstancia(){
-		esv.getTabla_habitaciones().clearSelection();
+		int eleccion = JOptionPane.showConfirmDialog(null, "Confirma que deseas eliminar esta estancia", "Borrar registro", JOptionPane.YES_NO_OPTION);
+		if(eleccion == JOptionPane.YES_OPTION) {
+			if(tipoEstanciaSeleccionada == TipoEstancia.HABITACION){
+				JOptionPane.showMessageDialog(null, habitacionSeleccionada.getNombre()+" eliminada");
+				new EstanciaDAO(Controlador.modelo).eliminarEstancia(this.habitacionSeleccionada);
+			}else if(tipoEstanciaSeleccionada == TipoEstancia.USO_COMUN){
+				JOptionPane.showMessageDialog(null, estanciaSeleccionada.getNombre()+" eliminada");
+				new EstanciaDAO(Controlador.modelo).eliminarEstancia(this.estanciaSeleccionada);
+			}
+			preparaEstanciasView();
+		}else{
+			JOptionPane.showMessageDialog(null, "No se ha eliminado ningun registro");
+		}
 	}
 	
 	public void cancelar(){

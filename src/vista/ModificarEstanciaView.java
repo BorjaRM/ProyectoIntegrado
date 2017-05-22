@@ -23,6 +23,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SpinnerNumberModel;
 
 public class ModificarEstanciaView extends JPanel implements IControladorEstancias{
 	private JTextField txt_Nombre;
@@ -90,12 +91,14 @@ public class ModificarEstanciaView extends JPanel implements IControladorEstanci
 		panel_Habitacion.add(lblPlazas);
 		
 		spinner_plazas = new JSpinner();
+		spinner_plazas.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
 		panel_Habitacion.add(spinner_plazas);
 		
 		JLabel lblPrecio = new JLabel("Precio:");
 		panel_Habitacion.add(lblPrecio);
 		
 		spinner_precio = new JSpinner();
+		spinner_precio.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		panel_Habitacion.add(spinner_precio);
 		
 		JLabel lblDescripcin = new JLabel("Descripcion:");

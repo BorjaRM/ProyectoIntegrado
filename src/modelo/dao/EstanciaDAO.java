@@ -55,7 +55,19 @@ public class EstanciaDAO {
 				JOptionPane.showMessageDialog(null, "Ya existe una estancia con ese nombre", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		
+	}
+	
+	public void eliminarEstancia(EstanciaVO estancia){
+		if(estancia != null){
+			String sql = ("DELETE FROM estancia WHERE id=?");
+			try{
+				PreparedStatement consulta = this.modelo.getConexion().prepareStatement(sql);
+				consulta.setInt(1, estancia.getId());
+				consulta.executeUpdate();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	
