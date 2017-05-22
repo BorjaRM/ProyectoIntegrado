@@ -60,7 +60,7 @@ public class ControladorUsuarios extends Controlador{
 	public void preparaPrincipalAdminView(){
 		super.creaMarco();
 		//Puedo hacer un new Controlador aqui? no se como pasar el Controlador de otra forma
-		frame.creaPrincipalAdminView(this); 
+		frame.creaPrincipalAdminView(new Controlador(),this); 
 		preparaDesplegableHotelView();
 		actualizaReferenciaHotelAdmin();
 		frame.muestraPrincipalAdminView();

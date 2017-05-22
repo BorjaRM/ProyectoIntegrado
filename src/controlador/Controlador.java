@@ -74,7 +74,5 @@ public class Controlador implements ActionListener, ItemListener{
 			Controlador.refHotel= hotelSeleccionado.getCodigo();
 		System.out.println("referencia hotel:" +refHotel);
 	}
-	
-
 
 }

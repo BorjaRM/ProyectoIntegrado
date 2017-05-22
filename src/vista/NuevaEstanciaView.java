@@ -114,7 +114,6 @@ public class NuevaEstanciaView extends JPanel implements IControladorEstancias{
 		text_descripcion = new JTextArea();
 		text_descripcion.setRows(10);
 		text_descripcion.setLineWrap(true);
-		//panel_Habitacion.add(text_descripcion);
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setViewportView(text_descripcion);

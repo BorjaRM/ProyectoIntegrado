@@ -127,10 +127,10 @@ public class Marco extends JFrame{
 		vistas.setLayout(cl);				
 	}
 	
-	public void creaPrincipalAdminView(ControladorUsuarios c2){
+	public void creaPrincipalAdminView(Controlador c1, ControladorUsuarios c2){
 		if(pav == null){
 			pav = new PrincipalAdminView();
-			pav.estableceControlador(this.controlador);
+			pav.estableceControlador(c1);
 			pav.estableceControlador(c2);
 			vistas.add(pav,PRINCIPAL_ADMIN);
 		}

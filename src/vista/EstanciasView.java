@@ -17,18 +17,13 @@ import modelo.vo.HabitacionVO;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 import javax.swing.ListSelectionModel;
-import javax.swing.SwingUtilities;
-
-import java.awt.Dimension;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class EstanciasView extends JPanel implements IControladorEstancias{
 	private JButton btnNuevaEstancia;
 	private JButton btnModificarEstancia;
 	private JButton btnEliminarEstancia;
 	private JTable tabla_habitaciones;
-	private final String[] habitaciones_head = {"Id","Nombre","Plazas","Precio","Descripcion"};
+	private final String[] habitaciones_head = {"Id","Nombre","Clasificacion","Plazas","Precio","Descripcion"};
 	private DefaultTableModel habitaciones_model;
 	private JTable tabla_estancias;
 	private final String[] estancias_head = {"Zonas de uso comun"};
@@ -60,19 +55,7 @@ public class EstanciasView extends JPanel implements IControladorEstancias{
 		//Creamos la tabla que contiene las habitaciones
 		JScrollPane scrollPane = new JScrollPane();
 		habitaciones_model = new DefaultTableModel(habitaciones_head,0);
-		tabla_habitaciones = new JTable(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Id", "Nombre", "Camas", "Precio", "Descripcion"
-			}
-		));
-		tabla_habitaciones.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				System.out.println("esta seleccionada");
-			}
-		});
+		tabla_habitaciones = new JTable(habitaciones_model);
 		tabla_habitaciones.setAutoCreateRowSorter(true);
 		tabla_habitaciones.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tabla_habitaciones.setFillsViewportHeight(true);
@@ -95,7 +78,9 @@ public class EstanciasView extends JPanel implements IControladorEstancias{
 	public void estableceControlador(ControladorEstancias controlador) {
 		this.btnNuevaEstancia.addActionListener(controlador);
 		this.btnModificarEstancia.addActionListener(controlador);
-		this.btnEliminarEstancia.addActionListener(controlador);
+		this.btnEliminarEstancia.addActionListener(controlador);		
+		this.tabla_habitaciones.getSelectionModel().addListSelectionListener(controlador);
+		this.tabla_estancias.getSelectionModel().addListSelectionListener(controlador);
 	}
 	
 	public void ocultaBotonNuevaEstancia(){
@@ -117,20 +102,21 @@ public class EstanciasView extends JPanel implements IControladorEstancias{
 		for (int i = 0 ; i < habitaciones.size(); i++ ){
 			fila[0] = habitaciones.get(i).getId();
 			fila[1] = habitaciones.get(i).getNombre();
-			fila[2] = habitaciones.get(i).getPlazas();
-			fila[3] = habitaciones.get(i).getPrecio();
-			fila[4] = habitaciones.get(i).getDescripcion();
+			fila[2] = habitaciones.get(i).getClasificacion();
+			fila[3] = habitaciones.get(i).getPlazas();
+			fila[4] = habitaciones.get(i).getPrecio();
+			fila[5] = habitaciones.get(i).getDescripcion();
 			habitaciones_model.addRow(fila);
 		}
 		tabla_habitaciones.setModel(habitaciones_model);
 	}
 	
-	public void rellenaTablaEstancias(ArrayList<EstanciaVO> arrayList){
+	public void rellenaTablaEstancias(ArrayList<EstanciaVO> estancias){
 		estancias_model = new DefaultTableModel(estancias_head,0);
 		Object[] fila = new Object[estancias_model.getColumnCount()];
 		
-		for (int i = 0 ; i < arrayList.size(); i++ ){
-			fila[0] = arrayList.get(i).getNombre();
+		for (int i = 0 ; i < estancias.size(); i++ ){
+			fila[0] = estancias.get(i).getNombre();
 			estancias_model.addRow(fila);
 		}
 		tabla_estancias.setModel(estancias_model);
