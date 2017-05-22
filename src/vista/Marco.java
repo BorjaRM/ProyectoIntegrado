@@ -15,6 +15,8 @@ import controlador.ControladorUsuarios;
 import controlador.ControladorReservas;
 
 import java.awt.CardLayout;
+import java.util.ResourceBundle;
+
 import javax.swing.Box;
 import javax.swing.JMenuItem;
 
@@ -65,7 +67,7 @@ public class Marco extends JFrame{
 	 * Create the frame.
 	 * @param controlador 
 	 */
-	public Marco(Controlador controlador) {
+	public Marco(Controlador controlador, ResourceBundle bundle) {
 		this.controlador=controlador;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 500);
@@ -77,48 +79,48 @@ public class Marco extends JFrame{
 		JMenuBar barraSuperior = new JMenuBar();
 		setJMenuBar(barraSuperior);
 		//Opciones menu
-		inicio = new JMenu("Inicio");
-		clientes = new JMenu("Clientes");
-		empleados = new JMenu("Empleados");
-		reservas = new JMenu("Reservas");
-		estancias = new JMenu("Estancias");
-		incidencias = new JMenu("Incidencias");
+		inicio = new JMenu(bundle.getString("jMenuInicio"));
+		clientes = new JMenu(bundle.getString("jMenuClientes"));
+		empleados = new JMenu(bundle.getString("jMenuEmpleados"));
+		reservas = new JMenu(bundle.getString("jMenuReservas"));
+		estancias = new JMenu(bundle.getString("jMenuEstancias"));
+		incidencias = new JMenu(bundle.getString("jMenuIncidencias"));
 		
 		barraSuperior.add(inicio);
 		barraSuperior.add(clientes);
 		
-		item_verClientes = new JMenuItem("Ver clientes");
+		item_verClientes = new JMenuItem(bundle.getString("jMenuClientesVer"));
 		clientes.add(item_verClientes);
 		
-		item_nuevoCliente = new JMenuItem("Nuevo cliente");
+		item_nuevoCliente = new JMenuItem(bundle.getString("jMenuClientesNew"));
 		clientes.add(item_nuevoCliente);
 		barraSuperior.add(empleados);
 		
-		item_verEmpleados = new JMenuItem("Ver Empleados");
+		item_verEmpleados = new JMenuItem(bundle.getString("jMenuEmpleadosVer"));
 		empleados.add(item_verEmpleados);
 		
-		item_nuevoEmpleado = new JMenuItem("Nuevo Empleado");
+		item_nuevoEmpleado = new JMenuItem(bundle.getString("jMenuEmpleadosNew"));
 		empleados.add(item_nuevoEmpleado);
 		barraSuperior.add(reservas);
 		
-		item_verReservas = new JMenuItem("Ver Reservas");
+		item_verReservas = new JMenuItem(bundle.getString("jMenuReservasVer"));
 		reservas.add(item_verReservas);
 		
-		item_nuevaReserva = new JMenuItem("Nueva Reserva");
+		item_nuevaReserva = new JMenuItem(bundle.getString("jMenuReservasNew"));
 		reservas.add(item_nuevaReserva);
 		barraSuperior.add(estancias);
 		
-		item_verEstancias = new JMenuItem("Ver Estancias");
+		item_verEstancias = new JMenuItem(bundle.getString("jMenuEstanciasVer"));
 		estancias.add(item_verEstancias);
 		
-		item_nuevaEstancia = new JMenuItem("Nueva Estancia");
+		item_nuevaEstancia = new JMenuItem(bundle.getString("jMenuEstanciasNew"));
 		estancias.add(item_nuevaEstancia);
 		barraSuperior.add(incidencias);
 		
-		item_verIncidencias = new JMenuItem("Ver Incidencias");
+		item_verIncidencias = new JMenuItem(bundle.getString("jMenuIncidenciasVer"));
 		incidencias.add(item_verIncidencias);
 		
-		item_nuevaIncidencia = new JMenuItem("Nueva Incidencia");
+		item_nuevaIncidencia = new JMenuItem(bundle.getString("jMenuIncidenciasNew"));
 		incidencias.add(item_nuevaIncidencia);
 		barraSuperior.add(Box.createHorizontalGlue());
 								

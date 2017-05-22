@@ -24,7 +24,7 @@ public class Controlador implements ActionListener, ItemListener{
 	}
 	
 	public void creaMarco(){
-		frame = new Marco(this);
+		frame = new Marco(this, bundle);
 	}
 	
 	public void creaControladoresVistas(){
