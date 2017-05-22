@@ -8,11 +8,11 @@ public class BD {
 	private static Connection conexion;
 	private String servidor, bd, usuario, contrasena;
 	
-	private BD(String servidor, String bd, String usuario, String contrasena){
-		this.servidor=servidor;
-		this.bd=bd;
-		this.usuario=usuario;
-		this.contrasena=contrasena;			
+	private BD(){
+		this.servidor="52.90.200.239";
+		this.bd="hotel_pi";
+		this.usuario="usuario";
+		this.contrasena="Pintegrado2017";			
 	
 		//Registramos el driver de Mysql
 		try{
@@ -32,9 +32,9 @@ public class BD {
 	}
 	
 	//Patron singleton para evitar crear multiples conexiones a la base de datos
-	public static BD getSingleDBInstance(String servidor, String bd, String usuario, String contrasena){
+	public static BD getSingleDBInstance(){
 		if(instanciaUnica == null)
-			instanciaUnica = new BD(servidor,bd,usuario,contrasena);
+			instanciaUnica = new BD();
 		return instanciaUnica;
 	}
 

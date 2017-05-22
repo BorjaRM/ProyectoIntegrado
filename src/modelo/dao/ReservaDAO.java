@@ -5,8 +5,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.mysql.jdbc.Connection;
-
 import modelo.BD;
 import modelo.vo.ReservaVO;
 
@@ -15,7 +13,9 @@ public class ReservaDAO {
 	BD bd;
 	ArrayList <ReservaVO> reservas;
 	ClienteDAO cld;
-	
+	public ReservaDAO(){
+		this.bd=BD.getSingleDBInstance();
+	}
 	public ArrayList<ReservaVO> consultaReservas(BD modelo){
 		reservas = new ArrayList<ReservaVO>();
 		try {
@@ -28,10 +28,10 @@ public class ReservaDAO {
 				String habitacion = rs.getString("cod_habitacion");
 				String inicio = rs.getString("inicio");
 				String fin = rs.getString("fin");
-				String noches = "LMAO";
+				String usuario = rs.getString("cod_usuario");
 				String pension = rs.getString("regimen");
 				
-				ReservaVO r = new ReservaVO(codigo,cliente,habitacion,pension,fin,inicio, noches);
+				ReservaVO r = new ReservaVO(codigo,inicio,fin,pension,cliente,usuario,habitacion);
 				reservas.add(r);
 			}
 		} catch (SQLException e) {

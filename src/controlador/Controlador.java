@@ -20,7 +20,7 @@ public class Controlador implements ActionListener, ItemListener{
 	protected static ResourceBundle bundle;
 	
 	public Controlador(){
-		modelo = BD.getSingleDBInstance("52.90.200.239","hotel_pi","usuario","Pintegrado2017");	
+		modelo = BD.getSingleDBInstance();
 	}
 	
 	public void creaMarco(){

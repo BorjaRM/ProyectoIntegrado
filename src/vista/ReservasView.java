@@ -8,15 +8,19 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import controlador.ControladorReservas;
 import interfaces.IControladorReservas;
+import modelo.BD;
+import modelo.dao.ClienteDAO;
+import modelo.dao.HabitacionDAO;
+import modelo.dao.ReservaDAO;
 import modelo.vo.ClienteVO;
+import modelo.vo.HabitacionVO;
 import modelo.vo.ReservaVO;
 
 import java.awt.BorderLayout;
-import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.awt.Component;
-import javax.swing.Box;
 
 public class ReservasView extends JPanel implements IControladorReservas{
 	private JTable table;
@@ -52,6 +56,10 @@ public class ReservasView extends JPanel implements IControladorReservas{
 		DefaultTableModel table_model = new DefaultTableModel(colHeader,0);
 		table = new JTable(table_model);
 		scrollPane.setViewportView(table);
+		ArrayList<ReservaVO> reservas = new ReservaDAO().consultaReservas(BD.getSingleDBInstance());
+		ArrayList<ClienteVO> clientes = new ClienteDAO(BD.getSingleDBInstance(),1).rellenaYConsigueArrayClientes();
+		ArrayList<HabitacionVO> habitaciones = new HabitacionDAO(BD.getSingleDBInstance()).getHabitaciones(1);
+		rellenaListaReservas(reservas,clientes,habitaciones);
 	}
 
 	@Override
@@ -60,22 +68,33 @@ public class ReservasView extends JPanel implements IControladorReservas{
 		this.btnCancelarReserva.addActionListener(controlador);
 	}
 	
-	public void rellenaListaReservas(ArrayList <ReservaVO> reserva){
+	public void rellenaListaReservas(ArrayList <ReservaVO> reservas, ArrayList<ClienteVO> clientes, ArrayList<HabitacionVO> habitaciones){
 		DefaultTableModel modeloTabla = (DefaultTableModel) table.getModel();
 		Object[] fila = new Object[modeloTabla.getColumnCount()];
 		
-		for (int i = 0 ; i < reserva.size(); i++ ){
-			fila[0] = reserva.get(i).getCodigo();
-			fila[1] = reserva.get(i).getInicio();
-			fila[2] = reserva.get(i).getFin();
-			fila[3] = reserva.get(i).getRegimen();
-			fila[4] = reserva.get(i).getCod_cliente();
-			fila[5] = reserva.get(i).getCod_usuario();
-			fila[6] = reserva.get(i).getCod_habitacion();
-			modeloTabla.addRow(fila);
+		for(int i=0;i<reservas.size();i++){
+			LocalDate fechaLlegada = LocalDate.parse(reservas.get(i).getInicio());
+			LocalDate fechaSalida = LocalDate.parse(reservas.get(i).getFin());
+			fila[0] = reservas.get(i).getCodigo();
+			fila[3] = reservas.get(i).getInicio();
+			fila[4] = reservas.get(i).getFin();
+			fila[5] = ChronoUnit.DAYS.between(fechaLlegada, fechaSalida);
+			fila[6] = reservas.get(i).getRegimen();	
+			for(int x=0;x<clientes.size();x++){
+				if(reservas.get(i).getCod_cliente().equals(clientes.get(x).getCodigo())){
+					fila[1] = clientes.get(x).getNombre()+" "+clientes.get(x).getApellidos();
+				}
+			}
+			for(int y=0;y<habitaciones.size();y++){
+				int codigoHabitacion = Integer.parseInt(reservas.get(i).getCod_habitacion());
+				if(codigoHabitacion == habitaciones.get(y).getId()){
+				fila[2] = habitaciones.get(y).getNombre();
+				}
+			}
+					modeloTabla.addRow(fila);
 		}
+		
 		table.setModel(modeloTabla);
 			
 	}
-
 }

@@ -6,11 +6,14 @@ import com.toedter.calendar.JDateChooser;
 
 import controlador.ControladorReservas;
 import interfaces.IControladorReservas;
+import modelo.BD;
+import modelo.dao.ClienteDAO;
+import modelo.dao.HabitacionDAO;
 import modelo.vo.ClienteVO;
-import modelo.vo.EstanciaVO;
 import modelo.vo.HabitacionVO;
 
 import java.awt.BorderLayout;
+
 import javax.swing.JButton;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
@@ -26,6 +29,7 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 	private JButton btnCancelar;
 	private JComboBox listaClientes;
 	private JComboBox listaHabitaciones;
+	private ClienteVO clv;
 	
 	/**
 	 * Create the panel.
@@ -60,7 +64,13 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		gbc_lblCliente.gridy = 1;
 		panel_1.add(lblCliente, gbc_lblCliente);
 		
+		
 		JComboBox listaClientes = new JComboBox();
+		ClienteDAO c = new ClienteDAO(BD.getSingleDBInstance(),0);
+		ArrayList<ClienteVO> clientes = c.rellenaYConsigueArrayClientes();
+		for(int i=0;i<clientes.size();i++){
+			listaClientes.addItem(clientes.get(i).getNombre()+" "+clientes.get(i).getApellidos() );
+		}
 		GridBagConstraints gbc_listaClientes = new GridBagConstraints();
 		gbc_listaClientes.gridwidth = 3;
 		gbc_listaClientes.insets = new Insets(0, 0, 5, 5);
@@ -77,6 +87,11 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		panel_1.add(lblHabitacion, gbc_lblHabitacion);
 		
 		JComboBox listaHabitaciones = new JComboBox();
+		HabitacionDAO h = new HabitacionDAO(BD.getSingleDBInstance());
+		ArrayList<HabitacionVO> habitaciones = h.getHabitaciones(1);	
+		for(int i=0;i<habitaciones.size();i++){
+			listaHabitaciones.addItem(habitaciones.get(i).getNombre());
+		}
 		GridBagConstraints gbc_listaHabitaciones = new GridBagConstraints();
 		gbc_listaHabitaciones.gridwidth = 3;
 		gbc_listaHabitaciones.insets = new Insets(0, 0, 5, 5);
@@ -128,7 +143,8 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		gbc_lblPension.gridy = 5;
 		panel_1.add(lblPension, gbc_lblPension);
 		
-		JComboBox listaPension = new JComboBox();
+		String[] pension = {"Alojamiento","Desayuno","Media","Completa"};
+		JComboBox listaPension = new JComboBox(pension);
 		GridBagConstraints gbc_listaPension = new GridBagConstraints();
 		gbc_listaPension.gridwidth = 3;
 		gbc_listaPension.insets = new Insets(0, 0, 5, 5);
@@ -144,15 +160,6 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		this.btnEnviar.addActionListener(controlador);
 		this.btnCancelar.addActionListener(controlador);
 	}
-	
-	public void rellenaComboBoxClientes(ArrayList <ClienteVO> clientes){
-		
-		for (int i = 0 ; i < clientes.size(); i++){
-			System.err.println(clientes.get(i).getNombre());
-			listaClientes.addItem(clientes.get(i));
-
-		}
-	}
 
 	public JComboBox getComboBoxClientes() {
 		return listaClientes;
@@ -162,15 +169,6 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		this.listaClientes = comboBoxClientes;
 	}
 	
-	public void rellenaComboBoxHabitaciones(ArrayList <HabitacionVO> habitaciones){
-		
-		for (int i = 0 ; i < habitaciones.size(); i++){
-			System.err.println(habitaciones.get(i).getNombre());
-			listaHabitaciones.addItem(habitaciones.get(i));
-
-		}
-	}
-
 	public JComboBox getComboBoxHabitaciones() {
 		return listaHabitaciones;
 	}
