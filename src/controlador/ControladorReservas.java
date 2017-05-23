@@ -3,8 +3,13 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 import modelo.BD;
 import modelo.dao.ClienteDAO;
+import modelo.dao.ReservaDAO;
+import modelo.vo.ClienteVO;
+import modelo.vo.ReservaVO;
 import vista.Marco;
 import vista.NuevaReservaView;
 import vista.ReservasView;
@@ -12,7 +17,7 @@ import vista.ReservasView;
 public class ControladorReservas extends Controlador{
 	private NuevaReservaView nrv;
 	private ReservasView rv;
-	private ClienteDAO cd;
+	private ReservaDAO rd;
 
 	public ControladorReservas(){
 		frame.estableceControlador(this);
@@ -29,6 +34,16 @@ public class ControladorReservas extends Controlador{
 			case "cancelar": cancelar(); break;
 		}
 	}
+	
+	private void insertaCliente() {
+		ReservaDAO modeloReserva = new ReservaDAO();
+		ReservaVO reserva = new ReservaVO("",nrv.getListaClientes().getSelectedItem().toString(),
+				nrv.getListaHabitaciones().getSelectedItem().toString(),nrv.getDateChooserLlegada().getDate().toString(),
+				nrv.getDateChooserSalida().getDate().toString(),
+				nrv.getListaPension().getSelectedItem().toString(),"");
+		
+		modeloReserva.nuevaReserva(reserva);
+		}
 
 	public void preparaReservasView(){
 		frame.creaReservasView(this);

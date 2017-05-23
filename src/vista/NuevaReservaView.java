@@ -29,6 +29,9 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 	private JButton btnCancelar;
 	private JComboBox listaClientes;
 	private JComboBox listaHabitaciones;
+	private JComboBox listaPension;
+	private JDateChooser dateChooserLlegada;
+	private JDateChooser dateChooserSalida;
 	private ClienteVO clv;
 	
 	/**
@@ -161,20 +164,44 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		this.btnCancelar.addActionListener(controlador);
 	}
 
-	public JComboBox getComboBoxClientes() {
+	public JComboBox getListaClientes() {
 		return listaClientes;
 	}
 
-	public void setComboBoxClientes(JComboBox comboBoxClientes) {
-		this.listaClientes = comboBoxClientes;
+	public void setListaClientes(JComboBox listaClientes) {
+		this.listaClientes = listaClientes;
 	}
-	
-	public JComboBox getComboBoxHabitaciones() {
+
+	public JComboBox getListaHabitaciones() {
 		return listaHabitaciones;
 	}
 
-	public void setComboBoxHabitaciones(JComboBox comboBoxHabitaciones) {
-		this.listaHabitaciones = comboBoxHabitaciones;
+	public void setListaHabitaciones(JComboBox listaHabitaciones) {
+		this.listaHabitaciones = listaHabitaciones;
+	}
+
+	public JComboBox getListaPension() {
+		return listaPension;
+	}
+
+	public void setListaPension(JComboBox listaPension) {
+		this.listaPension = listaPension;
+	}
+
+	public JDateChooser getDateChooserLlegada() {
+		return dateChooserLlegada;
+	}
+
+	public void setDateChooserLlegada(JDateChooser dateChooserLlegada) {
+		this.dateChooserLlegada = dateChooserLlegada;
+	}
+
+	public JDateChooser getDateChooserSalida() {
+		return dateChooserSalida;
+	}
+
+	public void setDateChooserSalida(JDateChooser dateChooserSalida) {
+		this.dateChooserSalida = dateChooserSalida;
 	}
 
 }
