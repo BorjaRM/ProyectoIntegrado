@@ -1,11 +1,13 @@
 package modelo.dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
 import modelo.BD;
+import modelo.vo.EstanciaVO;
 import modelo.vo.ReservaVO;
 
 
@@ -50,5 +52,51 @@ public class ReservaDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public ArrayList<String> getLLegadasHoy(int refHotel){
+		ArrayList<String> llegadas = new ArrayList<String>();
+		String llegada;
+		
+		try{
+			String sql = "SELECT concat(cliente.nombre,' ',cliente.apellidos,' - ',estancia.nombre) AS llegada FROM reserva INNER JOIN "
+					+ "estancia ON reserva.cod_habitacion=estancia.id INNER JOIN hotel ON estancia.cod_hotel=hotel.codigo INNER JOIN "
+					+ "cliente ON reserva.cod_cliente=cliente.codigo AND reserva.inicio=curdate() AND hotel.codigo=?;";
+			PreparedStatement ps = this.bd.getConexion().prepareStatement(sql);
+			ps.setInt(1, refHotel);
+			ResultSet resultadoConsulta = ps.executeQuery();
+			//Transformamos el resultset en un arraylist
+			while(resultadoConsulta.next()){
+				llegada=resultadoConsulta.getString("llegada");
+				//Creamos un objeto Estancia y lo añadimos al Arraylist
+				llegadas.add(llegada);
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		} 		
+		return llegadas;
+	}
+	
+	public ArrayList<String> getSalidasHoy(int refHotel){
+		ArrayList<String> salidas = new ArrayList<String>();
+		String salida;
+		
+		try{
+			String sql = "SELECT concat(cliente.nombre,' ',cliente.apellidos,' - ',estancia.nombre) AS salida FROM reserva INNER JOIN "
+					+ "estancia ON reserva.cod_habitacion=estancia.id INNER JOIN hotel ON estancia.cod_hotel=hotel.codigo INNER JOIN "
+					+ "cliente ON reserva.cod_cliente=cliente.codigo AND reserva.fin=curdate() AND hotel.codigo=?;";
+			PreparedStatement ps = this.bd.getConexion().prepareStatement(sql);
+			ps.setInt(1, refHotel);
+			ResultSet resultadoConsulta = ps.executeQuery();
+			//Transformamos el resultset en un arraylist
+			while(resultadoConsulta.next()){
+				salida=resultadoConsulta.getString("salida");
+				//Creamos un objeto Estancia y lo añadimos al Arraylist
+				salidas.add(salida);
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		} 		
+		return salidas;
 	}
 }

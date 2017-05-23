@@ -3,14 +3,16 @@ package modelo.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
 import modelo.BD;
 import modelo.vo.IncidenciaVO;
 
 public class IncidenciaDAO {
 	private BD bd;
 	
-	public IncidenciaDAO(BD bd){
-		this.bd = bd;
+	public IncidenciaDAO(){
+		this.bd=BD.getSingleDBInstance();
 	}
 	public void insertaIncidencia(IncidenciaVO in){
 		if(in != null){
@@ -48,9 +50,9 @@ public class IncidenciaDAO {
 			return nombresHoteles;
 		}
 		
-	}
 	
-}
+	
+
 	public int getReferenciaHotel(int codigoEmpleado){
 		int cod_hotel=0;
 		String sql = ("SELECT lugar_trabajo FROM empleado WHERE codigo=?");
@@ -65,4 +67,29 @@ public class IncidenciaDAO {
 		}		
 		return cod_hotel;
 	}
+	
+	public ArrayList<String> getIncidenciaActivas(int refHotel){
+		ArrayList<String> incidencias = new ArrayList<String>();
+		String incidencia;
+		
+		try{
+			String sql = "SELECT concat(estancia.nombre,' - ',incidencia.descripcion) AS incidencia FROM incidencia INNER JOIN "
+					+ "estancia ON incidencia.cod_estancia=estancia.id INNER JOIN hotel ON estancia.cod_hotel=hotel.codigo AND "
+					+ "hotel.codigo=? AND incidencia.estado='activa';";
+			PreparedStatement ps = this.bd.getConexion().prepareStatement(sql);
+			ps.setInt(1, refHotel);
+			ResultSet resultadoConsulta = ps.executeQuery();
+			//Transformamos el resultset en un arraylist
+			while(resultadoConsulta.next()){
+				incidencia=resultadoConsulta.getString("incidencia");
+				//Creamos un objeto Estancia y lo añadimos al Arraylist
+				incidencias.add(incidencia);
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		} 		
+		return incidencias;
+	} 
+	
+	
 }

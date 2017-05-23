@@ -418,6 +418,10 @@ public class Marco extends JFrame{
 
 	public NuevoHotelView getHv() {
 		return hv;
+	}
+
+	public PrincipalEmpleadoView getPev() {
+		return pev;
 	}	
 	
 }

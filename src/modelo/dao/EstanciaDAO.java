@@ -79,7 +79,7 @@ public class EstanciaDAO {
 				consulta.setInt(1, estancia.getId());
 				consulta.executeUpdate();
 			}catch(SQLException e){
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Esta habitacion esta reservada, no se puede eliminar", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}

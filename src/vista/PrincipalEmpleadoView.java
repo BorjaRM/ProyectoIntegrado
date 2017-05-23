@@ -9,10 +9,16 @@ import javax.swing.JList;
 import javax.swing.BoxLayout;
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.util.ArrayList;
+
 import javax.swing.Box;
 import javax.swing.ListSelectionModel;
 
 public class PrincipalEmpleadoView extends JPanel {
+	private JList<String> listaLLegadas;
+	private JList<String> listaSalidas;
+	private JList<String> listaHabitaciones;
+	private JList<String> listaIncidencias;
 
 	/**
 	 * Create the panel.
@@ -24,7 +30,7 @@ public class PrincipalEmpleadoView extends JPanel {
 		
 		//Creamos la lista de llegadas
 		JScrollPane scrollLLegadas = new JScrollPane();
-		JList<String> listaLLegadas = new JList<String>();		
+		listaLLegadas = new JList<String>();		
 		listaLLegadas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollLLegadas.setViewportView(listaLLegadas);
 		llegas_y_salidas.add(scrollLLegadas);
@@ -39,7 +45,7 @@ public class PrincipalEmpleadoView extends JPanel {
 		
 		//Creamos la lista de salidas
 		JScrollPane scrollSalidas = new JScrollPane();
-		JList<String> listaSalidas = new JList<String>();		
+		listaSalidas = new JList<String>();		
 		listaSalidas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollSalidas.setViewportView(listaSalidas);
 		llegas_y_salidas.add(scrollSalidas);
@@ -56,7 +62,7 @@ public class PrincipalEmpleadoView extends JPanel {
 		
 		//Creamos la lista de habitaciones
 		JScrollPane scrollHabitaciones = new JScrollPane();
-		JList<String> listaHabitaciones = new JList<String>();		
+		listaHabitaciones = new JList<String>();		
 		listaHabitaciones.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollHabitaciones.setViewportView(listaHabitaciones);
 		habitaciones_e_incidencias.add(scrollHabitaciones);
@@ -70,7 +76,7 @@ public class PrincipalEmpleadoView extends JPanel {
 
 		//Creamos la lista de incidencias
 		JScrollPane scrollIncidencias = new JScrollPane();
-		JList<String> listaIncidencias = new JList<String>();
+		listaIncidencias = new JList<String>();
 		listaIncidencias.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollIncidencias.setViewportView(listaIncidencias);
 		habitaciones_e_incidencias.add(scrollIncidencias);
@@ -99,6 +105,48 @@ public class PrincipalEmpleadoView extends JPanel {
 		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
 		add(horizontalStrut_1, BorderLayout.EAST);
 
+	}
+	
+	public void rellenaListaLlegadas(ArrayList<String> llegadas){
+		if(!llegadas.isEmpty()){
+			//Creamos un modelo por defecto
+			DefaultListModel listModel = new DefaultListModel();
+			//Añadimos los datos
+			listModel.addElement("Llegadas hoy:");
+			for(String llegada: llegadas){
+				listModel.addElement(llegada);
+			}
+			//Añadimos el modelo por defecto a la lista
+			listaLLegadas.setModel(listModel);
+		}
+	}
+	
+	public void rellenaListaSalidas(ArrayList<String> salidas){
+		if(!salidas.isEmpty()){
+			//Creamos un modelo por defecto
+			DefaultListModel listModel = new DefaultListModel();
+			//Añadimos los datos
+			listModel.addElement("Salidas hoy:");
+			for(String salida: salidas){
+				listModel.addElement(salida);
+			}
+			//Añadimos el modelo por defecto a la lista
+			listaSalidas.setModel(listModel);
+		}
+	}
+	
+	public void rellenaListaIncidencias(ArrayList<String> incidencias){
+		if(!incidencias.isEmpty()){
+			//Creamos un modelo por defecto
+			DefaultListModel listModel = new DefaultListModel();
+			//Añadimos los datos
+			listModel.addElement("Incidencias activas:");
+			for(String incidencia: incidencias){
+				listModel.addElement(incidencia);
+			}
+			//Añadimos el modelo por defecto a la lista
+			listaIncidencias.setModel(listModel);
+		}
 	}
 
 }

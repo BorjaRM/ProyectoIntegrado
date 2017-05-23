@@ -12,6 +12,8 @@ import javax.swing.JOptionPane;
 
 import modelo.BD;
 import modelo.dao.HotelDAO;
+import modelo.dao.IncidenciaDAO;
+import modelo.dao.ReservaDAO;
 import modelo.dao.UsuarioDAO;
 import modelo.vo.HotelVO;
 import vista.LoginView;
@@ -62,6 +64,7 @@ public class ControladorUsuarios extends Controlador{
 		//Puedo hacer un new Controlador aqui? no se como pasar el Controlador de otra forma
 		frame.creaPrincipalAdminView(new Controlador(),this); 
 		preparaDesplegableHotelView();
+		preparaListadoAdminView();
 		actualizaReferenciaHotelAdmin();
 		frame.muestraPrincipalAdminView();
 		creaControladoresVistas();
@@ -71,9 +74,21 @@ public class ControladorUsuarios extends Controlador{
 	public void preparaPrincipalEmpleadoView(){
 		super.creaMarco();
 		frame.creaPrincipalEmpleadoView();
+		preparaListadosEmpleadoView();
 		frame.muestraPrincipalEmpleadoView();
 		creaControladoresVistas();
 		frame.setVisible(true);
+	}
+	
+	public void preparaListadosEmpleadoView(){
+		Controlador.frame.getPev().rellenaListaLlegadas(new ReservaDAO().getLLegadasHoy(refHotel));
+		Controlador.frame.getPev().rellenaListaSalidas(new ReservaDAO().getSalidasHoy(refHotel));
+		Controlador.frame.getPev().rellenaListaIncidencias(new IncidenciaDAO().getIncidenciaActivas(refHotel));
+	}
+	
+	//MODIFICAR PARA QUE SE ACTUALICE CUANDO SE SELECCIONE OTRO HOTEL
+	public void preparaListadoAdminView(){
+		Controlador.frame.getPav().rellenaListaIncidencias(new IncidenciaDAO().getIncidenciaActivas(refHotel));
 	}
 	
 	public void preparaNuevoHotelView(){

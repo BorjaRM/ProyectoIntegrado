@@ -148,18 +148,22 @@ public class ControladorEstancias extends Controlador implements ListSelectionLi
 	}
 	
 	public void eliminarEstancia(){
-		int eleccion = JOptionPane.showConfirmDialog(null, "Confirma que deseas eliminar esta estancia", "Borrar registro", JOptionPane.YES_NO_OPTION);
-		if(eleccion == JOptionPane.YES_OPTION) {
-			if(tipoEstanciaSeleccionada == TipoEstancia.HABITACION){
-				JOptionPane.showMessageDialog(null, estanciaSeleccionada.getNombre()+" eliminada");
-				consultasEstancia.eliminarEstancia(this.estanciaSeleccionada);
-			}else if(tipoEstanciaSeleccionada == TipoEstancia.USO_COMUN){
-				JOptionPane.showMessageDialog(null, estanciaSeleccionada.getNombre()+" eliminada");
-				consultasEstancia.eliminarEstancia(this.estanciaSeleccionada);
+		if(this.estanciaSeleccionada != null){
+			int eleccion = JOptionPane.showConfirmDialog(null, "Confirma que deseas eliminar esta estancia", "Borrar registro", JOptionPane.YES_NO_OPTION);
+			if(eleccion == JOptionPane.YES_OPTION) {
+				if(tipoEstanciaSeleccionada == TipoEstancia.HABITACION){
+					JOptionPane.showMessageDialog(null, estanciaSeleccionada.getNombre()+" eliminada");
+					consultasEstancia.eliminarEstancia(this.estanciaSeleccionada);
+				}else if(tipoEstanciaSeleccionada == TipoEstancia.USO_COMUN){
+					JOptionPane.showMessageDialog(null, estanciaSeleccionada.getNombre()+" eliminada");
+					consultasEstancia.eliminarEstancia(this.estanciaSeleccionada);
+				}
+				preparaEstanciasView();
+			}else{
+				JOptionPane.showMessageDialog(null, "No se ha eliminado ningun registro");
 			}
-			preparaEstanciasView();
 		}else{
-			JOptionPane.showMessageDialog(null, "No se ha eliminado ningun registro");
+			JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun registro");
 		}
 	}
 	
