@@ -29,6 +29,7 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 	private JButton btnCancelar;
 	private JComboBox listaClientes;
 	private JComboBox listaHabitaciones;
+	private JComboBox listaPension;
 	private ClienteVO clv;
 	
 	/**
@@ -175,6 +176,14 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 
 	public void setComboBoxHabitaciones(JComboBox comboBoxHabitaciones) {
 		this.listaHabitaciones = comboBoxHabitaciones;
+	}
+	
+	public JComboBox getComboBoxPensiones() {
+		return listaPension;
+	}
+
+	public void setComboBoxPensiones(JComboBox comboBoxPensiones) {
+		this.listaHabitaciones = comboBoxPensiones;
 	}
 
 }
