@@ -95,11 +95,7 @@ public class EmpleadoDAO {
 					+ empleados.getApellido1() + "', '"+ empleados.getApellido2() + "', '"
 					+ empleados.getIdentificacion() + "', '" + empleados.getTelefono() + "', '"
 					+ empleados.getSalario() + "', '" + empleados.getSeguridad_social() + "','"
-<<<<<<< HEAD
-					+ empleados.getFecha_alta() + "', '" + empleados.getLugar_trabajo() + "')");
-=======
 					+ reportDate+ "', '" + empleados.getLugar_trabajo() + "')");
->>>>>>> a32e27046c91ac7d7489592af49f74f956bb922e
 
 		} catch (SQLException e) {
 			System.err.println("Error insertando empleado" + e);

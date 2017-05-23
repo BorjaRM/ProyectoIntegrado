@@ -101,5 +101,62 @@ public class ModificarClienteView extends JPanel implements IControladorClientes
 		this.btnModificar.addActionListener(controlador);
 		this.btnCancelar.addActionListener(controlador);
 	}
+
+	public JTextField getTxt_Nombre() {
+		return txt_Nombre;
+	}
+
+	public void setTxt_Nombre(JTextField txt_Nombre) {
+		this.txt_Nombre = txt_Nombre;
+	}
+
+	public JTextField getTxt_Apellidos() {
+		return txt_Apellidos;
+	}
+
+	public void setTxt_Apellidos(JTextField txt_Apellidos) {
+		this.txt_Apellidos = txt_Apellidos;
+	}
+
+	public JTextField getTxt_Identificacion() {
+		return txt_Identificacion;
+	}
+
+	public void setTxt_Identificacion(JTextField txt_Identificacion) {
+		this.txt_Identificacion = txt_Identificacion;
+	}
+
+	public JTextField getTxt_FechaNacimiento() {
+		return txt_FechaNacimiento;
+	}
+
+	public void setTxt_FechaNacimiento(JTextField txt_FechaNacimiento) {
+		this.txt_FechaNacimiento = txt_FechaNacimiento;
+	}
+
+	public JTextField getTxt_Telefono() {
+		return txt_Telefono;
+	}
+
+	public void setTxt_Telefono(JTextField txt_Telefono) {
+		this.txt_Telefono = txt_Telefono;
+	}
+
+	public JTextField getTxt_Email() {
+		return txt_Email;
+	}
+
+	public void setTxt_Email(JTextField txt_Email) {
+		this.txt_Email = txt_Email;
+	}
+
+	public JTextField getTxt_Nacionalidad() {
+		return txt_Nacionalidad;
+	}
+
+	public void setTxt_Nacionalidad(JTextField txt_Nacionalidad) {
+		this.txt_Nacionalidad = txt_Nacionalidad;
+	}
+	
 }
 

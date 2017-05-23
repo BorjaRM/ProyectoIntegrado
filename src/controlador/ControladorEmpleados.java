@@ -40,11 +40,7 @@ public class ControladorEmpleados extends Controlador{
 			case "Ver empleados": preparaEmpleadosView(); break;
 			case "Nuevo empleado": preparaNuevoEmpleadoView(); break;
 			case "Modificar Empleado": preparaModificaEmpleadoView(); break;
-<<<<<<< HEAD
-			case "Eliminar Empleado": /* **************************************************************************** */ break;
-=======
 			case "Eliminar Empleado": eliminaEmpleado();break;
->>>>>>> a32e27046c91ac7d7489592af49f74f956bb922e
 			case "Enviar": insertarEmpleado();
 						   preparaEmpleadosView();	break;
 			case "Modificar": /* **************************************************************************** */ break;
@@ -56,22 +52,14 @@ public class ControladorEmpleados extends Controlador{
 	private void insertarEmpleado() {
 		EmpleadoDAO modeloEmpleado = new EmpleadoDAO(modelo, refHotel);
 		//UsuarioDAO modeloUsuario = new UsuarioDAO(modelo);
-<<<<<<< HEAD
-		if(nev.getTxtUsuario().getText().isEmpty() || nev.getPasswordField().getText().isEmpty() || nev.getTxtNombre().getText().isEmpty() || nev.getTxtApellido1().getText().isEmpty() || nev.getTxtApellido2().getText().isEmpty() || nev.getTxtIdentificacion().getText().isEmpty() || nev.getTxtTelefono().getText().isEmpty() || nev.getTxtSalario().getText().isEmpty() || nev.getTxtSeguridadSocial().getText().isEmpty() || nev.getTxtFechaAlta().getText().isEmpty() || nev.getTxtLugarTrabajo().getText().isEmpty()){
-=======
 		if(nev.getTxtUsuario().getText().isEmpty() || nev.getPasswordField().getText().isEmpty() || nev.getTxtNombre().getText().isEmpty() || nev.getTxtApellido1().getText().isEmpty() || nev.getTxtApellido2().getText().isEmpty() || nev.getTxtIdentificacion().getText().isEmpty() || nev.getTxtTelefono().getText().isEmpty() || nev.getTxtSalario().getText().isEmpty() || nev.getTxtSeguridadSocial().getText().isEmpty() /*|| nev.getTxtFechaAlta().getText().isEmpty() */ || nev.getTxtLugarTrabajo().getText().isEmpty()){
->>>>>>> a32e27046c91ac7d7489592af49f74f956bb922e
 			JOptionPane.showMessageDialog(null, "Faltan datos por rellenar, Error");	
 		}else{	
 			String salarioTxt = nev.getTxtSalario().getText();
 			int salarioInt = Integer.parseInt(salarioTxt);
 			String hotelTxt = nev.getTxtLugarTrabajo().getText();
 			int hotelInt = Integer.parseInt(hotelTxt);
-<<<<<<< HEAD
-			EmpleadoVO em = new EmpleadoVO(0,nev.getTxtNombre().getText(),nev.getTxtApellido1().getText(),nev.getTxtApellido2().getText(),nev.getTxtIdentificacion().getText(),nev.getTxtTelefono().getText(),salarioInt,nev.getTxtSeguridadSocial().getText(),nev.getTxtFechaAlta().getText(),hotelInt);
-=======
 			EmpleadoVO em = new EmpleadoVO(0,nev.getTxtNombre().getText(),nev.getTxtApellido1().getText(),nev.getTxtApellido2().getText(),nev.getTxtIdentificacion().getText(),nev.getTxtTelefono().getText(),salarioInt,nev.getTxtSeguridadSocial().getText(),"",hotelInt);
->>>>>>> a32e27046c91ac7d7489592af49f74f956bb922e
 			UsuarioVO us = new UsuarioVO(nev.getTxtUsuario().getText(),nev.getPasswordField().getText(),em.getCodigo());
 			modeloEmpleado.insertarEmpleado(em,us);
 		}
