@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
 import java.awt.Insets;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -45,6 +46,8 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 		add(panel, BorderLayout.SOUTH);
+		
+		SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
 		
 		btnEnviar = new JButton("Enviar");
 		panel.add(btnEnviar);
@@ -113,6 +116,7 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		gbc_dateChooserLlegada.gridy = 3;
 		panel_1.add(dateChooserLlegada, gbc_dateChooserLlegada);
 		dateChooserLlegada.setMinSelectableDate(new Date());
+		dateChooserLlegada.setDateFormatString("yyyy-MM-dd");
 		
 		
 		JLabel lblSalida = new JLabel("Salida");
@@ -131,7 +135,7 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		gbc_dateChooserSalida.gridy = 4;
 		panel_1.add(dateChooserSalida, gbc_dateChooserSalida);
 		dateChooserSalida.setMinSelectableDate(new Date());
-		
+		dateChooserSalida.setDateFormatString("yyyy-MM-dd");
 		
 		JLabel lblPension = new JLabel("Pensi\u00F3n");
 		GridBagConstraints gbc_lblPension = new GridBagConstraints();
