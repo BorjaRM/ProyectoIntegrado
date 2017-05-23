@@ -93,9 +93,9 @@ public class ClienteDAO {
 		String codigoString = clientes.get(posicion).getCodigo();
 		try {
 			Statement stmt = bd.getConexion().createStatement();
-			stmt.executeUpdate("UPDATE cliente SET nombre='"+cliente.getNombre()+"', apelllidos='"+cliente.getApellidos()+"', identificacion='"+cliente.getIdentificacion()+"', fecha_nacimiento='"+cliente.getTelefono()+"', nacionalidad='"+cliente.getNacionalidad()+"', email='"+cliente.getEmail()+"', fecha_alta='"+cliente.getFecha_alta()+"' WHERE codigo='"+codigoString+"';");
+			stmt.executeUpdate("UPDATE cliente SET nombre='"+cliente.getNombre()+"', apellidos='"+cliente.getApellidos()+"', identificacion='"+cliente.getIdentificacion()+"', fecha_nacimiento='"+cliente.getFecha_nacimiento()+"', nacionalidad='"+cliente.getNacionalidad()+"', email='"+cliente.getEmail()+"', telefono='"+cliente.getTelefono()+"' WHERE codigo='"+codigoString+"';");
 		} catch (Exception e) {
-			System.err.println("Error modificando cliente.");
+			System.err.println("Error modificando cliente."+e);
 		}
 	}
 }
