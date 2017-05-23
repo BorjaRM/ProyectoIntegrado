@@ -1,20 +1,19 @@
 package controlador;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
-import modelo.BD;
 import modelo.dao.ClienteDAO;
+import modelo.dao.HabitacionDAO;
 import modelo.dao.ReservaDAO;
 import modelo.vo.ClienteVO;
+import modelo.vo.HabitacionVO;
 import modelo.vo.ReservaVO;
-import vista.Marco;
 import vista.NuevaReservaView;
 import vista.ReservasView;
 
 public class ControladorReservas extends Controlador{
+	private static final String refEmpleadoS = null;
 	private NuevaReservaView nrv;
 	private ReservasView rv;
 	private ReservaDAO rd;
@@ -37,11 +36,12 @@ public class ControladorReservas extends Controlador{
 	
 	private void insertaReserva() {
 		ReservaDAO modeloReserva = new ReservaDAO();
+		String refEmpeladoS = String.valueOf(refEmpleado);
 		ReservaVO reserva = new ReservaVO("",nrv.getListaClientes().getSelectedItem().toString(),
 				nrv.getListaHabitaciones().getSelectedItem().toString(),
 				nrv.getDateChooserLlegada().getDate().toString(),
 				nrv.getDateChooserSalida().getDate().toString(),
-				nrv.getListaPension().getSelectedItem().toString(),"");
+				nrv.getListaPension().getSelectedItem().toString(),refEmpleadoS);
 		
 		modeloReserva.nuevaReserva(reserva);
 		}
@@ -55,7 +55,21 @@ public class ControladorReservas extends Controlador{
 	public void preparaNuevaReservaView(){
 		frame.creaNuevaReservaView(this);
 		this.nrv=frame.getNrv();
+		llenaComboBoxClientes();
+		llenaComboBoxHabitaciones();
 		frame.muestraNuevaReservaView();
+	}
+	
+	public void llenaComboBoxClientes(){
+		ClienteDAO modeloCliente = new ClienteDAO(refHotel);
+		ArrayList <ClienteVO> clientes = modeloCliente.rellenaYConsigueArrayClientes();
+		nrv.llenaComboBoxClientes(clientes);
+	}
+	
+	public void llenaComboBoxHabitaciones(){
+		HabitacionDAO modeloHabitacion = new HabitacionDAO();
+		ArrayList <HabitacionVO> habitaciones = modeloHabitacion.getHabitaciones(refHotel);
+		nrv.llenaComboBoxHabitaciones(habitaciones);
 	}
 	
 	public void eliminarReserva(){

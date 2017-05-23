@@ -33,6 +33,7 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 	private JDateChooser dateChooserLlegada;
 	private JDateChooser dateChooserSalida;
 	private ClienteVO clv;
+
 	
 	/**
 	 * Create the panel.
@@ -68,12 +69,8 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		panel_1.add(lblCliente, gbc_lblCliente);
 		
 		
-		JComboBox listaClientes = new JComboBox();
-		ClienteDAO c = new ClienteDAO(0);
-		ArrayList<ClienteVO> clientes = c.rellenaYConsigueArrayClientes();
-		for(int i=0;i<clientes.size();i++){
-			listaClientes.addItem(clientes.get(i).getNombre()+" "+clientes.get(i).getApellidos() );
-		}
+		listaClientes = new JComboBox();
+		
 		GridBagConstraints gbc_listaClientes = new GridBagConstraints();
 		gbc_listaClientes.gridwidth = 3;
 		gbc_listaClientes.insets = new Insets(0, 0, 5, 5);
@@ -89,12 +86,9 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		gbc_lblHabitacion.gridy = 2;
 		panel_1.add(lblHabitacion, gbc_lblHabitacion);
 		
-		JComboBox listaHabitaciones = new JComboBox();
+		listaHabitaciones = new JComboBox();
 		HabitacionDAO h = new HabitacionDAO();
-		ArrayList<HabitacionVO> habitaciones = h.getHabitaciones(1);	
-		for(int i=0;i<habitaciones.size();i++){
-			listaHabitaciones.addItem(habitaciones.get(i).getNombre());
-		}
+		
 		GridBagConstraints gbc_listaHabitaciones = new GridBagConstraints();
 		gbc_listaHabitaciones.gridwidth = 3;
 		gbc_listaHabitaciones.insets = new Insets(0, 0, 5, 5);
@@ -110,7 +104,7 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		gbc_lblLlegada.gridy = 3;
 		panel_1.add(lblLlegada, gbc_lblLlegada);
 		
-		JDateChooser dateChooserLlegada = new JDateChooser();
+		dateChooserLlegada = new JDateChooser();
 		GridBagConstraints gbc_dateChooserLlegada = new GridBagConstraints();
 		gbc_dateChooserLlegada.gridwidth = 3;
 		gbc_dateChooserLlegada.insets = new Insets(0, 0, 5, 5);
@@ -128,7 +122,7 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		gbc_lblSalida.gridy = 4;
 		panel_1.add(lblSalida, gbc_lblSalida);
 		
-		JDateChooser dateChooserSalida = new JDateChooser();
+		dateChooserSalida = new JDateChooser();
 		GridBagConstraints gbc_dateChooserSalida = new GridBagConstraints();
 		gbc_dateChooserSalida.gridwidth = 3;
 		gbc_dateChooserSalida.insets = new Insets(0, 0, 5, 5);
@@ -147,7 +141,7 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		panel_1.add(lblPension, gbc_lblPension);
 		
 		String[] pension = {"Alojamiento","Desayuno","Media","Completa"};
-		JComboBox listaPension = new JComboBox(pension);
+		listaPension = new JComboBox(pension);
 		GridBagConstraints gbc_listaPension = new GridBagConstraints();
 		gbc_listaPension.gridwidth = 3;
 		gbc_listaPension.insets = new Insets(0, 0, 5, 5);
@@ -204,4 +198,16 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		this.dateChooserSalida = dateChooserSalida;
 	}
 
+	public void llenaComboBoxClientes(ArrayList<ClienteVO> clientes) {
+		for(int i=0;i<clientes.size();i++){
+			listaClientes.addItem(clientes.get(i).getNombre()+" "+clientes.get(i).getApellidos());
+		}
+		
+	}
+
+	public void llenaComboBoxHabitaciones(ArrayList<HabitacionVO> habitaciones) {
+		for(int i=0;i<habitaciones.size();i++){
+			listaHabitaciones.addItem(habitaciones.get(i).getNombre());
+		}
+	}
 }

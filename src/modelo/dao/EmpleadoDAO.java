@@ -3,8 +3,11 @@ package modelo.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import modelo.BD;
 import modelo.vo.EmpleadoVO;
@@ -77,13 +80,26 @@ public class EmpleadoDAO {
 	// Metodo que recoja la informacion de un empleado y haga un INSERT sobre la BBDD
 
 	public void insertarEmpleado(EmpleadoVO empleados, UsuarioVO usuarios) {
+		// Create an instance of SimpleDateFormat used for formatting 
+				// the string representation of date (month/day/year)
+				DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+				// Get the date today using Calendar object.
+				java.util.Date today =Calendar.getInstance().getTime();        
+				// Using DateFormat format method we can create a string 
+				// representation of a date with the defined format.
+				String reportDate = df.format(today);
 		try {
 			Statement stmt = bd.getConexion().createStatement();
 			stmt.executeUpdate("INSERT INTO Empleado VALUES(null, '"+empleados.getNombre() + "', '"
 					+ empleados.getApellido1() + "', '"+ empleados.getApellido2() + "', '"
 					+ empleados.getIdentificacion() + "', '" + empleados.getTelefono() + "', '"
 					+ empleados.getSalario() + "', '" + empleados.getSeguridad_social() + "','"
+<<<<<<< HEAD
 					+ empleados.getFecha_alta() + "', '" + empleados.getLugar_trabajo() + "')");
+=======
+					+ reportDate+ "', '" + empleados.getLugar_trabajo() + "')");
+>>>>>>> a32e27046c91ac7d7489592af49f74f956bb922e
 
 		} catch (SQLException e) {
 			System.err.println("Error insertando empleado" + e);
@@ -114,13 +130,16 @@ public class EmpleadoDAO {
 
 		try {
 			Statement stmt = bd.getConexion().createStatement();
-			stmt.executeUpdate("DELETE FROM Empleado WHERE codigo= '"+codigo+"';");
 			stmt.executeUpdate("DELETE FROM Usuario WHERE cod_empleado= '"+codigo+"';");
-			
+			stmt.executeUpdate("DELETE FROM Empleado WHERE codigo= '"+codigo+"';");
 
+
+			
 		} catch (SQLException e) {
-			System.err.println("Error eliminando empleado");
+			System.err.println("Error eliminando empleado"+e);
 		}
+		
+
 
 	}
 	

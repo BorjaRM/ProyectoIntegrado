@@ -18,7 +18,7 @@ public class ClienteDAO {
 	ArrayList <ClienteVO> clientes;
 	int referenciaHotel;
 	
-	public ClienteDAO (int refernciaHotel){
+	public ClienteDAO (int referenciaHotel){
 		this.bd = BD.getSingleDBInstance();;
 		this.referenciaHotel = referenciaHotel;
 	}
@@ -52,6 +52,7 @@ public class ClienteDAO {
 	}
 	
 	public void insertaCliente(ClienteVO cliente){
+		
 		// Create an instance of SimpleDateFormat used for formatting 
 		// the string representation of date (month/day/year)
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
