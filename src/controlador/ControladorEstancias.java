@@ -28,8 +28,8 @@ public class ControladorEstancias extends Controlador implements ListSelectionLi
 
 	public ControladorEstancias(){
 		Controlador.frame.estableceControlador(this);
-		consultasHabitacion = new HabitacionDAO(Controlador.modelo);
-		consultasEstancia = new EstanciaDAO(Controlador.modelo);
+		consultasHabitacion = new HabitacionDAO();
+		consultasEstancia = new EstanciaDAO();
 	}
 	
 	@Override

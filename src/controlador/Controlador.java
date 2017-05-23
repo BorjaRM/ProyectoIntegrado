@@ -20,11 +20,12 @@ public class Controlador implements ActionListener, ItemListener{
 	protected static ResourceBundle bundle;
 	
 	public Controlador(){
-		modelo = BD.getSingleDBInstance();
+		this.modelo = BD.getSingleDBInstance();
+		this.bundle = ResourceBundle.getBundle("idiomas/es_ES");
 	}
 	
 	public void creaMarco(){
-		frame = new Marco(this, bundle);
+		frame = new Marco(bundle);
 	}
 	
 	public void creaControladoresVistas(){
@@ -57,13 +58,12 @@ public class Controlador implements ActionListener, ItemListener{
 			switch ((String)e.getItem()){
 				case "Español": bundle = ResourceBundle.getBundle("idiomas/es_ES"); break;
 				case "English": bundle = ResourceBundle.getBundle("idiomas/en_UK"); break;
-				default: bundle = ResourceBundle.getBundle("idiomas/es_ES"); break;
 			}
 		}
 	}
 	
 	public void estableceReferenciaHotelEmpleado(String elEmpleado){
-		UsuarioDAO consultasUsuario = new UsuarioDAO(modelo);
+		UsuarioDAO consultasUsuario = new UsuarioDAO();
 		refHotel=consultasUsuario.getReferenciaHotel(consultasUsuario.getReferenciaEmpleado(elEmpleado));
 		System.out.println("referencia hotel:" +refHotel);
 	}

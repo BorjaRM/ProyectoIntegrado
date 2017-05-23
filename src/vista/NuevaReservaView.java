@@ -66,7 +66,7 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		
 		
 		JComboBox listaClientes = new JComboBox();
-		ClienteDAO c = new ClienteDAO(BD.getSingleDBInstance(),0);
+		ClienteDAO c = new ClienteDAO(0);
 		ArrayList<ClienteVO> clientes = c.rellenaYConsigueArrayClientes();
 		for(int i=0;i<clientes.size();i++){
 			listaClientes.addItem(clientes.get(i).getNombre()+" "+clientes.get(i).getApellidos() );
@@ -87,7 +87,7 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		panel_1.add(lblHabitacion, gbc_lblHabitacion);
 		
 		JComboBox listaHabitaciones = new JComboBox();
-		HabitacionDAO h = new HabitacionDAO(BD.getSingleDBInstance());
+		HabitacionDAO h = new HabitacionDAO();
 		ArrayList<HabitacionVO> habitaciones = h.getHabitaciones(1);	
 		for(int i=0;i<habitaciones.size();i++){
 			listaHabitaciones.addItem(habitaciones.get(i).getNombre());

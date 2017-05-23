@@ -14,8 +14,8 @@ import modelo.vo.HotelVO;
 public class HotelDAO {
 	private BD modelo;
 	
-	public HotelDAO(BD modelo){
-		this.modelo=modelo;
+	public HotelDAO(){
+		this.modelo=BD.getSingleDBInstance();;
 	}
 
 	public void insertaHotel(HotelVO hotel){

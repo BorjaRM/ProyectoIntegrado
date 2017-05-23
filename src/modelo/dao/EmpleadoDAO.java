@@ -15,8 +15,8 @@ public class EmpleadoDAO {
 	ArrayList<EmpleadoVO> empleados;
 	ArrayList<UsuarioVO> usuarios;
 	int numero_hotel;
-	public EmpleadoDAO(BD bd, int numero_hotel) {
-		this.bd = bd;
+	public EmpleadoDAO(int numero_hotel) {
+		this.bd = BD.getSingleDBInstance();;
 		this.numero_hotel = numero_hotel;
 		
 	}

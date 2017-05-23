@@ -13,8 +13,8 @@ import modelo.vo.EstanciaVO;
 public class EstanciaDAO {
 	private BD modelo;
 	
-	public EstanciaDAO(BD modelo){
-		this.modelo=modelo;
+	public EstanciaDAO(){
+		this.modelo=BD.getSingleDBInstance();
 	}
 	
 	public ArrayList<EstanciaVO> getEstanciasUsoComun(int refHotel){

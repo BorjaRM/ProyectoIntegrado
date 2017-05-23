@@ -40,14 +40,14 @@ public class ControladorClientes extends Controlador{
 	
 	private void eliminaCliente(){
 		int posicionParaEliminar = cv.getTable().getSelectedRow();
-		ClienteDAO modeloCliente = new ClienteDAO(modelo, refHotel);
+		ClienteDAO modeloCliente = new ClienteDAO(refHotel);
 		System.out.println(posicionParaEliminar);
 		modeloCliente.eliminarCliente(posicionParaEliminar);
 		rellenaTabla();
 	}
 	
 	private void insertaCliente() {
-		ClienteDAO modeloCliente = new ClienteDAO(modelo, refHotel);
+		ClienteDAO modeloCliente = new ClienteDAO(refHotel);
 		ClienteVO cliente = new ClienteVO("",ncv.getTxt_Nombre().getText(),ncv.getTxt_Apellidos().getText(),ncv.getTxt_Identificacion().getText(),ncv.getTxt_FechaNacimiento().getText(),ncv.getTxt_Telefono().getText(),ncv.getTxt_Nacionalidad().getText(),ncv.getTxt_Email().getText(),"");
 
 		if(ncv.getTxt_Apellidos().getText().isEmpty() || ncv.getTxt_Nombre().getText().isEmpty() || ncv.getTxt_Email().getText().isEmpty() || ncv.getTxt_FechaNacimiento().getText().isEmpty() || ncv.getTxt_Identificacion().getText().isEmpty() || ncv.getTxt_Telefono().getText().isEmpty() || ncv.getTxt_Nacionalidad().getText().isEmpty()){
@@ -67,7 +67,7 @@ public class ControladorClientes extends Controlador{
 	}
 	
 	public void rellenaTabla(){
-		ClienteDAO modeloCliente = new ClienteDAO(modelo, refHotel);
+		ClienteDAO modeloCliente = new ClienteDAO(refHotel);
 		ArrayList <ClienteVO> clientes = modeloCliente.rellenaYConsigueArrayClientes();
 		cv.rellenaListaClientes(clientes);
 	}

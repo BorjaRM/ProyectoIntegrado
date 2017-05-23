@@ -21,7 +21,7 @@ import javax.swing.Box;
 import javax.swing.JMenuItem;
 
 public class Marco extends JFrame{
-	private Controlador controlador;
+	private static ResourceBundle bundle;
 	private JPanel vistas;
 	private CardLayout cl;
 	//Referencias a las vistas
@@ -67,8 +67,8 @@ public class Marco extends JFrame{
 	 * Create the frame.
 	 * @param controlador 
 	 */
-	public Marco(Controlador controlador, ResourceBundle bundle) {
-		this.controlador=controlador;
+	public Marco(ResourceBundle bundle) {
+		Marco.bundle=bundle;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 500);
 		//Este panel contiene todas las vistas que se iran intercambiando
@@ -332,7 +332,7 @@ public class Marco extends JFrame{
 	}
 	
 	public void estableceControlador(ControladorUsuarios controlador){
-		//this.inicio.addMouseListener(controlador);		
+		this.inicio.addMouseListener(controlador);		
 	}
 	
 	public void estableceControlador(ControladorClientes controlador){

@@ -46,7 +46,7 @@ public class ControladorEmpleados extends Controlador{
 	public void preparaEmpleadosView(){
 		Controlador.frame.creaEmpleadosView(this);
 		this.ev=Controlador.frame.getEv();
-		EmpleadoDAO modeloEmpleado = new EmpleadoDAO(modelo, refHotel);
+		EmpleadoDAO modeloEmpleado = new EmpleadoDAO(refHotel);
 		ArrayList <EmpleadoVO> empleados = modeloEmpleado.rellenarYConseguirArrayEmpleados();
 		ev.rellenaListaEmpleados(empleados);
 		Controlador.frame.muestraEmpleadosView();

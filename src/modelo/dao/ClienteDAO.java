@@ -18,10 +18,9 @@ public class ClienteDAO {
 	ArrayList <ClienteVO> clientes;
 	int referenciaHotel;
 	
-	public ClienteDAO (BD bd, int refernciaHotel){
-		this.bd = bd;
+	public ClienteDAO (int refernciaHotel){
+		this.bd = BD.getSingleDBInstance();;
 		this.referenciaHotel = referenciaHotel;
-		
 	}
 	
 	public ArrayList <ClienteVO> rellenaYConsigueArrayClientes(){

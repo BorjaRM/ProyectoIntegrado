@@ -31,7 +31,6 @@ public class NuevoHotelView extends JPanel {
 	 */
 	public NuevoHotelView() {
 		setLayout(new BorderLayout(0, 0));
-		
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.CENTER);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));

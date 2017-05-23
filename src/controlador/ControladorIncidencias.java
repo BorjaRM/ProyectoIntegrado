@@ -53,7 +53,7 @@ public class ControladorIncidencias extends Controlador{
 		frame.creaNuevaIncidenciaView(this);
 		this.niv=frame.getNiv();
 		frame.muestraNuevaIncidenciaView();
-		EstanciaDAO modeloEstancia = new EstanciaDAO(modelo);
+		EstanciaDAO modeloEstancia = new EstanciaDAO();
 		ArrayList <EstanciaVO> Estancias = modeloEstancia.getEstanciasUsoComun(refHotel);
 		niv.rellenaComboBox(Estancias);
 		
