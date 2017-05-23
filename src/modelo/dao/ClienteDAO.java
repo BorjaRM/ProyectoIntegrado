@@ -52,6 +52,7 @@ public class ClienteDAO {
 	}
 	
 	public void insertaCliente(ClienteVO cliente){
+		
 		// Create an instance of SimpleDateFormat used for formatting 
 		// the string representation of date (month/day/year)
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

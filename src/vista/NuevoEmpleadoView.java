@@ -250,15 +250,12 @@ setLayout(new BorderLayout(0, 0));
 		panel_2.add(panel10);
 		panel10.setLayout(new BoxLayout(panel10, BoxLayout.X_AXIS));
 		
-		JLabel lblFechaAlta = new JLabel("Fecha de alta:");
-		panel10.add(lblFechaAlta);
+		
 		
 		Component horizontalStrut_8 = Box.createHorizontalStrut(20);
 		panel10.add(horizontalStrut_8);
 		
-		TxtFechaAlta = new JTextField();
-		panel10.add(TxtFechaAlta);
-		TxtFechaAlta.setColumns(10);
+		
 		
 		Component verticalStrut_1 = Box.createVerticalStrut(10);
 		panel_2.add(verticalStrut_1);
