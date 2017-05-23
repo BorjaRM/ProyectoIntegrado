@@ -95,4 +95,14 @@ public class ReservasView extends JPanel implements IControladorReservas{
 		}
 		table.setModel(modeloTabla);	
 	}
+
+	public JTable getTable() {
+		return table;
+	}
+
+	public void setTable(JTable table) {
+		this.table = table;
+	}
+	
+	
 }

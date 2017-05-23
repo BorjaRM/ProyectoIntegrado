@@ -43,14 +43,30 @@ public class ReservaDAO {
 	}
 	
 	public void nuevaReserva(ReservaVO reserva){
+        try {
+            PreparedStatement st = bd.getConexion().prepareStatement("INSERT INTO reserva VALUES(null, ?, ?, ?, ?, ?, ?)");
+          st.setString(1, reserva.getInicio());
+          st.setString(2, reserva.getFin());
+          st.setString(3, reserva.getRegimen());
+          st.setString(4, reserva.getCod_cliente());
+          st.setString(5, reserva.getCod_usuario());
+          st.setString(6, reserva.getCod_habitacion());
+          st.executeUpdate();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+	
+	public void eliminarReserva(int posicion){
+		reservas = consultaReservas(bd.getSingleDBInstance());
+		String codigoString = reservas.get(posicion).getCodigo();
 		try {
-			Statement st = bd.getConexion().createStatement();
-			st.executeUpdate("INSERT INTO reserva VALUES(null,"+reserva.getInicio()+", "+reserva.getFin()
-			+", "+reserva.getRegimen()+", "+reserva.getCod_cliente()+", "+reserva.getCod_usuario()
-			+", "+reserva.getCod_habitacion()+");");
+			Statement stmt = bd.getConexion().createStatement();
+			stmt.executeUpdate("DELETE FROM reserva WHERE codigo ='"+codigoString+"'");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.err.println("Error al eliminar la reserva");
 		}
 	}
 	
