@@ -9,8 +9,8 @@ import modelo.vo.UsuarioVO;
 public class UsuarioDAO {
 	private BD modelo;
 	
-	public UsuarioDAO(BD modelo){
-		this.modelo=modelo;
+	public UsuarioDAO(){
+		this.modelo=BD.getSingleDBInstance();;
 	}
 	
 	public boolean compruebaUsuario(UsuarioVO usuario){

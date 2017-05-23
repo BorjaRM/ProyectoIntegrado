@@ -26,7 +26,6 @@ public class ModificarEmpleadoView extends JPanel implements IControladorEmplead
 	private JTextField txtApellido1;
 	private JButton btnEnviar;
 	private JButton btnCancelar;
-	private JPasswordField txtFechaAlta;
 	private JTextField txtLugarTrabajo;
 
 	/**
@@ -168,14 +167,12 @@ setLayout(new BorderLayout(0, 0));
 		panel_2.add(panel10);
 		panel10.setLayout(new BoxLayout(panel10, BoxLayout.X_AXIS));
 		
-		JLabel lblFechaAlta = new JLabel("Fecha de alta:");
-		panel10.add(lblFechaAlta);
+		
 		
 		Component horizontalStrut_8 = Box.createHorizontalStrut(20);
 		panel10.add(horizontalStrut_8);
 		
-		txtFechaAlta = new JPasswordField();
-		panel10.add(txtFechaAlta);
+		
 		
 		Component verticalStrut_1 = Box.createVerticalStrut(10);
 		panel_2.add(verticalStrut_1);
@@ -218,9 +215,78 @@ setLayout(new BorderLayout(0, 0));
 		
 		btnCancelar = new JButton("Cancelar");
 		botonera.add(btnCancelar);
+		
+
 
 	}
 	
+	public JTextField getTxtSeguridadSocial() {
+		return txtSeguridadSocial;
+	}
+
+	public void setTxtSeguridadSocial(JTextField txtSeguridadSocial) {
+		this.txtSeguridadSocial = txtSeguridadSocial;
+	}
+
+	public JTextField getTxtSalario() {
+		return txtSalario;
+	}
+
+	public void setTxtSalario(JTextField txtSalario) {
+		this.txtSalario = txtSalario;
+	}
+
+	public JTextField getTxtTelefono() {
+		return txtTelefono;
+	}
+
+	public void setTxtTelefono(JTextField txtTelefono) {
+		this.txtTelefono = txtTelefono;
+	}
+
+	public JTextField getTxtIdentificacion() {
+		return txtIdentificacion;
+	}
+
+	public void setTxtIdentificacion(JTextField txtIdentificacion) {
+		this.txtIdentificacion = txtIdentificacion;
+	}
+
+	public JTextField getTxtApellido2() {
+		return txtApellido2;
+	}
+
+	public void setTxtApellido2(JTextField txtApellido2) {
+		this.txtApellido2 = txtApellido2;
+	}
+
+	public JTextField getTxtNombre() {
+		return txtNombre;
+	}
+
+	public void setTxtNombre(JTextField txtNombre) {
+		this.txtNombre = txtNombre;
+	}
+
+	public JTextField getTxtApellido1() {
+		return txtApellido1;
+	}
+
+	public void setTxtApellido1(JTextField txtApellido1) {
+		this.txtApellido1 = txtApellido1;
+	}
+
+
+
+
+	public JTextField getTxtLugarTrabajo() {
+		return txtLugarTrabajo;
+	}
+
+	public void setTxtLugarTrabajo(JTextField txtLugarTrabajo) {
+		this.txtLugarTrabajo = txtLugarTrabajo;
+	}
+
 	@Override
 	public void estableceControlador(ControladorEmpleados controlador) {
 		this.btnEnviar.addActionListener(controlador);

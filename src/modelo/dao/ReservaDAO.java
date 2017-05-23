@@ -65,10 +65,8 @@ public class ReservaDAO {
 			PreparedStatement ps = this.bd.getConexion().prepareStatement(sql);
 			ps.setInt(1, refHotel);
 			ResultSet resultadoConsulta = ps.executeQuery();
-			//Transformamos el resultset en un arraylist
 			while(resultadoConsulta.next()){
 				llegada=resultadoConsulta.getString("llegada");
-				//Creamos un objeto Estancia y lo añadimos al Arraylist
 				llegadas.add(llegada);
 			}
 		}catch(SQLException e){
@@ -88,10 +86,8 @@ public class ReservaDAO {
 			PreparedStatement ps = this.bd.getConexion().prepareStatement(sql);
 			ps.setInt(1, refHotel);
 			ResultSet resultadoConsulta = ps.executeQuery();
-			//Transformamos el resultset en un arraylist
 			while(resultadoConsulta.next()){
 				salida=resultadoConsulta.getString("salida");
-				//Creamos un objeto Estancia y lo añadimos al Arraylist
 				salidas.add(salida);
 			}
 		}catch(SQLException e){

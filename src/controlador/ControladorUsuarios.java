@@ -19,13 +19,13 @@ import modelo.vo.HotelVO;
 import vista.LoginView;
 import vista.Marco;
 
-public class ControladorUsuarios extends Controlador{
+public class ControladorUsuarios extends Controlador implements MouseListener{
 	private LoginView vistaLogin;
 	private HotelDAO consultasHotel;
 	
 	public ControladorUsuarios(LoginView login){
 		vistaLogin=login;
-		consultasHotel = new HotelDAO(Controlador.modelo);
+		consultasHotel = new HotelDAO();
 	}
 
 	@Override
@@ -45,6 +45,7 @@ public class ControladorUsuarios extends Controlador{
 			if(compruebaLoginEmpleado()){
 				String elEmpleado=vistaLogin.recogeDatos().getNombre();
 				this.estableceReferenciaHotelEmpleado(elEmpleado);
+				this.estableceReferenciaCodigoEmpleado(elEmpleado);
 				preparaPrincipalEmpleadoView();
 			}else
 				JOptionPane.showMessageDialog(null, "Datos incorrectos, Acceso denegado");			
@@ -55,28 +56,30 @@ public class ControladorUsuarios extends Controlador{
 	}
 	
 	public boolean compruebaLoginEmpleado(){
-		UsuarioDAO consultasUsuario = new UsuarioDAO(Controlador.modelo);
+		UsuarioDAO consultasUsuario = new UsuarioDAO();
 		return consultasUsuario.compruebaUsuario(vistaLogin.recogeDatos());			
 	}
 	
 	public void preparaPrincipalAdminView(){
 		super.creaMarco();
+		frame.estableceControlador(this);
 		//Puedo hacer un new Controlador aqui? no se como pasar el Controlador de otra forma
 		frame.creaPrincipalAdminView(new Controlador(),this); 
 		preparaDesplegableHotelView();
 		preparaListadoAdminView();
 		actualizaReferenciaHotelAdmin();
 		frame.muestraPrincipalAdminView();
-		creaControladoresVistas();
+		super.creaControladoresVistas();
 		frame.setVisible(true);
 	}
 	
 	public void preparaPrincipalEmpleadoView(){
 		super.creaMarco();
+		frame.estableceControlador(this);
 		frame.creaPrincipalEmpleadoView();
 		preparaListadosEmpleadoView();
 		frame.muestraPrincipalEmpleadoView();
-		creaControladoresVistas();
+		super.creaControladoresVistas();
 		frame.setVisible(true);
 	}
 	
@@ -117,5 +120,25 @@ public class ControladorUsuarios extends Controlador{
 			preparaDesplegableHotelView();
 		}
 	}
+
+	@Override
+	public void mouseClicked(MouseEvent e){
+		if(esAdministrador)
+			frame.muestraPrincipalAdminView();
+		else
+			frame.muestraPrincipalEmpleadoView();
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {}
 	
 }

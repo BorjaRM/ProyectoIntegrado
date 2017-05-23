@@ -21,7 +21,7 @@ import javax.swing.Box;
 import javax.swing.JMenuItem;
 
 public class Marco extends JFrame{
-	private Controlador controlador;
+	private static ResourceBundle bundle;
 	private JPanel vistas;
 	private CardLayout cl;
 	//Referencias a las vistas
@@ -67,8 +67,8 @@ public class Marco extends JFrame{
 	 * Create the frame.
 	 * @param controlador 
 	 */
-	public Marco(Controlador controlador, ResourceBundle bundle) {
-		this.controlador=controlador;
+	public Marco(ResourceBundle bundle) {
+		Marco.bundle=bundle;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 500);
 		//Este panel contiene todas las vistas que se iran intercambiando
@@ -121,7 +121,7 @@ public class Marco extends JFrame{
 		
 		barraSuperior.add(incidencias);
 		item_verIncidencias = new JMenuItem(bundle.getString("jMenuIncidenciasVer"));
-		item_verIncidencias.setActionCommand("Ver incidencias");
+		item_verIncidencias.setActionCommand("Ver incidencias");					//************Cambiar lo de Issue por ticket**************
 		incidencias.add(item_verIncidencias);
 		item_nuevaIncidencia = new JMenuItem(bundle.getString("jMenuIncidenciasNew"));
 		item_nuevaIncidencia.setActionCommand("Nueva incidencia");
@@ -136,7 +136,7 @@ public class Marco extends JFrame{
 	
 	public void creaPrincipalAdminView(Controlador c1, ControladorUsuarios c2){
 		if(pav == null){
-			pav = new PrincipalAdminView();
+			pav = new PrincipalAdminView(bundle);
 			pav.estableceControlador(c1);
 			pav.estableceControlador(c2);
 			vistas.add(pav,PRINCIPAL_ADMIN);
@@ -162,7 +162,7 @@ public class Marco extends JFrame{
 	
 	public void creaHotelView(ControladorUsuarios controlador){
 		if(hv == null){
-			hv = new NuevoHotelView();
+			hv = new NuevoHotelView(bundle);
 			hv.estableceControlador(controlador);
 			vistas.add(hv,NUEVO_HOTEL);
 		}
@@ -174,7 +174,7 @@ public class Marco extends JFrame{
 	
 	public void creaClientesView(ControladorClientes controlador){
 		if(cv == null){
-			cv = new ClientesView();
+			cv = new ClientesView(bundle);
 			cv.estableceControlador(controlador);
 			vistas.add(cv,VER_CLIENTES);
 		}
@@ -186,7 +186,7 @@ public class Marco extends JFrame{
 	
 	public void creaNuevoClienteView(ControladorClientes controlador){
 		if(ncv == null){
-			ncv = new NuevoClienteView();
+			ncv = new NuevoClienteView(bundle);
 			ncv.estableceControlador(controlador);
 			vistas.add(ncv,NUEVO_CLIENTE);
 		}
@@ -198,7 +198,7 @@ public class Marco extends JFrame{
 	
 	public void creaModificarClienteView(ControladorClientes controlador){
 		if(mcv == null){
-			mcv = new ModificarClienteView();
+			mcv = new ModificarClienteView(bundle);
 			mcv.estableceControlador(controlador);
 			vistas.add(mcv,MODIFICAR_CLIENTE);
 		}
@@ -332,7 +332,7 @@ public class Marco extends JFrame{
 	}
 	
 	public void estableceControlador(ControladorUsuarios controlador){
-		//this.inicio.addMouseListener(controlador);		
+		this.inicio.addMouseListener(controlador);		
 	}
 	
 	public void estableceControlador(ControladorClientes controlador){

@@ -18,7 +18,7 @@ public class ControladorClientes extends Controlador{
 	private ClientesView cv;
 	private NuevoClienteView ncv;
 	private ModificarClienteView mcv;
-
+	private int posicionSeleccionada;
 	
 	public ControladorClientes(){
 		frame.estableceControlador(this);
@@ -27,27 +27,33 @@ public class ControladorClientes extends Controlador{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.out.println(e.getActionCommand());
-		switch(e.getActionCommand().toLowerCase()){
-			case "ver clientes": preparaClientesView(); break;
-			case "nuevo cliente": preparaNuevoClienteView(); break;
-			case "editar cliente": preparaModificaClienteView(); break;
-			case "eliminar cliente": eliminaCliente(); break;
-			case "enviar": insertaCliente(); preparaClientesView(); break;
-			case "modificar": /* **************************************************************************** */ break;
-			case "cancelar": cancelar(); break;
+		switch(e.getActionCommand()){
+			case "Ver clientes": preparaClientesView(); break;
+			case "Nuevo cliente": preparaNuevoClienteView(); break;
+			case "Editar cliente": preparaModificaClienteView(); break;
+			case "Eliminar cliente": eliminaCliente(); break;
+			case "Enviar": insertaCliente();
+						   preparaClientesView(); break;
+			case "Modificar": modificaCliente();
+							  preparaClientesView(); break;
+			case "Cancelar": cancelar(); break;
 		}
 	}
 	
 	private void eliminaCliente(){
-		int posicionParaEliminar = cv.getTable().getSelectedRow();
-		ClienteDAO modeloCliente = new ClienteDAO(modelo, refHotel);
-		System.out.println(posicionParaEliminar);
-		modeloCliente.eliminarCliente(posicionParaEliminar);
+		posicionSeleccionada = cv.getTable().getSelectedRow();
+		if(posicionSeleccionada != -1){
+
+		ClienteDAO modeloCliente = new ClienteDAO(refHotel);
+		modeloCliente.eliminarCliente(posicionSeleccionada);
 		rellenaTabla();
+		}else{
+			JOptionPane.showMessageDialog(null, "ERROR, Primero Selecciona Un Cliente");
+		}
 	}
 	
 	private void insertaCliente() {
-		ClienteDAO modeloCliente = new ClienteDAO(modelo, refHotel);
+		ClienteDAO modeloCliente = new ClienteDAO(refHotel);
 		ClienteVO cliente = new ClienteVO("",ncv.getTxt_Nombre().getText(),ncv.getTxt_Apellidos().getText(),ncv.getTxt_Identificacion().getText(),ncv.getTxt_FechaNacimiento().getText(),ncv.getTxt_Telefono().getText(),ncv.getTxt_Nacionalidad().getText(),ncv.getTxt_Email().getText(),"");
 
 		if(ncv.getTxt_Apellidos().getText().isEmpty() || ncv.getTxt_Nombre().getText().isEmpty() || ncv.getTxt_Email().getText().isEmpty() || ncv.getTxt_FechaNacimiento().getText().isEmpty() || ncv.getTxt_Identificacion().getText().isEmpty() || ncv.getTxt_Telefono().getText().isEmpty() || ncv.getTxt_Nacionalidad().getText().isEmpty()){
@@ -55,6 +61,7 @@ public class ControladorClientes extends Controlador{
 		}else{			
 			modeloCliente.insertaCliente(cliente);
 		}
+		
 	}
 
 	public void preparaClientesView(){
@@ -67,7 +74,7 @@ public class ControladorClientes extends Controlador{
 	}
 	
 	public void rellenaTabla(){
-		ClienteDAO modeloCliente = new ClienteDAO(modelo, refHotel);
+		ClienteDAO modeloCliente = new ClienteDAO(refHotel);
 		ArrayList <ClienteVO> clientes = modeloCliente.rellenaYConsigueArrayClientes();
 		cv.rellenaListaClientes(clientes);
 	}
@@ -79,23 +86,48 @@ public class ControladorClientes extends Controlador{
 	}
 	
 	public void preparaModificaClienteView(){
-		//Falta a�adir que el usuario debe seleccionar a un cliente primero
-		frame.creaModificarClienteView(this);
-		this.mcv=frame.getMcv();
-		frame.muestraModificarClienteView();
+		posicionSeleccionada = cv.getTable().getSelectedRow();
+		if(posicionSeleccionada != -1){
+			frame.creaModificarClienteView(this);
+			this.mcv=frame.getMcv();
+			estableceValorCampos();
+			frame.muestraModificarClienteView();
+		}else{
+			JOptionPane.showMessageDialog(null, "ERROR, Pimero Selecciona Un Cliente");
+		}
 	}
 	
-	public void eliminarCliente(){
-		//Eliminar cliente seleccionado y volver a mostar clientesView
+	public void estableceValorCampos(){
+		ClienteDAO modeloCliente = new ClienteDAO(refHotel);
+		ArrayList <ClienteVO> clientes = modeloCliente.rellenaYConsigueArrayClientes();
+		mcv.getTxt_Apellidos().setText(clientes.get(posicionSeleccionada).getApellidos());
+		mcv.getTxt_Email().setText(clientes.get(posicionSeleccionada).getEmail());
+		mcv.getTxt_FechaNacimiento().setText(clientes.get(posicionSeleccionada).getFecha_nacimiento());
+		mcv.getTxt_Identificacion().setText(clientes.get(posicionSeleccionada).getIdentificacion());
+		mcv.getTxt_Nacionalidad().setText(clientes.get(posicionSeleccionada).getNacionalidad());
+		mcv.getTxt_Nombre().setText(clientes.get(posicionSeleccionada).getNombre());
+		mcv.getTxt_Telefono().setText(clientes.get(posicionSeleccionada).getTelefono());
+		
 	}
-	
-	public void insertarCliente(){
-		//Insertar cliente y volver a mostar clientesView
-	}
+	public void modificaCliente(){
 
-	public void modificarCliente(){
-		//Modificar cliente seleccionado y volver a mostar clientesView
+		ClienteDAO modeloCliente = new ClienteDAO(refHotel);
+		String apellidos =mcv.getTxt_Apellidos().getText();
+		String email =mcv.getTxt_Email().getText();
+		String fNacimiento =mcv.getTxt_FechaNacimiento().getText();
+		String nacionalidad =mcv.getTxt_Nacionalidad().getText();
+		String identificacion =mcv.getTxt_Identificacion().getText();
+		String nombre =mcv.getTxt_Nombre().getText();
+		String telefono =mcv.getTxt_Telefono().getText();
+		ClienteVO cliente = new ClienteVO("",nombre,apellidos,identificacion,fNacimiento,telefono,nacionalidad,email,"");
+		modeloCliente.modificarCliente(posicionSeleccionada, cliente);
+
+		
+		
+
+		
 	}
+	
 
 	public void cancelar(){
 		if(cv == null){

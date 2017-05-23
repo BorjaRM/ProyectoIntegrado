@@ -10,6 +10,7 @@ import modelo.vo.HotelVO;
 
 import javax.swing.BoxLayout;
 import java.awt.FlowLayout;
+import java.util.ResourceBundle;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
 import java.awt.Component;
@@ -29,14 +30,13 @@ public class NuevoHotelView extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public NuevoHotelView() {
+	public NuevoHotelView(ResourceBundle bundle) {
 		setLayout(new BorderLayout(0, 0));
-		
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.CENTER);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
-		JLabel lbl_nombre = new JLabel("Nombre:");
+		JLabel lbl_nombre = new JLabel(bundle.getString("jLblHotNombre"));
 		panel.add(lbl_nombre);
 		
 		text_nombre = new JTextField();
@@ -44,7 +44,7 @@ public class NuevoHotelView extends JPanel {
 		panel.add(text_nombre);
 		text_nombre.setColumns(10);
 		
-		JLabel lbl_telf = new JLabel("Telefono:");
+		JLabel lbl_telf = new JLabel(bundle.getString("jLblHotTelefono"));
 		panel.add(lbl_telf);
 		
 		text_telefono = new JTextField();
@@ -52,7 +52,7 @@ public class NuevoHotelView extends JPanel {
 		panel.add(text_telefono);
 		text_telefono.setColumns(10);
 		
-		JLabel lbl_calle = new JLabel("Calle:");
+		JLabel lbl_calle = new JLabel(bundle.getString("jLblHotCalle"));
 		panel.add(lbl_calle);
 		
 		text_calle = new JTextField();
@@ -60,7 +60,7 @@ public class NuevoHotelView extends JPanel {
 		panel.add(text_calle);
 		text_calle.setColumns(10);
 		
-		JLabel lblNewLabel_3 = new JLabel("Numero:");
+		JLabel lblNewLabel_3 = new JLabel(bundle.getString("jLblHotNumero"));
 		panel.add(lblNewLabel_3);
 		
 		text_numero = new JTextField();
@@ -68,7 +68,7 @@ public class NuevoHotelView extends JPanel {
 		panel.add(text_numero);
 		text_numero.setColumns(10);
 		
-		JLabel lblNewLabel_4 = new JLabel("CP:");
+		JLabel lblNewLabel_4 = new JLabel(bundle.getString("jLblHotCodPost"));
 		panel.add(lblNewLabel_4);
 		
 		text_cp = new JTextField();
@@ -76,7 +76,7 @@ public class NuevoHotelView extends JPanel {
 		panel.add(text_cp);
 		text_cp.setColumns(10);
 		
-		JLabel lblNewLabel_5 = new JLabel("Ciudad:");
+		JLabel lblNewLabel_5 = new JLabel(bundle.getString("jLblHotCiudad"));
 		panel.add(lblNewLabel_5);
 		
 		text_ciudad = new JTextField();
@@ -84,7 +84,7 @@ public class NuevoHotelView extends JPanel {
 		panel.add(text_ciudad);
 		text_ciudad.setColumns(10);
 		
-		JLabel lblNewLabel_6 = new JLabel("Pais:");
+		JLabel lblNewLabel_6 = new JLabel(bundle.getString("jLblHotPais"));
 		panel.add(lblNewLabel_6);
 		
 		text_pais = new JTextField();
@@ -100,10 +100,12 @@ public class NuevoHotelView extends JPanel {
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 		add(Botonera, BorderLayout.SOUTH);
 		
-		btnEnviar = new JButton("Enviar");
+		btnEnviar = new JButton(bundle.getString("btnEnviarHot"));
+		btnEnviar.setActionCommand("enviar");
 		Botonera.add(btnEnviar);
 		
-		btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton(bundle.getString("btnCancelarHot"));
+		btnCancelar.setActionCommand("cancelar");
 		Botonera.add(btnCancelar);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(20);

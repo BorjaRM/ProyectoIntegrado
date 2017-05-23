@@ -18,13 +18,15 @@ public class Controlador implements ActionListener, ItemListener{
 	protected static boolean esAdministrador;
 	protected static int refHotel;
 	protected static ResourceBundle bundle;
+	protected static int refEmpleado;
 	
 	public Controlador(){
-		modelo = BD.getSingleDBInstance();
+		this.modelo = BD.getSingleDBInstance();
+		this.bundle = ResourceBundle.getBundle("idiomas/es_ES");
 	}
 	
 	public void creaMarco(){
-		frame = new Marco(this, bundle);
+		frame = new Marco(bundle);
 	}
 	
 	public void creaControladoresVistas(){
@@ -55,15 +57,14 @@ public class Controlador implements ActionListener, ItemListener{
 		if(e.getStateChange() == 1){ 
 			System.out.println("Has cambiado idioma:" +e.getItem());			
 			switch ((String)e.getItem()){
-				case "Español": bundle = ResourceBundle.getBundle("idiomas/es_ES"); break;
+				case "Espaï¿½ol": bundle = ResourceBundle.getBundle("idiomas/es_ES"); break;
 				case "English": bundle = ResourceBundle.getBundle("idiomas/en_UK"); break;
-				default: bundle = ResourceBundle.getBundle("idiomas/es_ES"); break;
 			}
 		}
 	}
 	
 	public void estableceReferenciaHotelEmpleado(String elEmpleado){
-		UsuarioDAO consultasUsuario = new UsuarioDAO(modelo);
+		UsuarioDAO consultasUsuario = new UsuarioDAO();
 		refHotel=consultasUsuario.getReferenciaHotel(consultasUsuario.getReferenciaEmpleado(elEmpleado));
 		System.out.println("referencia hotel:" +refHotel);
 	}
@@ -73,6 +74,10 @@ public class Controlador implements ActionListener, ItemListener{
 		if(hotelSeleccionado != null)
 			Controlador.refHotel= hotelSeleccionado.getCodigo();
 		System.out.println("referencia hotel:" +refHotel);
+	}
+	public void estableceReferenciaCodigoEmpleado(String elEmpleado){
+		UsuarioDAO  consultasUsuario = new UsuarioDAO();
+		refEmpleado=consultasUsuario.getReferenciaEmpleado(elEmpleado);
 	}
 
 }

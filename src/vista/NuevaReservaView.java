@@ -6,8 +6,6 @@ import com.toedter.calendar.JDateChooser;
 
 import controlador.ControladorReservas;
 import interfaces.IControladorReservas;
-import modelo.BD;
-import modelo.dao.ClienteDAO;
 import modelo.dao.HabitacionDAO;
 import modelo.vo.ClienteVO;
 import modelo.vo.HabitacionVO;
@@ -21,6 +19,7 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
 import java.awt.Insets;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -30,7 +29,9 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 	private JComboBox listaClientes;
 	private JComboBox listaHabitaciones;
 	private JComboBox listaPension;
-	private ClienteVO clv;
+	private JDateChooser dateChooserLlegada;
+	private JDateChooser dateChooserSalida;
+
 	
 	/**
 	 * Create the panel.
@@ -42,6 +43,8 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 		add(panel, BorderLayout.SOUTH);
+		
+		SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
 		
 		btnEnviar = new JButton("Enviar");
 		panel.add(btnEnviar);
@@ -66,12 +69,8 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		panel_1.add(lblCliente, gbc_lblCliente);
 		
 		
-		JComboBox listaClientes = new JComboBox();
-		ClienteDAO c = new ClienteDAO(BD.getSingleDBInstance(),0);
-		ArrayList<ClienteVO> clientes = c.rellenaYConsigueArrayClientes();
-		for(int i=0;i<clientes.size();i++){
-			listaClientes.addItem(clientes.get(i).getNombre()+" "+clientes.get(i).getApellidos() );
-		}
+		listaClientes = new JComboBox();
+		
 		GridBagConstraints gbc_listaClientes = new GridBagConstraints();
 		gbc_listaClientes.gridwidth = 3;
 		gbc_listaClientes.insets = new Insets(0, 0, 5, 5);
@@ -87,12 +86,9 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		gbc_lblHabitacion.gridy = 2;
 		panel_1.add(lblHabitacion, gbc_lblHabitacion);
 		
-		JComboBox listaHabitaciones = new JComboBox();
-		HabitacionDAO h = new HabitacionDAO(BD.getSingleDBInstance());
-		ArrayList<HabitacionVO> habitaciones = h.getHabitaciones(1);	
-		for(int i=0;i<habitaciones.size();i++){
-			listaHabitaciones.addItem(habitaciones.get(i).getNombre());
-		}
+		listaHabitaciones = new JComboBox();
+		HabitacionDAO h = new HabitacionDAO();
+		
 		GridBagConstraints gbc_listaHabitaciones = new GridBagConstraints();
 		gbc_listaHabitaciones.gridwidth = 3;
 		gbc_listaHabitaciones.insets = new Insets(0, 0, 5, 5);
@@ -108,7 +104,7 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		gbc_lblLlegada.gridy = 3;
 		panel_1.add(lblLlegada, gbc_lblLlegada);
 		
-		JDateChooser dateChooserLlegada = new JDateChooser();
+		dateChooserLlegada = new JDateChooser();
 		GridBagConstraints gbc_dateChooserLlegada = new GridBagConstraints();
 		gbc_dateChooserLlegada.gridwidth = 3;
 		gbc_dateChooserLlegada.insets = new Insets(0, 0, 5, 5);
@@ -117,6 +113,7 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		gbc_dateChooserLlegada.gridy = 3;
 		panel_1.add(dateChooserLlegada, gbc_dateChooserLlegada);
 		dateChooserLlegada.setMinSelectableDate(new Date());
+		dateChooserLlegada.setDateFormatString("yyyy-MM-dd");
 		
 		
 		JLabel lblSalida = new JLabel("Salida");
@@ -126,7 +123,7 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		gbc_lblSalida.gridy = 4;
 		panel_1.add(lblSalida, gbc_lblSalida);
 		
-		JDateChooser dateChooserSalida = new JDateChooser();
+		dateChooserSalida = new JDateChooser();
 		GridBagConstraints gbc_dateChooserSalida = new GridBagConstraints();
 		gbc_dateChooserSalida.gridwidth = 3;
 		gbc_dateChooserSalida.insets = new Insets(0, 0, 5, 5);
@@ -135,7 +132,7 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		gbc_dateChooserSalida.gridy = 4;
 		panel_1.add(dateChooserSalida, gbc_dateChooserSalida);
 		dateChooserSalida.setMinSelectableDate(new Date());
-		
+		dateChooserSalida.setDateFormatString("yyyy-MM-dd");
 		
 		JLabel lblPension = new JLabel("Pensi\u00F3n");
 		GridBagConstraints gbc_lblPension = new GridBagConstraints();
@@ -145,7 +142,7 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		panel_1.add(lblPension, gbc_lblPension);
 		
 		String[] pension = {"Alojamiento","Desayuno","Media","Completa"};
-		JComboBox listaPension = new JComboBox(pension);
+		listaPension = new JComboBox(pension);
 		GridBagConstraints gbc_listaPension = new GridBagConstraints();
 		gbc_listaPension.gridwidth = 3;
 		gbc_listaPension.insets = new Insets(0, 0, 5, 5);
@@ -162,20 +159,28 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		this.btnCancelar.addActionListener(controlador);
 	}
 
-	public JComboBox getComboBoxClientes() {
+	public JComboBox getListaClientes() {
 		return listaClientes;
 	}
 
-	public void setComboBoxClientes(JComboBox comboBoxClientes) {
-		this.listaClientes = comboBoxClientes;
+	public void setListaClientes(JComboBox listaClientes) {
+		this.listaClientes = listaClientes;
 	}
-	
-	public JComboBox getComboBoxHabitaciones() {
+
+	public JComboBox getListaHabitaciones() {
 		return listaHabitaciones;
 	}
 
-	public void setComboBoxHabitaciones(JComboBox comboBoxHabitaciones) {
-		this.listaHabitaciones = comboBoxHabitaciones;
+	public void setListaHabitaciones(JComboBox listaHabitaciones) {
+		this.listaHabitaciones = listaHabitaciones;
+	}
+
+	public JComboBox getListaPension() {
+		return listaPension;
+	}
+
+	public void setListaPension(JComboBox listaPension) {
+		this.listaPension = listaPension;
 	}
 	
 	public JComboBox getComboBoxPensiones() {
@@ -186,4 +191,32 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		this.listaHabitaciones = comboBoxPensiones;
 	}
 
+	public JDateChooser getDateChooserLlegada() {
+		return dateChooserLlegada;
+	}
+
+	public void setDateChooserLlegada(JDateChooser dateChooserLlegada) {
+		this.dateChooserLlegada = dateChooserLlegada;
+	}
+
+	public JDateChooser getDateChooserSalida() {
+		return dateChooserSalida;
+	}
+
+	public void setDateChooserSalida(JDateChooser dateChooserSalida) {
+		this.dateChooserSalida = dateChooserSalida;
+	}
+
+	public void llenaComboBoxClientes(ArrayList<ClienteVO> clientes) {
+		for(int i=0;i<clientes.size();i++){
+			listaClientes.addItem(clientes.get(i).getNombre()+" "+clientes.get(i).getApellidos());
+		}
+		
+	}
+
+	public void llenaComboBoxHabitaciones(ArrayList<HabitacionVO> habitaciones) {
+		for(int i=0;i<habitaciones.size();i++){
+			listaHabitaciones.addItem(habitaciones.get(i).getNombre());
+		}
+	}
 }

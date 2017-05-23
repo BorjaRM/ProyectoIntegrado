@@ -3,6 +3,8 @@ package vista;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.util.ResourceBundle;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -26,7 +28,7 @@ public class NuevoClienteView extends JPanel  implements IControladorClientes{
 	/**
 	 * Create the panel.
 	 */
-	public NuevoClienteView() {
+	public NuevoClienteView(ResourceBundle bundle) {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_Botones = new JPanel();
@@ -34,11 +36,11 @@ public class NuevoClienteView extends JPanel  implements IControladorClientes{
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 		add(panel_Botones, BorderLayout.SOUTH);
 		
-		btnEnviar = new JButton("Enviar");
+		btnEnviar = new JButton(bundle.getString("btnRegCliEnviar"));
 		btnEnviar.setActionCommand("Enviar");
 		panel_Botones.add(btnEnviar);
 		
-		btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton(bundle.getString("btnRegCliCancelar"));
 		btnCancelar.setActionCommand("Cancelar");
 		panel_Botones.add(btnCancelar);
 		
@@ -46,49 +48,49 @@ public class NuevoClienteView extends JPanel  implements IControladorClientes{
 		add(panel_Informacion, BorderLayout.CENTER);
 		panel_Informacion.setLayout(new BoxLayout(panel_Informacion, BoxLayout.Y_AXIS));
 		
-		JLabel lblNombre = new JLabel("Nombre:");
+		JLabel lblNombre = new JLabel(bundle.getString("jLblRegCliNomb"));
 		panel_Informacion.add(lblNombre);
 		
 		txt_Nombre = new JTextField();
 		panel_Informacion.add(txt_Nombre);
 		txt_Nombre.setColumns(10);
 		
-		JLabel lblApellidos = new JLabel("Apellidos:");
+		JLabel lblApellidos = new JLabel(bundle.getString("jLblRegCliApell"));
 		panel_Informacion.add(lblApellidos);
 		
 		txt_Apellidos = new JTextField();
 		panel_Informacion.add(txt_Apellidos);
 		txt_Apellidos.setColumns(10);
 		
-		JLabel lblIndentificacion = new JLabel("Indentificación:");
+		JLabel lblIndentificacion = new JLabel(bundle.getString("jLblRegCliID"));
 		panel_Informacion.add(lblIndentificacion);
 		
 		txt_Identificacion = new JTextField();
 		panel_Informacion.add(txt_Identificacion);
 		txt_Identificacion.setColumns(10);
 		
-		JLabel lblFechaDeNacimiento = new JLabel("Fecha de nacimiento:");
+		JLabel lblFechaDeNacimiento = new JLabel(bundle.getString("jLblRegCliFechNacim"));
 		panel_Informacion.add(lblFechaDeNacimiento);
 		
 		txt_FechaNacimiento = new JTextField();
 		panel_Informacion.add(txt_FechaNacimiento);
 		txt_FechaNacimiento.setColumns(10);
 		
-		JLabel lblTelefono = new JLabel("Telefono:");
+		JLabel lblTelefono = new JLabel(bundle.getString("jLblRegCliTelef"));
 		panel_Informacion.add(lblTelefono);
 		
 		txt_Telefono = new JTextField();
 		panel_Informacion.add(txt_Telefono);
 		txt_Telefono.setColumns(10);
 		
-		JLabel lblEmail = new JLabel("Email:");
+		JLabel lblEmail = new JLabel(bundle.getString("jLblRegCliEmail"));
 		panel_Informacion.add(lblEmail);
 		
 		txt_Email = new JTextField();
 		panel_Informacion.add(txt_Email);
 		txt_Email.setColumns(10);
 		
-		JLabel lblNacionalidad = new JLabel("Nacionalidad:");
+		JLabel lblNacionalidad = new JLabel(bundle.getString("jLblRegCliNacion"));
 		panel_Informacion.add(lblNacionalidad);
 		
 		txt_Nacionalidad = new JTextField();

@@ -57,8 +57,8 @@ public class ReservasView extends JPanel implements IControladorReservas{
 		table = new JTable(table_model);
 		scrollPane.setViewportView(table);
 		ArrayList<ReservaVO> reservas = new ReservaDAO().consultaReservas(BD.getSingleDBInstance());
-		ArrayList<ClienteVO> clientes = new ClienteDAO(BD.getSingleDBInstance(),1).rellenaYConsigueArrayClientes();
-		ArrayList<HabitacionVO> habitaciones = new HabitacionDAO(BD.getSingleDBInstance()).getHabitaciones(1);
+		ArrayList<ClienteVO> clientes = new ClienteDAO(1).rellenaYConsigueArrayClientes();
+		ArrayList<HabitacionVO> habitaciones = new HabitacionDAO().getHabitaciones(1);
 		rellenaListaReservas(reservas,clientes,habitaciones);
 	}
 
@@ -91,10 +91,8 @@ public class ReservasView extends JPanel implements IControladorReservas{
 				fila[2] = habitaciones.get(y).getNombre();
 				}
 			}
-					modeloTabla.addRow(fila);
+			modeloTabla.addRow(fila);
 		}
-		
-		table.setModel(modeloTabla);
-			
+		table.setModel(modeloTabla);	
 	}
 }

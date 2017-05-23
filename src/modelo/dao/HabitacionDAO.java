@@ -14,8 +14,8 @@ import modelo.vo.HabitacionVO;
 public class HabitacionDAO {
 	private BD modelo;
 
-	public HabitacionDAO(BD modelo){
-		this.modelo=modelo;
+	public HabitacionDAO(){
+		this.modelo=BD.getSingleDBInstance();
 	}
 	
 	public ArrayList<HabitacionVO> getHabitaciones(int refHotel){

@@ -8,6 +8,7 @@ import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.ControladorEmpleados;
@@ -21,11 +22,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class EmpleadosView extends JPanel implements IControladorEmpleados{
-	private JTextField textField;
 	private JTable table;
 	private JButton btnNuevoEmpleado;
 	private JButton btnEliminarEmpleado;
 	private JButton btnModificarEmpleado;
+	JScrollPane scrollPane;
 
 	/**
 	 * Create the panel.
@@ -39,8 +40,8 @@ public class EmpleadosView extends JPanel implements IControladorEmpleados{
 		flowLayout.setHgap(30);
 		add(panel, BorderLayout.NORTH);
 		
-		btnNuevoEmpleado = new JButton("Nuevo Empleado");
-		btnNuevoEmpleado.setActionCommand("Nuevo Empleado");
+		btnNuevoEmpleado = new JButton("Nuevo empleado");
+		btnNuevoEmpleado.setActionCommand("Nuevo empleado");
 		panel.add(btnNuevoEmpleado);
 		
 		btnEliminarEmpleado = new JButton("Eliminar Empleado");
@@ -54,24 +55,23 @@ public class EmpleadosView extends JPanel implements IControladorEmpleados{
 		Component horizontalStrut_4 = Box.createHorizontalStrut(20);
 		panel.add(horizontalStrut_4);
 		
-		textField = new JTextField();
-		panel.add(textField);
-		textField.setColumns(10);
-		
 		JPanel panel_Tabla = new JPanel();
 		add(panel_Tabla, BorderLayout.CENTER);
 		panel_Tabla.setLayout(new BorderLayout(0, 0));
 		
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		panel_Tabla.add(scrollPane);
+		
+		
+		}
+	
+	public void rellenaListaEmpleados(ArrayList <EmpleadoVO> empleados){
 		
 		String[] colHeader = {"ID","Nombre","Apellidos","Telefono","Inicio contrato"};
 		DefaultTableModel table_model = new DefaultTableModel(colHeader,0);
 		table = new JTable(table_model);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
-		}
-	
-	public void rellenaListaEmpleados(ArrayList <EmpleadoVO> empleados){
 		DefaultTableModel modeloTabla = (DefaultTableModel) table.getModel();
 		Object[] fila = new Object[modeloTabla.getColumnCount()];
 		
@@ -88,6 +88,14 @@ public class EmpleadosView extends JPanel implements IControladorEmpleados{
 	}
 	
 	
+
+	public JTable getTable() {
+		return table;
+	}
+
+	public void setTable(JTable table) {
+		this.table = table;
+	}
 
 	@Override
 	public void estableceControlador(ControladorEmpleados controlador) {
