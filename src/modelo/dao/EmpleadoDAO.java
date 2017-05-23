@@ -12,11 +12,12 @@ import modelo.vo.UsuarioVO;
 
 public class EmpleadoDAO {
 	BD bd;
+	int codigoNuevoEmpleado;
 	ArrayList<EmpleadoVO> empleados;
 	ArrayList<UsuarioVO> usuarios;
 	int numero_hotel;
-	public EmpleadoDAO(int numero_hotel) {
-		this.bd = BD.getSingleDBInstance();;
+	public EmpleadoDAO(BD bd, int numero_hotel) {
+		this.bd = bd;
 		this.numero_hotel = numero_hotel;
 		
 	}
@@ -84,11 +85,24 @@ public class EmpleadoDAO {
 					+ empleados.getSalario() + "', '" + empleados.getSeguridad_social() + "','"
 					+ empleados.getFecha_alta() + "', '" + empleados.getLugar_trabajo() + "')");
 
-			stmt.executeUpdate("INSERT INTO Usuario VALUES('" + usuarios.getNombre() + "', '" + usuarios.getContrasena()
-					+ "', '" + usuarios.getEmpleado() + "')");
-
 		} catch (SQLException e) {
-			System.err.println("Error insertando empleado");
+			System.err.println("Error insertando empleado" + e);
+		}
+		try {
+			Statement stmt = bd.getConexion().createStatement();
+		ResultSet rs = stmt.executeQuery("SELECT (codigo) FROM Empleado WHERE identificacion='"+empleados.getIdentificacion()+"';");
+		while(rs.next()){
+			 codigoNuevoEmpleado = rs.getInt("codigo");
+		}
+		} catch (SQLException e) {
+			System.err.println("Error insertando usuario" + e);
+		}
+		try {
+			Statement stmt = bd.getConexion().createStatement();
+		stmt.executeUpdate("INSERT INTO Usuario VALUES('" + usuarios.getNombre() + "', '" + usuarios.getContrasena()
+		+ "', '" +codigoNuevoEmpleado+ "')");
+		} catch (SQLException e) {
+			System.err.println("Error insertando usuario" + e);
 		}
 	}
 

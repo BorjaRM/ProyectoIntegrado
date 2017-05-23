@@ -8,6 +8,7 @@ import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.ControladorEmpleados;
@@ -26,6 +27,7 @@ public class EmpleadosView extends JPanel implements IControladorEmpleados{
 	private JButton btnNuevoEmpleado;
 	private JButton btnEliminarEmpleado;
 	private JButton btnModificarEmpleado;
+	JScrollPane scrollPane;
 
 	/**
 	 * Create the panel.
@@ -62,16 +64,19 @@ public class EmpleadosView extends JPanel implements IControladorEmpleados{
 		add(panel_Tabla, BorderLayout.CENTER);
 		panel_Tabla.setLayout(new BorderLayout(0, 0));
 		
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		panel_Tabla.add(scrollPane);
+		
+		
+		}
+	
+	public void rellenaListaEmpleados(ArrayList <EmpleadoVO> empleados){
 		
 		String[] colHeader = {"ID","Nombre","Apellidos","Telefono","Inicio contrato"};
 		DefaultTableModel table_model = new DefaultTableModel(colHeader,0);
 		table = new JTable(table_model);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
-		}
-	
-	public void rellenaListaEmpleados(ArrayList <EmpleadoVO> empleados){
 		DefaultTableModel modeloTabla = (DefaultTableModel) table.getModel();
 		Object[] fila = new Object[modeloTabla.getColumnCount()];
 		
