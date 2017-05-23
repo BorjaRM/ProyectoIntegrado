@@ -41,8 +41,8 @@ public class EmpleadosView extends JPanel implements IControladorEmpleados{
 		flowLayout.setHgap(30);
 		add(panel, BorderLayout.NORTH);
 		
-		btnNuevoEmpleado = new JButton("Nuevo Empleado");
-		btnNuevoEmpleado.setActionCommand("Nuevo Empleado");
+		btnNuevoEmpleado = new JButton("Nuevo empleado");
+		btnNuevoEmpleado.setActionCommand("Nuevo empleado");
 		panel.add(btnNuevoEmpleado);
 		
 		btnEliminarEmpleado = new JButton("Eliminar Empleado");
@@ -93,6 +93,14 @@ public class EmpleadosView extends JPanel implements IControladorEmpleados{
 	}
 	
 	
+
+	public JTable getTable() {
+		return table;
+	}
+
+	public void setTable(JTable table) {
+		this.table = table;
+	}
 
 	@Override
 	public void estableceControlador(ControladorEmpleados controlador) {

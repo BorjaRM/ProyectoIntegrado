@@ -18,9 +18,10 @@ public class ClienteDAO {
 	ArrayList <ClienteVO> clientes;
 	int referenciaHotel;
 	
-	public ClienteDAO (int refernciaHotel){
-		this.bd = BD.getSingleDBInstance();;
+	public ClienteDAO (BD bd, int refernciaHotel){
+		this.bd = bd;
 		this.referenciaHotel = referenciaHotel;
+		
 	}
 	
 	public ArrayList <ClienteVO> rellenaYConsigueArrayClientes(){
@@ -77,12 +78,12 @@ public class ClienteDAO {
 	public void eliminarCliente(int posicion){
 		clientes = rellenaYConsigueArrayClientes();
 		String codigoString = clientes.get(posicion).getCodigo();
-		System.out.println(codigoString);
 		try {
 			Statement stmt = bd.getConexion().createStatement();
+			stmt.executeUpdate("DELETE FROM reserva WHERE cod_cliente ='"+codigoString+"'");
 			stmt.executeUpdate("DELETE FROM cliente WHERE codigo = '"+codigoString+"';");
-			
 		} catch (SQLException e) {
+			e.printStackTrace();
 			System.err.println("Error al eliminar cliente");
 		}
 	}
@@ -92,9 +93,9 @@ public class ClienteDAO {
 		String codigoString = clientes.get(posicion).getCodigo();
 		try {
 			Statement stmt = bd.getConexion().createStatement();
-			stmt.executeUpdate("UPDATE cliente SET nombre='"+cliente.getNombre()+"', apelllidos='"+cliente.getApellidos()+"', identificacion='"+cliente.getIdentificacion()+"', fecha_nacimiento='"+cliente.getTelefono()+"', nacionalidad='"+cliente.getNacionalidad()+"', email='"+cliente.getEmail()+"', fecha_alta='"+cliente.getFecha_alta()+"' WHERE codigo='"+codigoString+"';");
+			stmt.executeUpdate("UPDATE cliente SET nombre='"+cliente.getNombre()+"', apellidos='"+cliente.getApellidos()+"', identificacion='"+cliente.getIdentificacion()+"', fecha_nacimiento='"+cliente.getFecha_nacimiento()+"', nacionalidad='"+cliente.getNacionalidad()+"', email='"+cliente.getEmail()+"', telefono='"+cliente.getTelefono()+"' WHERE codigo='"+codigoString+"';");
 		} catch (Exception e) {
-			System.err.println("Error modificando cliente.");
+			System.err.println("Error modificando cliente."+e);
 		}
 	}
 }
