@@ -37,11 +37,11 @@ public class ControladorReservas extends Controlador{
 	private void insertaReserva() {
 		ReservaDAO modeloReserva = new ReservaDAO();
 		String refEmpeladoS = String.valueOf(refEmpleado);
-		ReservaVO reserva = new ReservaVO("",nrv.getListaClientes().getSelectedItem().toString(),
-				nrv.getListaHabitaciones().getSelectedItem().toString(),
-				nrv.getDateChooserLlegada().getDate().toString(),
+		ReservaVO reserva = new ReservaVO("",nrv.getDateChooserLlegada().getDate().toString(),
 				nrv.getDateChooserSalida().getDate().toString(),
-				nrv.getListaPension().getSelectedItem().toString(),refEmpleadoS);
+				nrv.getListaPension().getSelectedItem().toString(),
+				nrv.getListaClientes().getSelectedItem().toString(),refEmpleadoS,
+				nrv.getListaHabitaciones().getSelectedItem().toString());
 		
 		modeloReserva.nuevaReserva(reserva);
 		}
