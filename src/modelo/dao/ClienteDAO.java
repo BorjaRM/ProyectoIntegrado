@@ -18,9 +18,8 @@ public class ClienteDAO {
 	ArrayList <ClienteVO> clientes;
 	int referenciaHotel;
 	
-	public ClienteDAO (BD bd, int refernciaHotel){
-		this.bd = bd;
-		this.referenciaHotel = referenciaHotel;
+	public ClienteDAO (int referenciaHotel){
+		this.bd = BD.getSingleDBInstance();;
 		
 	}
 	

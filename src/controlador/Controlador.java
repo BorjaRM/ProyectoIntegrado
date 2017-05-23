@@ -18,6 +18,7 @@ public class Controlador implements ActionListener, ItemListener{
 	protected static boolean esAdministrador;
 	protected static int refHotel;
 	protected static ResourceBundle bundle;
+	protected static int refEmpleado;
 	
 	public Controlador(){
 		this.modelo = BD.getSingleDBInstance();
@@ -56,7 +57,7 @@ public class Controlador implements ActionListener, ItemListener{
 		if(e.getStateChange() == 1){ 
 			System.out.println("Has cambiado idioma:" +e.getItem());			
 			switch ((String)e.getItem()){
-				case "Español": bundle = ResourceBundle.getBundle("idiomas/es_ES"); break;
+				case "Espaï¿½ol": bundle = ResourceBundle.getBundle("idiomas/es_ES"); break;
 				case "English": bundle = ResourceBundle.getBundle("idiomas/en_UK"); break;
 			}
 		}
@@ -73,6 +74,10 @@ public class Controlador implements ActionListener, ItemListener{
 		if(hotelSeleccionado != null)
 			Controlador.refHotel= hotelSeleccionado.getCodigo();
 		System.out.println("referencia hotel:" +refHotel);
+	}
+	public void estableceReferenciaCodigoEmpleado(String elEmpleado){
+		UsuarioDAO  consultasUsuario = new UsuarioDAO();
+		refEmpleado=consultasUsuario.getReferenciaEmpleado(elEmpleado);
 	}
 
 }

@@ -43,7 +43,7 @@ public class ControladorEmpleados extends Controlador{
 			case "Eliminar Empleado": eliminaEmpleado();break;
 			case "Enviar": insertarEmpleado();
 						   preparaEmpleadosView();	break;
-			case "Modificar": /* **************************************************************************** */ break;
+			case "Modificar": modificarEmpleado(); break;
 			case "Cancelar": cancelar(); break;
 		}
 	}
@@ -87,27 +87,47 @@ public class ControladorEmpleados extends Controlador{
 	}
 	
 	public void preparaModificaEmpleadoView(){
-		//Falta añadir que el admin debe seleccionar a un empleado primero
-		Controlador.frame.creaModificarEmpeladoView(this);
-		this.mev=Controlador.frame.getMev();
-		Controlador.frame.muestraModificarEmpleadoView();
+		frame.creaModificarEmpeladoView(this);
+		this.mev=frame.getMev();
+		estableceValorCampos();
+		modificarEmpleado();
+		frame.muestraModificarEmpleadoView();
 	}
 	
 	private void eliminaEmpleado(){
 		int posicionParaEliminar = ev.getTable().getSelectedRow();
+		if(posicionParaEliminar != -1){
 		EmpleadoDAO modeloEmpleado = new EmpleadoDAO(modelo,refHotel);
-		System.out.println(posicionParaEliminar);
 		modeloEmpleado.eliminarEmpleado(posicionParaEliminar);
 		rellenaTabla();
+		}else{
+			JOptionPane.showMessageDialog(null, "Selecciona un empleado, Error");
+		}
 	}
 	
-//	public void insertarEmpleado(){
-//		//Insertar empleado y volver a mostar empleadosView
-//		
-//	}
+	public void estableceValorCampos(){
+		EmpleadoDAO modeloEmpleado = new EmpleadoDAO(modelo, refHotel);
+		ArrayList <EmpleadoVO> empleados = modeloEmpleado.rellenarYConseguirArrayEmpleados();
+		int posicionSeleccionada = ev.getTable().getSelectedRow();
+		String lugar_trabajo = String.valueOf(empleados.get(posicionSeleccionada).getLugar_trabajo());
+		String salario = String.valueOf(empleados.get(posicionSeleccionada).getSalario());
+
+		
+		mev.getTxtApellido1().setText(empleados.get(posicionSeleccionada).getApellido1());
+		mev.getTxtApellido2().setText(empleados.get(posicionSeleccionada).getApellido2());
+		mev.getTxtNombre().setText(empleados.get(posicionSeleccionada).getNombre());
+		mev.getTxtIdentificacion().setText(empleados.get(posicionSeleccionada).getIdentificacion());
+		mev.getTxtLugarTrabajo().setText(lugar_trabajo); 
+		mev.getTxtSeguridadSocial().setText(empleados.get(posicionSeleccionada).getSeguridad_social());
+		mev.getTxtTelefono().setText(empleados.get(posicionSeleccionada).getTelefono());
+		mev.getTxtSalario().setText(salario);
+	
+	}
 
 	public void modificarEmpleado(){
-		//Modificar empleado seleccionado y volver a mostar empleadosView
+		EmpleadoDAO modeloEmpleado = new EmpleadoDAO(modelo, refHotel);
+		
+		
 	}
 
 	public void cancelar(){
@@ -116,6 +136,8 @@ public class ControladorEmpleados extends Controlador{
 		}else
 			Controlador.frame.muestraEmpleadosView();
 	}
+	
+	
 
 
 }

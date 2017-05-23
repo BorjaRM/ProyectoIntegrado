@@ -22,7 +22,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class EmpleadosView extends JPanel implements IControladorEmpleados{
-	private JTextField textField;
 	private JTable table;
 	private JButton btnNuevoEmpleado;
 	private JButton btnEliminarEmpleado;
@@ -55,10 +54,6 @@ public class EmpleadosView extends JPanel implements IControladorEmpleados{
 		
 		Component horizontalStrut_4 = Box.createHorizontalStrut(20);
 		panel.add(horizontalStrut_4);
-		
-		textField = new JTextField();
-		panel.add(textField);
-		textField.setColumns(10);
 		
 		JPanel panel_Tabla = new JPanel();
 		add(panel_Tabla, BorderLayout.CENTER);
