@@ -6,6 +6,7 @@ import java.awt.BorderLayout;
 import javax.swing.JComboBox;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import javax.swing.JLabel;
 import javax.swing.Box;
@@ -30,7 +31,7 @@ public class PrincipalAdminView extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PrincipalAdminView() {
+	public PrincipalAdminView(ResourceBundle bundle) {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_2 = new JPanel();
@@ -44,7 +45,7 @@ public class PrincipalAdminView extends JPanel {
 		Box horizontalBox = Box.createHorizontalBox();
 		panel.add(horizontalBox);
 		
-		JLabel lblNewLabel = new JLabel("Selecciona hotel:  ");
+		JLabel lblNewLabel = new JLabel(bundle.getString("jLblSelectHotel"));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		horizontalBox.add(lblNewLabel);
 		
@@ -52,10 +53,12 @@ public class PrincipalAdminView extends JPanel {
 		desplegableHoteles.setActionCommand("Nueva referencia hotel");
 		horizontalBox.add(desplegableHoteles);
 		
-		btn_nuevoHotel = new JButton("Nuevo Hotel");
+		btn_nuevoHotel = new JButton(bundle.getString("btnAddHotel"));
+		btn_nuevoHotel.setActionCommand("nuevo hotel");
 		panel.add(btn_nuevoHotel);
 		
-		btn_eliminarHotel = new JButton("Eliminar Hotel");
+		btn_eliminarHotel = new JButton(bundle.getString("btnRmvHotel"));
+		btn_eliminarHotel.setActionCommand("eliminar hotel");
 		panel.add(btn_eliminarHotel);
 		
 		JPanel panel_1 = new JPanel();
@@ -74,19 +77,19 @@ public class PrincipalAdminView extends JPanel {
 		panel_3.add(panel_4);
 		panel_4.setLayout(new BoxLayout(panel_4, BoxLayout.Y_AXIS));
 		
-		JLabel lblNewLabel_1 = new JLabel("Clientes:");
+		JLabel lblNewLabel_1 = new JLabel(bundle.getString("jLblClientes"));
 		panel_4.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("Empelados:");
+		JLabel lblNewLabel_2 = new JLabel(bundle.getString("jLblEmpleados"));
 		panel_4.add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("Reservas:");
+		JLabel lblNewLabel_3 = new JLabel(bundle.getString("jLblReservas"));
 		panel_4.add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_4 = new JLabel("Habitaciones libres:");
+		JLabel lblNewLabel_4 = new JLabel(bundle.getString("jLblHabitaciones"));
 		panel_4.add(lblNewLabel_4);
 		
-		JLabel lblNewLabel_5 = new JLabel("Incidencias activas:");
+		JLabel lblNewLabel_5 = new JLabel(bundle.getString("jLblIncidencias"));
 		panel_4.add(lblNewLabel_5);
 		
 		JPanel panel_5 = new JPanel();

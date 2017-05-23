@@ -3,6 +3,7 @@ package vista;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -26,7 +27,7 @@ public class ClientesView extends JPanel implements IControladorClientes{
 	/**
 	 * Create the panel.
 	 */
-	public ClientesView() {
+	public ClientesView(ResourceBundle bundle) {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_BotonesArriba = new JPanel();
@@ -35,15 +36,15 @@ public class ClientesView extends JPanel implements IControladorClientes{
 		flowLayout.setHgap(30);
 		add(panel_BotonesArriba, BorderLayout.NORTH);
 		
-		btnNuevoCliente = new JButton("Nuevo cliente");
+		btnNuevoCliente = new JButton(bundle.getString("btnNewCli"));
 		btnNuevoCliente.setActionCommand("Nuevo cliente");
 		panel_BotonesArriba.add(btnNuevoCliente);
 		
-		btnEliminarCliente = new JButton("Eliminar cliente");
+		btnEliminarCliente = new JButton(bundle.getString("btnRmvCli"));
 		btnEliminarCliente.setActionCommand("Eliminar cliente");
 		panel_BotonesArriba.add(btnEliminarCliente);
 		
-		btnEditarCliente = new JButton("Editar cliente");
+		btnEditarCliente = new JButton(bundle.getString("btnEditCli"));
 		btnEditarCliente.setActionCommand("Editar cliente");
 		panel_BotonesArriba.add(btnEditarCliente);
 		
@@ -67,7 +68,8 @@ public class ClientesView extends JPanel implements IControladorClientes{
 		this.btnEliminarCliente.setVisible(false);
 	}
 	public void rellenaListaClientes(ArrayList <ClienteVO> cliente){
-		String[] colHeader = {"ID","Nombre","Apellidos","F.Nacimiento","Telefono","Email","Nacionalidad"};
+		String[] colHeader = {"ID","Nombre","Apellidos","F.Nacimiento","Telefono","E-Mail","Nacionalidad"};
+		
 		DefaultTableModel table_model = new DefaultTableModel(colHeader,0);
 		table = new JTable(table_model);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

@@ -30,7 +30,7 @@ public class Idiomas {
 		return bundle;
 	}
 	
-	public ResourceBundle getBundle() {
+	public static ResourceBundle getBundle() {
 		
 		return bundle;
 	}
