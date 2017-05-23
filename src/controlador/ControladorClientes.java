@@ -43,7 +43,7 @@ public class ControladorClientes extends Controlador{
 	private void eliminaCliente(){
 		posicionSeleccionada = cv.getTable().getSelectedRow();
 		if(posicionSeleccionada != -1){
-		ClienteDAO modeloCliente = new ClienteDAO(modelo, refHotel);
+		ClienteDAO modeloCliente = new ClienteDAO(refHotel);
 		modeloCliente.eliminarCliente(posicionSeleccionada);
 		rellenaTabla();
 		}else{
@@ -109,7 +109,7 @@ public class ControladorClientes extends Controlador{
 		
 	}
 	public void modificaCliente(){
-		ClienteDAO modeloCliente = new ClienteDAO(modelo, refHotel);
+		ClienteDAO modeloCliente = new ClienteDAO(refHotel);
 		String apellidos =mcv.getTxt_Apellidos().getText();
 		String email =mcv.getTxt_Email().getText();
 		String fNacimiento =mcv.getTxt_FechaNacimiento().getText();

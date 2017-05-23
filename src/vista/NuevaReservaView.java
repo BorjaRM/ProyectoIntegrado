@@ -6,8 +6,6 @@ import com.toedter.calendar.JDateChooser;
 
 import controlador.ControladorReservas;
 import interfaces.IControladorReservas;
-import modelo.BD;
-import modelo.dao.ClienteDAO;
 import modelo.dao.HabitacionDAO;
 import modelo.vo.ClienteVO;
 import modelo.vo.HabitacionVO;
