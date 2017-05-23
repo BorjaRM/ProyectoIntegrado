@@ -30,15 +30,16 @@ public class ControladorReservas extends Controlador{
 			case "ver reservas": preparaReservasView(); break;
 			case "nueva reserva": preparaNuevaReservaView(); break;
 			case "anular reserva": /* **************************************************************************** */ break;
-			case "enviar": /* **************************************************************************** */ break;
+			case "enviar": insertaReserva(); break;
 			case "cancelar": cancelar(); break;
 		}
 	}
 	
-	private void insertaCliente() {
+	private void insertaReserva() {
 		ReservaDAO modeloReserva = new ReservaDAO();
 		ReservaVO reserva = new ReservaVO("",nrv.getListaClientes().getSelectedItem().toString(),
-				nrv.getListaHabitaciones().getSelectedItem().toString(),nrv.getDateChooserLlegada().getDate().toString(),
+				nrv.getListaHabitaciones().getSelectedItem().toString(),
+				nrv.getDateChooserLlegada().getDate().toString(),
 				nrv.getDateChooserSalida().getDate().toString(),
 				nrv.getListaPension().getSelectedItem().toString(),"");
 		

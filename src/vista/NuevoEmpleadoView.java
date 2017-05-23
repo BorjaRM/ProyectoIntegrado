@@ -17,6 +17,86 @@ import javax.swing.SwingConstants;
 
 public class NuevoEmpleadoView extends JPanel implements IControladorEmpleados{
 	private JTextField textField;
+	public JTextField getTextField() {
+		return textField;
+	}
+
+	public void setTextField(JTextField textField) {
+		this.textField = textField;
+	}
+
+	public JTextField getTxtSeguridadSocial() {
+		return txtSeguridadSocial;
+	}
+
+	public void setTxtSeguridadSocial(JTextField txtSeguridadSocial) {
+		this.txtSeguridadSocial = txtSeguridadSocial;
+	}
+
+	public JTextField getTxtSalario() {
+		return txtSalario;
+	}
+
+	public void setTxtSalario(JTextField txtSalario) {
+		this.txtSalario = txtSalario;
+	}
+
+	public JTextField getTxtTelefono() {
+		return txtTelefono;
+	}
+
+	public void setTxtTelefono(JTextField txtTelefono) {
+		this.txtTelefono = txtTelefono;
+	}
+
+	public JTextField getTxtIdentificacion() {
+		return txtIdentificacion;
+	}
+
+	public void setTxtIdentificacion(JTextField txtIdentificacion) {
+		this.txtIdentificacion = txtIdentificacion;
+	}
+
+	public JTextField getTxtApellido2() {
+		return txtApellido2;
+	}
+
+	public void setTxtApellido2(JTextField txtApellido2) {
+		this.txtApellido2 = txtApellido2;
+	}
+
+	public JTextField getTxtNombre() {
+		return txtNombre;
+	}
+
+	public void setTxtNombre(JTextField txtNombre) {
+		this.txtNombre = txtNombre;
+	}
+
+	public JTextField getTxtApellido1() {
+		return txtApellido1;
+	}
+
+	public void setTxtApellido1(JTextField txtApellido1) {
+		this.txtApellido1 = txtApellido1;
+	}
+
+	public JTextField getTxtFechaAlta() {
+		return TxtFechaAlta;
+	}
+
+	public void setTxtFechaAlta(JTextField txtFechaAlta) {
+		this.TxtFechaAlta = txtFechaAlta;
+	}
+
+	public JTextField getTxtLugarTrabajo() {
+		return txtLugarTrabajo;
+	}
+
+	public void setTxtLugarTrabajo(JTextField txtLugarTrabajo) {
+		this.txtLugarTrabajo = txtLugarTrabajo;
+	}
+
 	private JTextField txtSeguridadSocial;
 	private JTextField txtSalario;
 	private JTextField txtTelefono;
@@ -26,8 +106,10 @@ public class NuevoEmpleadoView extends JPanel implements IControladorEmpleados{
 	private JTextField txtApellido1;
 	private JButton btnEnviar;
 	private JButton btnCancelar;
-	private JPasswordField txtFechaAlta;
 	private JTextField txtLugarTrabajo;
+	private JTextField TxtFechaAlta;
+	private JTextField txtUsuario;
+	private JPasswordField passwordField;
 
 	/**
 	 * Create the panel.
@@ -174,8 +256,9 @@ setLayout(new BorderLayout(0, 0));
 		Component horizontalStrut_8 = Box.createHorizontalStrut(20);
 		panel10.add(horizontalStrut_8);
 		
-		txtFechaAlta = new JPasswordField();
-		panel10.add(txtFechaAlta);
+		TxtFechaAlta = new JTextField();
+		panel10.add(TxtFechaAlta);
+		TxtFechaAlta.setColumns(10);
 		
 		Component verticalStrut_1 = Box.createVerticalStrut(10);
 		panel_2.add(verticalStrut_1);
@@ -199,10 +282,40 @@ setLayout(new BorderLayout(0, 0));
 		Component verticalStrut_9 = Box.createVerticalStrut(20);
 		panel_2.add(verticalStrut_9);
 		
+		JPanel panel_6 = new JPanel();
+		panel_2.add(panel_6);
+		panel_6.setLayout(new BoxLayout(panel_6, BoxLayout.X_AXIS));
+		
+		JLabel lblUsuario = new JLabel("Usuario:");
+		panel_6.add(lblUsuario);
+		
+		Component horizontalStrut_11 = Box.createHorizontalStrut(20);
+		panel_6.add(horizontalStrut_11);
+		
+		txtUsuario = new JTextField();
+		panel_6.add(txtUsuario);
+		txtUsuario.setColumns(10);
+		
+		Component verticalStrut_10 = Box.createVerticalStrut(20);
+		panel_2.add(verticalStrut_10);
+		
+		JPanel panel_1 = new JPanel();
+		panel_2.add(panel_1);
+		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.X_AXIS));
+		
+		JLabel lblContrasea = new JLabel("Contraseña:");
+		panel_1.add(lblContrasea);
+		
+		Component horizontalStrut_12 = Box.createHorizontalStrut(20);
+		panel_1.add(horizontalStrut_12);
+		
+		passwordField = new JPasswordField();
+		panel_1.add(passwordField);
+		JTextField txtContrasena = new JTextField();
 		Component horizontalStrut = Box.createHorizontalStrut(20);
 		formulario.add(horizontalStrut, BorderLayout.WEST);
 		
-		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
+		Component horizontalStrut_1 = Box.createHorizontalStrut(39);
 		formulario.add(horizontalStrut_1, BorderLayout.EAST);
 		
 		Component verticalStrut = Box.createVerticalStrut(20);
@@ -221,6 +334,22 @@ setLayout(new BorderLayout(0, 0));
 
 	}
 	
+	public JTextField getTxtUsuario() {
+		return txtUsuario;
+	}
+
+	public void setTxtUsuario(JTextField txtUsuario) {
+		this.txtUsuario = txtUsuario;
+	}
+
+	public JPasswordField getPasswordField() {
+		return passwordField;
+	}
+
+	public void setPasswordField(JPasswordField passwordField) {
+		this.passwordField = passwordField;
+	}
+
 	@Override
 	public void estableceControlador(ControladorEmpleados controlador) {
 		this.btnEnviar.addActionListener(controlador);
