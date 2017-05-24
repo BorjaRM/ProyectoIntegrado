@@ -10,33 +10,28 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import javax.swing.JOptionPane;
+
 import modelo.BD;
 import modelo.vo.EmpleadoVO;
+import modelo.vo.EstanciaVO;
 import modelo.vo.UsuarioVO;
 import res.Md5;
 
 public class EmpleadoDAO {
 	BD bd;
-	int codigoNuevoEmpleado;
-	ArrayList<UsuarioVO> usuarios;
-	ArrayList<EmpleadoVO> empleados;
-	int numero_hotel;
 	
-	public EmpleadoDAO(int numero_hotel) {
-		this.bd = BD.getSingleDBInstance();		
-		this.numero_hotel = numero_hotel;
-		
+	public EmpleadoDAO() {
+		this.bd = BD.getSingleDBInstance();				
 	}
 
 	// Metodo que recoja la informacion de un empleado y la guarde en un ArrayList
-	public ArrayList<EmpleadoVO> rellenarYConseguirArrayEmpleados() {
-	
-		empleados = new ArrayList<EmpleadoVO>();
+	public ArrayList<EmpleadoVO> getEmpleados(int refHotel) {
+		ArrayList<EmpleadoVO> empleados = new ArrayList<EmpleadoVO>();
 		try {
-			
 			String sql = "SELECT * FROM Empleado WHERE lugar_trabajo=?;";
 			PreparedStatement ps = this.bd.getConexion().prepareStatement(sql);
-			ps.setInt(1, numero_hotel);
+			ps.setInt(1, refHotel);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				int codigo = rs.getInt("codigo");
@@ -59,122 +54,73 @@ public class EmpleadoDAO {
 		return empleados;
 	}
 
-	// Metodo que recoja la informacion de un usuario y la guarde en un ArrayList
-	public ArrayList<UsuarioVO> rellenarYConseguirArrayUsuarios() {
-		usuarios = new ArrayList<UsuarioVO>();
-		empleados = rellenarYConseguirArrayEmpleados();
-
-//		try {
-//			Statement stmt = bd.getConexion().createStatement();
-//			ResultSet rs = stmt.executeQuery("SELECT (codigo) FROM Empleado WHERE identificacion='"+empleado.getIdentificacion()+"';");
-//			while(rs.next())
-//			 codigoNuevoEmpleado = rs.getInt("codigo");
-//		}catch (SQLException e) {
-//			System.err.println("Error insertando usuario" + e);
-//		}
-//		
-		try {
-			
-			String sql = "SELECT * FROM Usuario WHERE cod_empleado=?;";
-			PreparedStatement ps = this.bd.getConexion().prepareStatement(sql);
-			ps.setInt(1, numero_hotel);
-			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				String nombre = rs.getString("nombre");
-				String contrasena = rs.getString("contrasena");
-				int cod_empleado = rs.getInt("cod_empleado");
-
-				UsuarioVO u = new UsuarioVO(nombre, contrasena, cod_empleado);
-				usuarios.add(u);
-			}
-		} catch (Exception e) {
-			System.err.println("Error rellenando el array de usuarios");
-		}
-		return usuarios;
-	}
-
 	// Metodo que recoja la informacion de un empleado y haga un INSERT sobre la BBDD
-
-	public void insertarEmpleado(EmpleadoVO empleados, UsuarioVO usuarios) {
-		// Create an instance of SimpleDateFormat used for formatting the string representation of date (month/day/year)
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-		// Get the date today using Calendar object.
-		java.util.Date today =Calendar.getInstance().getTime();        
-		// Using DateFormat format method we can create a string representation of a date with the defined format.
-		String reportDate = df.format(today);
-		try {
-			Statement stmt = bd.getConexion().createStatement();
-			stmt.executeUpdate("INSERT INTO Empleado VALUES(null, '"+empleados.getNombre() + "', '"
-					+ empleados.getApellido1() + "', '"+ empleados.getApellido2() + "', '"
-					+ empleados.getIdentificacion() + "', '" + empleados.getTelefono() + "', '"
-					+ empleados.getSalario() + "', '" + empleados.getSeguridad_social() + "','"
-					+ reportDate+ "', '" + this.numero_hotel + "')");
-
-		}catch (SQLException e){
-			System.err.println("Error insertando empleado" + e);
-		}
-		try {
-			Statement stmt = bd.getConexion().createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT (codigo) FROM Empleado WHERE identificacion='"+empleados.getIdentificacion()+"';");
-			while(rs.next())
-			 codigoNuevoEmpleado = rs.getInt("codigo");
-		}catch (SQLException e) {
-			System.err.println("Error insertando usuario" + e);
-		}
-		try {
-			Statement stmt = bd.getConexion().createStatement();
-			stmt.executeUpdate("INSERT INTO Usuario VALUES('" + usuarios.getNombre() + "', '" +usuarios.getContrasena()
-				+ "', '" +codigoNuevoEmpleado+ "')");
-		}catch (SQLException e) {
-			System.err.println("Error insertando usuario" + e);
-		}
+	public void insertarEmpleado(EmpleadoVO empleado, int refHotel) {
+		if(empleado != null){
+			String sql = ("INSERT INTO empleado (nombre,apellido1,apellido2,identificacion,telefono,salario,seguridad_social,"
+					+ "fecha_alta,lugar_trabajo) VALUES (?,?,?,?,?,?,?,CURDATE(),?);");
+			try{
+				PreparedStatement consulta = this.bd.getConexion().prepareStatement(sql);
+				consulta.setString(1, empleado.getNombre());
+				consulta.setString(2, empleado.getApellido1());
+				consulta.setString(3, empleado.getApellido2());
+				consulta.setString(4, empleado.getIdentificacion());
+				consulta.setString(5, empleado.getTelefono());
+				consulta.setInt(6, empleado.getSalario());
+				consulta.setString(7, empleado.getSeguridad_social());
+				consulta.setInt(8, refHotel);
+				consulta.executeUpdate();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+		}		
 	}
 
-	// Metodo que te permita eliminar empleado a partir de su codigo.
-	public void eliminarEmpleado(int posicion) {
-		empleados = rellenarYConseguirArrayEmpleados();
-
-		int codigo = empleados.get(posicion).getCodigo();
-
-		try {
-			Statement stmt = bd.getConexion().createStatement();
-			stmt.executeUpdate("DELETE FROM Usuario WHERE cod_empleado= '"+codigo+"';");
-			stmt.executeUpdate("DELETE FROM Empleado WHERE codigo= '"+codigo+"';");
-		} catch (SQLException e) {
-			System.err.println("Error eliminando empleado"+e);
+	// Metodo que te permita eliminar empleado
+	public void eliminarEmpleado(EmpleadoVO empleado) {
+		if(empleado != null){
+			String sql = "DELETE FROM empleado WHERE codigo=?";
+			try{
+				PreparedStatement consulta = this.bd.getConexion().prepareStatement(sql);
+				consulta.setInt(1, empleado.getCodigo());
+				consulta.executeUpdate();
+			}catch(SQLException e){
+				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, "No se puede eliminar este empleado", "Error", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
 	
 	// Metodo que permita modificar los datos de las tablas empleado y usuario.
-	public void modificarEmpleado(EmpleadoVO empleado, UsuarioVO usuario, int posicion) {
-		empleados = rellenarYConseguirArrayEmpleados();
-		usuarios = rellenarYConseguirArrayUsuarios();
-		int codigo = empleados.get(posicion).getCodigo();
-		try {
-			Statement stmt = bd.getConexion().createStatement();
-			
-		stmt.executeUpdate("UPDATE FROM Usuario SET nombre='"+usuario.getNombre()+"', contrasena='"+Md5.encriptar(usuario.getContrasena())+"'"
-					+ " WHERE cod_empleado='"+codigo+"';");
-			
-			stmt.executeUpdate("UPDATE FROM Empleado SET nombre='"+empleado.getNombre()+"', apellido1='"+empleado.getApellido1()+""
-					+ ", apellido2='"+empleado.getApellido2()+"', identificacion='"+empleado.getIdentificacion()+"'"
-					+ ", telefono='"+empleado.getTelefono()+"', salario='"+empleado.getSalario()+"'"
-					+ ", seguridad_social='"+empleado.getSeguridad_social()+"', fecha_alta='"+empleado.getFecha_alta()+"'"
-					+ ", lugar_trabajo='"+this.numero_hotel+"' WHERE codigo='"+codigo+"';");
-			
-			
-		} catch (SQLException e) {
-			System.err.println("Error modificando empleado"+e);
+	public void modificarEmpleado(EmpleadoVO empleado) {
+		if(empleado != null){
+			String sql = "UPDATE empleado SET nombre=?, apellido1=?, apellido2=?, identificacion=?, telefono=?, salario=?, "
+					+ "seguridad_social=? WHERE empleado.codigo=?;";
+			try{
+				PreparedStatement consulta = this.bd.getConexion().prepareStatement(sql);
+				consulta.setString(1, empleado.getNombre());
+				consulta.setString(2, empleado.getApellido1());
+				consulta.setString(3, empleado.getApellido2());
+				consulta.setString(4, empleado.getIdentificacion());
+				consulta.setString(5, empleado.getTelefono());
+				consulta.setInt(6, empleado.getSalario());
+				consulta.setString(7, empleado.getSeguridad_social());
+				consulta.setInt(8, empleado.getCodigo());
+				consulta.executeUpdate();				
+			}catch(SQLException e){
+				JOptionPane.showMessageDialog(null, "No se puede modificar este empleado", "Error", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
 	
-	public int getTotalEmpleados(){
+	
+	
+	public int getTotalEmpleados(int refHotel){
 		int total=0;
 		String sql = ("SELECT COUNT(*) AS total_empleados FROM empleado WHERE empleado.lugar_trabajo=?;");
 		try {
 			PreparedStatement consulta = this.bd.getConexion().prepareStatement(sql);
-			consulta.setInt(1, numero_hotel);
+			consulta.setInt(1, refHotel);
 			ResultSet resultadoConsulta = consulta.executeQuery();
 			while(resultadoConsulta.next())
 				total=resultadoConsulta.getInt("total_empleados");

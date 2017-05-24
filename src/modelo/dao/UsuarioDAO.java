@@ -10,10 +10,10 @@ import modelo.BD;
 import modelo.vo.UsuarioVO;
 
 public class UsuarioDAO {
-	private BD modelo;
+	private BD bd;
 	
 	public UsuarioDAO(){
-		this.modelo=BD.getSingleDBInstance();;
+		this.bd=BD.getSingleDBInstance();;
 	}
 	
 	public boolean compruebaUsuario(UsuarioVO usuario){
@@ -21,7 +21,7 @@ public class UsuarioDAO {
 		boolean datosCorrectos = false;
 		String sql = ("SELECT count(*) FROM usuario WHERE nombre=? AND contrasena=?;");
 		try {
-			PreparedStatement consulta = this.modelo.getConexion().prepareStatement(sql);
+			PreparedStatement consulta = this.bd.getConexion().prepareStatement(sql);
 			consulta.setString(1, usuario.getNombre());
 			consulta.setString(2, usuario.getContrasena());
 			ResultSet resultadoConsulta = consulta.executeQuery();
@@ -35,31 +35,64 @@ public class UsuarioDAO {
 		return datosCorrectos;
 	}
 	
-	// Metodo que recoja la informacion de un usuario y la guarde en un ArrayList
-		public ArrayList<UsuarioVO> rellenarYConseguirArrayUsuarios() {
-			ArrayList<UsuarioVO> usuarios = new ArrayList<UsuarioVO>();
-			try {
-				Statement st = modelo.getConexion().createStatement();
-				ResultSet rs = st.executeQuery("SELECT * FROM Usuario;");
-				while (rs.next()) {
-					String nombre = rs.getString("nombre");
-					String contrasena = rs.getString("contrasena");
-					int cod_empleado = rs.getInt("cod_empleado");
-
-					UsuarioVO u = new UsuarioVO(nombre, contrasena, cod_empleado);
-					usuarios.add(u);
-				}
-			} catch (Exception e) {
-				System.err.println("Error rellenando el array de usuarios");
+	public ArrayList<UsuarioVO> getUsuarios(int refHotel) {
+		ArrayList<UsuarioVO> usuarios = new ArrayList<UsuarioVO>();		
+		try {
+				
+			String sql = "SELECT usuario.nombre,usuario.contrasena,usuario.cod_empleado FROM Usuario INNER JOIN Empleado ON "
+					+ "usuario.cod_empleado=empleado.codigo WHERE empleado.lugar_trabajo=?;";
+			PreparedStatement consulta = this.bd.getConexion().prepareStatement(sql);
+			consulta.setInt(1, refHotel);
+			ResultSet rs = consulta.executeQuery();
+			while (rs.next()) {
+				String nombre = rs.getString("nombre");
+				String contrasena = rs.getString("contrasena");
+				int cod_empleado = rs.getInt("cod_empleado");
+				UsuarioVO u = new UsuarioVO(nombre, contrasena, cod_empleado);
+				usuarios.add(u);
 			}
-			return usuarios;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("Error rellenando el array de usuarios");
 		}
+		return usuarios;
+	}
+	
+	public void insertarUsuario(UsuarioVO usuario){
+		if(usuario != null){
+			String sql = ("INSERT INTO usuario VALUES (?,?,0);");
+			try{
+				PreparedStatement consulta = this.bd.getConexion().prepareStatement(sql);
+				consulta.setString(1, usuario.getNombre());
+				consulta.setString(2, usuario.getContrasena());
+				consulta.executeUpdate();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void modificarUsuario(UsuarioVO usuario, int refEmpleado){
+		if(usuario != null){
+			String sql="UPDATE usuario SET nombre=?,contrasena=? WHERE usuario.cod_empleado=?;";
+			try{
+				PreparedStatement consulta = this.bd.getConexion().prepareStatement(sql);
+				consulta.setString(1, usuario.getNombre());
+				consulta.setString(2, usuario.getContrasena());
+				consulta.setInt(3, refEmpleado);
+				consulta.executeUpdate();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+
+	}
 		
 	public int getReferenciaEmpleado(String nombreUsuario){
 		int cod_empleado=0;
 		String sql = ("SELECT cod_empleado FROM usuario WHERE nombre=?;");
 		try {
-			PreparedStatement consulta = this.modelo.getConexion().prepareStatement(sql);
+			PreparedStatement consulta = this.bd.getConexion().prepareStatement(sql);
 			consulta.setString(1, nombreUsuario);
 			ResultSet resultadoConsulta = consulta.executeQuery();
 			while(resultadoConsulta.next())
@@ -74,7 +107,7 @@ public class UsuarioDAO {
 		int cod_hotel=0;
 		String sql = ("SELECT lugar_trabajo FROM empleado WHERE codigo=?");
 		try {
-			PreparedStatement consulta = this.modelo.getConexion().prepareStatement(sql);
+			PreparedStatement consulta = this.bd.getConexion().prepareStatement(sql);
 			consulta.setInt(1, codigoEmpleado);
 			ResultSet resultadoConsulta = consulta.executeQuery();
 			while(resultadoConsulta.next())

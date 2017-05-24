@@ -12,10 +12,10 @@ import modelo.vo.EstanciaVO;
 import modelo.vo.HabitacionVO;
 
 public class HabitacionDAO {
-	private BD modelo;
+	private BD bd;
 
 	public HabitacionDAO(){
-		this.modelo=BD.getSingleDBInstance();
+		this.bd=BD.getSingleDBInstance();
 	}
 	
 	public ArrayList<HabitacionVO> getHabitaciones(int refHotel){
@@ -26,7 +26,7 @@ public class HabitacionDAO {
 		try{
 			String sql = "SELECT * FROM estancia INNER JOIN habitacion ON "
 					+ "estancia.id=habitacion.id_estancia AND estancia.cod_hotel = ? AND estancia.tipo='habitacion';";
-			PreparedStatement ps = this.modelo.getConexion().prepareStatement(sql);
+			PreparedStatement ps = this.bd.getConexion().prepareStatement(sql);
 			ps.setInt(1, refHotel);
 			ResultSet resultadoConsulta = ps.executeQuery();
 			//Transformamos el resultset en un arraylist
@@ -52,7 +52,7 @@ public class HabitacionDAO {
 		if(habitacion != null){
 			String sql = ("INSERT INTO habitacion (id_estancia,clasificacion,plazas,precio,descripcion) VALUES (0,?,?,?,?);");
 			try{
-				PreparedStatement consulta = this.modelo.getConexion().prepareStatement(sql);
+				PreparedStatement consulta = this.bd.getConexion().prepareStatement(sql);
 				consulta.setString(1, habitacion.getClasificacion());
 				consulta.setInt(2, habitacion.getPlazas());
 				consulta.setInt(3, habitacion.getPrecio());
@@ -69,7 +69,7 @@ public class HabitacionDAO {
 			HabitacionVO h = (HabitacionVO) estancia;
 			String sql = ("UPDATE habitacion SET clasificacion=?,plazas=? ,precio=?, descripcion=? WHERE id_estancia=?;");
 			try{
-				PreparedStatement consulta = this.modelo.getConexion().prepareStatement(sql);
+				PreparedStatement consulta = this.bd.getConexion().prepareStatement(sql);
 				consulta.setString(1, h.getClasificacion());
 				consulta.setInt(2, h.getPlazas());
 				consulta.setInt(3, h.getPrecio());
@@ -91,7 +91,7 @@ public class HabitacionDAO {
 				+ "estancia.cod_hotel=hotel.codigo) WHERE reserva.inicio=CURDATE()) AND estancia.tipo='habitacion' AND "
 				+ "estancia.cod_hotel=?;");
 		try {
-			PreparedStatement consulta = this.modelo.getConexion().prepareStatement(sql);
+			PreparedStatement consulta = this.bd.getConexion().prepareStatement(sql);
 			consulta.setInt(1, refHotel);
 			ResultSet resultadoConsulta = consulta.executeQuery();
 			while(resultadoConsulta.next()){
@@ -116,7 +116,7 @@ public class HabitacionDAO {
 		int total=0;
 		String sql = ("SELECT COUNT(*) AS total_estancias from estancia WHERE estancia.tipo='habitacion' AND estancia.cod_hotel=?;");
 		try {
-			PreparedStatement consulta = this.modelo.getConexion().prepareStatement(sql);
+			PreparedStatement consulta = this.bd.getConexion().prepareStatement(sql);
 			consulta.setInt(1, refHotel);
 			ResultSet resultadoConsulta = consulta.executeQuery();
 			while(resultadoConsulta.next())

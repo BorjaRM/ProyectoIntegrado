@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -15,24 +14,21 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.ControladorEmpleados;
-import idiomas.Idiomas;
 import interfaces.IControladorEmpleados;
 import modelo.vo.EmpleadoVO;
 
 public class EmpleadosView extends JPanel implements IControladorEmpleados{
-	private JTable table;
+	private JTable tabla_empleados;
+	private DefaultTableModel empleados_model;
+	String[] empleados_head = {"ID","Nombre","Apellidos","Telefono","Inicio contrato"};
 	private JButton btnNuevoEmpleado;
 	private JButton btnEliminarEmpleado;
 	private JButton btnModificarEmpleado;
-	JScrollPane scrollPane;
-	ResourceBundle bundle;
-	
+
 	/**
 	 * Create the panel.
 	 */
 	public EmpleadosView() {
-		bundle = Idiomas.getBundle();
-		
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
@@ -41,15 +37,15 @@ public class EmpleadosView extends JPanel implements IControladorEmpleados{
 		flowLayout.setHgap(30);
 		add(panel, BorderLayout.NORTH);
 		
-		btnNuevoEmpleado = new JButton(bundle.getString("btnNewEmp"));
+		btnNuevoEmpleado = new JButton("Nuevo empleado");
 		btnNuevoEmpleado.setActionCommand("Nuevo empleado");
 		panel.add(btnNuevoEmpleado);
 		
-		btnEliminarEmpleado = new JButton(bundle.getString("btnRmvEmp"));
+		btnEliminarEmpleado = new JButton("Eliminar Empleado");
 		btnEliminarEmpleado.setActionCommand("Eliminar Empleado");
 		panel.add(btnEliminarEmpleado);
 		
-		btnModificarEmpleado = new JButton(bundle.getString("btnModEmp"));
+		btnModificarEmpleado = new JButton("Modificar Empleado");
 		btnModificarEmpleado.setActionCommand("Modificar Empleado");
 		panel.add(btnModificarEmpleado);
 		
@@ -60,22 +56,20 @@ public class EmpleadosView extends JPanel implements IControladorEmpleados{
 		add(panel_Tabla, BorderLayout.CENTER);
 		panel_Tabla.setLayout(new BorderLayout(0, 0));
 		
-		scrollPane = new JScrollPane();
+		
+		//Creamos la tabla que contiene los empleados
+		JScrollPane scrollPane = new JScrollPane();
+		empleados_model = new DefaultTableModel(empleados_head,0);
+		tabla_empleados = new JTable(empleados_model);
+		tabla_empleados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tabla_empleados.setFillsViewportHeight(true);
+		scrollPane.setViewportView(tabla_empleados);	
 		panel_Tabla.add(scrollPane);
-		
-		
 		}
 	
 	public void rellenaListaEmpleados(ArrayList <EmpleadoVO> empleados){
-		bundle = Idiomas.getBundle();
-		
-		String[] colHeader = {bundle.getString("jTblEmpID"),bundle.getString("jTblEmpNomb"),bundle.getString("jTblEmpApell"),bundle.getString("jTblEmpTelef"),bundle.getString("jTblEmpIniContr")};
-		DefaultTableModel table_model = new DefaultTableModel(colHeader,0);
-		table = new JTable(table_model);
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scrollPane.setViewportView(table);
-		DefaultTableModel modeloTabla = (DefaultTableModel) table.getModel();
-		Object[] fila = new Object[modeloTabla.getColumnCount()];
+		empleados_model = new DefaultTableModel(empleados_head,0);
+		Object[] fila = new Object[empleados_model.getColumnCount()];
 		
 		for (int i = 0 ; i < empleados.size(); i++ ){
 			fila[0] = empleados.get(i).getIdentificacion();
@@ -83,18 +77,18 @@ public class EmpleadosView extends JPanel implements IControladorEmpleados{
 			fila[2] = empleados.get(i).getApellido1();
 			fila[3] = empleados.get(i).getTelefono();
 			fila[4] = empleados.get(i).getFecha_alta();
-			modeloTabla.addRow(fila);
+			empleados_model.addRow(fila);
 		}
-		table.setModel(modeloTabla);
+		tabla_empleados.setModel(empleados_model);
 			
 	}
 	
 	public JTable getTable() {
-		return table;
+		return tabla_empleados;
 	}
 
 	public void setTable(JTable table) {
-		this.table = table;
+		this.tabla_empleados = table;
 	}
 
 	@Override
@@ -102,6 +96,7 @@ public class EmpleadosView extends JPanel implements IControladorEmpleados{
 		this.btnNuevoEmpleado.addActionListener(controlador);
 		this.btnModificarEmpleado.addActionListener(controlador);
 		this.btnEliminarEmpleado.addActionListener(controlador);
+		this.tabla_empleados.getSelectionModel().addListSelectionListener(controlador);
 	}
 
 }
