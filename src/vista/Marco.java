@@ -1,24 +1,22 @@
 package vista;
 
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import controlador.Controlador;
-import controlador.ControladorClientes;
-import controlador.ControladorEmpleados;
-import controlador.ControladorEstancias;
-import controlador.ControladorIncidencias;
-import controlador.ControladorUsuarios;
-import controlador.ControladorReservas;
-
 import java.awt.CardLayout;
 import java.util.ResourceBundle;
 
 import javax.swing.Box;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import controlador.ControladorClientes;
+import controlador.ControladorEmpleados;
+import controlador.ControladorEstancias;
+import controlador.ControladorIncidencias;
+import controlador.ControladorReservas;
+import controlador.ControladorUsuarios;
 
 public class Marco extends JFrame{
 	private static ResourceBundle bundle;

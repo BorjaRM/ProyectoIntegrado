@@ -1,26 +1,26 @@
 package vista;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import controlador.Controlador;
 import controlador.ControladorUsuarios;
 import modelo.vo.UsuarioVO;
-
-import javax.swing.Box;
-import java.awt.Color;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import java.awt.FlowLayout;
+import res.Md5;
 
 public class LoginView extends JFrame{
 	private JPanel contentPane;
@@ -109,8 +109,9 @@ public class LoginView extends JFrame{
 		UsuarioVO u = null;
 		try{
 			String nombre=this.text_usuario.getText();
-			String passText = new String(passwordField.getPassword());
+			String passText = Md5.encriptar(new String(passwordField.getPassword()));
 			u=new UsuarioVO(nombre,passText);
+			System.out.println(passText);
 		}catch (Exception e){
 			e.printStackTrace();
 		}

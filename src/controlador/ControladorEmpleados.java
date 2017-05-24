@@ -1,25 +1,15 @@
 package controlador;
 
 import java.awt.event.ActionEvent;
-
-
-import java.awt.event.ActionListener;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
-import modelo.BD;
-import modelo.dao.ClienteDAO;
 import modelo.dao.EmpleadoDAO;
-import modelo.dao.UsuarioDAO;
-import modelo.vo.ClienteVO;
 import modelo.vo.EmpleadoVO;
 import modelo.vo.UsuarioVO;
+import res.Md5;
 import vista.EmpleadosView;
-import vista.Marco;
 import vista.ModificarEmpleadoView;
 import vista.NuevoEmpleadoView;
 
@@ -50,20 +40,18 @@ public class ControladorEmpleados extends Controlador{
 	
 	private void insertarEmpleado() {
 		EmpleadoDAO modeloEmpleado = new EmpleadoDAO(Controlador.refHotel);
-		//UsuarioDAO modeloUsuario = new UsuarioDAO(modelo);
-		if(nev.getTxtUsuario().getText().isEmpty() || nev.getPasswordField().getText().isEmpty() || nev.getTxtNombre().getText().isEmpty() || nev.getTxtApellido1().getText().isEmpty() || nev.getTxtApellido2().getText().isEmpty() || nev.getTxtIdentificacion().getText().isEmpty() || nev.getTxtTelefono().getText().isEmpty() || nev.getTxtSalario().getText().isEmpty() || nev.getTxtSeguridadSocial().getText().isEmpty() /*|| nev.getTxtFechaAlta().getText().isEmpty() */ || nev.getTxtLugarTrabajo().getText().isEmpty()){
+		if(nev.getTxtUsuario().getText().isEmpty() || new String(nev.getPasswordField().getPassword()).isEmpty() || nev.getTxtNombre().getText().isEmpty() || 
+				nev.getTxtApellido1().getText().isEmpty() || nev.getTxtApellido2().getText().isEmpty() || nev.getTxtIdentificacion().getText().isEmpty() || 
+				nev.getTxtTelefono().getText().isEmpty() || nev.getTxtSalario().getText().isEmpty() || nev.getTxtSeguridadSocial().getText().isEmpty()){
 			JOptionPane.showMessageDialog(null, "Faltan datos por rellenar, Error");	
 		}else{	
-			String salarioTxt = nev.getTxtSalario().getText();
-			int salarioInt = Integer.parseInt(salarioTxt);
-			String hotelTxt = nev.getTxtLugarTrabajo().getText();
-			int hotelInt = Integer.parseInt(hotelTxt);
-			EmpleadoVO em = new EmpleadoVO(0,nev.getTxtNombre().getText(),nev.getTxtApellido1().getText(),nev.getTxtApellido2().getText(),nev.getTxtIdentificacion().getText(),nev.getTxtTelefono().getText(),salarioInt,nev.getTxtSeguridadSocial().getText(),"",hotelInt);
-			UsuarioVO us = new UsuarioVO(nev.getTxtUsuario().getText(),nev.getPasswordField().getText(),em.getCodigo());
+			int salarioInt = Integer.parseInt(nev.getTxtSalario().getText());
+			EmpleadoVO em = new EmpleadoVO(0,nev.getTxtNombre().getText(),nev.getTxtApellido1().getText(),nev.getTxtApellido2().getText(),nev.getTxtIdentificacion().getText(),nev.getTxtTelefono().getText(),salarioInt,nev.getTxtSeguridadSocial().getText(),"",Controlador.refHotel);
+			UsuarioVO us = new UsuarioVO(nev.getTxtUsuario().getText(),Md5.encriptar(new String(nev.getPasswordField().getPassword())),em.getCodigo());
 			modeloEmpleado.insertarEmpleado(em,us);
-		}
-		
+		}	
 	}
+	
 	
 	public void preparaEmpleadosView(){
 		Controlador.frame.creaEmpleadosView(this);

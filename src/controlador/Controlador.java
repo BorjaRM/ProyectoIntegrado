@@ -7,8 +7,8 @@ import java.awt.event.ItemListener;
 import java.util.ResourceBundle;
 
 import javax.swing.JCheckBox;
+
 import modelo.BD;
-import modelo.dao.IncidenciaDAO;
 import modelo.dao.UsuarioDAO;
 import modelo.vo.HotelVO;
 import vista.Marco;

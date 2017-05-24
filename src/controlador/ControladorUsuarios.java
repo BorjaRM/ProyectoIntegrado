@@ -1,17 +1,11 @@
 package controlador;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ResourceBundle;
 
-import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 
-import modelo.BD;
 import modelo.dao.ClienteDAO;
 import modelo.dao.EmpleadoDAO;
 import modelo.dao.HabitacionDAO;
@@ -19,9 +13,7 @@ import modelo.dao.HotelDAO;
 import modelo.dao.IncidenciaDAO;
 import modelo.dao.ReservaDAO;
 import modelo.dao.UsuarioDAO;
-import modelo.vo.HotelVO;
 import vista.LoginView;
-import vista.Marco;
 
 public class ControladorUsuarios extends Controlador implements MouseListener{
 	private LoginView vistaLogin;

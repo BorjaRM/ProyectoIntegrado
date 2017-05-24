@@ -7,12 +7,12 @@ import javax.swing.DefaultListSelectionModel;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
 import modelo.dao.EstanciaDAO;
 import modelo.dao.HabitacionDAO;
 import modelo.vo.EstanciaVO;
 import modelo.vo.HabitacionVO;
 import modelo.vo.TipoEstancia;
-import modelo.vo.TipoHabitacion;
 import vista.EstanciasView;
 import vista.ModificarEstanciaView;
 import vista.NuevaEstanciaView;

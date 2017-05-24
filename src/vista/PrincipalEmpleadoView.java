@@ -1,17 +1,15 @@
 package vista;
 
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
-import javax.swing.JScrollPane;
-import javax.swing.DefaultListModel;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.BoxLayout;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.util.ArrayList;
 
 import javax.swing.Box;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.ListSelectionModel;
 
 import modelo.vo.HabitacionVO;

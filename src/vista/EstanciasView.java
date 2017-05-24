@@ -1,22 +1,21 @@
 package vista;
 
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
-
-import java.awt.BorderLayout;
-import javax.swing.JButton;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.ControladorEstancias;
 import interfaces.IControladorEstancias;
 import modelo.vo.EstanciaVO;
 import modelo.vo.HabitacionVO;
-
-import java.awt.FlowLayout;
-import java.util.ArrayList;
-import javax.swing.ListSelectionModel;
 
 public class EstanciasView extends JPanel implements IControladorEstancias{
 	private JButton btnNuevaEstancia;

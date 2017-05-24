@@ -1,11 +1,17 @@
 package vista;
 
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
 import controlador.ControladorReservas;
 import interfaces.IControladorReservas;
 import modelo.BD;
@@ -15,12 +21,6 @@ import modelo.dao.ReservaDAO;
 import modelo.vo.ClienteVO;
 import modelo.vo.HabitacionVO;
 import modelo.vo.ReservaVO;
-
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 
 public class ReservasView extends JPanel implements IControladorReservas{
 	private JTable table;

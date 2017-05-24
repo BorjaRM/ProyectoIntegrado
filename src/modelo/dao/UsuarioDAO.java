@@ -3,6 +3,9 @@ package modelo.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
 import modelo.BD;
 import modelo.vo.UsuarioVO;
 
@@ -32,6 +35,26 @@ public class UsuarioDAO {
 		return datosCorrectos;
 	}
 	
+	// Metodo que recoja la informacion de un usuario y la guarde en un ArrayList
+		public ArrayList<UsuarioVO> rellenarYConseguirArrayUsuarios() {
+			ArrayList<UsuarioVO> usuarios = new ArrayList<UsuarioVO>();
+			try {
+				Statement st = modelo.getConexion().createStatement();
+				ResultSet rs = st.executeQuery("SELECT * FROM Usuario;");
+				while (rs.next()) {
+					String nombre = rs.getString("nombre");
+					String contrasena = rs.getString("contrasena");
+					int cod_empleado = rs.getInt("cod_empleado");
+
+					UsuarioVO u = new UsuarioVO(nombre, contrasena, cod_empleado);
+					usuarios.add(u);
+				}
+			} catch (Exception e) {
+				System.err.println("Error rellenando el array de usuarios");
+			}
+			return usuarios;
+		}
+		
 	public int getReferenciaEmpleado(String nombreUsuario){
 		int cod_empleado=0;
 		String sql = ("SELECT cod_empleado FROM usuario WHERE nombre=?;");

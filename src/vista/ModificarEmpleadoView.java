@@ -1,19 +1,19 @@
 package vista;
 
-import javax.swing.JPanel;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JPasswordField;
+import javax.swing.SwingConstants;
+
 import controlador.ControladorEmpleados;
 import interfaces.IControladorEmpleados;
-import javax.swing.DropMode;
-import javax.swing.SwingConstants;
 
 public class ModificarEmpleadoView extends JPanel implements IControladorEmpleados{
 	private JTextField textField;

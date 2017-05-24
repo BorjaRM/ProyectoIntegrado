@@ -1,16 +1,13 @@
 package controlador;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import modelo.BD;
 import modelo.dao.ClienteDAO;
 import modelo.vo.ClienteVO;
 import vista.ClientesView;
-import vista.Marco;
 import vista.ModificarClienteView;
 import vista.NuevoClienteView;
 

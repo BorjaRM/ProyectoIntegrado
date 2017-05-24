@@ -1,25 +1,24 @@
 package vista;
 
-import javax.swing.JPanel;
-import javax.swing.JButton;
 import java.awt.BorderLayout;
-import javax.swing.JComboBox;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import javax.swing.JLabel;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.SpringLayout;
+import javax.swing.SwingConstants;
 
 import controlador.ControladorUsuarios;
 import modelo.vo.HotelVO;
-
-import javax.swing.SwingConstants;
-import javax.swing.JScrollPane;
-import javax.swing.JList;
 
 public class PrincipalAdminView extends JPanel {
 	private JButton btn_nuevoHotel;

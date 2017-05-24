@@ -1,20 +1,20 @@
 package vista;
 
-import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.util.ResourceBundle;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controlador.ControladorUsuarios;
 import modelo.vo.HotelVO;
-
-import javax.swing.BoxLayout;
-import java.awt.FlowLayout;
-import java.util.ResourceBundle;
-import java.awt.BorderLayout;
-import javax.swing.JButton;
-import java.awt.Component;
-import javax.swing.Box;
 
 public class NuevoHotelView extends JPanel {
 	private JTextField text_nombre;

@@ -1,5 +1,17 @@
 package vista;
 
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.toedter.calendar.JDateChooser;
@@ -9,19 +21,6 @@ import interfaces.IControladorReservas;
 import modelo.dao.HabitacionDAO;
 import modelo.vo.ClienteVO;
 import modelo.vo.HabitacionVO;
-
-import java.awt.BorderLayout;
-
-import javax.swing.JButton;
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import javax.swing.JComboBox;
-import java.awt.Insets;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 
 public class NuevaReservaView extends JPanel implements IControladorReservas{
 	private JButton btnEnviar;

@@ -1,16 +1,9 @@
 package vista;
 
 import java.awt.EventQueue;
-import java.sql.Statement;
 
 import controlador.Controlador;
-import controlador.ControladorClientes;
-import controlador.ControladorEmpleados;
-import controlador.ControladorEstancias;
-import controlador.ControladorIncidencias;
 import controlador.ControladorUsuarios;
-import controlador.ControladorReservas;
-import modelo.BD;
 
 public class Inicio {
 	

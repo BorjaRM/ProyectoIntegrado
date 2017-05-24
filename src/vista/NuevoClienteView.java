@@ -1,18 +1,17 @@
 package vista;
 
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.util.ResourceBundle;
 
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controlador.ControladorClientes;
 import interfaces.IControladorClientes;
-
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
 
 public class NuevoClienteView extends JPanel  implements IControladorClientes{
 	private JTextField txt_Nombre;

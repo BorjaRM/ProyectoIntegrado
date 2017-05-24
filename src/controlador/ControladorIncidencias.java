@@ -1,16 +1,13 @@
 package controlador;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import modelo.BD;
 import modelo.dao.EstanciaDAO;
 import modelo.vo.EstanciaVO;
 import vista.IncidenciasView;
-import vista.Marco;
 import vista.NuevaIncidenciaView;
 
 public class ControladorIncidencias extends Controlador{

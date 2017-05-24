@@ -1,29 +1,29 @@
 package vista;
 
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import javax.swing.JLabel;
 import java.awt.Component;
-import javax.swing.Box;
-import javax.swing.JButton;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 
 import controlador.ControladorEstancias;
 import interfaces.IControladorEstancias;
 import modelo.vo.TipoHabitacion;
-
-import javax.swing.JTextField;
-import javax.swing.JRadioButton;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import javax.swing.BoxLayout;
-import javax.swing.JComboBox;
-import javax.swing.JSpinner;
-import javax.swing.JTextArea;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SpinnerNumberModel;
 
 public class ModificarEstanciaView extends JPanel implements IControladorEstancias{
 	private JTextField txt_Nombre;

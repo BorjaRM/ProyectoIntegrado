@@ -5,17 +5,16 @@ import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.ControladorClientes;
 import interfaces.IControladorClientes;
 import modelo.vo.ClienteVO;
-import javax.swing.ListSelectionModel;
 
 public class ClientesView extends JPanel implements IControladorClientes{
 	private JTable table;

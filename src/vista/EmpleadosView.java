@@ -1,25 +1,21 @@
 package vista;
 
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.FlowLayout;
+import java.util.ArrayList;
+
 import javax.swing.Box;
 import javax.swing.JButton;
-import javax.swing.JTextField;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.ControladorEmpleados;
 import interfaces.IControladorEmpleados;
-import modelo.vo.ClienteVO;
 import modelo.vo.EmpleadoVO;
-
-import javax.swing.JTable;
-import java.awt.FlowLayout;
-import java.sql.Statement;
-import java.util.ArrayList;
 
 public class EmpleadosView extends JPanel implements IControladorEmpleados{
 	private JTable table;
