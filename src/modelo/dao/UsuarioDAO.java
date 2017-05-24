@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import modelo.BD;
 import modelo.vo.UsuarioVO;
 
@@ -67,7 +69,7 @@ public class UsuarioDAO {
 				consulta.setString(2, usuario.getContrasena());
 				consulta.executeUpdate();
 			}catch(SQLException e){
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Se ha producido un error, no se ha podido completar la insercion", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
@@ -82,7 +84,7 @@ public class UsuarioDAO {
 				consulta.setInt(3, refEmpleado);
 				consulta.executeUpdate();
 			}catch(SQLException e){
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Se ha producido un error, no se ha podido realizar la modificacion", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 

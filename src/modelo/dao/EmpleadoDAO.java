@@ -71,7 +71,7 @@ public class EmpleadoDAO {
 				consulta.setInt(8, refHotel);
 				consulta.executeUpdate();
 			}catch(SQLException e){
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Se ha producido un error, no se ha podido completar la insercion", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}		
 	}
@@ -108,7 +108,7 @@ public class EmpleadoDAO {
 				consulta.setInt(8, empleado.getCodigo());
 				consulta.executeUpdate();				
 			}catch(SQLException e){
-				JOptionPane.showMessageDialog(null, "No se puede modificar este empleado", "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Se ha producido un error, no se ha podido realizar la modificacion", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
