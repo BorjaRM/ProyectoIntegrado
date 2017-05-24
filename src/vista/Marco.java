@@ -17,9 +17,10 @@ import controlador.ControladorEstancias;
 import controlador.ControladorIncidencias;
 import controlador.ControladorReservas;
 import controlador.ControladorUsuarios;
+import idiomas.Idiomas;
 
 public class Marco extends JFrame{
-	private static ResourceBundle bundle;
+	private ResourceBundle bundle;
 	private JPanel vistas;
 	private CardLayout cl;
 	//Referencias a las vistas
@@ -64,8 +65,8 @@ public class Marco extends JFrame{
 	/**
 	 * Create the frame.
 	 */
-	public Marco(ResourceBundle bundle) {
-		Marco.bundle=bundle;
+	public Marco() {
+		bundle = Idiomas.getBundle();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 500);
 		//Este panel contiene todas las vistas que se iran intercambiando

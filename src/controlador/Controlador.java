@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import javax.swing.JCheckBox;
 
+import idiomas.Idiomas;
 import modelo.BD;
 import modelo.dao.UsuarioDAO;
 import modelo.vo.HotelVO;
@@ -18,16 +19,14 @@ public class Controlador implements ActionListener, ItemListener{
 	protected static Marco frame;
 	protected static boolean esAdministrador;
 	protected static int refHotel;
-	protected static ResourceBundle bundle;
 	protected static int refEmpleado;
 	
 	public Controlador(){
 		this.modelo = BD.getSingleDBInstance();
-		this.bundle = ResourceBundle.getBundle("idiomas/es_ES");
 	}
 	
 	public void creaMarco(){
-		frame = new Marco(bundle);
+		frame = new Marco();
 	}
 	
 	public void creaControladoresVistas(){
@@ -56,10 +55,7 @@ public class Controlador implements ActionListener, ItemListener{
 		//Se ha seleccionado un idioma
 		if(e.getStateChange() == 1){ 
 			System.out.println("Has cambiado idioma:" +e.getItem());			
-			switch ((String)e.getItem()){
-				case "Espa�ol": bundle = ResourceBundle.getBundle("idiomas/es_ES"); break;
-				case "English": bundle = ResourceBundle.getBundle("idiomas/en_UK"); break;
-			}
+			Idiomas.newIdioma((String)e.getItem());
 		}
 	}
 	

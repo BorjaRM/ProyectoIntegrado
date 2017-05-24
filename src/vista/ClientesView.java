@@ -13,6 +13,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.ControladorClientes;
+import idiomas.Idiomas;
 import interfaces.IControladorClientes;
 import modelo.vo.ClienteVO;
 
@@ -22,11 +23,12 @@ public class ClientesView extends JPanel implements IControladorClientes{
 	private JButton btnEliminarCliente;
 	private JButton btnEditarCliente;
 	JScrollPane scrollPane;
-
 	/**
 	 * Create the panel.
 	 */
 	public ClientesView(ResourceBundle bundle) {
+		String prueba  = Idiomas.getBundle().getString("jTblCliNombre");
+		System.out.println(prueba);
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_BotonesArriba = new JPanel();
@@ -67,7 +69,9 @@ public class ClientesView extends JPanel implements IControladorClientes{
 		this.btnEliminarCliente.setVisible(false);
 	}
 	public void rellenaListaClientes(ArrayList <ClienteVO> cliente){
-		String[] colHeader = {"ID","Nombre","Apellidos","F.Nacimiento","Telefono","E-Mail","Nacionalidad"};
+		ResourceBundle bundle = Idiomas.getBundle();
+		
+		String[] colHeader = {bundle.getString("jTblCliID"), bundle.getString("jTblCliNombre"),bundle.getString("jTblCliApellidos"),bundle.getString("jTblCliFechNacim"),bundle.getString("jTblCliTelef"),bundle.getString("jTblCliEmail"),bundle.getString("jTblCliNacion")};
 		
 		DefaultTableModel table_model = new DefaultTableModel(colHeader,0);
 		table = new JTable(table_model);

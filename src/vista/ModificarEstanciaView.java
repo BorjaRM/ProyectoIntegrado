@@ -67,7 +67,7 @@ public class ModificarEstanciaView extends JPanel implements IControladorEstanci
 		
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.CENTER);
-		panel.setLayout(new GridLayout(1, 3, 0, 0));
+		panel.setLayout(new GridLayout(1, 3, 20, 0));
 		
 		JPanel panel_Habitacion = new JPanel();
 		panel.add(panel_Habitacion);
@@ -112,39 +112,9 @@ public class ModificarEstanciaView extends JPanel implements IControladorEstanci
 		scrollPane.setViewportView(text_descripcion);
 		panel_Habitacion.add(scrollPane);
 		
-		JPanel panel_Servicios = new JPanel();
-		panel.add(panel_Servicios);
-		panel_Servicios.setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblServicios = new JLabel("Servicios");
-		lblServicios.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
-		lblServicios.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_Servicios.add(lblServicios, BorderLayout.NORTH);
-		
-		JPanel panel_1 = new JPanel();
-		panel_Servicios.add(panel_1, BorderLayout.CENTER);
-		
-		JRadioButton rdbtnBaoPrivado = new JRadioButton("Aseo Privado");
-		panel_1.add(rdbtnBaoPrivado);
-		
-		JRadioButton rdbtnAc = new JRadioButton("A/C            ");
-		panel_1.add(rdbtnAc);
-		
-		JRadioButton rdbtnWifi = new JRadioButton("Wifi             ");
-		panel_1.add(rdbtnWifi);
-		
-		JRadioButton rdbtnTv = new JRadioButton(" TV             ");
-		panel_1.add(rdbtnTv);
-		
 		JPanel panel_UsoComun = new JPanel();
 		panel.add(panel_UsoComun);
-		panel_UsoComun.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-		Component horizontalStrut_2 = Box.createHorizontalStrut(100);
-		panel_UsoComun.add(horizontalStrut_2);
-		
-		Component verticalStrut = Box.createVerticalStrut(70);
-		panel_UsoComun.add(verticalStrut);
+		panel_UsoComun.setLayout(new BoxLayout(panel_UsoComun, BoxLayout.Y_AXIS));
 		
 		JLabel lblNombre_1 = new JLabel("Nombre:");
 		panel_UsoComun.add(lblNombre_1);
@@ -152,6 +122,9 @@ public class ModificarEstanciaView extends JPanel implements IControladorEstanci
 		txt_nombre_uso = new JTextField();
 		panel_UsoComun.add(txt_nombre_uso);
 		txt_nombre_uso.setColumns(10);
+		
+		Component verticalStrut = Box.createVerticalStrut(210);
+		panel_UsoComun.add(verticalStrut);
 	}
 
 	@Override
