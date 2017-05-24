@@ -74,7 +74,7 @@ public class NuevaEstanciaView extends JPanel implements IControladorEstancias{
 		
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.CENTER);
-		panel.setLayout(new GridLayout(0, 3, 15, 0));
+		panel.setLayout(new GridLayout(0, 2, 20, 0));
 		
 		JPanel panel_Habitacion = new JPanel();
 		panel.add(panel_Habitacion);
@@ -128,35 +128,6 @@ public class NuevaEstanciaView extends JPanel implements IControladorEstancias{
 		btn_NewHabitacion.setActionCommand("Nueva habitacion");
 		panel_2.add(btn_NewHabitacion);
 		
-		JPanel panel_Servicios = new JPanel();
-		panel.add(panel_Servicios);
-		panel_Servicios.setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblServicios = new JLabel("Servicios");
-		lblServicios.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
-		lblServicios.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_Servicios.add(lblServicios, BorderLayout.NORTH);
-		
-		JSeparator separator = new JSeparator();
-		separator.setOrientation(SwingConstants.VERTICAL);
-		panel_Servicios.add(separator, BorderLayout.EAST);
-		
-		JPanel panel_1 = new JPanel();
-		panel_Servicios.add(panel_1, BorderLayout.CENTER);
-		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
-		
-		JRadioButton rdbtnBaoPrivado = new JRadioButton("Aseo Privado");
-		panel_1.add(rdbtnBaoPrivado);
-		
-		JRadioButton rdbtnAc = new JRadioButton("A/C            ");
-		panel_1.add(rdbtnAc);
-		
-		JRadioButton rdbtnWifi = new JRadioButton("Wifi             ");
-		panel_1.add(rdbtnWifi);
-		
-		JRadioButton rdbtnTv = new JRadioButton(" TV             ");
-		panel_1.add(rdbtnTv);
-		
 		JPanel panel_UsoComun = new JPanel();
 		panel.add(panel_UsoComun);
 		panel_UsoComun.setLayout(new BoxLayout(panel_UsoComun, BoxLayout.Y_AXIS));
@@ -171,11 +142,15 @@ public class NuevaEstanciaView extends JPanel implements IControladorEstancias{
 		Component verticalStrut = Box.createVerticalStrut(20);
 		panel_UsoComun.add(verticalStrut);
 		
-		btnAadirEstancia = new JButton("Nueva zona comun");
-		btnAadirEstancia.setActionCommand("Nueva zona comun");
-		panel_UsoComun.add(btnAadirEstancia);
+		JPanel panel_1 = new JPanel();
+		panel_1.setAlignmentX(0.0f);
+		panel_UsoComun.add(panel_1);
 		
-		Component verticalStrut_1 = Box.createVerticalStrut(280);
+		btnAadirEstancia = new JButton("Nueva zona comun");
+		panel_1.add(btnAadirEstancia);
+		btnAadirEstancia.setActionCommand("Nueva zona comun");
+		
+		Component verticalStrut_1 = Box.createVerticalStrut(270);
 		panel_UsoComun.add(verticalStrut_1);
 	}
 

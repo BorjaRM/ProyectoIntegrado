@@ -130,20 +130,22 @@ public class ControladorEstancias extends Controlador implements ListSelectionLi
 	}
 	
 	public void modificarEstancia(){
-		if(tipoEstanciaSeleccionada == TipoEstancia.HABITACION){
-			HabitacionVO h = (HabitacionVO) estanciaSeleccionada;
-			h.setNombre(mesv.getTxt_Nombre().getText());
-			h.setClasificacion(mesv.getDesplegable_tipo().getSelectedItem().toString());
-			h.setPlazas((Integer) mesv.getSpinner_plazas().getValue());
-			h.setPrecio((Integer) mesv.getSpinner_precio().getValue());
-			h.setDescripcion(mesv.getText_descripcion().getText());
-			consultasEstancia.updateEstancia(estanciaSeleccionada);
-			consultasHabitacion.updateHabitacion(estanciaSeleccionada);
-		}else if(tipoEstanciaSeleccionada == TipoEstancia.USO_COMUN){
-			estanciaSeleccionada.setNombre(mesv.getTxt_nombre_uso().getText());
-			consultasEstancia.updateEstancia(estanciaSeleccionada);
+		if(this.estanciaSeleccionada != null){
+			if(tipoEstanciaSeleccionada == TipoEstancia.HABITACION){
+				HabitacionVO h = (HabitacionVO) estanciaSeleccionada;
+				h.setNombre(mesv.getTxt_Nombre().getText());
+				h.setClasificacion(mesv.getDesplegable_tipo().getSelectedItem().toString());
+				h.setPlazas((Integer) mesv.getSpinner_plazas().getValue());
+				h.setPrecio((Integer) mesv.getSpinner_precio().getValue());
+				h.setDescripcion(mesv.getText_descripcion().getText());
+				consultasEstancia.updateEstancia(estanciaSeleccionada);
+				consultasHabitacion.updateHabitacion(estanciaSeleccionada);
+			}else if(tipoEstanciaSeleccionada == TipoEstancia.USO_COMUN){
+				estanciaSeleccionada.setNombre(mesv.getTxt_nombre_uso().getText());
+				consultasEstancia.updateEstancia(estanciaSeleccionada);
+			}
+			preparaEstanciasView();
 		}
-		preparaEstanciasView();
 	}
 	
 	public void eliminarEstancia(){
