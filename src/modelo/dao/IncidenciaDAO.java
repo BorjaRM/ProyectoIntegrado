@@ -3,6 +3,7 @@ package modelo.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import modelo.BD;
@@ -83,7 +84,7 @@ public class IncidenciaDAO {
 			//Transformamos el resultset en un arraylist
 			while(resultadoConsulta.next()){
 				incidencia=resultadoConsulta.getString("incidencia");
-				//Creamos un objeto Estancia y lo añadimos al Arraylist
+				//Creamos un objeto Estancia y lo aï¿½adimos al Arraylist
 				incidencias.add(incidencia);
 			}
 		}catch(SQLException e){

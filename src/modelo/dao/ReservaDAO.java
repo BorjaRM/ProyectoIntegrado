@@ -17,7 +17,7 @@ public class ReservaDAO {
 	public ReservaDAO(){
 		this.bd=BD.getSingleDBInstance();
 	}
-	public ArrayList<ReservaVO> consultaReservas(BD modelo){
+	public ArrayList<ReservaVO> consultaReservas(){
 		reservas = new ArrayList<ReservaVO>();
 		try {
 			Statement stmt = bd.getConexion().createStatement();
@@ -58,7 +58,7 @@ public class ReservaDAO {
     }
 	
 	public void eliminarReserva(int posicion){
-		reservas = consultaReservas(bd.getSingleDBInstance());
+		reservas = consultaReservas();
 		String codigoString = reservas.get(posicion).getCodigo();
 		try {
 			Statement stmt = bd.getConexion().createStatement();
