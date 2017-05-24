@@ -28,9 +28,7 @@ public class ControladorUsuarios extends Controlador implements MouseListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch(e.getActionCommand().toLowerCase()){
-			case "entrar": 	compruebaIdioma();
-							verificaAcceso();			
-							break;
+			case "entrar": 	compruebaIdioma(); verificaAcceso(); break;		
 			case "enviar": enviar(); break;
 			case "cancelar": cancelar(); break;
 			case "nuevo hotel": preparaNuevoHotelView(); break;
@@ -91,7 +89,7 @@ public class ControladorUsuarios extends Controlador implements MouseListener{
 	public void preparaListadoAdminView(){
 		Controlador.frame.getPav().rellenaListaIncidencias(new IncidenciaDAO().getIncidenciaActivas(refHotel));
 		Controlador.frame.getPav().getTxt_clientes().setText(String.valueOf(new ClienteDAO().getTotalClientes(refHotel)));
-		Controlador.frame.getPav().getTxt_empleados().setText(String.valueOf(new EmpleadoDAO(refHotel).getTotalEmpleados()));
+		Controlador.frame.getPav().getTxt_empleados().setText(String.valueOf(new EmpleadoDAO().getTotalEmpleados(refHotel)));
 		Controlador.frame.getPav().getTxt_reservas().setText(String.valueOf(new ReservaDAO().getTotalReservasHoy(refHotel)));
 		Controlador.frame.getPav().getTxt_hab().setText(String.valueOf(new HabitacionDAO().getTotalHabitaciones(refHotel)));
 		Controlador.frame.getPav().getTxt_incidencias().setText(String.valueOf(new IncidenciaDAO().getTotalIncidencias(refHotel)));
