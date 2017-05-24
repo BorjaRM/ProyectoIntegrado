@@ -8,9 +8,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ResourceBundle;
 
+import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 
 import modelo.BD;
+import modelo.dao.ClienteDAO;
+import modelo.dao.EmpleadoDAO;
+import modelo.dao.HabitacionDAO;
 import modelo.dao.HotelDAO;
 import modelo.dao.IncidenciaDAO;
 import modelo.dao.ReservaDAO;
@@ -30,13 +34,13 @@ public class ControladorUsuarios extends Controlador implements MouseListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(e.getActionCommand().toLowerCase());
 		switch(e.getActionCommand().toLowerCase()){
 			case "entrar": verificaAcceso(); break;
 			case "enviar": enviar(); break;
 			case "cancelar": cancelar(); break;
 			case "nuevo hotel": preparaNuevoHotelView(); break;
 			case "eliminar hotel": eliminar(); break;
+			case "nueva referencia hotel": super.actualizaReferenciaHotelAdmin(); preparaListadoAdminView(); break;
 		}
 	}
 	
@@ -63,8 +67,7 @@ public class ControladorUsuarios extends Controlador implements MouseListener{
 	public void preparaPrincipalAdminView(){
 		super.creaMarco();
 		frame.estableceControlador(this);
-		//Puedo hacer un new Controlador aqui? no se como pasar el Controlador de otra forma
-		frame.creaPrincipalAdminView(new Controlador(),this); 
+		frame.creaPrincipalAdminView(this); 
 		preparaDesplegableHotelView();
 		preparaListadoAdminView();
 		actualizaReferenciaHotelAdmin();
@@ -87,11 +90,16 @@ public class ControladorUsuarios extends Controlador implements MouseListener{
 		Controlador.frame.getPev().rellenaListaLlegadas(new ReservaDAO().getLLegadasHoy(refHotel));
 		Controlador.frame.getPev().rellenaListaSalidas(new ReservaDAO().getSalidasHoy(refHotel));
 		Controlador.frame.getPev().rellenaListaIncidencias(new IncidenciaDAO().getIncidenciaActivas(refHotel));
+		Controlador.frame.getPev().rellenaListaHabitacionesLibres(new HabitacionDAO().getHabitacionesLibres(refHotel));
 	}
 	
-	//MODIFICAR PARA QUE SE ACTUALICE CUANDO SE SELECCIONE OTRO HOTEL
 	public void preparaListadoAdminView(){
 		Controlador.frame.getPav().rellenaListaIncidencias(new IncidenciaDAO().getIncidenciaActivas(refHotel));
+		Controlador.frame.getPav().getTxt_clientes().setText(String.valueOf(new ClienteDAO().getTotalClientes(refHotel)));
+		Controlador.frame.getPav().getTxt_empleados().setText(String.valueOf(new EmpleadoDAO(refHotel).getTotalEmpleados()));
+		Controlador.frame.getPav().getTxt_reservas().setText(String.valueOf(new ReservaDAO().getTotalReservasHoy(refHotel)));
+		Controlador.frame.getPav().getTxt_hab().setText(String.valueOf(new HabitacionDAO().getTotalHabitaciones(refHotel)));
+		Controlador.frame.getPav().getTxt_incidencias().setText(String.valueOf(new IncidenciaDAO().getTotalIncidencias(refHotel)));
 	}
 	
 	public void preparaNuevoHotelView(){

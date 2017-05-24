@@ -29,7 +29,6 @@ public class ControladorReservas extends Controlador{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(e.getActionCommand());
 		switch(e.getActionCommand().toLowerCase()){
 			case "ver reservas": preparaReservasView(); break;
 			case "nueva reserva": preparaNuevaReservaView(); break;
@@ -67,7 +66,7 @@ public class ControladorReservas extends Controlador{
 	
 	public void rellenaTabla(){
 		ReservaDAO modeloReserva = new ReservaDAO();
-		ClienteDAO modeloCliente = new ClienteDAO(refHotel);
+		ClienteDAO modeloCliente = new ClienteDAO();
 		HabitacionDAO modeloHabitacion = new HabitacionDAO();
 		ArrayList <ReservaVO> reservas = modeloReserva.consultaReservas(BD.getSingleDBInstance());
 		ArrayList <ClienteVO> clientes = modeloCliente.rellenaYConsigueArrayClientes();
@@ -90,7 +89,7 @@ public class ControladorReservas extends Controlador{
 	}
 	
 	public void llenaComboBoxClientes(){
-		ClienteDAO modeloCliente = new ClienteDAO(refHotel);
+		ClienteDAO modeloCliente = new ClienteDAO();
 		ArrayList <ClienteVO> clientes = modeloCliente.rellenaYConsigueArrayClientes();
 		nrv.llenaComboBoxClientes(clientes);
 	}

@@ -26,7 +26,6 @@ public class ControladorClientes extends Controlador{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(e.getActionCommand());
 		switch(e.getActionCommand()){
 			case "Ver clientes": preparaClientesView(); break;
 			case "Nuevo cliente": preparaNuevoClienteView(); break;
@@ -44,7 +43,7 @@ public class ControladorClientes extends Controlador{
 		posicionSeleccionada = cv.getTable().getSelectedRow();
 		if(posicionSeleccionada != -1){
 
-		ClienteDAO modeloCliente = new ClienteDAO(refHotel);
+		ClienteDAO modeloCliente = new ClienteDAO();
 		modeloCliente.eliminarCliente(posicionSeleccionada);
 		rellenaTabla();
 		}else{
@@ -53,7 +52,7 @@ public class ControladorClientes extends Controlador{
 	}
 	
 	private void insertaCliente() {
-		ClienteDAO modeloCliente = new ClienteDAO(refHotel);
+		ClienteDAO modeloCliente = new ClienteDAO();
 		ClienteVO cliente = new ClienteVO("",ncv.getTxt_Nombre().getText(),ncv.getTxt_Apellidos().getText(),ncv.getTxt_Identificacion().getText(),ncv.getTxt_FechaNacimiento().getText(),ncv.getTxt_Telefono().getText(),ncv.getTxt_Nacionalidad().getText(),ncv.getTxt_Email().getText(),"");
 
 		if(ncv.getTxt_Apellidos().getText().isEmpty() || ncv.getTxt_Nombre().getText().isEmpty() || ncv.getTxt_Email().getText().isEmpty() || ncv.getTxt_FechaNacimiento().getText().isEmpty() || ncv.getTxt_Identificacion().getText().isEmpty() || ncv.getTxt_Telefono().getText().isEmpty() || ncv.getTxt_Nacionalidad().getText().isEmpty()){
@@ -74,7 +73,7 @@ public class ControladorClientes extends Controlador{
 	}
 	
 	public void rellenaTabla(){
-		ClienteDAO modeloCliente = new ClienteDAO(refHotel);
+		ClienteDAO modeloCliente = new ClienteDAO();
 		ArrayList <ClienteVO> clientes = modeloCliente.rellenaYConsigueArrayClientes();
 		cv.rellenaListaClientes(clientes);
 	}
@@ -98,7 +97,7 @@ public class ControladorClientes extends Controlador{
 	}
 	
 	public void estableceValorCampos(){
-		ClienteDAO modeloCliente = new ClienteDAO(refHotel);
+		ClienteDAO modeloCliente = new ClienteDAO();
 		ArrayList <ClienteVO> clientes = modeloCliente.rellenaYConsigueArrayClientes();
 		mcv.getTxt_Apellidos().setText(clientes.get(posicionSeleccionada).getApellidos());
 		mcv.getTxt_Email().setText(clientes.get(posicionSeleccionada).getEmail());
@@ -111,7 +110,7 @@ public class ControladorClientes extends Controlador{
 	}
 	public void modificaCliente(){
 
-		ClienteDAO modeloCliente = new ClienteDAO(refHotel);
+		ClienteDAO modeloCliente = new ClienteDAO();
 		String apellidos =mcv.getTxt_Apellidos().getText();
 		String email =mcv.getTxt_Email().getText();
 		String fNacimiento =mcv.getTxt_FechaNacimiento().getText();

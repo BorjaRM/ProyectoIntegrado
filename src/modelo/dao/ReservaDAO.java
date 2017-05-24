@@ -111,4 +111,20 @@ public class ReservaDAO {
 		} 		
 		return salidas;
 	}
+	
+	public int getTotalReservasHoy(int refHotel){
+		int total=0;
+		String sql = ("SELECT count(*) AS total_reservas  from ((reserva INNER JOIN estancia ON estancia.id=reserva.cod_habitacion) "
+				+ "INNER JOIN hotel ON estancia.cod_hotel=hotel.codigo) WHERE cod_hotel=?;");
+		try {
+			PreparedStatement consulta = this.bd.getConexion().prepareStatement(sql);
+			consulta.setInt(1, refHotel);
+			ResultSet resultadoConsulta = consulta.executeQuery();
+			while(resultadoConsulta.next())
+				total=resultadoConsulta.getInt("total_reservas");
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return total;
+	}
 }

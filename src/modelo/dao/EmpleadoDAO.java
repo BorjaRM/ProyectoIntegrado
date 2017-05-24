@@ -19,8 +19,9 @@ public class EmpleadoDAO {
 	ArrayList<EmpleadoVO> empleados;
 	ArrayList<UsuarioVO> usuarios;
 	int numero_hotel;
-	public EmpleadoDAO(BD bd, int numero_hotel) {
-		this.bd = bd;
+	
+	public EmpleadoDAO(int numero_hotel) {
+		this.bd = BD.getSingleDBInstance();		
 		this.numero_hotel = numero_hotel;
 		
 	}
@@ -160,6 +161,21 @@ public class EmpleadoDAO {
 			System.err.println("Error modificando empleado");
 		}
 
+	}
+	
+	public int getTotalEmpleados(){
+		int total=0;
+		String sql = ("SELECT COUNT(*) AS total_empleados FROM empleado WHERE empleado.lugar_trabajo=?;");
+		try {
+			PreparedStatement consulta = this.bd.getConexion().prepareStatement(sql);
+			consulta.setInt(1, numero_hotel);
+			ResultSet resultadoConsulta = consulta.executeQuery();
+			while(resultadoConsulta.next())
+				total=resultadoConsulta.getInt("total_empleados");
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return total;
 	}
 
 }

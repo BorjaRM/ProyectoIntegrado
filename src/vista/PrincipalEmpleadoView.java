@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import javax.swing.Box;
 import javax.swing.ListSelectionModel;
 
+import modelo.vo.HabitacionVO;
+
 public class PrincipalEmpleadoView extends JPanel {
 	private JList<String> listaLLegadas;
 	private JList<String> listaSalidas;
@@ -35,13 +37,13 @@ public class PrincipalEmpleadoView extends JPanel {
 		scrollLLegadas.setViewportView(listaLLegadas);
 		llegas_y_salidas.add(scrollLLegadas);
 		
-		//Creamos un modelo para la lista *******************SUSTITUIR***********************
+		/*//Creamos un modelo para la lista *******************SUSTITUIR***********************
 		DefaultListModel<String> llegadasModel = new DefaultListModel<String>();
 		llegadasModel.addElement("8:00 - Alejandro Tortajada");
 		llegadasModel.addElement("10:00 - Andrea Gimeno");
 		llegadasModel.addElement("15:00 - Alejandro Tortajada");
 		llegadasModel.addElement("16:30 - Andrea Gimeno");		
-		listaLLegadas.setModel(llegadasModel);
+		listaLLegadas.setModel(llegadasModel);*/
 		
 		//Creamos la lista de salidas
 		JScrollPane scrollSalidas = new JScrollPane();
@@ -50,12 +52,12 @@ public class PrincipalEmpleadoView extends JPanel {
 		scrollSalidas.setViewportView(listaSalidas);
 		llegas_y_salidas.add(scrollSalidas);
 		
-		//Creamos un modelo para la lista *******************SUSTITUIR***********************
+	/*	//Creamos un modelo para la lista *******************SUSTITUIR***********************
 		DefaultListModel<String> salidasModel = new DefaultListModel<String>();
 		salidasModel.addElement("10:00 - Alejandro Tortajada");
 		salidasModel.addElement("10:00 - Alejandro Tortajada");
 		salidasModel.addElement("10:00 - Alejandro Tortajada");
-		listaSalidas.setModel(salidasModel);
+		listaSalidas.setModel(salidasModel);*/
 
 		//Creamos el segundo splitPane
 		JSplitPane habitaciones_e_incidencias = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
@@ -67,12 +69,12 @@ public class PrincipalEmpleadoView extends JPanel {
 		scrollHabitaciones.setViewportView(listaHabitaciones);
 		habitaciones_e_incidencias.add(scrollHabitaciones);
 		
-		//Creamos un modelo para la lista *******************SUSTITUIR***********************
+	/*	//Creamos un modelo para la lista *******************SUSTITUIR***********************
 		DefaultListModel<String> habitacionesModel = new DefaultListModel<String>();
 		habitacionesModel.addElement("Habitacion libre 1");
 		habitacionesModel.addElement("Habitacion libre 2");
 		habitacionesModel.addElement("Habitacion libre 3");
-		listaHabitaciones.setModel(habitacionesModel);
+		listaHabitaciones.setModel(habitacionesModel);*/
 
 		//Creamos la lista de incidencias
 		JScrollPane scrollIncidencias = new JScrollPane();
@@ -81,12 +83,12 @@ public class PrincipalEmpleadoView extends JPanel {
 		scrollIncidencias.setViewportView(listaIncidencias);
 		habitaciones_e_incidencias.add(scrollIncidencias);
 		
-		//Creamos un modelo para la lista *******************SUSTITUIR***********************
+	/*	//Creamos un modelo para la lista *******************SUSTITUIR***********************
 		DefaultListModel<String> incidenciasModel = new DefaultListModel<String>();
 		incidenciasModel.addElement("incidencia 1");
 		incidenciasModel.addElement("incidencia 2");
 		incidenciasModel.addElement("incidencia 3");
-		listaIncidencias.setModel(incidenciasModel);
+		listaIncidencias.setModel(incidenciasModel);*/
 		setLayout(new BorderLayout(0, 0));
 		
 		//Creamos un tercer SplitPane que contiene al uno y al dos
@@ -108,45 +110,51 @@ public class PrincipalEmpleadoView extends JPanel {
 	}
 	
 	public void rellenaListaLlegadas(ArrayList<String> llegadas){
+		DefaultListModel<String> listModel = new DefaultListModel<String>();
+		listModel.addElement("Llegadas hoy:");
 		if(!llegadas.isEmpty()){
-			//Creamos un modelo por defecto
-			DefaultListModel listModel = new DefaultListModel();
-			//Añadimos los datos
-			listModel.addElement("Llegadas hoy:");
 			for(String llegada: llegadas){
 				listModel.addElement(llegada);
 			}
-			//Añadimos el modelo por defecto a la lista
-			listaLLegadas.setModel(listModel);
-		}
+		}else
+			listModel.addElement("no hay llegadas previstas para hoy");
+		listaLLegadas.setModel(listModel);
 	}
 	
 	public void rellenaListaSalidas(ArrayList<String> salidas){
+		DefaultListModel<String> listModel = new DefaultListModel<String>();
+		listModel.addElement("Salidas hoy:");
 		if(!salidas.isEmpty()){
-			//Creamos un modelo por defecto
-			DefaultListModel listModel = new DefaultListModel();
-			//Añadimos los datos
-			listModel.addElement("Salidas hoy:");
 			for(String salida: salidas){
 				listModel.addElement(salida);
 			}
-			//Añadimos el modelo por defecto a la lista
-			listaSalidas.setModel(listModel);
-		}
+		}else
+			listModel.addElement("no hay salidas previstas para hoy");
+		listaSalidas.setModel(listModel);
 	}
 	
 	public void rellenaListaIncidencias(ArrayList<String> incidencias){
+		DefaultListModel<String> listModel = new DefaultListModel<String>();
+		listModel.addElement("Incidencias activas:");
 		if(!incidencias.isEmpty()){
-			//Creamos un modelo por defecto
-			DefaultListModel listModel = new DefaultListModel();
-			//Añadimos los datos
-			listModel.addElement("Incidencias activas:");
 			for(String incidencia: incidencias){
 				listModel.addElement(incidencia);
 			}
-			//Añadimos el modelo por defecto a la lista
-			listaIncidencias.setModel(listModel);
-		}
+		}else
+			listModel.addElement("no hay incidencias activas");
+		listaIncidencias.setModel(listModel);
+	}
+	
+	public void rellenaListaHabitacionesLibres(ArrayList<HabitacionVO> habitaciones){
+		DefaultListModel<String> listModel = new DefaultListModel<String>();
+		listModel.addElement("Habitaciones disponibles:");
+		if(!habitaciones.isEmpty()){
+			for(HabitacionVO h: habitaciones){
+				listModel.addElement(h.getNombre()+" - "+h.getClasificacion()+" "+h.getPlazas()+" plazas, "+h.getPrecio()+"€ "+h.getDescripcion());
+			}
+		}else
+			listModel.addElement("no hay habitaciones disponibles");
+		listaHabitaciones.setModel(listModel);
 	}
 
 }

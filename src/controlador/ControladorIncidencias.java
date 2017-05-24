@@ -23,7 +23,6 @@ public class ControladorIncidencias extends Controlador{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(e.getActionCommand());
 		switch(e.getActionCommand().toLowerCase()){
 			case "ver incidencias": preparaIncidenciasView(); break;
 			case "nueva incidencia": preparaNuevaIncidenciaView(); break;

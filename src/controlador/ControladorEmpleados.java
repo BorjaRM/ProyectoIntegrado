@@ -35,7 +35,6 @@ public class ControladorEmpleados extends Controlador{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(e.getActionCommand());
 		switch(e.getActionCommand()){
 			case "Ver empleados": preparaEmpleadosView(); break;
 			case "Nuevo empleado": preparaNuevoEmpleadoView(); break;
@@ -50,7 +49,7 @@ public class ControladorEmpleados extends Controlador{
 
 	
 	private void insertarEmpleado() {
-		EmpleadoDAO modeloEmpleado = new EmpleadoDAO(modelo, refHotel);
+		EmpleadoDAO modeloEmpleado = new EmpleadoDAO(Controlador.refHotel);
 		//UsuarioDAO modeloUsuario = new UsuarioDAO(modelo);
 		if(nev.getTxtUsuario().getText().isEmpty() || nev.getPasswordField().getText().isEmpty() || nev.getTxtNombre().getText().isEmpty() || nev.getTxtApellido1().getText().isEmpty() || nev.getTxtApellido2().getText().isEmpty() || nev.getTxtIdentificacion().getText().isEmpty() || nev.getTxtTelefono().getText().isEmpty() || nev.getTxtSalario().getText().isEmpty() || nev.getTxtSeguridadSocial().getText().isEmpty() /*|| nev.getTxtFechaAlta().getText().isEmpty() */ || nev.getTxtLugarTrabajo().getText().isEmpty()){
 			JOptionPane.showMessageDialog(null, "Faltan datos por rellenar, Error");	
@@ -74,7 +73,7 @@ public class ControladorEmpleados extends Controlador{
 	}
 	
 	public void rellenaTabla(){
-		EmpleadoDAO modeloEmpleado = new EmpleadoDAO(modelo, refHotel);
+		EmpleadoDAO modeloEmpleado = new EmpleadoDAO(Controlador.refHotel);
 		ArrayList <EmpleadoVO> empleados = modeloEmpleado.rellenarYConseguirArrayEmpleados();
 		ev.rellenaListaEmpleados(empleados);
 	}
@@ -97,7 +96,7 @@ public class ControladorEmpleados extends Controlador{
 	private void eliminaEmpleado(){
 		int posicionParaEliminar = ev.getTable().getSelectedRow();
 		if(posicionParaEliminar != -1){
-		EmpleadoDAO modeloEmpleado = new EmpleadoDAO(modelo,refHotel);
+		EmpleadoDAO modeloEmpleado = new EmpleadoDAO(Controlador.refHotel);
 		modeloEmpleado.eliminarEmpleado(posicionParaEliminar);
 		rellenaTabla();
 		}else{
@@ -106,7 +105,7 @@ public class ControladorEmpleados extends Controlador{
 	}
 	
 	public void estableceValorCampos(){
-		EmpleadoDAO modeloEmpleado = new EmpleadoDAO(modelo, refHotel);
+		EmpleadoDAO modeloEmpleado = new EmpleadoDAO(Controlador.refHotel);
 		ArrayList <EmpleadoVO> empleados = modeloEmpleado.rellenarYConseguirArrayEmpleados();
 		int posicionSeleccionada = ev.getTable().getSelectedRow();
 		String lugar_trabajo = String.valueOf(empleados.get(posicionSeleccionada).getLugar_trabajo());
@@ -125,7 +124,7 @@ public class ControladorEmpleados extends Controlador{
 	}
 
 	public void modificarEmpleado(){
-		EmpleadoDAO modeloEmpleado = new EmpleadoDAO(modelo, refHotel);
+		EmpleadoDAO modeloEmpleado = new EmpleadoDAO(Controlador.refHotel);
 		
 		
 	}

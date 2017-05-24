@@ -34,7 +34,6 @@ public class ControladorEstancias extends Controlador implements ListSelectionLi
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(e.getActionCommand());
 		switch(e.getActionCommand().toLowerCase()){
 			case "ver estancias": preparaEstanciasView(); break;
 			case "nueva estancia": preparaNuevaEstanciaView(); break;

@@ -71,11 +71,12 @@ public class IncidenciaDAO {
 	public ArrayList<String> getIncidenciaActivas(int refHotel){
 		ArrayList<String> incidencias = new ArrayList<String>();
 		String incidencia;
+		System.out.println(refHotel);
 		
 		try{
-			String sql = "SELECT concat(estancia.nombre,' - ',incidencia.descripcion) AS incidencia FROM incidencia INNER JOIN "
-					+ "estancia ON incidencia.cod_estancia=estancia.id INNER JOIN hotel ON estancia.cod_hotel=hotel.codigo AND "
-					+ "hotel.codigo=? AND incidencia.estado='activa';";
+			String sql = "SELECT concat(estancia.nombre,' - ',incidencia.descripcion) AS incidencia  FROM incidencia INNER JOIN "
+					+ "estancia ON incidencia.cod_estancia=estancia.id INNER JOIN hotel ON estancia.cod_hotel=hotel.codigo WHERE "
+					+ "incidencia.estado='activa' AND hotel.codigo=?;";
 			PreparedStatement ps = this.bd.getConexion().prepareStatement(sql);
 			ps.setInt(1, refHotel);
 			ResultSet resultadoConsulta = ps.executeQuery();
@@ -90,6 +91,22 @@ public class IncidenciaDAO {
 		} 		
 		return incidencias;
 	} 
+	
+	public int getTotalIncidencias(int refHotel){
+		int total=0;
+		String sql = ("SELECT count(*) AS total_incidencias FROM incidencia INNER JOIN estancia ON incidencia.cod_estancia=estancia.id "
+				+ "INNER JOIN hotel ON estancia.cod_hotel=hotel.codigo WHERE incidencia.estado='activa' AND hotel.codigo=?;");
+		try {
+			PreparedStatement consulta = this.bd.getConexion().prepareStatement(sql);
+			consulta.setInt(1, refHotel);
+			ResultSet resultadoConsulta = consulta.executeQuery();
+			while(resultadoConsulta.next())
+				total=resultadoConsulta.getInt("total_incidencias");
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return total;
+	}
 	
 	
 }

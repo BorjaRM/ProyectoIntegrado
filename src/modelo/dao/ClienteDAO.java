@@ -1,6 +1,6 @@
 package modelo.dao;
 
-import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,41 +13,34 @@ import modelo.BD;
 import modelo.vo.ClienteVO;
 
 public class ClienteDAO {
-
 	BD bd ;
 	ArrayList <ClienteVO> clientes;
-	int referenciaHotel;
 	
-	public ClienteDAO (int referenciaHotel){
-		this.bd = BD.getSingleDBInstance();;
-		
+	public ClienteDAO (){
+		this.bd = BD.getSingleDBInstance();		
 	}
 	
 	public ArrayList <ClienteVO> rellenaYConsigueArrayClientes(){
 		clientes = new ArrayList <ClienteVO>();
 		try{
-		Statement stmt = bd.getConexion().createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT * FROM cliente;");
-		while (rs.next()){
-			String codigo = rs.getString("codigo");
-			String nombre = rs.getString("nombre");
-			String apellidos = rs.getString("apellidos");
-			String identificacion = rs.getString("identificacion");
-			String fecha_nacimiento = rs.getString("fecha_nacimiento");
-			String telefono = rs.getString("telefono");
-			String nacionalidad = rs.getString("nacionalidad");
-			String Email = rs.getString("email");
-			String fecha_alta = rs.getString("fecha_alta");
-			ClienteVO c = new ClienteVO(codigo, nombre, apellidos, identificacion, fecha_nacimiento, telefono, nacionalidad, Email, fecha_alta);
-			clientes.add(c);
-		}
-
-		
-		}
-		catch(Exception e){
+			Statement stmt = bd.getConexion().createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM cliente;");
+			while (rs.next()){
+				String codigo = rs.getString("codigo");
+				String nombre = rs.getString("nombre");
+				String apellidos = rs.getString("apellidos");
+				String identificacion = rs.getString("identificacion");
+				String fecha_nacimiento = rs.getString("fecha_nacimiento");
+				String telefono = rs.getString("telefono");
+				String nacionalidad = rs.getString("nacionalidad");
+				String Email = rs.getString("email");
+				String fecha_alta = rs.getString("fecha_alta");
+				ClienteVO c = new ClienteVO(codigo, nombre, apellidos, identificacion, fecha_nacimiento, telefono, nacionalidad, Email, fecha_alta);
+				clientes.add(c);
+			}
+		}catch(Exception e){
 			System.err.println("Error plenant el Array de clientes");
 		}
-	
 		return clientes;
 	}
 	
@@ -96,5 +89,22 @@ public class ClienteDAO {
 		} catch (Exception e) {
 			System.err.println("Error modificando cliente."+e);
 		}
+	}
+	
+	public int getTotalClientes(int refHotel){
+		int total=0;
+		String sql = ("SELECT COUNT(*) AS total_clientes FROM ((((reserva INNER JOIN estancia on reserva.cod_habitacion=estancia.id) "
+				+ "INNER JOIN hotel ON estancia.cod_hotel=hotel.codigo)) INNER JOIN cliente ON reserva.cod_cliente=cliente.codigo) "
+				+ "WHERE hotel.codigo = ?;");
+		try {
+			PreparedStatement consulta = this.bd.getConexion().prepareStatement(sql);
+			consulta.setInt(1, refHotel);
+			ResultSet resultadoConsulta = consulta.executeQuery();
+			while(resultadoConsulta.next())
+				total=resultadoConsulta.getInt("total_clientes");
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return total;
 	}
 }

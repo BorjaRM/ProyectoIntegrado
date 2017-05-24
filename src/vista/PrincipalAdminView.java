@@ -14,7 +14,6 @@ import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.SpringLayout;
 
-import controlador.Controlador;
 import controlador.ControladorUsuarios;
 import modelo.vo.HotelVO;
 
@@ -26,7 +25,12 @@ public class PrincipalAdminView extends JPanel {
 	private JButton btn_nuevoHotel;
 	private JButton btn_eliminarHotel;
 	private JComboBox<HotelVO> desplegableHoteles;
-	private JList incidenciasList;
+	private JList<String> incidenciasList;
+	private JLabel txt_clientes;
+	private JLabel txt_empleados;
+	private JLabel txt_reservas;
+	private JLabel txt_hab;
+	private JLabel txt_incidencias;
 
 	/**
 	 * Create the panel.
@@ -96,22 +100,22 @@ public class PrincipalAdminView extends JPanel {
 		panel_3.add(panel_5);
 		panel_5.setLayout(new BoxLayout(panel_5, BoxLayout.Y_AXIS));
 		
-		JLabel txt_clientes = new JLabel("New label");
+		txt_clientes = new JLabel("New label");
 		panel_5.add(txt_clientes);
 		
-		JLabel txt_empleados = new JLabel("New label");
+		txt_empleados = new JLabel("New label");
 		panel_5.add(txt_empleados);
 		
-		JLabel txt_reservas = new JLabel("New label");
+		txt_reservas = new JLabel("New label");
 		panel_5.add(txt_reservas);
 		
-		JLabel txt_hab = new JLabel("New label");
+		txt_hab = new JLabel("New label");
 		panel_5.add(txt_hab);
 		
-		JLabel txt_incidencias = new JLabel("New label");
+		txt_incidencias = new JLabel("New label");
 		panel_5.add(txt_incidencias);
 		
-		incidenciasList = new JList();		
+		incidenciasList = new JList<String>();		
 		JScrollPane scrollPane = new JScrollPane();
 		sl_panel_1.putConstraint(SpringLayout.EAST, panel_3, -20, SpringLayout.WEST, scrollPane);
 		sl_panel_1.putConstraint(SpringLayout.NORTH, scrollPane, 0, SpringLayout.NORTH, panel_3);
@@ -125,9 +129,6 @@ public class PrincipalAdminView extends JPanel {
 	public void estableceControlador(ControladorUsuarios controlador) {
 		this.btn_nuevoHotel.addActionListener(controlador);
 		this.btn_eliminarHotel.addActionListener(controlador);
-	}
-	
-	public void estableceControlador(Controlador controlador) {
 		this.desplegableHoteles.addActionListener(controlador);
 	}
 	
@@ -141,7 +142,7 @@ public class PrincipalAdminView extends JPanel {
 	public void rellenaListaIncidencias(ArrayList<String> incidencias){
 		if(!incidencias.isEmpty()){
 			//Creamos un modelo por defecto
-			DefaultListModel listModel = new DefaultListModel();
+			DefaultListModel<String> listModel = new DefaultListModel<String>();
 			//Añadimos los datos
 			listModel.addElement("Incidencias activas:");
 			for(String incidencia: incidencias){
@@ -154,6 +155,26 @@ public class PrincipalAdminView extends JPanel {
 
 	public JComboBox<HotelVO> getDesplegableHoteles() {
 		return desplegableHoteles;
+	}
+
+	public JLabel getTxt_clientes() {
+		return txt_clientes;
+	}
+
+	public JLabel getTxt_empleados() {
+		return txt_empleados;
+	}
+
+	public JLabel getTxt_reservas() {
+		return txt_reservas;
+	}
+
+	public JLabel getTxt_hab() {
+		return txt_hab;
+	}
+
+	public JLabel getTxt_incidencias() {
+		return txt_incidencias;
 	}	
 
 }

@@ -81,5 +81,50 @@ public class HabitacionDAO {
 			}
 		}
 	}
+	
+	public ArrayList<HabitacionVO> getHabitacionesLibres(int refHotel){
+		ArrayList<HabitacionVO> habitaciones = new ArrayList<HabitacionVO>();
+		int id_estancia,cod_hotel = 0,plazas,precio;
+		String tipo_hab,nombre,clasificacion,descripcion;
+		String sql = ("SELECT * FROM estancia INNER JOIN habitacion ON estancia.id=habitacion.id_estancia WHERE estancia.id NOT IN "
+				+ "(SELECT estancia.id FROM ((reserva INNER JOIN estancia ON estancia.id=reserva.cod_habitacion) INNER JOIN hotel ON "
+				+ "estancia.cod_hotel=hotel.codigo) WHERE reserva.inicio=CURDATE()) AND estancia.tipo='habitacion' AND "
+				+ "estancia.cod_hotel=?;");
+		try {
+			PreparedStatement consulta = this.modelo.getConexion().prepareStatement(sql);
+			consulta.setInt(1, refHotel);
+			ResultSet resultadoConsulta = consulta.executeQuery();
+			while(resultadoConsulta.next()){
+				cod_hotel=resultadoConsulta.getInt("cod_hotel");
+				tipo_hab=resultadoConsulta.getString("tipo");
+				id_estancia=resultadoConsulta.getInt("id");
+				nombre=resultadoConsulta.getString("nombre");
+				clasificacion=resultadoConsulta.getString("clasificacion");
+				plazas=resultadoConsulta.getInt("plazas");
+				precio=resultadoConsulta.getInt("precio");
+				descripcion=resultadoConsulta.getString("descripcion");
+				//Creamos un objeto Habitacion y lo añadimos al Arraylist
+				habitaciones.add(new HabitacionVO(id_estancia,cod_hotel,nombre,tipo_hab,clasificacion,plazas,precio,descripcion));	
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return habitaciones;		
+	}
+	
+	public int getTotalHabitaciones(int refHotel){
+		int total=0;
+		String sql = ("SELECT COUNT(*) AS total_estancias from estancia WHERE estancia.tipo='habitacion' AND estancia.cod_hotel=?;");
+		try {
+			PreparedStatement consulta = this.modelo.getConexion().prepareStatement(sql);
+			consulta.setInt(1, refHotel);
+			ResultSet resultadoConsulta = consulta.executeQuery();
+			while(resultadoConsulta.next())
+				total=resultadoConsulta.getInt("total_estancias");
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return total;
+	}
 			
 }

@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import javax.swing.JCheckBox;
 import modelo.BD;
+import modelo.dao.IncidenciaDAO;
 import modelo.dao.UsuarioDAO;
 import modelo.vo.HotelVO;
 import vista.Marco;
@@ -43,11 +44,10 @@ public class Controlador implements ActionListener, ItemListener{
 		System.out.println(e.getActionCommand());
 		switch(e.getActionCommand().toLowerCase()){
 			case "obtener permisos": setPermisos((JCheckBox) e.getSource()); break;
-			case "nueva referencia hotel": actualizaReferenciaHotelAdmin(); break;
 		}				
 	}
 	
-	private void setPermisos(JCheckBox soyAdmin){
+	public void setPermisos(JCheckBox soyAdmin){
 		esAdministrador=soyAdmin.isSelected();
 	}
 

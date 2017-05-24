@@ -21,7 +21,7 @@ import interfaces.IControladorIncidencias;
 import modelo.vo.EstanciaVO;
 
 public class NuevaIncidenciaView extends JPanel implements IControladorIncidencias{
-	private JComboBox comboBox;
+	private JComboBox<EstanciaVO> comboBox;
 	private JButton btnEnviar;
 	private JButton btnCancelar;
 	private JTextArea textArea;
@@ -43,7 +43,7 @@ public class NuevaIncidenciaView extends JPanel implements IControladorIncidenci
 		Component horizontalStrut_1 = Box.createHorizontalStrut(100);
 		panel_2.add(horizontalStrut_1, BorderLayout.WEST);
 		
-		comboBox = new JComboBox();
+		comboBox = new JComboBox<EstanciaVO>();
 		panel_2.add(comboBox, BorderLayout.CENTER);
 		
 		JPanel panel_3 = new JPanel();
@@ -105,7 +105,7 @@ public class NuevaIncidenciaView extends JPanel implements IControladorIncidenci
 		this.btnCancelar.addActionListener(controlador);
 	}
 	public void rellenaComboBox(ArrayList <EstanciaVO> Estancias){
-		
+		comboBox.removeAllItems();
 		for (int i = 0 ; i < Estancias.size(); i++){
 			System.err.println(Estancias.get(i).getNombre());
 			comboBox.addItem(Estancias.get(i));
@@ -113,11 +113,11 @@ public class NuevaIncidenciaView extends JPanel implements IControladorIncidenci
 		}
 	}
 
-	public JComboBox getComboBox() {
+	public JComboBox<EstanciaVO> getComboBox() {
 		return comboBox;
 	}
 
-	public void setComboBox(JComboBox comboBox) {
+	public void setComboBox(JComboBox<EstanciaVO> comboBox) {
 		this.comboBox = comboBox;
 	}
 

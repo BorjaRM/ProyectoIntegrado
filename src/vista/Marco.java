@@ -65,7 +65,6 @@ public class Marco extends JFrame{
 	
 	/**
 	 * Create the frame.
-	 * @param controlador 
 	 */
 	public Marco(ResourceBundle bundle) {
 		Marco.bundle=bundle;
@@ -134,11 +133,10 @@ public class Marco extends JFrame{
 		vistas.setLayout(cl);				
 	}
 	
-	public void creaPrincipalAdminView(Controlador c1, ControladorUsuarios c2){
+	public void creaPrincipalAdminView(ControladorUsuarios controlador){
 		if(pav == null){
 			pav = new PrincipalAdminView(bundle);
-			pav.estableceControlador(c1);
-			pav.estableceControlador(c2);
+			pav.estableceControlador(controlador);
 			vistas.add(pav,PRINCIPAL_ADMIN);
 		}
 	}
