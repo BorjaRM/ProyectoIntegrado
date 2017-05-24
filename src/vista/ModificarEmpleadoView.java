@@ -3,6 +3,7 @@ package vista;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
+import java.util.ResourceBundle;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -13,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import controlador.ControladorEmpleados;
+import idiomas.Idiomas;
 import interfaces.IControladorEmpleados;
 import javax.swing.JPasswordField;
 
@@ -29,12 +31,15 @@ public class ModificarEmpleadoView extends JPanel implements IControladorEmplead
 	private JButton btnCancelar;
 	private JTextField txtUsuario;
 	private JPasswordField passwordField;
-
+	ResourceBundle bundle;
+	
 	/**
 	 * Create the panel.
 	 */
 	public ModificarEmpleadoView() {
-setLayout(new BorderLayout(0, 0));
+		bundle = Idiomas.getBundle();
+		
+		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel9;
 		
@@ -52,7 +57,7 @@ setLayout(new BorderLayout(0, 0));
 		panel_2.add(panel_3);
 		panel_3.setLayout(new BoxLayout(panel_3, BoxLayout.X_AXIS));
 		
-		JLabel lblNombre = new JLabel("Nombre:");
+		JLabel lblNombre = new JLabel(bundle.getString("jLblModEmpNomb"));
 		panel_3.add(lblNombre);
 		
 		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
@@ -69,7 +74,7 @@ setLayout(new BorderLayout(0, 0));
 		panel_2.add(panel_4);
 		panel_4.setLayout(new BoxLayout(panel_4, BoxLayout.X_AXIS));
 		
-		JLabel lblApellido1 = new JLabel("Primer apellido:");
+		JLabel lblApellido1 = new JLabel(bundle.getString("jLblModEmpApell1"));
 		panel_4.add(lblApellido1);
 		
 		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
@@ -86,7 +91,7 @@ setLayout(new BorderLayout(0, 0));
 		panel_2.add(panel_5);
 		panel_5.setLayout(new BoxLayout(panel_5, BoxLayout.X_AXIS));
 		
-		JLabel lblApellido2 = new JLabel("Segundo apellido:");
+		JLabel lblApellido2 = new JLabel(bundle.getString("jLblModEmpApell2"));
 		panel_5.add(lblApellido2);
 		
 		Component horizontalStrut_4 = Box.createHorizontalStrut(20);
@@ -103,7 +108,7 @@ setLayout(new BorderLayout(0, 0));
 		panel_2.add(panel6);
 		panel6.setLayout(new BoxLayout(panel6, BoxLayout.X_AXIS));
 		
-		JLabel lblIdentificacion = new JLabel("Identificacion:");
+		JLabel lblIdentificacion = new JLabel(bundle.getString("jLblModEmpID"));
 		panel6.add(lblIdentificacion);
 		
 		Component horizontalStrut_5 = Box.createHorizontalStrut(20);
@@ -120,7 +125,7 @@ setLayout(new BorderLayout(0, 0));
 		panel_2.add(panel7);
 		panel7.setLayout(new BoxLayout(panel7, BoxLayout.X_AXIS));
 		
-		JLabel lblTelefono = new JLabel("Telefono:");
+		JLabel lblTelefono = new JLabel(bundle.getString("jLblModEmpTelef"));
 		panel7.add(lblTelefono);
 		
 		Component horizontalStrut_6 = Box.createHorizontalStrut(20);
@@ -137,7 +142,7 @@ setLayout(new BorderLayout(0, 0));
 		panel_2.add(panel8);
 		panel8.setLayout(new BoxLayout(panel8, BoxLayout.X_AXIS));
 		
-		JLabel lblSalario = new JLabel("Salario:");
+		JLabel lblSalario = new JLabel(bundle.getString("jLblModEmpSalario"));
 		panel8.add(lblSalario);
 		
 		Component horizontalStrut_9 = Box.createHorizontalStrut(20);
@@ -153,7 +158,7 @@ setLayout(new BorderLayout(0, 0));
 		panel_2.add(panel9);
 		panel9.setLayout(new BoxLayout(panel9, BoxLayout.X_AXIS));
 		
-		JLabel lblSeguridadSocial = new JLabel("Seguridad Social:");
+		JLabel lblSeguridadSocial = new JLabel(bundle.getString("jLblModEmpSS"));
 		panel9.add(lblSeguridadSocial);
 		
 		Component horizontalStrut_7 = Box.createHorizontalStrut(20);
@@ -170,7 +175,7 @@ setLayout(new BorderLayout(0, 0));
 		panel_2.add(panel_1);
 		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.X_AXIS));
 		
-		JLabel lblUsuario = new JLabel("Usuario:");
+		JLabel lblUsuario = new JLabel(bundle.getString("jLblModEmpUsuaio"));
 		panel_1.add(lblUsuario);
 		
 		Component horizontalStrut_11 = Box.createHorizontalStrut(20);
@@ -187,7 +192,7 @@ setLayout(new BorderLayout(0, 0));
 		panel_2.add(panel_6);
 		panel_6.setLayout(new BoxLayout(panel_6, BoxLayout.X_AXIS));
 		
-		JLabel lblContrasea = new JLabel("Contraseña:");
+		JLabel lblContrasea = new JLabel(bundle.getString("jLblModEmpPasswd"));
 		panel_6.add(lblContrasea);
 		
 		Component horizontalStrut_12 = Box.createHorizontalStrut(20);
@@ -227,10 +232,10 @@ setLayout(new BorderLayout(0, 0));
 		fl_botonera.setAlignment(FlowLayout.RIGHT);
 		add(botonera, BorderLayout.SOUTH);
 		
-		btnModificar = new JButton("Modificar");
-		botonera.add(btnModificar);
+		btnModificar = new JButton(bundle.getString("btnModEmpEnviar"));
+		botonera.add(btnModificar);// LOS PUTOS ACTION 
 		
-		btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton(bundle.getString("btnModEmpCancelar"));
 		botonera.add(btnCancelar);
 		
 

@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -14,6 +15,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.ControladorEmpleados;
+import idiomas.Idiomas;
 import interfaces.IControladorEmpleados;
 import modelo.vo.EmpleadoVO;
 
@@ -23,11 +25,14 @@ public class EmpleadosView extends JPanel implements IControladorEmpleados{
 	private JButton btnEliminarEmpleado;
 	private JButton btnModificarEmpleado;
 	JScrollPane scrollPane;
-
+	ResourceBundle bundle;
+	
 	/**
 	 * Create the panel.
 	 */
 	public EmpleadosView() {
+		bundle = Idiomas.getBundle();
+		
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
@@ -36,15 +41,15 @@ public class EmpleadosView extends JPanel implements IControladorEmpleados{
 		flowLayout.setHgap(30);
 		add(panel, BorderLayout.NORTH);
 		
-		btnNuevoEmpleado = new JButton("Nuevo empleado");
+		btnNuevoEmpleado = new JButton(bundle.getString("btnNewEmp"));
 		btnNuevoEmpleado.setActionCommand("Nuevo empleado");
 		panel.add(btnNuevoEmpleado);
 		
-		btnEliminarEmpleado = new JButton("Eliminar Empleado");
+		btnEliminarEmpleado = new JButton(bundle.getString("btnRmvEmp"));
 		btnEliminarEmpleado.setActionCommand("Eliminar Empleado");
 		panel.add(btnEliminarEmpleado);
 		
-		btnModificarEmpleado = new JButton("Modificar Empleado");
+		btnModificarEmpleado = new JButton(bundle.getString("btnModEmp"));
 		btnModificarEmpleado.setActionCommand("Modificar Empleado");
 		panel.add(btnModificarEmpleado);
 		
@@ -62,8 +67,9 @@ public class EmpleadosView extends JPanel implements IControladorEmpleados{
 		}
 	
 	public void rellenaListaEmpleados(ArrayList <EmpleadoVO> empleados){
+		bundle = Idiomas.getBundle();
 		
-		String[] colHeader = {"ID","Nombre","Apellidos","Telefono","Inicio contrato"};
+		String[] colHeader = {bundle.getString("jTblEmpID"),bundle.getString("jTblEmpNomb"),bundle.getString("jTblEmpApell"),bundle.getString("jTblEmpTelef"),bundle.getString("jTblEmpIniContr")};
 		DefaultTableModel table_model = new DefaultTableModel(colHeader,0);
 		table = new JTable(table_model);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
