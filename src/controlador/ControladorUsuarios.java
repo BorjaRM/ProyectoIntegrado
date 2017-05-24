@@ -6,6 +6,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JOptionPane;
 
+import idiomas.Idiomas;
 import modelo.dao.ClienteDAO;
 import modelo.dao.EmpleadoDAO;
 import modelo.dao.HabitacionDAO;
@@ -27,7 +28,9 @@ public class ControladorUsuarios extends Controlador implements MouseListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch(e.getActionCommand().toLowerCase()){
-			case "entrar": verificaAcceso(); break;
+			case "entrar": 	compruebaIdioma();
+							verificaAcceso();			
+							break;
 			case "enviar": enviar(); break;
 			case "cancelar": cancelar(); break;
 			case "nuevo hotel": preparaNuevoHotelView(); break;
@@ -118,6 +121,14 @@ public class ControladorUsuarios extends Controlador implements MouseListener{
 		if(eleccion == JOptionPane.YES_OPTION) {
 			consultasHotel.eliminaHotel(refHotel);
 			preparaDesplegableHotelView();
+		}
+	}
+	
+	public void compruebaIdioma() {
+		
+		if (Idiomas.getBundle() == null) {
+			
+			Idiomas.newIdioma("Español");
 		}
 	}
 

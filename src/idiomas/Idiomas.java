@@ -4,7 +4,7 @@ import java.util.ResourceBundle;
 
 public class Idiomas {
 
-	static ResourceBundle bundle = null;
+	private static ResourceBundle bundle = null;
 	String var_idioma = new String("");
 	
 	
@@ -18,12 +18,19 @@ public class Idiomas {
 		//Seleccion entre un idioma y otro
 		
 		if (bundle == null) {
-			if (idioma == "ingles") {
-				
-				bundle = ResourceBundle.getBundle("en_UK");
-			} else {
 			
-				bundle = ResourceBundle.getBundle("es_ES");
+			switch (idioma) {
+			
+			case "Español": 
+				bundle = ResourceBundle.getBundle("idiomas/es_ES");
+				break;
+			case "English":
+				bundle = ResourceBundle.getBundle("idiomas/en_UK");
+				break;
+				
+			default:
+				bundle = ResourceBundle.getBundle("idiomas/es_ES");
+				break;
 			}
 		}
 		
