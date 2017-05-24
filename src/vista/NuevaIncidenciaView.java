@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.Box;
@@ -18,13 +20,18 @@ import javax.swing.SwingConstants;
 
 import controlador.ControladorIncidencias;
 import interfaces.IControladorIncidencias;
+import modelo.dao.IncidenciaDAO;
 import modelo.vo.EstanciaVO;
+import modelo.vo.IncidenciaVO;
+
 
 public class NuevaIncidenciaView extends JPanel implements IControladorIncidencias{
 	private JComboBox<EstanciaVO> comboBox;
 	private JButton btnEnviar;
 	private JButton btnCancelar;
 	private JTextArea textArea;
+	private ArrayList <EstanciaVO> misEstancias;
+	private int cod_estancia=0;
 	
 	public NuevaIncidenciaView() {
 		setLayout(new BorderLayout(0, 0));
@@ -44,6 +51,15 @@ public class NuevaIncidenciaView extends JPanel implements IControladorIncidenci
 		panel_2.add(horizontalStrut_1, BorderLayout.WEST);
 		
 		comboBox = new JComboBox<EstanciaVO>();
+		comboBox.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			int posSeleccio = comboBox.getSelectedIndex();
+
+			cod_estancia = misEstancias.get(posSeleccio).getId();
+			}
+		});
 		panel_2.add(comboBox, BorderLayout.CENTER);
 		
 		JPanel panel_3 = new JPanel();
@@ -112,7 +128,15 @@ public class NuevaIncidenciaView extends JPanel implements IControladorIncidenci
 
 		}
 	}
+	public IncidenciaVO enviarDatosIncidencia(){
+		IncidenciaDAO in = new IncidenciaDAO();
+		String descripcion = this.textArea.getText().toUpperCase();
+		boolean estado = true;
+		String fecha = in.obtenFecha();
 
+		IncidenciaVO objIn = new IncidenciaVO(0,descripcion,estado,fecha,cod_estancia);
+		return objIn;
+	}
 	public JComboBox<EstanciaVO> getComboBox() {
 		return comboBox;
 	}
