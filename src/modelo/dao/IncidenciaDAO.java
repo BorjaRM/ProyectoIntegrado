@@ -92,5 +92,21 @@ public class IncidenciaDAO {
 		return incidencias;
 	} 
 	
+	public int getTotalIncidencias(int refHotel){
+		int total=0;
+		String sql = ("SELECT count(*) AS total_incidencias FROM incidencia INNER JOIN estancia ON incidencia.cod_estancia=estancia.id "
+				+ "INNER JOIN hotel ON estancia.cod_hotel=hotel.codigo WHERE incidencia.estado='activa' AND hotel.codigo=?;");
+		try {
+			PreparedStatement consulta = this.bd.getConexion().prepareStatement(sql);
+			consulta.setInt(1, refHotel);
+			ResultSet resultadoConsulta = consulta.executeQuery();
+			while(resultadoConsulta.next())
+				total=resultadoConsulta.getInt("total_incidencias");
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return total;
+	}
+	
 	
 }

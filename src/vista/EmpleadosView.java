@@ -83,8 +83,6 @@ public class EmpleadosView extends JPanel implements IControladorEmpleados{
 			
 	}
 	
-	
-
 	public JTable getTable() {
 		return table;
 	}
