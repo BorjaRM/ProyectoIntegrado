@@ -1,5 +1,6 @@
 package modelo.dao;
 
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,6 +33,7 @@ public class EmpleadoDAO {
 	
 		empleados = new ArrayList<EmpleadoVO>();
 		try {
+			
 			String sql = "SELECT * FROM Empleado WHERE lugar_trabajo=?;";
 			PreparedStatement ps = this.bd.getConexion().prepareStatement(sql);
 			ps.setInt(1, numero_hotel);
@@ -57,12 +59,26 @@ public class EmpleadoDAO {
 		return empleados;
 	}
 
-	/*// Metodo que recoja la informacion de un usuario y la guarde en un ArrayList
+	// Metodo que recoja la informacion de un usuario y la guarde en un ArrayList
 	public ArrayList<UsuarioVO> rellenarYConseguirArrayUsuarios() {
 		usuarios = new ArrayList<UsuarioVO>();
+		empleados = rellenarYConseguirArrayEmpleados();
+
+//		try {
+//			Statement stmt = bd.getConexion().createStatement();
+//			ResultSet rs = stmt.executeQuery("SELECT (codigo) FROM Empleado WHERE identificacion='"+empleado.getIdentificacion()+"';");
+//			while(rs.next())
+//			 codigoNuevoEmpleado = rs.getInt("codigo");
+//		}catch (SQLException e) {
+//			System.err.println("Error insertando usuario" + e);
+//		}
+//		
 		try {
-			Statement st = bd.getConexion().createStatement();
-			ResultSet rs = st.executeQuery("SELECT * FROM Usuario;");
+			
+			String sql = "SELECT * FROM Usuario WHERE cod_empleado=?;";
+			PreparedStatement ps = this.bd.getConexion().prepareStatement(sql);
+			ps.setInt(1, numero_hotel);
+			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				String nombre = rs.getString("nombre");
 				String contrasena = rs.getString("contrasena");
@@ -75,7 +91,7 @@ public class EmpleadoDAO {
 			System.err.println("Error rellenando el array de usuarios");
 		}
 		return usuarios;
-	}*/
+	}
 
 	// Metodo que recoja la informacion de un empleado y haga un INSERT sobre la BBDD
 
@@ -118,6 +134,7 @@ public class EmpleadoDAO {
 	// Metodo que te permita eliminar empleado a partir de su codigo.
 	public void eliminarEmpleado(int posicion) {
 		empleados = rellenarYConseguirArrayEmpleados();
+
 		int codigo = empleados.get(posicion).getCodigo();
 
 		try {
@@ -130,20 +147,25 @@ public class EmpleadoDAO {
 	}
 	
 	// Metodo que permita modificar los datos de las tablas empleado y usuario.
-	public void modificarEmpleado(EmpleadoVO empleados, UsuarioVO usuarios) {
-
+	public void modificarEmpleado(EmpleadoVO empleado, UsuarioVO usuario, int posicion) {
+		empleados = rellenarYConseguirArrayEmpleados();
+		usuarios = rellenarYConseguirArrayUsuarios();
+		int codigo = empleados.get(posicion).getCodigo();
 		try {
 			Statement stmt = bd.getConexion().createStatement();
-			stmt.executeUpdate("UPDATE FROM Empleado SET nombre='"+empleados.getNombre()+"', apellido1='"+empleados.getApellido1()+""
-					+ ", apellido2='"+empleados.getApellido2()+"', identificacion='"+empleados.getIdentificacion()+"'"
-					+ ", telefono='"+empleados.getTelefono()+"', salario='"+empleados.getSalario()+"'"
-					+ ", seguridad_social='"+empleados.getSeguridad_social()+"', fecha_alta='"+empleados.getFecha_alta()+"'"
-					+ ", lugar_trabajo='"+empleados.getLugar_trabajo()+"' WHERE codigo='"+empleados.getCodigo()+"';");
 			
-			stmt.executeUpdate("UPDATE FROM Usuario SET nombre='"+usuarios.getNombre()+"', contrasena='"+Md5.encriptar(usuarios.getContrasena())+"'"
-					+ " WHERE cod_empleado='"+empleados.getCodigo()+"';");
+		stmt.executeUpdate("UPDATE FROM Usuario SET nombre='"+usuario.getNombre()+"', contrasena='"+Md5.encriptar(usuario.getContrasena())+"'"
+					+ " WHERE cod_empleado='"+codigo+"';");
+			
+			stmt.executeUpdate("UPDATE FROM Empleado SET nombre='"+empleado.getNombre()+"', apellido1='"+empleado.getApellido1()+""
+					+ ", apellido2='"+empleado.getApellido2()+"', identificacion='"+empleado.getIdentificacion()+"'"
+					+ ", telefono='"+empleado.getTelefono()+"', salario='"+empleado.getSalario()+"'"
+					+ ", seguridad_social='"+empleado.getSeguridad_social()+"', fecha_alta='"+empleado.getFecha_alta()+"'"
+					+ ", lugar_trabajo='"+this.numero_hotel+"' WHERE codigo='"+codigo+"';");
+			
+			
 		} catch (SQLException e) {
-			System.err.println("Error modificando empleado");
+			System.err.println("Error modificando empleado"+e);
 		}
 	}
 	

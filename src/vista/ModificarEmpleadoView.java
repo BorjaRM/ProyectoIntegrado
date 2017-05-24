@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 
 import controlador.ControladorEmpleados;
 import interfaces.IControladorEmpleados;
+import javax.swing.JPasswordField;
 
 public class ModificarEmpleadoView extends JPanel implements IControladorEmpleados{
 	private JTextField textField;
@@ -24,9 +25,10 @@ public class ModificarEmpleadoView extends JPanel implements IControladorEmplead
 	private JTextField txtApellido2;
 	private JTextField txtNombre;
 	private JTextField txtApellido1;
-	private JButton btnEnviar;
+	private JButton btnModificar;
 	private JButton btnCancelar;
-	private JTextField txtLugarTrabajo;
+	private JTextField txtUsuario;
+	private JPasswordField passwordField;
 
 	/**
 	 * Create the panel.
@@ -163,6 +165,36 @@ setLayout(new BorderLayout(0, 0));
 		
 		Component verticalStrut_8 = Box.createVerticalStrut(10);
 		panel_2.add(verticalStrut_8);
+		
+		JPanel panel_1 = new JPanel();
+		panel_2.add(panel_1);
+		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.X_AXIS));
+		
+		JLabel lblUsuario = new JLabel("Usuario:");
+		panel_1.add(lblUsuario);
+		
+		Component horizontalStrut_11 = Box.createHorizontalStrut(20);
+		panel_1.add(horizontalStrut_11);
+		
+		txtUsuario = new JTextField();
+		panel_1.add(txtUsuario);
+		txtUsuario.setColumns(10);
+		
+		Component verticalStrut_1 = Box.createVerticalStrut(20);
+		panel_2.add(verticalStrut_1);
+		
+		JPanel panel_6 = new JPanel();
+		panel_2.add(panel_6);
+		panel_6.setLayout(new BoxLayout(panel_6, BoxLayout.X_AXIS));
+		
+		JLabel lblContrasea = new JLabel("Contraseña:");
+		panel_6.add(lblContrasea);
+		
+		Component horizontalStrut_12 = Box.createHorizontalStrut(20);
+		panel_6.add(horizontalStrut_12);
+		
+		passwordField = new JPasswordField();
+		panel_6.add(passwordField);
 		panel10 = new JPanel();
 		panel_2.add(panel10);
 		panel10.setLayout(new BoxLayout(panel10, BoxLayout.X_AXIS));
@@ -172,29 +204,14 @@ setLayout(new BorderLayout(0, 0));
 		Component horizontalStrut_8 = Box.createHorizontalStrut(20);
 		panel10.add(horizontalStrut_8);
 		
-		
-		
-		Component verticalStrut_1 = Box.createVerticalStrut(10);
-		panel_2.add(verticalStrut_1);
-		
 		JPanel panel = new JPanel();
 		panel_2.add(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 		
-		JLabel lblLugarDeTrabajo = new JLabel("Lugar de trabajo:");
-		lblLugarDeTrabajo.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel.add(lblLugarDeTrabajo);
+		
 		
 		Component horizontalStrut_10 = Box.createHorizontalStrut(20);
 		panel.add(horizontalStrut_10);
-		
-		txtLugarTrabajo = new JTextField();
-		txtLugarTrabajo.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(txtLugarTrabajo);
-		txtLugarTrabajo.setColumns(10);
-		
-		Component verticalStrut_9 = Box.createVerticalStrut(20);
-		panel_2.add(verticalStrut_9);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(20);
 		formulario.add(horizontalStrut, BorderLayout.WEST);
@@ -210,8 +227,8 @@ setLayout(new BorderLayout(0, 0));
 		fl_botonera.setAlignment(FlowLayout.RIGHT);
 		add(botonera, BorderLayout.SOUTH);
 		
-		btnEnviar = new JButton("Enviar");
-		botonera.add(btnEnviar);
+		btnModificar = new JButton("Modificar");
+		botonera.add(btnModificar);
 		
 		btnCancelar = new JButton("Cancelar");
 		botonera.add(btnCancelar);
@@ -222,6 +239,22 @@ setLayout(new BorderLayout(0, 0));
 	
 	public JTextField getTxtSeguridadSocial() {
 		return txtSeguridadSocial;
+	}
+
+	public JTextField getTxtUsuario() {
+		return txtUsuario;
+	}
+
+	public void setTxtUsuario(JTextField txtUsuario) {
+		this.txtUsuario = txtUsuario;
+	}
+
+	public JPasswordField getPasswordField() {
+		return passwordField;
+	}
+
+	public void setPasswordField(JPasswordField passwordField) {
+		this.passwordField = passwordField;
 	}
 
 	public void setTxtSeguridadSocial(JTextField txtSeguridadSocial) {
@@ -279,17 +312,11 @@ setLayout(new BorderLayout(0, 0));
 
 
 
-	public JTextField getTxtLugarTrabajo() {
-		return txtLugarTrabajo;
-	}
 
-	public void setTxtLugarTrabajo(JTextField txtLugarTrabajo) {
-		this.txtLugarTrabajo = txtLugarTrabajo;
-	}
 
 	@Override
 	public void estableceControlador(ControladorEmpleados controlador) {
-		this.btnEnviar.addActionListener(controlador);
+		this.btnModificar.addActionListener(controlador);
 		this.btnCancelar.addActionListener(controlador);
 	}
 

@@ -90,13 +90,7 @@ public class NuevoEmpleadoView extends JPanel implements IControladorEmpleados{
 		this.TxtFechaAlta = txtFechaAlta;
 	}
 
-	public JTextField getTxtLugarTrabajo() {
-		return txtLugarTrabajo;
-	}
 
-	public void setTxtLugarTrabajo(JTextField txtLugarTrabajo) {
-		this.txtLugarTrabajo = txtLugarTrabajo;
-	}
 
 	private JTextField txtSeguridadSocial;
 	private JTextField txtSalario;
@@ -107,7 +101,6 @@ public class NuevoEmpleadoView extends JPanel implements IControladorEmpleados{
 	private JTextField txtApellido1;
 	private JButton btnEnviar;
 	private JButton btnCancelar;
-	private JTextField txtLugarTrabajo;
 	private JTextField TxtFechaAlta;
 	private JTextField txtUsuario;
 	private JPasswordField passwordField;
@@ -264,21 +257,10 @@ setLayout(new BorderLayout(0, 0));
 		JPanel panel = new JPanel();
 		panel_2.add(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
-		
-		JLabel lblLugarDeTrabajo = new JLabel("Lugar de trabajo:");
-		lblLugarDeTrabajo.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel.add(lblLugarDeTrabajo);
+
 		
 		Component horizontalStrut_10 = Box.createHorizontalStrut(20);
 		panel.add(horizontalStrut_10);
-		
-		txtLugarTrabajo = new JTextField();
-		txtLugarTrabajo.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(txtLugarTrabajo);
-		txtLugarTrabajo.setColumns(10);
-		
-		Component verticalStrut_9 = Box.createVerticalStrut(20);
-		panel_2.add(verticalStrut_9);
 		
 		JPanel panel_6 = new JPanel();
 		panel_2.add(panel_6);
