@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.ResourceBundle;
 
 import javax.swing.JCheckBox;
 
@@ -54,7 +53,6 @@ public class Controlador implements ActionListener, ItemListener{
 	public void itemStateChanged(ItemEvent e){
 		//Se ha seleccionado un idioma
 		if(e.getStateChange() == 1){ 
-			System.out.println("Has cambiado idioma:" +e.getItem());			
 			Idiomas.newIdioma((String)e.getItem());
 		}
 	}
@@ -62,14 +60,12 @@ public class Controlador implements ActionListener, ItemListener{
 	public void estableceReferenciaHotelEmpleado(String elEmpleado){
 		UsuarioDAO consultasUsuario = new UsuarioDAO();
 		refHotel=consultasUsuario.getReferenciaHotel(consultasUsuario.getReferenciaEmpleado(elEmpleado));
-		System.out.println("referencia hotel:" +refHotel);
 	}
 	
 	public void actualizaReferenciaHotelAdmin(){
 		HotelVO hotelSeleccionado = (HotelVO) frame.getPav().getDesplegableHoteles().getSelectedItem();
 		if(hotelSeleccionado != null)
 			Controlador.refHotel= hotelSeleccionado.getCodigo();
-		System.out.println("referencia hotel:" +refHotel);
 	}
 	public void estableceReferenciaCodigoEmpleado(String elEmpleado){
 		UsuarioDAO  consultasUsuario = new UsuarioDAO();

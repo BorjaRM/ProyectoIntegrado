@@ -3,6 +3,7 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -13,6 +14,7 @@ import modelo.dao.HabitacionDAO;
 import modelo.dao.HotelDAO;
 import modelo.dao.IncidenciaDAO;
 import modelo.dao.ReservaDAO;
+import modelo.dao.RutinasAlmacenadas;
 import modelo.dao.UsuarioDAO;
 import vista.LoginView;
 
@@ -94,6 +96,16 @@ public class ControladorUsuarios extends Controlador implements MouseListener{
 		Controlador.frame.getPav().getTxt_hab().setText(String.valueOf(new HabitacionDAO().getTotalHabitaciones(refHotel)));
 		Controlador.frame.getPav().getTxt_incidencias().setText(String.valueOf(new IncidenciaDAO().getTotalIncidencias(refHotel)));
 	}
+	
+	/*public void preparaListadoAdminView(){
+		RutinasAlmacenadas ra = new RutinasAlmacenadas();
+		Controlador.frame.getPav().rellenaListaIncidencias(new IncidenciaDAO().getIncidenciaActivas(refHotel));
+		Controlador.frame.getPav().getTxt_clientes().setText(String.valueOf(ra.rutinaAlmacenadaTotalClientes(refHotel)));
+		Controlador.frame.getPav().getTxt_empleados().setText(String.valueOf(ra.rutinaAlmacenadaTotalEmpleados(refHotel)));
+		Controlador.frame.getPav().getTxt_reservas().setText(String.valueOf(ra.rutinaAlmacenadaTotalReservasHoy(refHotel)));
+		Controlador.frame.getPav().getTxt_hab().setText(String.valueOf(ra.rutinaAlmacenadaTotalHabitaciones(refHotel)));
+		Controlador.frame.getPav().getTxt_incidencias().setText(String.valueOf(ra.rutinaAlmacenadaTotalIncidencias(refHotel)));
+	}*/
 	
 	public void preparaNuevoHotelView(){
 		Controlador.frame.creaHotelView(this);

@@ -1,8 +1,10 @@
 package modelo.dao;
 
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -114,13 +116,13 @@ public class HabitacionDAO {
 	
 	public int getTotalHabitaciones(int refHotel){
 		int total=0;
-		String sql = ("SELECT COUNT(*) AS total_estancias from estancia WHERE estancia.tipo='habitacion' AND estancia.cod_hotel=?;");
+		String sql = ("SELECT COUNT(*) AS total_habitaciones from estancia WHERE estancia.tipo='habitacion' AND estancia.cod_hotel=?;");
 		try {
 			PreparedStatement consulta = this.bd.getConexion().prepareStatement(sql);
 			consulta.setInt(1, refHotel);
 			ResultSet resultadoConsulta = consulta.executeQuery();
 			while(resultadoConsulta.next())
-				total=resultadoConsulta.getInt("total_estancias");
+				total=resultadoConsulta.getInt("total_habitaciones");
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
