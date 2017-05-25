@@ -19,6 +19,7 @@ public class Controlador implements ActionListener, ItemListener{
 	protected static boolean esAdministrador;
 	protected static int refHotel;
 	protected static int refEmpleado;
+	protected static String refUsuario;
 	
 	public Controlador(){
 		this.modelo = BD.getSingleDBInstance();
@@ -67,9 +68,9 @@ public class Controlador implements ActionListener, ItemListener{
 		if(hotelSeleccionado != null)
 			Controlador.refHotel= hotelSeleccionado.getCodigo();
 	}
-	public void estableceReferenciaCodigoEmpleado(String elEmpleado){
+	public void estableceReferenciaCodigoEmpleado(String refUsuario){
 		UsuarioDAO  consultasUsuario = new UsuarioDAO();
-		refEmpleado=consultasUsuario.getReferenciaEmpleado(elEmpleado);
+		refEmpleado=consultasUsuario.getReferenciaEmpleado(refUsuario);
 	}
 
 }

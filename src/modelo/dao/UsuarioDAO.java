@@ -87,7 +87,6 @@ public class UsuarioDAO {
 				JOptionPane.showMessageDialog(null, "Se ha producido un error, no se ha podido realizar la modificacion", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-
 	}
 		
 	public int getReferenciaEmpleado(String nombreUsuario){

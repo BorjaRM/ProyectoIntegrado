@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.JOptionPane;
@@ -22,7 +23,6 @@ import vista.NuevaReservaView;
 import vista.ReservasView;
 
 public class ControladorReservas extends Controlador{
-	private static final String refEmpleadoS = null;
 	private NuevaReservaView nrv;
 	private ReservasView rv;
 	private ReservaDAO rd;
@@ -38,29 +38,29 @@ public class ControladorReservas extends Controlador{
 			case "ver reservas": preparaReservasView(); break;
 			case "nueva reserva": preparaNuevaReservaView(); break;
 			case "anular reserva": eliminaReserva(); break;
-			case "enviar": insertaReserva(); break;
+			case "enviar": insertaReserva(); preparaReservasView(); break;
 			case "cancelar": cancelar(); break;
 		}
 	}
 	
 	private void insertaReserva() {
 		ReservaDAO modeloReserva = new ReservaDAO();
-		String refEmpeladoS = String.valueOf(refEmpleado);
+		ClienteVO clienteSeleccionado = null;
+		HabitacionVO habSeleccionada = null;
+		String inicio = null;
+		String fin = null;
 		try {
-		    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		    Date dob = null;
-		    dob = nrv.getDateChooserLlegada().getDate();
-		    } catch (Exception e) {
-		    	System.out.println("NO PODÉS");
-		          e.printStackTrace();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd",Locale.ENGLISH);
+			inicio = sdf.format(nrv.getDateChooserLlegada().getDate().getTime());
+			fin = sdf.format(nrv.getDateChooserSalida().getDate().getTime());
+			clienteSeleccionado = (ClienteVO) nrv.getListaClientes().getSelectedItem();
+			habSeleccionada = (HabitacionVO) nrv.getListaHabitaciones().getSelectedItem();
+			ReservaVO reserva = new ReservaVO("",inicio,fin,nrv.getListaPension().getSelectedItem().toString(),
+					clienteSeleccionado.getCodigo(),Controlador.refUsuario,String.valueOf(habSeleccionada.getId()));
+			modeloReserva.nuevaReserva(reserva);
+		}catch (Exception e){
+			 e.printStackTrace();
 		}
-		ReservaVO reserva = new ReservaVO("",nrv.getDateChooserLlegada().getDate().toString(),
-				nrv.getDateChooserSalida().getDate().toString(),
-				nrv.getListaPension().getSelectedItem().toString(),
-				nrv.getListaClientes().getSelectedItem().toString(),refEmpleadoS,
-				nrv.getListaHabitaciones().getSelectedItem().toString());
-		
-		modeloReserva.nuevaReserva(reserva);
 	}
 	
 	private void eliminaReserva(){
@@ -108,14 +108,6 @@ public class ControladorReservas extends Controlador{
 		HabitacionDAO modeloHabitacion = new HabitacionDAO();
 		ArrayList <HabitacionVO> habitaciones = modeloHabitacion.getHabitaciones(refHotel);
 		nrv.llenaComboBoxHabitaciones(habitaciones);
-	}
-	
-	public void eliminarReserva(){
-		//Eliminar reserva seleccionada y volver a mostar reservasView
-	}
-	
-	public void insertarReserva(){
-		//Insertar reserva y volver a mostrar reservasView
 	}
 	
 	public void cancelar(){

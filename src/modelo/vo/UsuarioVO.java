@@ -15,6 +15,10 @@ public class UsuarioVO {
 		nombre=nom;
 		contrasena=pwd;
 	}
+	
+	public String toString(){
+		return this.nombre;
+	}
 
 	public String getNombre() {
 		return nombre;

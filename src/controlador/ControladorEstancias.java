@@ -119,8 +119,7 @@ public class ControladorEstancias extends Controlador implements ListSelectionLi
 	public void rellenaDatosParaEditar(){
 		if(tipoEstanciaSeleccionada == TipoEstancia.HABITACION){
 			mesv.getTxt_Nombre().setText(this.estanciaSeleccionada.getNombre());
-			//EL DESPLEGABLE NO SE RELLENA, COMPROBAR TIPOS STRING - ENUM
-			//mesv.getDesplegable_tipo().setSelectedItem(this.estanciaSeleccionada.getTipo());
+			//EL DESPLEGABLE NO SE RELLENA BIEN, COMPROBAR TIPOS STRING - ENUM
 			mesv.getSpinner_plazas().setValue(((HabitacionVO) this.estanciaSeleccionada).getPlazas());
 			mesv.getSpinner_precio().setValue(((HabitacionVO) this.estanciaSeleccionada).getPrecio());
 			mesv.getText_descripcion().setText(((HabitacionVO) this.estanciaSeleccionada).getDescripcion());			

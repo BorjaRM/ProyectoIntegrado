@@ -88,8 +88,11 @@ public class ControladorEmpleados extends Controlador implements ListSelectionLi
 	
 	private void eliminaEmpleado(){
 		if(this.empleadoSeleccionado != null){
-			new EmpleadoDAO().eliminarEmpleado(this.empleadoSeleccionado);;
-			rellenaTabla();
+			int eleccion = JOptionPane.showConfirmDialog(null, "Confirma que deseas eliminar este cliente", "Borrar registro", JOptionPane.YES_NO_OPTION);
+			if(eleccion == JOptionPane.YES_OPTION) {
+				new EmpleadoDAO().eliminarEmpleado(this.empleadoSeleccionado);;
+				rellenaTabla();
+			}
 		}else{
 			JOptionPane.showMessageDialog(null, "ERROR. Selecciona un empleado,");
 		}

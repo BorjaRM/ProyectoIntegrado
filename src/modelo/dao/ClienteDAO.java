@@ -10,6 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import javax.swing.JOptionPane;
+
 import modelo.BD;
 import modelo.vo.ClienteVO;
 
@@ -46,24 +48,13 @@ public class ClienteDAO {
 	}
 	
 	public void insertaCliente(ClienteVO cliente){
-		// Create an instance of SimpleDateFormat used for formatting 
-		// the string representation of date (month/day/year)
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-		// Get the date today using Calendar object.
-		java.util.Date today =Calendar.getInstance().getTime();        
-		// Using DateFormat format method we can create a string 
-		// representation of a date with the defined format.
-		String reportDate = df.format(today);
-
-		// Print what date is today!
-		//System.out.println("Report Date: " + reportDate);
 		try {
 			Statement stmt = bd.getConexion().createStatement();
-			stmt.executeUpdate("INSERT INTO cliente VALUES(null, '"+cliente.getNombre()+"', '"+cliente.getApellidos()+"', '"+cliente.getIdentificacion()+"', '"+cliente.getFecha_nacimiento()+"', '"+cliente.getTelefono()+"', '"+cliente.getNacionalidad()+"', '"+cliente.getEmail()+"', '"+reportDate+"');");
-			
+			stmt.executeUpdate("INSERT INTO cliente VALUES(null, '"+cliente.getNombre()+"', '"+cliente.getApellidos()+"', "
+					+ "'"+cliente.getIdentificacion()+"', '"+cliente.getFecha_nacimiento()+"', '"+cliente.getTelefono()+"', "
+							+ "'"+cliente.getNacionalidad()+"', '"+cliente.getEmail()+"', NOW());");
 		} catch (SQLException e) {
-			System.err.println("Error insertant client");
+			JOptionPane.showMessageDialog(null, "Se ha producido un error, no se ha podido completar la insercion", "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
 	}
@@ -77,7 +68,7 @@ public class ClienteDAO {
 			stmt.executeUpdate("DELETE FROM cliente WHERE codigo = '"+codigoString+"';");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.err.println("Error al eliminar cliente");
+			JOptionPane.showMessageDialog(null, "No se puede eliminar este cliente", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -86,9 +77,12 @@ public class ClienteDAO {
 		String codigoString = clientes.get(posicion).getCodigo();
 		try {
 			Statement stmt = bd.getConexion().createStatement();
-			stmt.executeUpdate("UPDATE cliente SET nombre='"+cliente.getNombre()+"', apellidos='"+cliente.getApellidos()+"', identificacion='"+cliente.getIdentificacion()+"', fecha_nacimiento='"+cliente.getFecha_nacimiento()+"', nacionalidad='"+cliente.getNacionalidad()+"', email='"+cliente.getEmail()+"', telefono='"+cliente.getTelefono()+"' WHERE codigo='"+codigoString+"';");
+			stmt.executeUpdate("UPDATE cliente SET nombre='"+cliente.getNombre()+"', apellidos='"+cliente.getApellidos()+"', "
+					+ "identificacion='"+cliente.getIdentificacion()+"', fecha_nacimiento='"+cliente.getFecha_nacimiento()+"', "
+							+ "nacionalidad='"+cliente.getNacionalidad()+"', email='"+cliente.getEmail()+"', "
+									+ "telefono='"+cliente.getTelefono()+"' WHERE codigo='"+codigoString+"';");
 		} catch (Exception e) {
-			System.err.println("Error modificando cliente."+e);
+			JOptionPane.showMessageDialog(null, "Se ha producido un error, no se ha podido realizar la modificacion", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	

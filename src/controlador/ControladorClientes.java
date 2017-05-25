@@ -39,10 +39,12 @@ public class ControladorClientes extends Controlador{
 	private void eliminaCliente(){
 		posicionSeleccionada = cv.getTable().getSelectedRow();
 		if(posicionSeleccionada != -1){
-
-		ClienteDAO modeloCliente = new ClienteDAO();
-		modeloCliente.eliminarCliente(posicionSeleccionada);
-		rellenaTabla();
+			int eleccion = JOptionPane.showConfirmDialog(null, "Confirma que deseas eliminar este cliente", "Borrar registro", JOptionPane.YES_NO_OPTION);
+			if(eleccion == JOptionPane.YES_OPTION) {
+				ClienteDAO modeloCliente = new ClienteDAO();
+				modeloCliente.eliminarCliente(posicionSeleccionada);
+				rellenaTabla();
+			}
 		}else{
 			JOptionPane.showMessageDialog(null, "ERROR, Primero Selecciona Un Cliente");
 		}

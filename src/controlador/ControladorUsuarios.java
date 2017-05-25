@@ -42,9 +42,9 @@ public class ControladorUsuarios extends Controlador implements MouseListener{
 	public void verificaAcceso(){
 		if(!Controlador.esAdministrador){
 			if(compruebaLoginEmpleado()){
-				String elEmpleado=vistaLogin.recogeDatos().getNombre();
-				this.estableceReferenciaHotelEmpleado(elEmpleado);
-				this.estableceReferenciaCodigoEmpleado(elEmpleado);
+				Controlador.refUsuario=vistaLogin.recogeDatos().getNombre();
+				this.estableceReferenciaHotelEmpleado(refUsuario);
+				this.estableceReferenciaCodigoEmpleado(refUsuario);
 				preparaPrincipalEmpleadoView();
 			}else
 				JOptionPane.showMessageDialog(null, "Datos incorrectos, Acceso denegado");			

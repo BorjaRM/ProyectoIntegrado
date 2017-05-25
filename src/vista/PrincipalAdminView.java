@@ -139,17 +139,18 @@ public class PrincipalAdminView extends JPanel {
 	}
 	
 	public void rellenaListaIncidencias(ArrayList<String> incidencias){
+		DefaultListModel<String> listModel = new DefaultListModel<String>();
 		if(!incidencias.isEmpty()){
-			//Creamos un modelo por defecto
-			DefaultListModel<String> listModel = new DefaultListModel<String>();
 			//Añadimos los datos
 			listModel.addElement("Incidencias activas:");
 			for(String incidencia: incidencias){
 				listModel.addElement(incidencia);
 			}
-			//Añadimos el modelo por defecto a la lista
-			incidenciasList.setModel(listModel);
+		}else{
+			listModel.addElement("No hay incidencias activas");
 		}
+		//Añadimos el modelo a la lista
+		incidenciasList.setModel(listModel);
 	}
 
 	public JComboBox<HotelVO> getDesplegableHoteles() {

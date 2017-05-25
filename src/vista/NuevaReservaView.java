@@ -21,12 +21,13 @@ import interfaces.IControladorReservas;
 import modelo.dao.HabitacionDAO;
 import modelo.vo.ClienteVO;
 import modelo.vo.HabitacionVO;
+import modelo.vo.HotelVO;
 
 public class NuevaReservaView extends JPanel implements IControladorReservas{
 	private JButton btnEnviar;
 	private JButton btnCancelar;
-	private JComboBox listaClientes;
-	private JComboBox listaHabitaciones;
+	private JComboBox<ClienteVO> listaClientes;
+	private JComboBox<HabitacionVO> listaHabitaciones;
 	private JComboBox listaPension;
 	private JDateChooser dateChooserLlegada;
 	private JDateChooser dateChooserSalida;
@@ -207,15 +208,17 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 	}
 
 	public void llenaComboBoxClientes(ArrayList<ClienteVO> clientes) {
-		for(int i=0;i<clientes.size();i++){
-			listaClientes.addItem(clientes.get(i).getNombre()+" "+clientes.get(i).getApellidos());
+		listaClientes.removeAllItems();
+		for(ClienteVO cliente: clientes){
+			this.listaClientes.addItem(cliente);
 		}
 		
 	}
 
 	public void llenaComboBoxHabitaciones(ArrayList<HabitacionVO> habitaciones) {
-		for(int i=0;i<habitaciones.size();i++){
-			listaHabitaciones.addItem(habitaciones.get(i).getNombre());
+		listaHabitaciones.removeAllItems();
+		for(HabitacionVO habitacion: habitaciones){
+			this.listaHabitaciones.addItem(habitacion);
 		}
 	}
 }
