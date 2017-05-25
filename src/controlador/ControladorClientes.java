@@ -1,9 +1,13 @@
 package controlador;
 
 import java.awt.event.ActionEvent;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import javax.swing.JOptionPane;
+
+import com.toedter.calendar.JDateChooser;
 
 import modelo.dao.ClienteDAO;
 import modelo.vo.ClienteVO;
@@ -52,9 +56,18 @@ public class ControladorClientes extends Controlador{
 	}
 	
 	private void insertaCliente() {
-		ClienteVO cliente = new ClienteVO("",ncv.getTxt_Nombre().getText(),ncv.getTxt_Apellidos().getText(),ncv.getTxt_Identificacion().getText(),ncv.getTxt_FechaNacimiento().getText(),ncv.getTxt_Telefono().getText(),ncv.getTxt_Nacionalidad().getText(),ncv.getTxt_Email().getText(),"");
+		String fecha = null;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd",Locale.ENGLISH);
+		fecha = sdf.format(ncv.getDateChooser().getDate().getTime());
+		ClienteVO cliente = new ClienteVO("",ncv.getTxt_Nombre().getText(),
+				ncv.getTxt_Apellidos().getText(),
+				ncv.getTxt_Identificacion().getText(),
+				fecha,
+				ncv.getTxt_Telefono().getText(),
+				ncv.getTxt_Nacionalidad().getText(),
+				ncv.getTxt_Email().getText(),"");
 
-		if(ncv.getTxt_Apellidos().getText().isEmpty() || ncv.getTxt_Nombre().getText().isEmpty() || ncv.getTxt_Email().getText().isEmpty() || ncv.getTxt_FechaNacimiento().getText().isEmpty() || ncv.getTxt_Identificacion().getText().isEmpty() || ncv.getTxt_Telefono().getText().isEmpty() || ncv.getTxt_Nacionalidad().getText().isEmpty()){
+		if(ncv.getTxt_Apellidos().getText().isEmpty() || ncv.getTxt_Nombre().getText().isEmpty() || ncv.getTxt_Email().getText().isEmpty() || ncv.getTxt_Identificacion().getText().isEmpty() || ncv.getTxt_Telefono().getText().isEmpty() || ncv.getTxt_Nacionalidad().getText().isEmpty()){
 			JOptionPane.showMessageDialog(null, "Faltan datos por rellenar, Error");	
 		}else{			
 			modeloCliente.insertaCliente(cliente);
@@ -95,7 +108,7 @@ public class ControladorClientes extends Controlador{
 		ArrayList <ClienteVO> clientes = modeloCliente.rellenaYConsigueArrayClientes();
 		mcv.getTxt_Apellidos().setText(clientes.get(posicionSeleccionada).getApellidos());
 		mcv.getTxt_Email().setText(clientes.get(posicionSeleccionada).getEmail());
-		mcv.getTxt_FechaNacimiento().setText(clientes.get(posicionSeleccionada).getFecha_nacimiento());
+		mcv.getDateChooser().setToolTipText(clientes.get(posicionSeleccionada).getFecha_nacimiento());
 		mcv.getTxt_Identificacion().setText(clientes.get(posicionSeleccionada).getIdentificacion());
 		mcv.getTxt_Nacionalidad().setText(clientes.get(posicionSeleccionada).getNacionalidad());
 		mcv.getTxt_Nombre().setText(clientes.get(posicionSeleccionada).getNombre());
@@ -105,7 +118,7 @@ public class ControladorClientes extends Controlador{
 	public void modificaCliente(){
 		String apellidos =mcv.getTxt_Apellidos().getText();
 		String email =mcv.getTxt_Email().getText();
-		String fNacimiento =mcv.getTxt_FechaNacimiento().getText();
+		String fNacimiento =mcv.getDateChooser().getToolTipText();
 		String nacionalidad =mcv.getTxt_Nacionalidad().getText();
 		String identificacion =mcv.getTxt_Identificacion().getText();
 		String nombre =mcv.getTxt_Nombre().getText();
