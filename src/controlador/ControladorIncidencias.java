@@ -9,6 +9,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import modelo.BD;
+import modelo.dao.ClienteDAO;
 import modelo.dao.EstanciaDAO;
 import modelo.dao.IncidenciaDAO;
 import modelo.vo.EstanciaVO;
@@ -21,9 +22,11 @@ public class ControladorIncidencias extends Controlador implements ListSelection
 	private IncidenciasView iv;
 	private NuevaIncidenciaView niv;
 	private IncidenciaDAO consultas;
+	private int posicionSeleccionada;
 	
 	public ControladorIncidencias(){
 		frame.estableceControlador(this);
+		consultas=new IncidenciaDAO();
 	}
 	
 	@Override
@@ -38,15 +41,32 @@ public class ControladorIncidencias extends Controlador implements ListSelection
 				cancelar(); break;
 		}
 	}
+	
 	private void preparaIncidenciaResuelta(){
-		
+		posicionSeleccionada = iv.getTable().getSelectedRow();
+		if(posicionSeleccionada != -1){
+			consultas.modificaEstadoIncidencia();
+		}else{
+			JOptionPane.showMessageDialog(null, "Error, selecciona la incidencia");
+		}
 	}
 	
 	private void preparaInsertarIncidencia() {
 		if(niv.getTextArea().getText().isEmpty()){
 			JOptionPane.showInputDialog("Rellena la descripcion");
 		}else{
-		IncidenciaVO incidencia = frame.getNiv().enviarDatosIncidencia();
+		
+		EstanciaVO estancia = (EstanciaVO) niv.getComboBox().getSelectedItem();
+		int codigoEstancia = estancia.getId();
+		
+		String descripcion = niv.getTextArea().getText();
+		
+		String estado = "activa";
+		
+		String fecha = "";
+		
+		IncidenciaVO incidencia = new IncidenciaVO(0,descripcion,estado,fecha,codigoEstancia);
+			
 		consultas.insertaIncidencia(incidencia);
 		}
 	}
@@ -55,8 +75,10 @@ public class ControladorIncidencias extends Controlador implements ListSelection
 		frame.creaIncidenciasView(this);
 		this.iv=frame.getIv();
 		frame.muestraIncidenciasView();
-		frame.getIv().rellenaTablaIncidencias(consultas.getIncidenciaActivas(refHotel));
+		frame.getIv().rellenaTablaIncidencias(consultas.getTablaIncidencias(refHotel));
+
 	}
+	
 
 	public void preparaNuevaIncidenciaView(){
 		frame.creaNuevaIncidenciaView(this);
@@ -80,7 +102,7 @@ public class ControladorIncidencias extends Controlador implements ListSelection
 	@Override
 	public void valueChanged(ListSelectionEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 	
 }
