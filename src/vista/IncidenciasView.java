@@ -3,6 +3,7 @@ package vista;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -19,14 +20,17 @@ import modelo.vo.IncidenciaVO;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import idiomas.Idiomas;
 
 public class IncidenciasView extends JPanel implements IControladorIncidencias{
+	ResourceBundle bundle = Idiomas.getBundle();
 	private JTable table;
 	private JButton btnNueva;
 	private JButton btnResuelta;
-	private String[]titulosColumnas = {"Descripcion Incidencia", "Estancia", "Estado", "Fecha"};
+	private String[]titulosColumnas = {bundle.getString("jTblInciDesc"), bundle.getString("jTblInciEstan"), bundle.getString("jTblInciEstado"), bundle.getString("jTblInciFecha")};
 	private DefaultTableModel modeloTabla;
 	private String fecha;
+	
 
 
 	public IncidenciasView() {
@@ -38,11 +42,11 @@ public class IncidenciasView extends JPanel implements IControladorIncidencias{
 		flowLayout.setHgap(30);
 		add(panel, BorderLayout.NORTH);
 		
-		btnNueva = new JButton("Nueva Incidencia");
+		btnNueva = new JButton(bundle.getString("btnInciNewInci"));
 		btnNueva.setActionCommand("Nueva Incidencia");
 		panel.add(btnNueva);
 		
-		btnResuelta = new JButton("Marcar Como Resuelta");
+		btnResuelta = new JButton(bundle.getString("btnInciDoneInci"));
 		btnResuelta.setActionCommand("Incidencia Resuelta");
 		panel.add(btnResuelta);
 		
