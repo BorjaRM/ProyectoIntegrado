@@ -53,18 +53,14 @@ public class ControladorIncidencias extends Controlador implements ListSelection
 	
 	private void preparaInsertarIncidencia() {
 		if(niv.getTextArea().getText().isEmpty()){
-			JOptionPane.showInputDialog("Rellena la descripcion");
+			JOptionPane.showMessageDialog(null, "Rellena la descripcion");
 		}else{
 		
 		EstanciaVO estancia = (EstanciaVO) niv.getComboBox().getSelectedItem();
 		int codigoEstancia = estancia.getId();
-		
 		String descripcion = niv.getTextArea().getText();
-		
 		String estado = "activa";
-		
 		String fecha = consultas.getFechayHora();
-		
 		IncidenciaVO incidencia = new IncidenciaVO(0,descripcion,estado,fecha,codigoEstancia);
 			
 		consultas.insertaIncidencia(incidencia);

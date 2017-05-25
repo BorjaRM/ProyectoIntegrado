@@ -44,8 +44,6 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 		add(panel, BorderLayout.SOUTH);
 		
-		SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
-		
 		btnEnviar = new JButton("Enviar");
 		panel.add(btnEnviar);
 		

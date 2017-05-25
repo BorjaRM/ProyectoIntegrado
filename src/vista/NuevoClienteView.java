@@ -2,6 +2,8 @@ package vista;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javax.swing.BoxLayout;
@@ -12,15 +14,16 @@ import javax.swing.JTextField;
 
 import controlador.ControladorClientes;
 import interfaces.IControladorClientes;
+import com.toedter.calendar.JDateChooser;
 
 public class NuevoClienteView extends JPanel  implements IControladorClientes{
 	private JTextField txt_Nombre;
 	private JTextField txt_Apellidos;
 	private JTextField txt_Identificacion;
-	private JTextField txt_FechaNacimiento;
 	private JTextField txt_Telefono;
 	private JTextField txt_Email;
 	private JTextField txt_Nacionalidad;
+	private JDateChooser dateChooser;
 	private JButton btnEnviar;
 	private JButton btnCancelar;
 
@@ -71,9 +74,9 @@ public class NuevoClienteView extends JPanel  implements IControladorClientes{
 		JLabel lblFechaDeNacimiento = new JLabel(bundle.getString("jLblRegCliFechNacim"));
 		panel_Informacion.add(lblFechaDeNacimiento);
 		
-		txt_FechaNacimiento = new JTextField();
-		panel_Informacion.add(txt_FechaNacimiento);
-		txt_FechaNacimiento.setColumns(10);
+		dateChooser = new JDateChooser();
+		panel_Informacion.add(dateChooser);
+		dateChooser.setDateFormatString("yyyy-MM-dd");
 		
 		JLabel lblTelefono = new JLabel(bundle.getString("jLblRegCliTelef"));
 		panel_Informacion.add(lblTelefono);
@@ -126,12 +129,12 @@ public class NuevoClienteView extends JPanel  implements IControladorClientes{
 		this.txt_Identificacion = txt_Identificacion;
 	}
 
-	public JTextField getTxt_FechaNacimiento() {
-		return txt_FechaNacimiento;
+	public JDateChooser getDateChooser() {
+		return dateChooser;
 	}
 
-	public void setTxt_FechaNacimiento(JTextField txt_FechaNacimiento) {
-		this.txt_FechaNacimiento = txt_FechaNacimiento;
+	public void setDateChooser(JDateChooser dateChooser) {
+		this.dateChooser = dateChooser;
 	}
 
 	public JTextField getTxt_Telefono() {
