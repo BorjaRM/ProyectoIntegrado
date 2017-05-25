@@ -8,6 +8,7 @@ import java.awt.Insets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -17,6 +18,7 @@ import javax.swing.JPanel;
 import com.toedter.calendar.JDateChooser;
 
 import controlador.ControladorReservas;
+import idiomas.Idiomas;
 import interfaces.IControladorReservas;
 import modelo.dao.HabitacionDAO;
 import modelo.vo.ClienteVO;
@@ -31,12 +33,13 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 	private JComboBox listaPension;
 	private JDateChooser dateChooserLlegada;
 	private JDateChooser dateChooserSalida;
-
+	ResourceBundle bundle;
 	
 	/**
 	 * Create the panel.
 	 */
 	public NuevaReservaView() {
+		bundle = Idiomas.getBundle();
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
@@ -44,10 +47,14 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 		add(panel, BorderLayout.SOUTH);
 		
-		btnEnviar = new JButton("Enviar");
+		SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
+		
+		btnEnviar = new JButton(bundle.getString("btnRegRsrvEnviar"));
+		btnEnviar.setActionCommand("Enviar");
 		panel.add(btnEnviar);
 		
-		btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton(bundle.getString("btnRegRsrvCancelar"));
+		btnCancelar.setActionCommand("Cancelar");
 		panel.add(btnCancelar);
 		
 		JPanel panel_1 = new JPanel();
@@ -59,7 +66,7 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_1.setLayout(gbl_panel_1);
 		
-		JLabel lblCliente = new JLabel("Cliente");
+		JLabel lblCliente = new JLabel(bundle.getString("jLblRegRsrvCli"));
 		GridBagConstraints gbc_lblCliente = new GridBagConstraints();
 		gbc_lblCliente.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCliente.gridx = 1;
@@ -77,7 +84,7 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		gbc_listaClientes.gridy = 1;
 		panel_1.add(listaClientes, gbc_listaClientes);
 		
-		JLabel lblHabitacion = new JLabel("Habitaci\u00F3n");
+		JLabel lblHabitacion = new JLabel(bundle.getString("jLblRegRsrvHabit"));
 		GridBagConstraints gbc_lblHabitacion = new GridBagConstraints();
 		gbc_lblHabitacion.insets = new Insets(0, 0, 5, 5);
 		gbc_lblHabitacion.gridx = 1;
@@ -95,7 +102,7 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		gbc_listaHabitaciones.gridy = 2;
 		panel_1.add(listaHabitaciones, gbc_listaHabitaciones);
 		
-		JLabel lblLlegada = new JLabel("Llegada");
+		JLabel lblLlegada = new JLabel(bundle.getString("jLblRegRsrvLleg"));
 		GridBagConstraints gbc_lblLlegada = new GridBagConstraints();
 		gbc_lblLlegada.insets = new Insets(0, 0, 5, 5);
 		gbc_lblLlegada.gridx = 1;
@@ -114,7 +121,7 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		dateChooserLlegada.setDateFormatString("yyyy-MM-dd");
 		
 		
-		JLabel lblSalida = new JLabel("Salida");
+		JLabel lblSalida = new JLabel(bundle.getString("jLblRegRsrvSalid"));
 		GridBagConstraints gbc_lblSalida = new GridBagConstraints();
 		gbc_lblSalida.insets = new Insets(0, 0, 5, 5);
 		gbc_lblSalida.gridx = 1;
@@ -132,14 +139,14 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		dateChooserSalida.setMinSelectableDate(new Date());
 		dateChooserSalida.setDateFormatString("yyyy-MM-dd");
 		
-		JLabel lblPension = new JLabel("Pensi\u00F3n");
+		JLabel lblPension = new JLabel(bundle.getString("jLblRegRsrvPension"));
 		GridBagConstraints gbc_lblPension = new GridBagConstraints();
 		gbc_lblPension.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPension.gridx = 1;
 		gbc_lblPension.gridy = 5;
 		panel_1.add(lblPension, gbc_lblPension);
 		
-		String[] pension = {"Alojamiento","Desayuno","Media","Completa"};
+		String[] pension = {bundle.getString("jCBRegRsrvAlojamiento"),bundle.getString("jCBRegRsrvDesayuno"),bundle.getString("jCBRegRsrvMedia"),bundle.getString("jCBRegRsrvCompleta")};
 		listaPension = new JComboBox(pension);
 		GridBagConstraints gbc_listaPension = new GridBagConstraints();
 		gbc_listaPension.gridwidth = 3;
