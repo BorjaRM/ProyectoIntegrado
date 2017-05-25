@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -14,17 +15,18 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.ControladorEmpleados;
+import idiomas.Idiomas;
 import interfaces.IControladorEmpleados;
 import modelo.vo.EmpleadoVO;
 
 public class EmpleadosView extends JPanel implements IControladorEmpleados{
+	ResourceBundle bundle = Idiomas.getBundle();
 	private JTable tabla_empleados;
 	private DefaultTableModel empleados_model;
-	String[] empleados_head = {"ID","Nombre","Apellidos","Telefono","Inicio contrato"};
+	String[] empleados_head = {bundle.getString("jTblEmpID"),bundle.getString("jTblEmpNomb"),bundle.getString("jTblEmpApell"),bundle.getString("jTblEmpTelef"),bundle.getString("jTblEmpIniContr")};
 	private JButton btnNuevoEmpleado;
 	private JButton btnEliminarEmpleado;
 	private JButton btnModificarEmpleado;
-
 	/**
 	 * Create the panel.
 	 */
@@ -37,15 +39,15 @@ public class EmpleadosView extends JPanel implements IControladorEmpleados{
 		flowLayout.setHgap(30);
 		add(panel, BorderLayout.NORTH);
 		
-		btnNuevoEmpleado = new JButton("Nuevo empleado");
+		btnNuevoEmpleado = new JButton(bundle.getString("btnNewEmp"));
 		btnNuevoEmpleado.setActionCommand("Nuevo empleado");
 		panel.add(btnNuevoEmpleado);
 		
-		btnEliminarEmpleado = new JButton("Eliminar Empleado");
+		btnEliminarEmpleado = new JButton(bundle.getString("btnRmvEmp"));
 		btnEliminarEmpleado.setActionCommand("Eliminar Empleado");
 		panel.add(btnEliminarEmpleado);
 		
-		btnModificarEmpleado = new JButton("Modificar Empleado");
+		btnModificarEmpleado = new JButton(bundle.getString("btnModEmp"));
 		btnModificarEmpleado.setActionCommand("Modificar Empleado");
 		panel.add(btnModificarEmpleado);
 		
