@@ -63,7 +63,7 @@ public class ControladorIncidencias extends Controlador implements ListSelection
 		
 		String estado = "activa";
 		
-		String fecha = "";
+		String fecha = consultas.getFechayHora();
 		
 		IncidenciaVO incidencia = new IncidenciaVO(0,descripcion,estado,fecha,codigoEstancia);
 			

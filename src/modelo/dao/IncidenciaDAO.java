@@ -4,6 +4,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -24,7 +28,7 @@ public class IncidenciaDAO {
 	}
 	public void insertaIncidencia(IncidenciaVO in){
 		if(in != null){
-			String sql = ("INSERT INTO incidencia (null,descripcion,estado,fecha,cod_estancia) VALUES (?,?,?,?,?);");
+			String sql = ("INSERT INTO incidencia (codigo,descripcion,estado,fecha,cod_estancia) VALUES (?,?,?,?,?);");
 			try {
 				PreparedStatement consultaIn = this.bd.getConexion().prepareStatement(sql);	
 				consultaIn.setString(1, null);
@@ -40,7 +44,12 @@ public class IncidenciaDAO {
 			}
 		}
 	}
-	
+	public String getFechayHora(){
+		//DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+		Instant instant = Instant.now ();
+		String output = instant.toString ().replace ( "T" , " " ).replace( "Z" , "" );
+		return output;	 
+	}
 	public ArrayList<EstanciaVO> getEstancias(int refHotel){
 		ArrayList<EstanciaVO> estancias = new ArrayList<EstanciaVO>();
 		int id_estancia,cod_hotel;
