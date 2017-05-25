@@ -22,7 +22,6 @@ public class ControladorIncidencias extends Controlador implements ListSelection
 	private IncidenciasView iv;
 	private NuevaIncidenciaView niv;
 	private IncidenciaDAO consultas;
-	private int posicionSeleccionada;
 	
 	public ControladorIncidencias(){
 		frame.estableceControlador(this);
@@ -35,17 +34,21 @@ public class ControladorIncidencias extends Controlador implements ListSelection
 		switch(e.getActionCommand().toLowerCase()){
 			case "ver incidencias": preparaIncidenciasView(); break;
 			case "nueva incidencia": preparaNuevaIncidenciaView(); break;
-			case "incidencia resuelta": preparaIncidenciaResuelta(); break;
-			case "enviar": preparaInsertarIncidencia(); break;
+			case "incidencia resuelta": preparaIncidenciaResuelta();
+										preparaIncidenciasView();
+										break;
+			case "enviar": preparaInsertarIncidencia();
+							preparaIncidenciasView();
+							break;
 			case "cancelar":
 				cancelar(); break;
 		}
 	}
 	
 	private void preparaIncidenciaResuelta(){
-		posicionSeleccionada = iv.getTable().getSelectedRow();
+		int posicionSeleccionada = iv.getTable().getSelectedRow();
 		if(posicionSeleccionada != -1){
-			consultas.modificaEstadoIncidencia();
+			consultas.modificaEstadoIncidencia(posicionSeleccionada,refHotel);
 		}else{
 			JOptionPane.showMessageDialog(null, "Error, selecciona la incidencia");
 		}
@@ -71,7 +74,7 @@ public class ControladorIncidencias extends Controlador implements ListSelection
 		frame.creaIncidenciasView(this);
 		this.iv=frame.getIv();
 		frame.muestraIncidenciasView();
-		frame.getIv().rellenaTablaIncidencias(consultas.getTablaIncidencias(refHotel));
+		iv.rellenaTablaIncidencias(consultas.getTablaIncidencias(refHotel),consultas.getEstancias(refHotel));
 
 	}
 	

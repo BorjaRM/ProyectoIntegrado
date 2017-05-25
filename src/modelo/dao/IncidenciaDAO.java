@@ -20,11 +20,11 @@ import vista.IncidenciasView;
 
 public class IncidenciaDAO {
 	private BD bd;
-	
-	
+	ArrayList <IncidenciaVO> incidencia;
+	ArrayList <EstanciaVO> estancia;
+
 	public IncidenciaDAO(){
 		this.bd=BD.getSingleDBInstance();
-		
 	}
 	public void insertaIncidencia(IncidenciaVO in){
 		if(in != null){
@@ -45,7 +45,6 @@ public class IncidenciaDAO {
 		}
 	}
 	public String getFechayHora(){
-		//DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		Instant instant = Instant.now ();
 		String output = instant.toString ().replace ( "T" , " " ).replace( "Z" , "" );
 		return output;	 
@@ -60,13 +59,11 @@ public class IncidenciaDAO {
 			PreparedStatement ps = this.bd.getConexion().prepareStatement(sql);
 			ps.setInt(1, refHotel);
 			ResultSet resultadoConsulta = ps.executeQuery();
-			//Transformamos el resultset en un arraylist
 			while(resultadoConsulta.next()){
 				id_estancia=resultadoConsulta.getInt("id");
 				cod_hotel=resultadoConsulta.getInt("cod_hotel");
 				nombre=resultadoConsulta.getString("nombre");
 				tipo=resultadoConsulta.getString("tipo");
-				//Creamos un objeto Estancia y lo añadimos al Arraylist
 				estancias.add(new EstanciaVO(id_estancia,cod_hotel,nombre,tipo));
 			}
 		}catch(SQLException e){
@@ -74,45 +71,51 @@ public class IncidenciaDAO {
 		} 		
 		return estancias;
 	}
-	public void modificaEstadoIncidencia(){
-		IncidenciasView iv = new IncidenciasView();
-	
+	public void modificaEstadoIncidencia(int posicion,int refHotel){
+		incidencia = getTablaIncidencias(refHotel);
+		int codigo = incidencia.get(posicion).getCodigo();
+		String estado = "resuelta";
+		String sql = "UPDATE incidencia SET estado=? WHERE codigo=?;";
+		if(incidencia != null){	
 		try {
-			String sql ="UPDATE incidencia SET estado='inactiva' WHERE fecha=?;";
 			PreparedStatement ps = this.bd.getConexion().prepareStatement(sql);
-			ps.setString(1, iv.getFecha());
-			ps.executeUpdate(sql);
+			ps.setString(1, estado);
+			ps.setInt(2, codigo);
+			ps.executeUpdate();
 		} catch (SQLException e) {
-			System.err.println("Error al cambiar estado de incidencia");
+			e.printStackTrace();
+			System.err.println("Error al cambiar el estado de la incidencia");
 		}
 	}
-	public ArrayList<String> getTablaIncidencias(int refHotel){
-		ArrayList<String> tablaIncidencias = new ArrayList<String>();
-		String descripcion,nombre,estado,fecha;
-		
+}
+	public ArrayList<IncidenciaVO> getTablaIncidencias(int refHotel){
+		incidencia = new ArrayList<IncidenciaVO>();
+		int codigo,cod_estancia;
+		String descripcion,estado,fecha;
 		try{
-			String sql = "SELECT (incidencia.descripcion) AS descripcion,(estancia.nombre) AS nombre,(incidencia.estado) AS estado,(incidencia.fecha) AS fecha FROM incidencia INNER JOIN estancia "
-					+ "ON incidencia.cod_estancia=estancia.id INNER JOIN hotel ON estancia.cod_hotel=hotel.codigo AND "
+			String sql = "SELECT * FROM incidencia INNER JOIN estancia "
+					+ "ON incidencia.cod_estancia=estancia.id INNER JOIN hotel "
+					+ "ON estancia.cod_hotel=hotel.codigo AND "
 					+ "incidencia.estado='activa' AND hotel.codigo=?;";
 
 			PreparedStatement ps = this.bd.getConexion().prepareStatement(sql);
 			ps.setInt(1, refHotel);
 			ResultSet resultadoConsulta = ps.executeQuery();
-			//Transformamos el resultset en un arraylist
+
 			while(resultadoConsulta.next()){
+				codigo=resultadoConsulta.getInt("codigo");
 				descripcion=resultadoConsulta.getString("descripcion");
-				tablaIncidencias.add(descripcion);
-				nombre=resultadoConsulta.getString("nombre");
-				tablaIncidencias.add(nombre);
 				estado=resultadoConsulta.getString("estado");
-				tablaIncidencias.add(estado);
 				fecha=resultadoConsulta.getString("fecha");
-				tablaIncidencias.add(fecha);
+				cod_estancia=resultadoConsulta.getInt("cod_estancia");
+				IncidenciaVO i = new IncidenciaVO(codigo,descripcion,estado,fecha,cod_estancia);
+				incidencia.add(i);
 			}
 		}catch(SQLException e){
+			e.printStackTrace();
 			System.err.println("Error haciendo la consulta de incidencias");
 		} 		
-		return tablaIncidencias;
+		return incidencia;
 	} 
 	
 	public ArrayList<String> getIncidenciaActivas(int refHotel){

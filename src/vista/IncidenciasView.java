@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controlador.ControladorIncidencias;
 import interfaces.IControladorIncidencias;
+import modelo.vo.EstanciaVO;
 import modelo.vo.IncidenciaVO;
 
 import java.awt.event.ActionListener;
@@ -30,7 +31,7 @@ public class IncidenciasView extends JPanel implements IControladorIncidencias{
 	private String[]titulosColumnas = {bundle.getString("jTblInciDesc"), bundle.getString("jTblInciEstan"), bundle.getString("jTblInciEstado"), bundle.getString("jTblInciFecha")};
 	private DefaultTableModel modeloTabla;
 	private String fecha;
-	
+	JScrollPane scrollPane;
 
 
 	public IncidenciasView() {
@@ -52,27 +53,10 @@ public class IncidenciasView extends JPanel implements IControladorIncidencias{
 		
 		JPanel panel_1 = new JPanel();
 		add(panel_1, BorderLayout.CENTER);
-		
-		modeloTabla = new DefaultTableModel(titulosColumnas, 0);
+
 		panel_1.setLayout(new BorderLayout(0, 0));
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		panel_1.add(scrollPane);
-		//metodo para que no se pueda editar la celda
-		table = new JTable(modeloTabla){
-			private static final long serialVersionUID = 1L;
-	        public boolean isCellEditable(int row, int column) {                
-	                return false;               
-	        };
-	    };
-	    table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-	        @Override
-	        public void valueChanged(ListSelectionEvent event) {
-	            if (table.getSelectedRow() > -1) {
-	              fecha=(String) table.getValueAt(table.getSelectedRow(), 3);
-	            }
-	        }
-	    });
-		scrollPane.setViewportView(table);
 	}
 
 
@@ -82,20 +66,27 @@ public class IncidenciasView extends JPanel implements IControladorIncidencias{
 		this.btnResuelta.addActionListener(controlador);
 	}
 
-	public void rellenaTablaIncidencias(ArrayList<String> arrayList){
+	public void rellenaTablaIncidencias(ArrayList<IncidenciaVO> incidencias,ArrayList<EstanciaVO>estancias){
 		modeloTabla = new DefaultTableModel(titulosColumnas,0);
+		table = new JTable(modeloTabla);
+	    scrollPane.setViewportView(table);
+	    
 		Object[] fila = new Object[modeloTabla.getColumnCount()];
-		
-		for (int i = 0 ; i < arrayList.size(); i=i+4 ){
-			fila[0] = arrayList.get(i);
-			fila[1] = arrayList.get(i+1);
-			fila[2] = arrayList.get(i+2);
-			fila[3] = arrayList.get(i+3);
-			modeloTabla.addRow(fila);
+		for (int i = 0 ; i < incidencias.size(); i++ ){
+			fila[0] = incidencias.get(i).getDescripcion();
+			fila[2] = incidencias.get(i).getEstado();
+			fila[3] = incidencias.get(i).getFecha();
+		for (int j = 0 ; j < estancias.size(); j++){
+			if(incidencias.get(i).getCod_estancia()==(estancias.get(j).getId())){
+			fila[1] = estancias.get(j).getNombre();
+			}
+		}
+		modeloTabla.addRow(fila);
 		}
 		table.setModel(modeloTabla);
 	}
 
+	
 
 	public JTable getTable() {
 		return table;
