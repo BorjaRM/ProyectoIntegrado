@@ -40,7 +40,6 @@ public class Controlador implements ActionListener, ItemListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e){
-		System.out.println(e.getActionCommand());
 		switch(e.getActionCommand().toLowerCase()){
 			case "obtener permisos": setPermisos((JCheckBox) e.getSource()); break;
 		}				

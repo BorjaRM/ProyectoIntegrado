@@ -49,7 +49,7 @@ public class ModificarEstanciaView extends JPanel implements IControladorEstanci
 		lblHabitacion.setFont(new Font("Lucida Grande", Font.ITALIC, 16));
 		panel_Textos.add(lblHabitacion);
 		
-		Component horizontalStrut = Box.createHorizontalStrut(150);
+		Component horizontalStrut = Box.createHorizontalStrut(400);
 		panel_Textos.add(horizontalStrut);
 		
 		JLabel lblUsoComn = new JLabel("Uso Comun");
@@ -67,7 +67,7 @@ public class ModificarEstanciaView extends JPanel implements IControladorEstanci
 		
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.CENTER);
-		panel.setLayout(new GridLayout(1, 3, 20, 0));
+		panel.setLayout(new GridLayout(0, 2, 20, 0));
 		
 		JPanel panel_Habitacion = new JPanel();
 		panel.add(panel_Habitacion);
@@ -123,7 +123,7 @@ public class ModificarEstanciaView extends JPanel implements IControladorEstanci
 		panel_UsoComun.add(txt_nombre_uso);
 		txt_nombre_uso.setColumns(10);
 		
-		Component verticalStrut = Box.createVerticalStrut(210);
+		Component verticalStrut = Box.createVerticalStrut(290);
 		panel_UsoComun.add(verticalStrut);
 	}
 

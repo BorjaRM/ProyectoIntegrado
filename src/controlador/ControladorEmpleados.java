@@ -30,7 +30,6 @@ public class ControladorEmpleados extends Controlador implements ListSelectionLi
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(e.getActionCommand());
 		switch(e.getActionCommand()){
 			case "Ver empleados": preparaEmpleadosView(); break;
 			case "Nuevo empleado": preparaNuevoEmpleadoView(); break;
@@ -148,10 +147,7 @@ public class ControladorEmpleados extends Controlador implements ListSelectionLi
 					int filaSeleccionada = ev.getTable().getSelectedRow();
 					if(filaSeleccionada > -1){
 						this.empleadoSeleccionado=empleados.get(filaSeleccionada);
-						System.out.println(usuarios.size());
 						this.usuarioSeleccionado=usuarios.get(filaSeleccionada);
-						System.out.println(empleadoSeleccionado.getNombre());
-						System.out.println(usuarioSeleccionado.getNombre());
 					}
 				}
 			}

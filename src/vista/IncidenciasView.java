@@ -59,7 +59,6 @@ public class IncidenciasView extends JPanel implements IControladorIncidencias{
 		panel_1.add(scrollPane);
 	}
 
-
 	@Override
 	public void estableceControlador(ControladorIncidencias controlador) {
 		this.btnNueva.addActionListener(controlador);
@@ -86,27 +85,20 @@ public class IncidenciasView extends JPanel implements IControladorIncidencias{
 		table.setModel(modeloTabla);
 	}
 
-	
-
 	public JTable getTable() {
 		return table;
 	}
-
 
 	public void setTable(JTable table) {
 		this.table = table;
 	}
 
-
 	public String getFecha() {
 		return fecha;
 	}
-
 
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
 
-	
-	
 }

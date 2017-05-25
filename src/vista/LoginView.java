@@ -111,7 +111,6 @@ public class LoginView extends JFrame{
 			String nombre=this.text_usuario.getText();
 			String passText = Md5.encriptar(new String(passwordField.getPassword()));
 			u=new UsuarioVO(nombre,passText);
-			System.out.println(passText);
 		}catch (Exception e){
 			e.printStackTrace();
 		}

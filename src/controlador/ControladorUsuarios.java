@@ -49,7 +49,6 @@ public class ControladorUsuarios extends Controlador implements MouseListener{
 			}else
 				JOptionPane.showMessageDialog(null, "Datos incorrectos, Acceso denegado");			
 		}else{
-			System.err.println("programar acceso por VMware");
 			preparaPrincipalAdminView();
 		}
 	}
@@ -97,16 +96,6 @@ public class ControladorUsuarios extends Controlador implements MouseListener{
 		Controlador.frame.getPav().getTxt_incidencias().setText(String.valueOf(new IncidenciaDAO().getTotalIncidencias(refHotel)));
 	}
 	
-	/*public void preparaListadoAdminView(){
-		RutinasAlmacenadas ra = new RutinasAlmacenadas();
-		Controlador.frame.getPav().rellenaListaIncidencias(new IncidenciaDAO().getIncidenciaActivas(refHotel));
-		Controlador.frame.getPav().getTxt_clientes().setText(String.valueOf(ra.rutinaAlmacenadaTotalClientes(refHotel)));
-		Controlador.frame.getPav().getTxt_empleados().setText(String.valueOf(ra.rutinaAlmacenadaTotalEmpleados(refHotel)));
-		Controlador.frame.getPav().getTxt_reservas().setText(String.valueOf(ra.rutinaAlmacenadaTotalReservasHoy(refHotel)));
-		Controlador.frame.getPav().getTxt_hab().setText(String.valueOf(ra.rutinaAlmacenadaTotalHabitaciones(refHotel)));
-		Controlador.frame.getPav().getTxt_incidencias().setText(String.valueOf(ra.rutinaAlmacenadaTotalIncidencias(refHotel)));
-	}*/
-	
 	public void preparaNuevoHotelView(){
 		Controlador.frame.creaHotelView(this);
 		Controlador.frame.muestraHotelView();
@@ -134,12 +123,9 @@ public class ControladorUsuarios extends Controlador implements MouseListener{
 		}
 	}
 	
-	public void compruebaIdioma() {
-		
-		if (Idiomas.getBundle() == null) {
-			
+	public void compruebaIdioma() {		
+		if (Idiomas.getBundle() == null)
 			Idiomas.newIdioma("Español");
-		}
 	}
 
 	@Override

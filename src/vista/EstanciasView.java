@@ -22,7 +22,7 @@ public class EstanciasView extends JPanel implements IControladorEstancias{
 	private JButton btnModificarEstancia;
 	private JButton btnEliminarEstancia;
 	private JTable tabla_habitaciones;
-	private final String[] habitaciones_head = {"Id","Nombre","Clasificacion","Plazas","Precio","Descripcion"};
+	private final String[] habitaciones_head = {"Nombre","Clasificacion","Plazas","Precio","Descripcion"};
 	private DefaultTableModel habitaciones_model;
 	private JTable tabla_estancias;
 	private final String[] estancias_head = {"Zonas de uso comun"};
@@ -99,12 +99,11 @@ public class EstanciasView extends JPanel implements IControladorEstancias{
 		Object[] fila = new Object[habitaciones_model.getColumnCount()];
 		
 		for (int i = 0 ; i < habitaciones.size(); i++ ){
-			fila[0] = habitaciones.get(i).getId();
-			fila[1] = habitaciones.get(i).getNombre();
-			fila[2] = habitaciones.get(i).getClasificacion();
-			fila[3] = habitaciones.get(i).getPlazas();
-			fila[4] = habitaciones.get(i).getPrecio();
-			fila[5] = habitaciones.get(i).getDescripcion();
+			fila[0] = habitaciones.get(i).getNombre();
+			fila[1] = habitaciones.get(i).getClasificacion();
+			fila[2] = habitaciones.get(i).getPlazas();
+			fila[3] = habitaciones.get(i).getPrecio();
+			fila[4] = habitaciones.get(i).getDescripcion();
 			habitaciones_model.addRow(fila);
 		}
 		tabla_habitaciones.setModel(habitaciones_model);

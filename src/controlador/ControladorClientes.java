@@ -58,20 +58,20 @@ public class ControladorClientes extends Controlador{
 	private void insertaCliente() {
 		String fecha = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd",Locale.ENGLISH);
-		fecha = sdf.format(ncv.getDateChooser().getDate().getTime());
-		ClienteVO cliente = new ClienteVO("",ncv.getTxt_Nombre().getText(),
-				ncv.getTxt_Apellidos().getText(),
-				ncv.getTxt_Identificacion().getText(),
-				fecha,
-				ncv.getTxt_Telefono().getText(),
-				ncv.getTxt_Nacionalidad().getText(),
-				ncv.getTxt_Email().getText(),"");
+		try {
+			fecha = sdf.format(ncv.getDateChooser().getDate().getTime());
+			ClienteVO cliente = new ClienteVO("",ncv.getTxt_Nombre().getText(), ncv.getTxt_Apellidos().getText(), ncv.getTxt_Identificacion().getText(),
+					fecha, ncv.getTxt_Telefono().getText(), ncv.getTxt_Nacionalidad().getText(), ncv.getTxt_Email().getText(),"");
 
-		if(ncv.getTxt_Apellidos().getText().isEmpty() || ncv.getTxt_Nombre().getText().isEmpty() || ncv.getTxt_Email().getText().isEmpty() || ncv.getTxt_Identificacion().getText().isEmpty() || ncv.getTxt_Telefono().getText().isEmpty() || ncv.getTxt_Nacionalidad().getText().isEmpty()){
-			JOptionPane.showMessageDialog(null, "Faltan datos por rellenar, Error");	
-		}else{			
-			modeloCliente.insertaCliente(cliente);
-		}	
+			if(ncv.getTxt_Apellidos().getText().isEmpty() || ncv.getTxt_Nombre().getText().isEmpty() || ncv.getTxt_Email().getText().isEmpty() || 
+					ncv.getTxt_Identificacion().getText().isEmpty() || ncv.getTxt_Telefono().getText().isEmpty() || ncv.getTxt_Nacionalidad().getText().isEmpty()){
+				JOptionPane.showMessageDialog(null, "Faltan datos por rellenar, Error");	
+			}else{			
+				modeloCliente.insertaCliente(cliente);
+			}	
+		}catch(Exception e){
+			JOptionPane.showMessageDialog(null, "Se ha producido un error, no se ha podido completar la insercion", "Error", JOptionPane.ERROR_MESSAGE);
+		}		
 	}
 	public void preparaClientesView(){
 		frame.creaClientesView(this);

@@ -93,10 +93,8 @@ public class IncidenciaDAO {
 		int codigo,cod_estancia;
 		String descripcion,estado,fecha;
 		try{
-			String sql = "SELECT * FROM incidencia INNER JOIN estancia "
-					+ "ON incidencia.cod_estancia=estancia.id INNER JOIN hotel "
-					+ "ON estancia.cod_hotel=hotel.codigo AND "
-					+ "incidencia.estado='activa' AND hotel.codigo=?;";
+			String sql = "SELECT * FROM incidencia INNER JOIN estancia ON incidencia.cod_estancia=estancia.id INNER JOIN hotel ON "
+					+ "estancia.cod_hotel=hotel.codigo AND hotel.codigo=? ORDER BY estado ASC, fecha DESC;";
 
 			PreparedStatement ps = this.bd.getConexion().prepareStatement(sql);
 			ps.setInt(1, refHotel);
