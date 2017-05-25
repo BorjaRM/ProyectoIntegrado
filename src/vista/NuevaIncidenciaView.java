@@ -32,6 +32,8 @@ public class NuevaIncidenciaView extends JPanel implements IControladorIncidenci
 	private JTextArea textArea;
 	private ArrayList <EstanciaVO> misEstancias;
 	private int cod_estancia=0;
+	private int posSeleccio=0;
+	private IncidenciaDAO inc=new IncidenciaDAO();
 	
 	public NuevaIncidenciaView() {
 		setLayout(new BorderLayout(0, 0));
@@ -51,15 +53,6 @@ public class NuevaIncidenciaView extends JPanel implements IControladorIncidenci
 		panel_2.add(horizontalStrut_1, BorderLayout.WEST);
 		
 		comboBox = new JComboBox<EstanciaVO>();
-		comboBox.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-			int posSeleccio = comboBox.getSelectedIndex();
-
-			cod_estancia = misEstancias.get(posSeleccio).getId();
-			}
-		});
 		panel_2.add(comboBox, BorderLayout.CENTER);
 		
 		JPanel panel_3 = new JPanel();
@@ -125,18 +118,9 @@ public class NuevaIncidenciaView extends JPanel implements IControladorIncidenci
 		for (int i = 0 ; i < Estancias.size(); i++){
 			System.err.println(Estancias.get(i).getNombre());
 			comboBox.addItem(Estancias.get(i));
-
-		}
+		}	
 	}
-	public IncidenciaVO enviarDatosIncidencia(){
-		IncidenciaDAO in = new IncidenciaDAO();
-		String descripcion = this.textArea.getText().toUpperCase();
-		boolean estado = true;
-		String fecha = in.obtenFecha();
 
-		IncidenciaVO objIn = new IncidenciaVO(0,descripcion,estado,fecha,cod_estancia);
-		return objIn;
-	}
 	public JComboBox<EstanciaVO> getComboBox() {
 		return comboBox;
 	}

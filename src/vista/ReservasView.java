@@ -26,6 +26,8 @@ public class ReservasView extends JPanel implements IControladorReservas{
 	private JTable table;
 	private JButton btnNuevaReserva;
 	private JButton btnCancelarReserva;
+	private DefaultTableModel table_model;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Create the panel.
@@ -49,17 +51,8 @@ public class ReservasView extends JPanel implements IControladorReservas{
 		add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new BorderLayout(0, 0));
 		
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		panel_1.add(scrollPane);
-		
-		String[] colHeader = {"ID","Cliente","Habitacion","Check-In","Check-Out","Noches","Pension"};
-		DefaultTableModel table_model = new DefaultTableModel(colHeader,0);
-		table = new JTable(table_model);
-		scrollPane.setViewportView(table);
-		ArrayList<ReservaVO> reservas = new ReservaDAO().consultaReservas();
-		ArrayList<ClienteVO> clientes = new ClienteDAO().rellenaYConsigueArrayClientes();
-		ArrayList<HabitacionVO> habitaciones = new HabitacionDAO().getHabitaciones(1);
-		rellenaListaReservas(reservas,clientes,habitaciones);
 	}
 
 	@Override
@@ -68,7 +61,12 @@ public class ReservasView extends JPanel implements IControladorReservas{
 		this.btnCancelarReserva.addActionListener(controlador);
 	}
 	
+	
 	public void rellenaListaReservas(ArrayList <ReservaVO> reservas, ArrayList<ClienteVO> clientes, ArrayList<HabitacionVO> habitaciones){
+		String[] colHeader = {"ID","Cliente","Habitacion","Check-In","Check-Out","Noches","Pension"};
+		table_model = new DefaultTableModel(colHeader,0);
+		table = new JTable(table_model);
+		scrollPane.setViewportView(table);
 		DefaultTableModel modeloTabla = (DefaultTableModel) table.getModel();
 		Object[] fila = new Object[modeloTabla.getColumnCount()];
 		
@@ -93,7 +91,8 @@ public class ReservasView extends JPanel implements IControladorReservas{
 			}
 			modeloTabla.addRow(fila);
 		}
-		table.setModel(modeloTabla);	
+		table.setModel(modeloTabla);
+		
 	}
 
 	public JTable getTable() {

@@ -63,6 +63,7 @@ public class ControladorReservas extends Controlador{
 		}
 	}
 	
+	
 	private void eliminaReserva(){
 		posicionSeleccionada = rv.getTable().getSelectedRow();
 		if(posicionSeleccionada != -1){
@@ -87,7 +88,9 @@ public class ControladorReservas extends Controlador{
 	public void preparaReservasView(){
 		frame.creaReservasView(this);
 		this.rv=frame.getRv();
+		rellenaTabla();
 		frame.muestraReservasView();
+		
 	}
 	
 	public void preparaNuevaReservaView(){
