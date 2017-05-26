@@ -1,8 +1,10 @@
 package vista;
 
 import java.awt.BorderLayout;
+
 import java.awt.FlowLayout;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -13,6 +15,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.ControladorEstancias;
+import idiomas.Idiomas;
 import interfaces.IControladorEstancias;
 import modelo.vo.EstanciaVO;
 import modelo.vo.HabitacionVO;
@@ -22,11 +25,13 @@ public class EstanciasView extends JPanel implements IControladorEstancias{
 	private JButton btnModificarEstancia;
 	private JButton btnEliminarEstancia;
 	private JTable tabla_habitaciones;
-	private final String[] habitaciones_head = {"Nombre","Clasificacion","Plazas","Precio","Descripcion"};
+	ResourceBundle bundle = Idiomas.getBundle();
+	private final String[] habitaciones_head = {bundle.getString("jTblEstanID"),bundle.getString("jTblEstanNom"),bundle.getString("jTblEstanTipo"),bundle.getString("jTblEstanPlazas"),bundle.getString("jTblEstanPension"),bundle.getString("jLblRegEstanDescrp")};
 	private DefaultTableModel habitaciones_model;
 	private JTable tabla_estancias;
-	private final String[] estancias_head = {"Zonas de uso comun"};
+	private final String[] estancias_head = {bundle.getString("jTblEstanZonCom")};
 	private DefaultTableModel estancias_model;
+	
 	
 	/**
 	 * Create the panel.
@@ -39,13 +44,13 @@ public class EstanciasView extends JPanel implements IControladorEstancias{
 		flowLayout.setVgap(15);
 		add(botonera, BorderLayout.NORTH);
 		
-		btnNuevaEstancia = new JButton("Nueva Estancia");
+		btnNuevaEstancia = new JButton(bundle.getString("btnNewEstan"));
 		botonera.add(btnNuevaEstancia);
 		
-		btnEliminarEstancia = new JButton("Eliminar Estancia");
+		btnEliminarEstancia = new JButton(bundle.getString("btnRmvEstan"));
 		botonera.add(btnEliminarEstancia);
 		
-		btnModificarEstancia = new JButton("Modificar Estancia");
+		btnModificarEstancia = new JButton(bundle.getString("btnModEstan"));
 		botonera.add(btnModificarEstancia);
 		
 		JPanel panel_Tabla = new JPanel();
@@ -99,11 +104,11 @@ public class EstanciasView extends JPanel implements IControladorEstancias{
 		Object[] fila = new Object[habitaciones_model.getColumnCount()];
 		
 		for (int i = 0 ; i < habitaciones.size(); i++ ){
-			fila[0] = habitaciones.get(i).getNombre();
-			fila[1] = habitaciones.get(i).getClasificacion();
-			fila[2] = habitaciones.get(i).getPlazas();
-			fila[3] = habitaciones.get(i).getPrecio();
-			fila[4] = habitaciones.get(i).getDescripcion();
+			fila[1] = habitaciones.get(i).getNombre();
+			fila[2] = habitaciones.get(i).getClasificacion();
+			fila[3] = habitaciones.get(i).getPlazas();
+			fila[4] = habitaciones.get(i).getPrecio();
+			fila[5] = habitaciones.get(i).getDescripcion();
 			habitaciones_model.addRow(fila);
 		}
 		tabla_habitaciones.setModel(habitaciones_model);
