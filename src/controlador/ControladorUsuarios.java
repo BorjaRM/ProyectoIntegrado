@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import idiomas.Idiomas;
+import modelo.ConexionAdmin;
 import modelo.dao.ClienteDAO;
 import modelo.dao.EmpleadoDAO;
 import modelo.dao.HabitacionDAO;
@@ -49,7 +50,11 @@ public class ControladorUsuarios extends Controlador implements MouseListener{
 			}else
 				JOptionPane.showMessageDialog(null, "Datos incorrectos, Acceso denegado");			
 		}else{
-			preparaPrincipalAdminView();
+			ConexionAdmin ca = new ConexionAdmin();
+			if(ca.isDatosOk()){
+				preparaPrincipalAdminView();
+			}else
+				vistaLogin.dispose();
 		}
 	}
 	
