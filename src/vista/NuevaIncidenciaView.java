@@ -117,10 +117,10 @@ public class NuevaIncidenciaView extends JPanel implements IControladorIncidenci
 		this.btnEnviar.addActionListener(controlador);
 		this.btnCancelar.addActionListener(controlador);
 	}
+	
 	public void rellenaComboBox(ArrayList <EstanciaVO> Estancias){
 		comboBox.removeAllItems();
 		for (int i = 0 ; i < Estancias.size(); i++){
-			System.err.println(Estancias.get(i).getNombre());
 			comboBox.addItem(Estancias.get(i));
 		}	
 	}

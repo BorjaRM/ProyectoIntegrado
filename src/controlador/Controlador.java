@@ -11,6 +11,7 @@ import idiomas.Idiomas;
 import modelo.BD;
 import modelo.dao.UsuarioDAO;
 import modelo.vo.HotelVO;
+import vista.LoginView;
 import vista.Marco;
 
 public class Controlador implements ActionListener, ItemListener{
@@ -39,17 +40,6 @@ public class Controlador implements ActionListener, ItemListener{
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e){
-		switch(e.getActionCommand().toLowerCase()){
-			case "obtener permisos": setPermisos((JCheckBox) e.getSource()); break;
-		}				
-	}
-	
-	public void setPermisos(JCheckBox soyAdmin){
-		esAdministrador=soyAdmin.isSelected();
-	}
-
-	@Override
 	public void itemStateChanged(ItemEvent e){
 		//Se ha seleccionado un idioma
 		if(e.getStateChange() == 1){ 
@@ -71,5 +61,8 @@ public class Controlador implements ActionListener, ItemListener{
 		UsuarioDAO  consultasUsuario = new UsuarioDAO();
 		refEmpleado=consultasUsuario.getReferenciaEmpleado(refUsuario);
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {}
 
 }

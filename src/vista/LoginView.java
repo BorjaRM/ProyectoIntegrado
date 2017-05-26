@@ -93,11 +93,12 @@ public class LoginView extends JFrame{
 	}
 
 	public void estableceControlador(ControladorUsuarios controlador) {
+		this.soyAdmin.addActionListener(controlador);
 		this.bntEntrar.addActionListener(controlador);
 	}
 	
 	public void estableceControlador(Controlador controlador){
-		this.soyAdmin.addActionListener(controlador);
+	//	this.soyAdmin.addActionListener(controlador);
 		this.desplegableIdioma.addItemListener(controlador);
 	}
 
@@ -105,6 +106,10 @@ public class LoginView extends JFrame{
 		return soyAdmin;
 	}	
 	
+	public JTextField getText_usuario() {
+		return text_usuario;
+	}
+
 	public UsuarioVO recogeDatos(){
 		UsuarioVO u = null;
 		try{
@@ -115,6 +120,10 @@ public class LoginView extends JFrame{
 			e.printStackTrace();
 		}
 		return u;
+	}
+
+	public String getPasswordAdmin() {
+		return new String(passwordField.getPassword());
 	}
 
 }

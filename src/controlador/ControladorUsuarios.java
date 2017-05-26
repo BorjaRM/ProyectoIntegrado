@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 
 import idiomas.Idiomas;
@@ -37,6 +38,17 @@ public class ControladorUsuarios extends Controlador implements MouseListener{
 			case "nuevo hotel": preparaNuevoHotelView(); break;
 			case "eliminar hotel": eliminar(); break;
 			case "nueva referencia hotel": super.actualizaReferenciaHotelAdmin(); preparaListadoAdminView(); break;
+			case "obtener permisos": setPermisos((JCheckBox) e.getSource()); break;
+		}
+	}
+	
+	public void setPermisos(JCheckBox soyAdmin){
+		Controlador.esAdministrador=soyAdmin.isSelected();	
+		if(esAdministrador){
+			vistaLogin.getText_usuario().setText("Administrador");
+			vistaLogin.getText_usuario().setEnabled(false);
+		}else{
+			vistaLogin.getText_usuario().setEnabled(true);
 		}
 	}
 	
@@ -47,14 +59,19 @@ public class ControladorUsuarios extends Controlador implements MouseListener{
 				this.estableceReferenciaHotelEmpleado(refUsuario);
 				this.estableceReferenciaCodigoEmpleado(refUsuario);
 				preparaPrincipalEmpleadoView();
+				vistaLogin.setVisible(false);
 			}else
 				JOptionPane.showMessageDialog(null, "Datos incorrectos, Acceso denegado");			
 		}else{
-			ConexionAdmin ca = new ConexionAdmin();
-			if(ca.isDatosOk()){
-				preparaPrincipalAdminView();
+			String pass = vistaLogin.getPasswordAdmin();
+			if(!pass.equalsIgnoreCase("")){
+				ConexionAdmin ca = new ConexionAdmin(pass);
+				if(ca.isDatosOk()){
+					preparaPrincipalAdminView();
+					vistaLogin.setVisible(false);
+				}
 			}else
-				vistaLogin.dispose();
+				JOptionPane.showMessageDialog(null, "Ha habido un error en la autenticación", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
