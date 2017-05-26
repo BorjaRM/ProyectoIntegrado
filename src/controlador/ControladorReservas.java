@@ -1,18 +1,16 @@
 package controlador;
 
 import java.awt.event.ActionEvent;
-import java.text.DateFormat;
-import java.text.ParseException;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-import java.util.concurrent.TimeUnit;
-
 import javax.swing.JOptionPane;
 
-import modelo.BD;
+import com.toedter.calendar.JDateChooser;
+
 import modelo.dao.ClienteDAO;
 import modelo.dao.HabitacionDAO;
 import modelo.dao.ReservaDAO;
@@ -22,11 +20,13 @@ import modelo.vo.ReservaVO;
 import vista.NuevaReservaView;
 import vista.ReservasView;
 
-public class ControladorReservas extends Controlador{
+public class ControladorReservas extends Controlador implements PropertyChangeListener{
 	private NuevaReservaView nrv;
 	private ReservasView rv;
 	private ReservaDAO rd;
 	private int posicionSeleccionada;
+	String newFechaLlegada;
+	String newFechaSalida;
 
 	public ControladorReservas(){
 		frame.estableceControlador(this);
@@ -50,9 +50,8 @@ public class ControladorReservas extends Controlador{
 		String inicio = null;
 		String fin = null;
 		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd",Locale.ENGLISH);
-			inicio = sdf.format(nrv.getDateChooserLlegada().getDate().getTime());
-			fin = sdf.format(nrv.getDateChooserSalida().getDate().getTime());
+			inicio = transformaFecha(nrv.getDateChooserLlegada().getDate().getTime());
+			fin = transformaFecha(nrv.getDateChooserSalida().getDate().getTime());
 			clienteSeleccionado = (ClienteVO) nrv.getListaClientes().getSelectedItem();
 			habSeleccionada = (HabitacionVO) nrv.getListaHabitaciones().getSelectedItem();
 			ReservaVO reserva = new ReservaVO("",inicio,fin,nrv.getListaPension().getSelectedItem().toString(),
@@ -61,6 +60,12 @@ public class ControladorReservas extends Controlador{
 		}catch (Exception e){
 			 e.printStackTrace();
 		}
+	}
+	
+	public String  transformaFecha(long oldDate ){
+		String newDate;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd",Locale.ENGLISH);
+		return newDate=sdf.format(oldDate);
 	}
 	
 	
@@ -97,7 +102,6 @@ public class ControladorReservas extends Controlador{
 		frame.creaNuevaReservaView(this);
 		this.nrv=frame.getNrv();
 		llenaComboBoxClientes();
-		llenaComboBoxHabitaciones();
 		frame.muestraNuevaReservaView();
 	}
 	
@@ -107,9 +111,9 @@ public class ControladorReservas extends Controlador{
 		nrv.llenaComboBoxClientes(clientes);
 	}
 	
-	public void llenaComboBoxHabitaciones(){
+	public void llenaComboBoxHabitaciones(String newFechaLlegada, String newFechaSalida){
 		HabitacionDAO modeloHabitacion = new HabitacionDAO();
-		ArrayList <HabitacionVO> habitaciones = modeloHabitacion.getHabitaciones(refHotel);
+		ArrayList <HabitacionVO> habitaciones = modeloHabitacion.getHabitacionesLibresEntreDosFechas(newFechaLlegada,newFechaSalida,refHotel);
 		nrv.llenaComboBoxHabitaciones(habitaciones);
 	}
 	
@@ -121,5 +125,30 @@ public class ControladorReservas extends Controlador{
 				frame.muestraPrincipalEmpleadoView();
 		}else
 			frame.muestraReservasView();
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent e) {
+		System.out.println("ha ocurrido algo");
+		if(e.getPropertyName().equals("date")){
+			JDateChooser source = (JDateChooser) e.getSource();
+			JDateChooser llegada = nrv.getDateChooserLlegada();
+			JDateChooser salida = nrv.getDateChooserSalida();
+			if(llegada == source){
+				Date fechaLlegada = (Date) e.getNewValue();
+				this.newFechaLlegada = transformaFecha((long)fechaLlegada.getTime());
+				System.out.println("has cambiado llegada "+newFechaLlegada);
+				salida.setMinSelectableDate(fechaLlegada);
+			}else if(salida == source){
+				Date fechaSalida = (Date) e.getNewValue();
+				this.newFechaSalida = transformaFecha((long)fechaSalida.getTime());
+				System.out.println("has cambiado salida "+newFechaSalida);
+			}
+			System.out.println(newFechaLlegada+" - "+newFechaSalida);
+			if(newFechaLlegada != null && newFechaSalida != null){
+				System.out.println("rellenando");
+				llenaComboBoxHabitaciones(newFechaLlegada,newFechaSalida);
+			}
+		}
 	}
 }

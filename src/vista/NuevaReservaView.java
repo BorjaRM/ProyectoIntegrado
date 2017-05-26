@@ -120,7 +120,6 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		dateChooserLlegada.setMinSelectableDate(new Date());
 		dateChooserLlegada.setDateFormatString("yyyy-MM-dd");
 		
-		
 		JLabel lblSalida = new JLabel(bundle.getString("jLblRegRsrvSalid"));
 		GridBagConstraints gbc_lblSalida = new GridBagConstraints();
 		gbc_lblSalida.insets = new Insets(0, 0, 5, 5);
@@ -162,6 +161,8 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 	public void estableceControlador(ControladorReservas controlador) {
 		this.btnEnviar.addActionListener(controlador);
 		this.btnCancelar.addActionListener(controlador);
+		this.dateChooserLlegada.addPropertyChangeListener(controlador);
+		this.dateChooserSalida.addPropertyChangeListener(controlador);
 	}
 
 	public JComboBox getListaClientes() {
@@ -217,7 +218,6 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		for(ClienteVO cliente: clientes){
 			this.listaClientes.addItem(cliente);
 		}
-		
 	}
 
 	public void llenaComboBoxHabitaciones(ArrayList<HabitacionVO> habitaciones) {
@@ -225,5 +225,8 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		for(HabitacionVO habitacion: habitaciones){
 			this.listaHabitaciones.addItem(habitacion);
 		}
+		listaHabitaciones.setVisible(false);
+		listaHabitaciones.setVisible(true);
+
 	}
 }

@@ -84,7 +84,7 @@ public class HabitacionDAO {
 		}
 	}
 	
-	public ArrayList<HabitacionVO> getHabitacionesLibres(int refHotel){
+	public ArrayList<HabitacionVO> getHabitacionesLibresHoy(int refHotel){
 		ArrayList<HabitacionVO> habitaciones = new ArrayList<HabitacionVO>();
 		int id_estancia,cod_hotel = 0,plazas,precio;
 		String tipo_hab,nombre,clasificacion,descripcion;
@@ -95,6 +95,40 @@ public class HabitacionDAO {
 		try {
 			PreparedStatement consulta = this.bd.getConexion().prepareStatement(sql);
 			consulta.setInt(1, refHotel);
+			ResultSet resultadoConsulta = consulta.executeQuery();
+			while(resultadoConsulta.next()){
+				cod_hotel=resultadoConsulta.getInt("cod_hotel");
+				tipo_hab=resultadoConsulta.getString("tipo");
+				id_estancia=resultadoConsulta.getInt("id");
+				nombre=resultadoConsulta.getString("nombre");
+				clasificacion=resultadoConsulta.getString("clasificacion");
+				plazas=resultadoConsulta.getInt("plazas");
+				precio=resultadoConsulta.getInt("precio");
+				descripcion=resultadoConsulta.getString("descripcion");
+				//Creamos un objeto Habitacion y lo añadimos al Arraylist
+				habitaciones.add(new HabitacionVO(id_estancia,cod_hotel,nombre,tipo_hab,clasificacion,plazas,precio,descripcion));	
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return habitaciones;		
+	}
+	
+	public ArrayList<HabitacionVO> getHabitacionesLibresEntreDosFechas(String inicio, String fin,int refHotel){
+		ArrayList<HabitacionVO> habitaciones = new ArrayList<HabitacionVO>();
+		int id_estancia,cod_hotel = 0,plazas,precio;
+		String tipo_hab,nombre,clasificacion,descripcion;
+		String sql = ("SELECT estancia.cod_hotel, estancia.tipo,estancia.id,estancia.nombre,habitacion.clasificacion,habitacion.plazas,"
+				+ "habitacion.precio,habitacion.descripcion FROM estancia INNER JOIN hotel ON estancia.cod_hotel=hotel.codigo INNER JOIN "
+				+ "habitacion ON estancia.id=habitacion.id_estancia WHERE estancia.id NOT IN (SELECT reserva.cod_habitacion FROM reserva "
+				+ "WHERE reserva.inicio BETWEEN ? AND ? OR reserva.fin BETWEEN ? AND ?) AND estancia.tipo='habitacion' AND hotel.codigo=?;");
+		try {
+			PreparedStatement consulta = this.bd.getConexion().prepareStatement(sql);
+			consulta.setString(1, inicio);
+			consulta.setString(2, fin);
+			consulta.setString(3, inicio);
+			consulta.setString(4, fin);
+			consulta.setInt(5, refHotel);
 			ResultSet resultadoConsulta = consulta.executeQuery();
 			while(resultadoConsulta.next()){
 				cod_hotel=resultadoConsulta.getInt("cod_hotel");

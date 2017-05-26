@@ -84,7 +84,7 @@ public class ControladorUsuarios extends Controlador implements MouseListener{
 		Controlador.frame.getPev().rellenaListaLlegadas(new ReservaDAO().getLLegadasHoy(refHotel));
 		Controlador.frame.getPev().rellenaListaSalidas(new ReservaDAO().getSalidasHoy(refHotel));
 		Controlador.frame.getPev().rellenaListaIncidencias(new IncidenciaDAO().getIncidenciaActivas(refHotel));
-		Controlador.frame.getPev().rellenaListaHabitacionesLibres(new HabitacionDAO().getHabitacionesLibres(refHotel));
+		Controlador.frame.getPev().rellenaListaHabitacionesLibres(new HabitacionDAO().getHabitacionesLibresHoy(refHotel));
 	}
 	
 	public void preparaListadoAdminView(){
