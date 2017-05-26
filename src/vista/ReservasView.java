@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -13,6 +14,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.ControladorReservas;
+import idiomas.Idiomas;
 import interfaces.IControladorReservas;
 import modelo.BD;
 import modelo.dao.ClienteDAO;
@@ -28,22 +30,24 @@ public class ReservasView extends JPanel implements IControladorReservas{
 	private JButton btnCancelarReserva;
 	private DefaultTableModel table_model;
 	private JScrollPane scrollPane;
-
+	ResourceBundle bundle;
+	
 	/**
 	 * Create the panel.
 	 */
 	public ReservasView() {
+		bundle = Idiomas.getBundle();
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.NORTH);
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 15));
 		
-		btnNuevaReserva = new JButton("Nueva Reserva");
+		btnNuevaReserva = new JButton(bundle.getString("btnNewRsrv"));
 		btnNuevaReserva.setActionCommand("Nueva Reserva");
 		panel.add(btnNuevaReserva);
 		
-		btnCancelarReserva = new JButton("Anular Reserva");
+		btnCancelarReserva = new JButton(bundle.getString("btnRmvRsrv"));
 		btnCancelarReserva.setActionCommand("Anular Reserva");
 		panel.add(btnCancelarReserva);
 		
@@ -63,7 +67,7 @@ public class ReservasView extends JPanel implements IControladorReservas{
 	
 	
 	public void rellenaListaReservas(ArrayList <ReservaVO> reservas, ArrayList<ClienteVO> clientes, ArrayList<HabitacionVO> habitaciones){
-		String[] colHeader = {"ID","Cliente","Habitacion","Check-In","Check-Out","Noches","Pension"};
+		String[] colHeader = {bundle.getString("jTblRsrvID"),bundle.getString("jTblRsrvCli"),bundle.getString("jTblRsrvHabi"),bundle.getString("jTblRsrvCheckIn"),bundle.getString("jTblRsrvCheckOut"),bundle.getString("jTblRsrvNoches"),bundle.getString("jTblRsrvPension")};
 		table_model = new DefaultTableModel(colHeader,0);
 		table = new JTable(table_model);
 		scrollPane.setViewportView(table);

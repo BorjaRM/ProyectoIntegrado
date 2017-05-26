@@ -65,7 +65,7 @@ public class LoginView extends JFrame{
 		
 		panel_1.add(Box.createVerticalStrut(20));
 		
-		JLabel lbl_pass = new JLabel("Contrasenya:");
+		JLabel lbl_pass = new JLabel("Contrase\u00F1a:");
 		panel_1.add(lbl_pass);
 		
 		passwordField = new JPasswordField();
