@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.util.ResourceBundle;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -23,6 +24,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 
 import controlador.ControladorEstancias;
+import idiomas.Idiomas;
 import interfaces.IControladorEstancias;
 import modelo.vo.EstanciaVO;
 import modelo.vo.HabitacionVO;
@@ -39,25 +41,27 @@ public class NuevaEstanciaView extends JPanel implements IControladorEstancias{
 	private JSpinner spinner_precio;
 	private JSpinner spinner_plazas;
 	private JTextArea text_descripcion;
+	ResourceBundle bundle;
 
 	/**
 	 * Create the panel.
 	 */
 	public NuevaEstanciaView() {
+		bundle = Idiomas.getBundle();
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_Textos = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panel_Textos.getLayout();
 		add(panel_Textos, BorderLayout.NORTH);
 		
-		JLabel lblHabitacin = new JLabel("Habitacion");
+		JLabel lblHabitacin = new JLabel(bundle.getString("jLblRegEstanTit1"));
 		lblHabitacin.setFont(new Font("Lucida Grande", Font.ITALIC, 16));
 		panel_Textos.add(lblHabitacin);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(400);
 		panel_Textos.add(horizontalStrut);
 		
-		JLabel lblUsoComn = new JLabel("Uso Comun");
+		JLabel lblUsoComn = new JLabel(bundle.getString("jLblRegEstanTit2"));
 		lblUsoComn.setFont(new Font("Lucida Grande", Font.ITALIC, 16));
 		panel_Textos.add(lblUsoComn);
 		
@@ -68,7 +72,7 @@ public class NuevaEstanciaView extends JPanel implements IControladorEstancias{
 		Component horizontalGlue = Box.createHorizontalGlue();
 		panel_Botones.add(horizontalGlue);
 		
-		btn_Cancelar = new JButton("Cancelar");
+		btn_Cancelar = new JButton(bundle.getString("btnRegEstanCancel"));
 		btn_Cancelar.setActionCommand("Cancelar");
 		panel_Botones.add(btn_Cancelar);
 		
@@ -80,35 +84,35 @@ public class NuevaEstanciaView extends JPanel implements IControladorEstancias{
 		panel.add(panel_Habitacion);
 		panel_Habitacion.setLayout(new BoxLayout(panel_Habitacion, BoxLayout.Y_AXIS));
 		
-		JLabel lblNombre = new JLabel("Nombre:");
+		JLabel lblNombre = new JLabel(bundle.getString("jLblRegEstanNom"));
 		panel_Habitacion.add(lblNombre);
 		
 		txt_Nombre = new JTextField();
 		panel_Habitacion.add(txt_Nombre);
 		txt_Nombre.setColumns(5);
 		
-		JLabel lblTipo = new JLabel("Tipo:");
+		JLabel lblTipo = new JLabel(bundle.getString("jLblRegEstanTipo"));
 		panel_Habitacion.add(lblTipo);
 		
 		desplegableTipoHab = new JComboBox<TipoHabitacion>();
 		rellenaDesplegableTipoHabitacion();
 		panel_Habitacion.add(desplegableTipoHab);
 		
-		JLabel lblPlazas = new JLabel("Plazas:");
+		JLabel lblPlazas = new JLabel(bundle.getString("jLblRegEstanPlazas"));
 		panel_Habitacion.add(lblPlazas);
 		
 		spinner_plazas = new JSpinner();
 		spinner_plazas.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
 		panel_Habitacion.add(spinner_plazas);
 		
-		JLabel lblPrecio = new JLabel("Precio:");
+		JLabel lblPrecio = new JLabel(bundle.getString("jLblRegEstanPrecio"));
 		panel_Habitacion.add(lblPrecio);
 		
 		spinner_precio = new JSpinner();
 		spinner_precio.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		panel_Habitacion.add(spinner_precio);
 		
-		JLabel lblDescripcin = new JLabel("Descripcion:");
+		JLabel lblDescripcin = new JLabel(bundle.getString("jLblRegEstanDescrp"));
 		panel_Habitacion.add(lblDescripcin);
 		
 		text_descripcion = new JTextArea();
@@ -124,7 +128,7 @@ public class NuevaEstanciaView extends JPanel implements IControladorEstancias{
 		panel_2.setAlignmentX(Component.LEFT_ALIGNMENT);
 		panel_Habitacion.add(panel_2);
 		
-		btn_NewHabitacion = new JButton("Nueva Habitacion");
+		btn_NewHabitacion = new JButton(bundle.getString("btnRegEstanAddHabi"));
 		btn_NewHabitacion.setActionCommand("Nueva habitacion");
 		panel_2.add(btn_NewHabitacion);
 		
@@ -132,7 +136,7 @@ public class NuevaEstanciaView extends JPanel implements IControladorEstancias{
 		panel.add(panel_UsoComun);
 		panel_UsoComun.setLayout(new BoxLayout(panel_UsoComun, BoxLayout.Y_AXIS));
 		
-		JLabel lblNombre_1 = new JLabel("Nombre:");
+		JLabel lblNombre_1 = new JLabel(bundle.getString("jLblRegEstanTit1"));
 		panel_UsoComun.add(lblNombre_1);
 		
 		txt_nombre_uso = new JTextField();
@@ -146,7 +150,7 @@ public class NuevaEstanciaView extends JPanel implements IControladorEstancias{
 		panel_1.setAlignmentX(0.0f);
 		panel_UsoComun.add(panel_1);
 		
-		btnAadirEstancia = new JButton("Nueva zona comun");
+		btnAadirEstancia = new JButton(bundle.getString("jLblRegEstanZonCom"));
 		panel_1.add(btnAadirEstancia);
 		btnAadirEstancia.setActionCommand("Nueva zona comun");
 		
