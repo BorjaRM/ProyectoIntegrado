@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.util.ResourceBundle;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -22,6 +23,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 
 import controlador.ControladorEstancias;
+import idiomas.Idiomas;
 import interfaces.IControladorEstancias;
 import modelo.vo.TipoHabitacion;
 
@@ -35,73 +37,74 @@ public class ModificarEstanciaView extends JPanel implements IControladorEstanci
 	private JSpinner spinner_precio;
 	private JTextArea text_descripcion;
 	private JComboBox<TipoHabitacion> desplegable_tipo;
-
+	ResourceBundle bundle;
 	/**
 	 * Create the panel.
 	 */
 	public ModificarEstanciaView() {
+		bundle = Idiomas.getBundle();
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_Textos = new JPanel();
 		add(panel_Textos, BorderLayout.NORTH);
 		
-		JLabel lblHabitacion = new JLabel("Habitacion");
+		JLabel lblHabitacion = new JLabel(bundle.getString("jLblModEstanTit1"));
 		lblHabitacion.setFont(new Font("Lucida Grande", Font.ITALIC, 16));
 		panel_Textos.add(lblHabitacion);
 		
-		Component horizontalStrut = Box.createHorizontalStrut(400);
+		Component horizontalStrut = Box.createHorizontalStrut(150);
 		panel_Textos.add(horizontalStrut);
 		
-		JLabel lblUsoComn = new JLabel("Uso Comun");
+		JLabel lblUsoComn = new JLabel(bundle.getString("jLblModEstanTit2"));
 		lblUsoComn.setFont(new Font("Lucida Grande", Font.ITALIC, 16));
 		panel_Textos.add(lblUsoComn);
 		
 		JPanel panel_Botones = new JPanel();
 		add(panel_Botones, BorderLayout.SOUTH);
 		
-		btnModificar = new JButton("Modificar");
+		btnModificar = new JButton(bundle.getString("btnModEstanEnviar"));
 		panel_Botones.add(btnModificar);
 		
-		btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton(bundle.getString("btnModEstanCancel"));
 		panel_Botones.add(btnCancelar);
 		
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.CENTER);
-		panel.setLayout(new GridLayout(0, 2, 20, 0));
+		panel.setLayout(new GridLayout(1, 3, 20, 0));
 		
 		JPanel panel_Habitacion = new JPanel();
 		panel.add(panel_Habitacion);
 		panel_Habitacion.setLayout(new BoxLayout(panel_Habitacion, BoxLayout.Y_AXIS));
 		
-		JLabel lblNombre = new JLabel("Nombre:");
+		JLabel lblNombre = new JLabel(bundle.getString("jLblModEstanNom"));
 		panel_Habitacion.add(lblNombre);
 		
 		txt_Nombre = new JTextField();
 		panel_Habitacion.add(txt_Nombre);
 		txt_Nombre.setColumns(5);
 		
-		JLabel lblTipo = new JLabel("Tipo:");
+		JLabel lblTipo = new JLabel(bundle.getString("jLblModEstanTipo"));
 		panel_Habitacion.add(lblTipo);
 		
 		desplegable_tipo = new JComboBox<TipoHabitacion>();
 		rellenaDesplegableTipoHabitacion();
 		panel_Habitacion.add(desplegable_tipo);
 		
-		JLabel lblPlazas = new JLabel("Plazas:");
+		JLabel lblPlazas = new JLabel(bundle.getString("jLblModEstanPlazas"));
 		panel_Habitacion.add(lblPlazas);
 		
 		spinner_plazas = new JSpinner();
 		spinner_plazas.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
 		panel_Habitacion.add(spinner_plazas);
 		
-		JLabel lblPrecio = new JLabel("Precio:");
+		JLabel lblPrecio = new JLabel(bundle.getString("jLblModEstanPrecio"));
 		panel_Habitacion.add(lblPrecio);
 		
 		spinner_precio = new JSpinner();
 		spinner_precio.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		panel_Habitacion.add(spinner_precio);
 		
-		JLabel lblDescripcin = new JLabel("Descripcion:");
+		JLabel lblDescripcin = new JLabel(bundle.getString("jLblModEstanDescrp"));
 		panel_Habitacion.add(lblDescripcin);
 		
 		text_descripcion = new JTextArea();
@@ -116,14 +119,14 @@ public class ModificarEstanciaView extends JPanel implements IControladorEstanci
 		panel.add(panel_UsoComun);
 		panel_UsoComun.setLayout(new BoxLayout(panel_UsoComun, BoxLayout.Y_AXIS));
 		
-		JLabel lblNombre_1 = new JLabel("Nombre:");
+		JLabel lblNombre_1 = new JLabel(bundle.getString("jLblModEstanNom"));
 		panel_UsoComun.add(lblNombre_1);
 		
 		txt_nombre_uso = new JTextField();
 		panel_UsoComun.add(txt_nombre_uso);
 		txt_nombre_uso.setColumns(10);
 		
-		Component verticalStrut = Box.createVerticalStrut(290);
+		Component verticalStrut = Box.createVerticalStrut(210);
 		panel_UsoComun.add(verticalStrut);
 	}
 
