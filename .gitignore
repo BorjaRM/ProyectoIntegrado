@@ -1,3 +1,4 @@
+/bin/
 -.DS_Store
  -.metadata
  -bin/
@@ -50,6 +51,3 @@
  -.scala_dependencies
  -<<<<<<< HEAD
  -.worksheet
- -=======
- -.worksheet
- ->>>>>>> cf366a207c1be95ab6fd33f68aa8a2eb59e6ae7a
