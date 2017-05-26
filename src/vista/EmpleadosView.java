@@ -63,6 +63,7 @@ public class EmpleadosView extends JPanel implements IControladorEmpleados{
 		JScrollPane scrollPane = new JScrollPane();
 		empleados_model = new DefaultTableModel(empleados_head,0);
 		tabla_empleados = new JTable(empleados_model);
+		tabla_empleados.setName("Empleados");
 		tabla_empleados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tabla_empleados.setFillsViewportHeight(true);
 		scrollPane.setViewportView(tabla_empleados);	
@@ -82,7 +83,7 @@ public class EmpleadosView extends JPanel implements IControladorEmpleados{
 			empleados_model.addRow(fila);
 		}
 		tabla_empleados.setModel(empleados_model);
-			
+		tabla_empleados.setName("Empleados");
 	}
 	
 	public JTable getTable() {

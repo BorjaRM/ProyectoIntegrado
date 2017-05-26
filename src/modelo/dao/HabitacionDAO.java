@@ -26,8 +26,8 @@ public class HabitacionDAO {
 		String tipo_hab,nombre,clasificacion,descripcion;
 		
 		try{
-			String sql = "SELECT * FROM estancia INNER JOIN habitacion ON "
-					+ "estancia.id=habitacion.id_estancia AND estancia.cod_hotel = ? AND estancia.tipo='habitacion';";
+			String sql = "SELECT * FROM estancia INNER JOIN habitacion ON estancia.id=habitacion.id_estancia AND "
+					+ "estancia.cod_hotel = ? AND estancia.tipo='habitacion' ORDER BY estancia.nombre ASC;";
 			PreparedStatement ps = this.bd.getConexion().prepareStatement(sql);
 			ps.setInt(1, refHotel);
 			ResultSet resultadoConsulta = ps.executeQuery();
@@ -61,7 +61,7 @@ public class HabitacionDAO {
 				consulta.setString(4, habitacion.getDescripcion());
 				consulta.executeUpdate();
 			}catch(SQLException e){
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Se ha producido un error, no se ha podido completar la insercion", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}

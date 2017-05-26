@@ -23,7 +23,7 @@ public class EstanciaDAO {
 		String nombre,tipo;
 		
 		try{
-			String sql = "SELECT * FROM estancia WHERE estancia.tipo='uso_comun' AND estancia.cod_hotel=?;";
+			String sql = "SELECT * FROM estancia WHERE estancia.tipo='uso_comun' AND estancia.cod_hotel=? ORDER BY estancia.nombre ASC";
 			PreparedStatement ps = this.modelo.getConexion().prepareStatement(sql);
 			ps.setInt(1, refHotel);
 			ResultSet resultadoConsulta = ps.executeQuery();
@@ -82,10 +82,5 @@ public class EstanciaDAO {
 				JOptionPane.showMessageDialog(null, "Esta habitacion esta reservada, no se puede eliminar", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-	}
-	
-	
-
-	
-	
+	}	
 }

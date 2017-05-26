@@ -73,7 +73,7 @@ public class ControladorReservas extends Controlador implements PropertyChangeLi
 		posicionSeleccionada = rv.getTable().getSelectedRow();
 		if(posicionSeleccionada != -1){
 		ReservaDAO modeloReserva = new ReservaDAO();
-		modeloReserva.eliminarReserva(posicionSeleccionada);
+		modeloReserva.eliminarReserva(posicionSeleccionada,refHotel);
 		rellenaTabla();
 		}else{
 			JOptionPane.showMessageDialog(null, "ERROR, Primero Selecciona Una Reserva");
@@ -84,7 +84,7 @@ public class ControladorReservas extends Controlador implements PropertyChangeLi
 		ReservaDAO modeloReserva = new ReservaDAO();
 		ClienteDAO modeloCliente = new ClienteDAO();
 		HabitacionDAO modeloHabitacion = new HabitacionDAO();
-		ArrayList <ReservaVO> reservas = modeloReserva.consultaReservas();
+		ArrayList <ReservaVO> reservas = modeloReserva.consultaReservas(refHotel);
 		ArrayList <ClienteVO> clientes = modeloCliente.rellenaYConsigueArrayClientes();
 		ArrayList <HabitacionVO> habitaciones = modeloHabitacion.getHabitaciones(refHotel);
 		rv.rellenaListaReservas(reservas, clientes, habitaciones);

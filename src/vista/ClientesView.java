@@ -75,6 +75,7 @@ public class ClientesView extends JPanel implements IControladorClientes{
 		
 		DefaultTableModel table_model = new DefaultTableModel(colHeader,0);
 		table = new JTable(table_model);
+		table.setName("Clientes");
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
 		DefaultTableModel modeloTabla = (DefaultTableModel) table.getModel();

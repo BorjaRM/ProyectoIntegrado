@@ -9,7 +9,7 @@ import javax.naming.directory.InitialDirContext;
 import javax.swing.JOptionPane;
 
 public class ConexionAdmin {
-	private boolean datosOk;
+	private boolean datosValidos;
 	
 	public ConexionAdmin(String pass){
 		Hashtable<String, String> env = new Hashtable<String, String>();
@@ -27,15 +27,15 @@ public class ConexionAdmin {
 			//Authenticate the login user
 			ctx = new InitialDirContext(env);
 			ctx.close();
-			datosOk=true;
+			datosValidos=true;
 		} catch (NamingException ex) {
-			datosOk = false;
+			datosValidos = false;
 			JOptionPane.showMessageDialog(null, "Ha habido un error en la autenticación", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
 	public boolean isDatosOk() {
-		return datosOk;
+		return datosValidos;
 	}
 
 }

@@ -12,6 +12,7 @@ import modelo.dao.UsuarioDAO;
 import modelo.vo.EmpleadoVO;
 import modelo.vo.UsuarioVO;
 import res.Md5;
+import res.Exportar;
 import vista.EmpleadosView;
 import vista.ModificarEmpleadoView;
 import vista.NuevoEmpleadoView;
@@ -79,7 +80,7 @@ public class ControladorEmpleados extends Controlador implements ListSelectionLi
 	}
 	
 	public void preparaModificaEmpleadoView(){
-		frame.creaModificarEmpeladoView(this);
+		frame.creaModificarEmpleadoView(this);
 		this.mev=frame.getMev();
 		estableceValorCampos();
 		frame.muestraModificarEmpleadoView();

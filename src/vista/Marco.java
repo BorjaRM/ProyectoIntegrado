@@ -9,6 +9,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 import controlador.ControladorClientes;
@@ -18,6 +19,11 @@ import controlador.ControladorIncidencias;
 import controlador.ControladorReservas;
 import controlador.ControladorUsuarios;
 import idiomas.Idiomas;
+import res.Exportar;
+
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Marco extends JFrame{
 	private ResourceBundle bundle;
@@ -58,9 +64,9 @@ public class Marco extends JFrame{
 	private IncidenciasView iv;
 	private NuevaIncidenciaView niv;
 	//Botones barra superior
-	private JMenu inicio,clientes,empleados,reservas,estancias,incidencias;
+	private JMenu inicio,clientes,empleados,reservas,estancias,incidencias,exportar;
 	private JMenuItem item_verClientes,item_nuevoCliente,item_verEmpleados,item_nuevoEmpleado,item_nuevaReserva;
-	private JMenuItem item_verReservas,item_verEstancias,item_nuevaEstancia,item_verIncidencias,item_nuevaIncidencia;
+	private JMenuItem item_verReservas,item_verEstancias,item_nuevaEstancia,item_verIncidencias,item_nuevaIncidencia,item_pdf;
 	
 	/**
 	 * Create the frame.
@@ -83,7 +89,8 @@ public class Marco extends JFrame{
 		reservas = new JMenu(bundle.getString("jMenuReservas"));
 		estancias = new JMenu(bundle.getString("jMenuEstancias"));
 		incidencias = new JMenu(bundle.getString("jMenuIncidencias"));
-		
+		exportar = new JMenu(bundle.getString("jMenuExportar"));
+
 		barraSuperior.add(inicio);
 		barraSuperior.add(clientes);
 		item_verClientes = new JMenuItem(bundle.getString("jMenuClientesVer"));
@@ -125,8 +132,28 @@ public class Marco extends JFrame{
 		item_nuevaIncidencia.setActionCommand("Nueva incidencia");
 		incidencias.add(item_nuevaIncidencia);
 		
-		barraSuperior.add(Box.createHorizontalGlue());
-								
+		Component horizontalGlue = Box.createHorizontalGlue();
+		barraSuperior.add(horizontalGlue);
+		
+		barraSuperior.add(exportar);
+		item_pdf = new JMenuItem("pdf");
+		item_pdf.setActionCommand("Exportar pdf");
+		item_pdf.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JPanel vista = null;
+				for(Component comp:vistas.getComponents()){
+					if (comp.isVisible() == true) {
+			            vista = (JPanel)comp;
+					}
+				}
+				if(vista.getName() != null){
+					JTable table = getTabla(vista.getName());	
+					Exportar.toPdf(table);
+				}
+			}
+		});
+		exportar.add(item_pdf);
+		
 		//Creamos el cardLayout
 		cl = new CardLayout(0, 0);
 		vistas.setLayout(cl);				
@@ -172,6 +199,7 @@ public class Marco extends JFrame{
 	public void creaClientesView(ControladorClientes controlador){
 		if(cv == null){
 			cv = new ClientesView(bundle);
+			cv.setName(VER_CLIENTES);
 			cv.estableceControlador(controlador);
 			vistas.add(cv,VER_CLIENTES);
 		}
@@ -209,6 +237,7 @@ public class Marco extends JFrame{
 		if(ev == null){
 			ev = new EmpleadosView();
 			ev.estableceControlador(controlador);
+			ev.setName(VER_EMPLEADOS);
 			vistas.add(ev,VER_EMPLEADOS);
 		}
 	}
@@ -229,7 +258,7 @@ public class Marco extends JFrame{
 		cl.show(vistas, NUEVO_EMPLEADO);
 	}
 	
-	public void creaModificarEmpeladoView(ControladorEmpleados controlador){
+	public void creaModificarEmpleadoView(ControladorEmpleados controlador){
 		if(mev == null){
 			mev = new ModificarEmpleadoView();
 			mev.estableceControlador(controlador);
@@ -244,6 +273,7 @@ public class Marco extends JFrame{
 	public void creaReservasView(ControladorReservas controlador){
 		if(rv == null){
 			rv = new ReservasView();
+			rv.setName(VER_RESERVAS);
 			rv.estableceControlador(controlador);
 			vistas.add(rv,VER_RESERVAS);
 		}
@@ -268,6 +298,7 @@ public class Marco extends JFrame{
 	public void creaIncidenciasView(ControladorIncidencias controlador){
 		if(iv == null){
 			iv = new IncidenciasView();
+			iv.setName(VER_INCIDENCIAS);
 			iv.estableceControlador(controlador);
 			vistas.add(iv,VER_INCIDENCIAS);
 		}
@@ -293,6 +324,7 @@ public class Marco extends JFrame{
 	public void creaEstanciasView(ControladorEstancias controlador){
 		if(esv == null){
 			esv = new EstanciasView();
+			esv.setName(VER_ESTANCIAS);
 			esv.estableceControlador(controlador);
 			vistas.add(esv,VER_ESTANCIAS);
 		}
@@ -420,5 +452,16 @@ public class Marco extends JFrame{
 	public PrincipalEmpleadoView getPev() {
 		return pev;
 	}	
+	
+	public JTable getTabla(String vista){
+		switch(vista){
+		case "vista clientes": return cv.getTable(); 
+		case "vista empleados": return ev.getTable(); 
+		case "vista reservas": return rv.getTable();
+		case "vista estancias": return esv.getTabla_habitaciones();
+		case "vista incidencias": return iv.getTable();
+		}
+		return null;
+	}
 	
 }

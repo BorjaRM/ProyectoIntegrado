@@ -27,7 +27,7 @@ public class ClienteDAO {
 		clientes = new ArrayList <ClienteVO>();
 		try{
 			Statement stmt = bd.getConexion().createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM cliente;");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM cliente ORDER BY cliente.apellidos,cliente.nombre ASC;");
 			while (rs.next()){
 				String codigo = rs.getString("codigo");
 				String nombre = rs.getString("nombre");

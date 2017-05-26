@@ -26,7 +26,7 @@ public class EstanciasView extends JPanel implements IControladorEstancias{
 	private JButton btnEliminarEstancia;
 	private JTable tabla_habitaciones;
 	ResourceBundle bundle = Idiomas.getBundle();
-	private final String[] habitaciones_head = {bundle.getString("jTblEstanID"),bundle.getString("jTblEstanNom"),bundle.getString("jTblEstanTipo"),bundle.getString("jTblEstanPlazas"),bundle.getString("jTblEstanPension"),bundle.getString("jLblRegEstanDescrp")};
+	private final String[] habitaciones_head = {bundle.getString("jTblEstanNom"),bundle.getString("jTblEstanTipo"),bundle.getString("jTblEstanPlazas"),bundle.getString("jTblEstanPension"),bundle.getString("jLblRegEstanDescrp")};
 	private DefaultTableModel habitaciones_model;
 	private JTable tabla_estancias;
 	private final String[] estancias_head = {bundle.getString("jTblEstanZonCom")};
@@ -60,6 +60,7 @@ public class EstanciasView extends JPanel implements IControladorEstancias{
 		JScrollPane scrollPane = new JScrollPane();
 		habitaciones_model = new DefaultTableModel(habitaciones_head,0);
 		tabla_habitaciones = new JTable(habitaciones_model);
+		tabla_habitaciones.setName("Habitaciones");
 		tabla_habitaciones.setAutoCreateRowSorter(true);
 		tabla_habitaciones.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tabla_habitaciones.setFillsViewportHeight(true);
@@ -104,14 +105,15 @@ public class EstanciasView extends JPanel implements IControladorEstancias{
 		Object[] fila = new Object[habitaciones_model.getColumnCount()];
 		
 		for (int i = 0 ; i < habitaciones.size(); i++ ){
-			fila[1] = habitaciones.get(i).getNombre();
-			fila[2] = habitaciones.get(i).getClasificacion();
-			fila[3] = habitaciones.get(i).getPlazas();
-			fila[4] = habitaciones.get(i).getPrecio();
-			fila[5] = habitaciones.get(i).getDescripcion();
+			fila[0] = habitaciones.get(i).getNombre();
+			fila[1] = habitaciones.get(i).getClasificacion();
+			fila[2] = habitaciones.get(i).getPlazas();
+			fila[3] = habitaciones.get(i).getPrecio();
+			fila[4] = habitaciones.get(i).getDescripcion();
 			habitaciones_model.addRow(fila);
 		}
 		tabla_habitaciones.setModel(habitaciones_model);
+		tabla_habitaciones.setName("Habitaciones");
 	}
 	
 	public void rellenaTablaEstancias(ArrayList<EstanciaVO> estancias){
@@ -123,6 +125,7 @@ public class EstanciasView extends JPanel implements IControladorEstancias{
 			estancias_model.addRow(fila);
 		}
 		tabla_estancias.setModel(estancias_model);
+		tabla_estancias.setName("Estancias");
 	}
 
 	public JTable getTabla_habitaciones() {

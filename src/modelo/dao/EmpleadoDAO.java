@@ -30,7 +30,7 @@ public class EmpleadoDAO {
 	public ArrayList<EmpleadoVO> getEmpleados(int refHotel) {
 		ArrayList<EmpleadoVO> empleados = new ArrayList<EmpleadoVO>();
 		try {
-			String sql = "SELECT * FROM Empleado WHERE lugar_trabajo=?;";
+			String sql = "SELECT * FROM Empleado WHERE lugar_trabajo=? ORDER BY apellido1,apellido2,nombre ASC;";
 			PreparedStatement ps = this.bd.getConexion().prepareStatement(sql);
 			ps.setInt(1, refHotel);
 			ResultSet rs = ps.executeQuery();

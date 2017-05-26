@@ -70,6 +70,7 @@ public class ReservasView extends JPanel implements IControladorReservas{
 		String[] colHeader = {bundle.getString("jTblRsrvID"),bundle.getString("jTblRsrvCli"),bundle.getString("jTblRsrvHabi"),bundle.getString("jTblRsrvCheckIn"),bundle.getString("jTblRsrvCheckOut"),bundle.getString("jTblRsrvNoches"),bundle.getString("jTblRsrvPension")};
 		table_model = new DefaultTableModel(colHeader,0);
 		table = new JTable(table_model);
+		table.setName("Reservas");
 		scrollPane.setViewportView(table);
 		DefaultTableModel modeloTabla = (DefaultTableModel) table.getModel();
 		Object[] fila = new Object[modeloTabla.getColumnCount()];

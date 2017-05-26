@@ -68,6 +68,7 @@ public class IncidenciasView extends JPanel implements IControladorIncidencias{
 	public void rellenaTablaIncidencias(ArrayList<IncidenciaVO> incidencias,ArrayList<EstanciaVO>estancias){
 		modeloTabla = new DefaultTableModel(titulosColumnas,0);
 		table = new JTable(modeloTabla);
+		table.setName("Incidencias");
 	    scrollPane.setViewportView(table);
 	    
 		Object[] fila = new Object[modeloTabla.getColumnCount()];

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.swing.DefaultListSelectionModel;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -13,6 +14,7 @@ import modelo.dao.HabitacionDAO;
 import modelo.vo.EstanciaVO;
 import modelo.vo.HabitacionVO;
 import modelo.vo.TipoEstancia;
+import res.Exportar;
 import vista.EstanciasView;
 import vista.ModificarEstanciaView;
 import vista.NuevaEstanciaView;
@@ -177,8 +179,7 @@ public class ControladorEstancias extends Controlador implements ListSelectionLi
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
 		if(!e.getValueIsAdjusting()){	
-			DefaultListSelectionModel dlsm = (DefaultListSelectionModel) e.getSource();
-			int refTablaSeleccionada = dlsm.hashCode();
+			int refTablaSeleccionada = ((DefaultListSelectionModel) e.getSource()).hashCode();
 			int refTablaHabitacion = esv.getTabla_habitaciones().getSelectionModel().hashCode();
 			int refTablaUsoComun = esv.getTabla_estancias().getSelectionModel().hashCode();
 			int filaSeleccionada;

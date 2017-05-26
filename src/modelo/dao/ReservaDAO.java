@@ -17,12 +17,14 @@ public class ReservaDAO {
 	public ReservaDAO(){
 		this.bd=BD.getSingleDBInstance();
 	}
-	public ArrayList<ReservaVO> consultaReservas(){
+	public ArrayList<ReservaVO> consultaReservas(int refHotel){
 		reservas = new ArrayList<ReservaVO>();
 		try {
-			Statement stmt = bd.getConexion().createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM reserva");
-			
+			String sql = "SELECT * FROM reserva INNER JOIN estancia ON reserva.cod_habitacion=estancia.id INNER "
+					+ "JOIN hotel ON estancia.cod_hotel=hotel.codigo AND hotel.codigo = ? ORDER BY reserva.inicio ASC;";
+			PreparedStatement ps = this.bd.getConexion().prepareStatement(sql);
+			ps.setInt(1, refHotel);
+			ResultSet rs = ps.executeQuery();			
 			while(rs.next()){
 				String codigo = rs.getString("codigo");
 				String cliente = rs.getString("cod_cliente");
@@ -43,7 +45,7 @@ public class ReservaDAO {
 	
 	public void nuevaReserva(ReservaVO reserva){
         try {
-            PreparedStatement st = bd.getConexion().prepareStatement("INSERT INTO reserva VALUES(null, ?, ?, ?, ?, ?, ?)");
+          PreparedStatement st = bd.getConexion().prepareStatement("INSERT INTO reserva VALUES(null, ?, ?, ?, ?, ?, ?)");
           st.setString(1, reserva.getInicio());
           st.setString(2, reserva.getFin());
           st.setString(3, reserva.getRegimen());
@@ -57,8 +59,8 @@ public class ReservaDAO {
         }
     }
 	
-	public void eliminarReserva(int posicion){
-		reservas = consultaReservas();
+	public void eliminarReserva(int posicion, int refHotel){
+		reservas = consultaReservas(refHotel);
 		String codigoString = reservas.get(posicion).getCodigo();
 		try {
 			Statement stmt = bd.getConexion().createStatement();
