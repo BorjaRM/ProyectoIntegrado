@@ -12,7 +12,6 @@ import modelo.dao.UsuarioDAO;
 import modelo.vo.EmpleadoVO;
 import modelo.vo.UsuarioVO;
 import res.Md5;
-import res.Exportar;
 import vista.EmpleadosView;
 import vista.ModificarEmpleadoView;
 import vista.NuevoEmpleadoView;
@@ -58,8 +57,6 @@ public class ControladorEmpleados extends Controlador implements ListSelectionLi
 		new EmpleadoDAO().insertarEmpleado(new EmpleadoVO(0,nom,ap1,ap2,id,tlf,s,ss,"",0), refHotel);
 		new UsuarioDAO().insertarUsuario(new UsuarioVO(us,pass,0));
 	}	
-
-	
 	
 	public void preparaEmpleadosView(){
 		Controlador.frame.creaEmpleadosView(this);
@@ -72,11 +69,23 @@ public class ControladorEmpleados extends Controlador implements ListSelectionLi
 		ev.rellenaListaEmpleados(new EmpleadoDAO().getEmpleados(Controlador.refHotel));
 	}
 
-
 	public void preparaNuevoEmpleadoView(){
 		Controlador.frame.creaNuevoEmpleadoView(this);
 		this.nev=Controlador.frame.getNev();
+		removePreviousData();
 		Controlador.frame.muestraNuevoEmpleadoView();
+	}
+	
+	public void removePreviousData(){
+		nev.getTxtNombre().setText("");
+		nev.getTxtApellido1().setText("");
+		nev.getTxtApellido2().setText("");
+		nev.getTxtIdentificacion().setText("");
+		nev.getTxtTelefono().setText("");
+		nev.getTxtSalario().setText("");
+		nev.getTxtSeguridadSocial().setText("");
+		nev.getTxtUsuario().setText("");
+		nev.getPasswordField().setText("");
 	}
 	
 	public void preparaModificaEmpleadoView(){
@@ -94,7 +103,7 @@ public class ControladorEmpleados extends Controlador implements ListSelectionLi
 				rellenaTabla();
 			}
 		}else{
-			JOptionPane.showMessageDialog(null, "ERROR. Selecciona un empleado,");
+			JOptionPane.showMessageDialog(null, "ERROR. Selecciona un empleado");
 		}
 	}
 	
@@ -113,46 +122,50 @@ public class ControladorEmpleados extends Controlador implements ListSelectionLi
 	}
 
 	public void modificarEmpleado(){
-		int cod = this.empleadoSeleccionado.getCodigo();
-		String nom = mev.getTxtNombre().getText();
-		String ap1 = mev.getTxtApellido1().getText();
-		String ap2 = mev.getTxtApellido2().getText();
-		String id = mev.getTxtIdentificacion().getText();
-		String tlf = mev.getTxtTelefono().getText();
-		int s =Integer.parseInt(mev.getTxtSalario().getText());
-		String ss = mev.getTxtSeguridadSocial().getText();
-		String us = mev.getTxtUsuario().getText();
-		String pass = Md5.encriptar(new String(mev.getPasswordField().getPassword()));		
-		
-		EmpleadoVO empleadoModificado = new EmpleadoVO(cod,nom,ap1,ap2,id,tlf,s,ss,"",0);
-		UsuarioVO usuariomodificado = new UsuarioVO(us,pass,0);
-		
-		new EmpleadoDAO().modificarEmpleado(empleadoModificado);
-		new UsuarioDAO().modificarUsuario(usuariomodificado,cod);
+		if(this.empleadoSeleccionado != null){
+			int cod = this.empleadoSeleccionado.getCodigo();
+			String nom = mev.getTxtNombre().getText();
+			String ap1 = mev.getTxtApellido1().getText();
+			String ap2 = mev.getTxtApellido2().getText();
+			String id = mev.getTxtIdentificacion().getText();
+			String tlf = mev.getTxtTelefono().getText();
+			int s =Integer.parseInt(mev.getTxtSalario().getText());
+			String ss = mev.getTxtSeguridadSocial().getText();
+			String us = mev.getTxtUsuario().getText();
+			String pass = Md5.encriptar(new String(mev.getPasswordField().getPassword()));		
+			
+			EmpleadoVO empleadoModificado = new EmpleadoVO(cod,nom,ap1,ap2,id,tlf,s,ss,"",0);
+			UsuarioVO usuariomodificado = new UsuarioVO(us,pass,0);
+			
+			new EmpleadoDAO().modificarEmpleado(empleadoModificado);
+			new UsuarioDAO().modificarUsuario(usuariomodificado,cod);
+		}else{
+			JOptionPane.showMessageDialog(null, "ERROR. Selecciona un empleado");
+		}
 	}
-	
 
-		public void cancelar(){
+	public void cancelar(){
 		if(ev == null){
 			Controlador.frame.muestraPrincipalAdminView();
 		}else
 			Controlador.frame.muestraEmpleadosView();
 		}
 
-		@Override
-		public void valueChanged(ListSelectionEvent e) {
-			if(!e.getValueIsAdjusting()){
-				ArrayList <EmpleadoVO> empleados = new EmpleadoDAO().getEmpleados(Controlador.refHotel);
-				ArrayList <UsuarioVO> usuarios = new UsuarioDAO().getUsuarios(Controlador.refHotel);
-				if(!e.getValueIsAdjusting()){
-					int filaSeleccionada = ev.getTable().getSelectedRow();
-					if(filaSeleccionada > -1){
-						this.empleadoSeleccionado=empleados.get(filaSeleccionada);
-						this.usuarioSeleccionado=usuarios.get(filaSeleccionada);
-					}
-				}
-			}
+	@Override
+	public void valueChanged(ListSelectionEvent e) {
+		if(!e.getValueIsAdjusting()){
+			ArrayList <EmpleadoVO> empleados = new EmpleadoDAO().getEmpleados(Controlador.refHotel);		
+			ArrayList <UsuarioVO> usuarios = new UsuarioDAO().getUsuarios(Controlador.refHotel);
+			int filaSeleccionada = ev.getTable().getSelectedRow();
+			if(filaSeleccionada > -1){
+				this.empleadoSeleccionado=empleados.get(filaSeleccionada);
+				this.usuarioSeleccionado=usuarios.get(filaSeleccionada);
+			}else{
+				this.empleadoSeleccionado=null;		
+				this.usuarioSeleccionado=null;
+			}	
 		}
+	}
 	
 	
 

@@ -32,7 +32,6 @@ public class HotelDAO {
 				consulta.setString(7, hotel.getPais());
 				consulta.executeUpdate();
 			} catch (SQLException e) {
-				e.printStackTrace();
 			}
 		}
 	}
@@ -68,7 +67,6 @@ public class HotelDAO {
 				nombresHoteles.add(new HotelVO(codigo,nombre,telefono,calle,numero,cp,ciudad,pais));
 			}
 		}catch (SQLException e) {
-			e.printStackTrace();
 		} 		
 		return nombresHoteles;
 	}
@@ -83,7 +81,6 @@ public class HotelDAO {
 			while(resultadoConsulta.next())
 				codigo=resultadoConsulta.getInt(1);
 		}catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return codigo;
 	}

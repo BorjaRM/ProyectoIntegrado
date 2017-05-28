@@ -2,8 +2,6 @@ package vista;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 import javax.swing.BoxLayout;
@@ -12,9 +10,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.toedter.calendar.JDateChooser;
+
 import controlador.ControladorClientes;
 import interfaces.IControladorClientes;
-import com.toedter.calendar.JDateChooser;
 
 public class NuevoClienteView extends JPanel  implements IControladorClientes{
 	private JTextField txt_Nombre;

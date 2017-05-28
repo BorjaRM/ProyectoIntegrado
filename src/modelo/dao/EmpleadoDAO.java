@@ -1,23 +1,15 @@
 package modelo.dao;
 
 
-import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import javax.swing.JOptionPane;
 
 import modelo.BD;
 import modelo.vo.EmpleadoVO;
-import modelo.vo.EstanciaVO;
-import modelo.vo.UsuarioVO;
-import res.Md5;
 
 public class EmpleadoDAO {
 	BD bd;
@@ -86,7 +78,6 @@ public class EmpleadoDAO {
 				consulta.setInt(1, empleado.getCodigo());
 				consulta.executeUpdate();
 			}catch(SQLException e){
-				e.printStackTrace();
 				JOptionPane.showMessageDialog(null, "No se puede eliminar este empleado", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
@@ -124,7 +115,6 @@ public class EmpleadoDAO {
 			while(resultadoConsulta.next())
 				total=resultadoConsulta.getInt("total_empleados");
 		}catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return total;
 	}

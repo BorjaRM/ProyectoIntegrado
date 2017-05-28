@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import javax.swing.DefaultListSelectionModel;
 import javax.swing.JOptionPane;
-import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -14,7 +13,6 @@ import modelo.dao.HabitacionDAO;
 import modelo.vo.EstanciaVO;
 import modelo.vo.HabitacionVO;
 import modelo.vo.TipoEstancia;
-import res.Exportar;
 import vista.EstanciasView;
 import vista.ModificarEstanciaView;
 import vista.NuevaEstanciaView;
@@ -64,34 +62,50 @@ public class ControladorEstancias extends Controlador implements ListSelectionLi
 	public void preparaNuevaEstanciaView(){
 		frame.creaNuevaEstanciaView(this);
 		this.nesv=frame.getNesv();
+		removePreviousData();
 		frame.muestraNuevaEstanciaView();
+	}
+	
+	public void removePreviousData(){
+		nesv.getTxt_Nombre().setText("");
+		nesv.getDesplegableTipoHab().setSelectedIndex(0);
+		nesv.getSpinner_plazas().setValue(0);
+		nesv.getSpinner_precio().setValue(0);
+		nesv.getText_descripcion().setText("");
+		nesv.getTxt_nombre_uso().setText("");
 	}
 	
 	public void insertarHabitacion(){
 		HabitacionVO habitacion = frame.getNesv().enviarDatosHabitacion();
-		habitacion.setCod_hotel(refHotel);
-		consultasEstancia.insertEstancia(habitacion);
-		consultasHabitacion.insertHabitacion(habitacion);
-		preparaEstanciasView();
+		if(!habitacion.getNombre().equals("")){
+			habitacion.setCod_hotel(refHotel);
+			consultasEstancia.insertEstancia(habitacion);
+			consultasHabitacion.insertHabitacion(habitacion);
+			preparaEstanciasView();
+		}else
+			JOptionPane.showMessageDialog(null, "Introduzca un nombre para la nueva habitacion", "Error", JOptionPane.ERROR_MESSAGE);		
 	}
 	
 	public void insertarZonaComun(){
 		EstanciaVO estancia = frame.getNesv().enviarDatosUsoComun();
-		estancia.setCod_hotel(refHotel);
-		consultasEstancia.insertEstancia(estancia);
-		preparaEstanciasView();
+		if(!estancia.getNombre().equals("")){
+			estancia.setCod_hotel(refHotel);
+			consultasEstancia.insertEstancia(estancia);
+			preparaEstanciasView();
+		}else
+			JOptionPane.showMessageDialog(null, "Introduzca un nombre para la nueva estancia", "Error", JOptionPane.ERROR_MESSAGE);		
 	}
 	
 	public void preparaModificarEstanciaView(){
 		frame.creaModificaEstanciaView(this);
 		this.mesv=frame.getMesv();
-		removePreviousData();
+		removePreviousDataModificar();
 		disableFields();
 		rellenaDatosParaEditar();
 		frame.muestraModificaEstancia();
 	}
 	
-	public void removePreviousData(){
+	public void removePreviousDataModificar(){
 		mesv.getTxt_Nombre().setText("");
 		mesv.getDesplegable_tipo().setSelectedIndex(0);
 		mesv.getSpinner_plazas().setValue(0);
@@ -121,7 +135,6 @@ public class ControladorEstancias extends Controlador implements ListSelectionLi
 	public void rellenaDatosParaEditar(){
 		if(tipoEstanciaSeleccionada == TipoEstancia.HABITACION){
 			mesv.getTxt_Nombre().setText(this.estanciaSeleccionada.getNombre());
-			//EL DESPLEGABLE NO SE RELLENA BIEN, COMPROBAR TIPOS STRING - ENUM
 			mesv.getSpinner_plazas().setValue(((HabitacionVO) this.estanciaSeleccionada).getPlazas());
 			mesv.getSpinner_precio().setValue(((HabitacionVO) this.estanciaSeleccionada).getPrecio());
 			mesv.getText_descripcion().setText(((HabitacionVO) this.estanciaSeleccionada).getDescripcion());			
@@ -146,7 +159,8 @@ public class ControladorEstancias extends Controlador implements ListSelectionLi
 				consultasEstancia.updateEstancia(estanciaSeleccionada);
 			}
 			preparaEstanciasView();
-		}
+		}else
+			JOptionPane.showMessageDialog(null, "No se ha eliminado ningun registro");
 	}
 	
 	public void eliminarEstancia(){

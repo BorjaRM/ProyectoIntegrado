@@ -3,20 +3,17 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 
 import idiomas.Idiomas;
-import modelo.ConexionAdmin;
 import modelo.dao.ClienteDAO;
 import modelo.dao.EmpleadoDAO;
 import modelo.dao.HabitacionDAO;
 import modelo.dao.HotelDAO;
 import modelo.dao.IncidenciaDAO;
 import modelo.dao.ReservaDAO;
-import modelo.dao.RutinasAlmacenadas;
 import modelo.dao.UsuarioDAO;
 import vista.LoginView;
 
@@ -68,8 +65,8 @@ public class ControladorUsuarios extends Controlador implements MouseListener{
 				ConexionAdmin ca = new ConexionAdmin(pass);
 				if(ca.isDatosOk()){*/
 					preparaPrincipalAdminView();
-					/*vistaLogin.setVisible(false);
-				}
+					vistaLogin.setVisible(false);
+				/*}
 			}else
 				JOptionPane.showMessageDialog(null, "Ha habido un error en la autenticación", "Error", JOptionPane.ERROR_MESSAGE);*/
 		}

@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+
 import javax.swing.JOptionPane;
 
 import com.toedter.calendar.JDateChooser;
@@ -62,12 +63,10 @@ public class ControladorReservas extends Controlador implements PropertyChangeLi
 		}
 	}
 	
-	public String  transformaFecha(long oldDate ){
-		String newDate;
+	public String transformaFecha(long oldDate){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd",Locale.ENGLISH);
-		return newDate=sdf.format(oldDate);
+		return sdf.format(oldDate);
 	}
-	
 	
 	private void eliminaReserva(){
 		posicionSeleccionada = rv.getTable().getSelectedRow();
@@ -95,7 +94,6 @@ public class ControladorReservas extends Controlador implements PropertyChangeLi
 		this.rv=frame.getRv();
 		rellenaTabla();
 		frame.muestraReservasView();
-		
 	}
 	
 	public void preparaNuevaReservaView(){
@@ -129,7 +127,6 @@ public class ControladorReservas extends Controlador implements PropertyChangeLi
 
 	@Override
 	public void propertyChange(PropertyChangeEvent e) {
-		System.out.println("ha ocurrido algo");
 		if(e.getPropertyName().equals("date")){
 			JDateChooser source = (JDateChooser) e.getSource();
 			JDateChooser llegada = nrv.getDateChooserLlegada();
@@ -137,16 +134,12 @@ public class ControladorReservas extends Controlador implements PropertyChangeLi
 			if(llegada == source){
 				Date fechaLlegada = (Date) e.getNewValue();
 				this.newFechaLlegada = transformaFecha((long)fechaLlegada.getTime());
-				System.out.println("has cambiado llegada "+newFechaLlegada);
 				salida.setMinSelectableDate(fechaLlegada);
 			}else if(salida == source){
 				Date fechaSalida = (Date) e.getNewValue();
 				this.newFechaSalida = transformaFecha((long)fechaSalida.getTime());
-				System.out.println("has cambiado salida "+newFechaSalida);
 			}
-			System.out.println(newFechaLlegada+" - "+newFechaSalida);
 			if(newFechaLlegada != null && newFechaSalida != null){
-				System.out.println("rellenando");
 				llenaComboBoxHabitaciones(newFechaLlegada,newFechaSalida);
 			}
 		}

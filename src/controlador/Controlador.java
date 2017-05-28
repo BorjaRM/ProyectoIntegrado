@@ -5,13 +5,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-import javax.swing.JCheckBox;
-
 import idiomas.Idiomas;
 import modelo.BD;
 import modelo.dao.UsuarioDAO;
 import modelo.vo.HotelVO;
-import vista.LoginView;
 import vista.Marco;
 
 public class Controlador implements ActionListener, ItemListener{

@@ -3,7 +3,6 @@ package modelo.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -32,7 +31,6 @@ public class UsuarioDAO {
 			if(coincidencias>0)
 				datosCorrectos=true;
 		}catch (SQLException e) {
-			e.printStackTrace();
 		}		
 		return datosCorrectos;
 	}
@@ -54,7 +52,6 @@ public class UsuarioDAO {
 				usuarios.add(u);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			System.err.println("Error rellenando el array de usuarios");
 		}
 		return usuarios;
@@ -99,7 +96,6 @@ public class UsuarioDAO {
 			while(resultadoConsulta.next())
 				cod_empleado = resultadoConsulta.getInt(1);
 		}catch (SQLException e) {
-			e.printStackTrace();
 		}		
 		return cod_empleado;
 	}
@@ -114,7 +110,6 @@ public class UsuarioDAO {
 			while(resultadoConsulta.next())
 				cod_hotel = resultadoConsulta.getInt(1);
 		}catch (SQLException e) {
-			e.printStackTrace();
 		}		
 		return cod_hotel;
 	}

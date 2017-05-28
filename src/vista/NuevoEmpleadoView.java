@@ -12,88 +12,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 
 import controlador.ControladorEmpleados;
 import idiomas.Idiomas;
 import interfaces.IControladorEmpleados;
 
 public class NuevoEmpleadoView extends JPanel implements IControladorEmpleados{
-	private JTextField textField;
-	public JTextField getTextField() {
-		return textField;
-	}
-
-	public void setTextField(JTextField textField) {
-		this.textField = textField;
-	}
-
-	public JTextField getTxtSeguridadSocial() {
-		return txtSeguridadSocial;
-	}
-
-	public void setTxtSeguridadSocial(JTextField txtSeguridadSocial) {
-		this.txtSeguridadSocial = txtSeguridadSocial;
-	}
-
-	public JTextField getTxtSalario() {
-		return txtSalario;
-	}
-
-	public void setTxtSalario(JTextField txtSalario) {
-		this.txtSalario = txtSalario;
-	}
-
-	public JTextField getTxtTelefono() {
-		return txtTelefono;
-	}
-
-	public void setTxtTelefono(JTextField txtTelefono) {
-		this.txtTelefono = txtTelefono;
-	}
-
-	public JTextField getTxtIdentificacion() {
-		return txtIdentificacion;
-	}
-
-	public void setTxtIdentificacion(JTextField txtIdentificacion) {
-		this.txtIdentificacion = txtIdentificacion;
-	}
-
-	public JTextField getTxtApellido2() {
-		return txtApellido2;
-	}
-
-	public void setTxtApellido2(JTextField txtApellido2) {
-		this.txtApellido2 = txtApellido2;
-	}
-
-	public JTextField getTxtNombre() {
-		return txtNombre;
-	}
-
-	public void setTxtNombre(JTextField txtNombre) {
-		this.txtNombre = txtNombre;
-	}
-
-	public JTextField getTxtApellido1() {
-		return txtApellido1;
-	}
-
-	public void setTxtApellido1(JTextField txtApellido1) {
-		this.txtApellido1 = txtApellido1;
-	}
-
-	public JTextField getTxtFechaAlta() {
-		return TxtFechaAlta;
-	}
-
-	public void setTxtFechaAlta(JTextField txtFechaAlta) {
-		this.TxtFechaAlta = txtFechaAlta;
-	}
-
-
-
 	private JTextField txtSeguridadSocial;
 	private JTextField txtSalario;
 	private JTextField txtTelefono;
@@ -247,13 +171,9 @@ setLayout(new BorderLayout(0, 0));
 		panel10 = new JPanel();
 		panel_2.add(panel10);
 		panel10.setLayout(new BoxLayout(panel10, BoxLayout.X_AXIS));
-		
-		
-		
+			
 		Component horizontalStrut_8 = Box.createHorizontalStrut(20);
 		panel10.add(horizontalStrut_8);
-		
-		
 		
 		Component verticalStrut_1 = Box.createVerticalStrut(10);
 		panel_2.add(verticalStrut_1);
@@ -262,7 +182,6 @@ setLayout(new BorderLayout(0, 0));
 		panel_2.add(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 
-		
 		Component horizontalStrut_10 = Box.createHorizontalStrut(20);
 		panel.add(horizontalStrut_10);
 		
@@ -320,6 +239,68 @@ setLayout(new BorderLayout(0, 0));
 
 	}
 	
+	@Override
+	public void estableceControlador(ControladorEmpleados controlador) {
+		this.btnEnviar.addActionListener(controlador);
+		this.btnCancelar.addActionListener(controlador);
+	}
+
+	public JTextField getTxtSeguridadSocial() {
+		return txtSeguridadSocial;
+	}
+
+	public void setTxtSeguridadSocial(JTextField txtSeguridadSocial) {
+		this.txtSeguridadSocial = txtSeguridadSocial;
+	}
+
+	public JTextField getTxtSalario() {
+		return txtSalario;
+	}
+
+	public void setTxtSalario(JTextField txtSalario) {
+		this.txtSalario = txtSalario;
+	}
+
+	public JTextField getTxtTelefono() {
+		return txtTelefono;
+	}
+
+	public void setTxtTelefono(JTextField txtTelefono) {
+		this.txtTelefono = txtTelefono;
+	}
+
+	public JTextField getTxtIdentificacion() {
+		return txtIdentificacion;
+	}
+
+	public void setTxtIdentificacion(JTextField txtIdentificacion) {
+		this.txtIdentificacion = txtIdentificacion;
+	}
+
+	public JTextField getTxtApellido2() {
+		return txtApellido2;
+	}
+
+	public void setTxtApellido2(JTextField txtApellido2) {
+		this.txtApellido2 = txtApellido2;
+	}
+
+	public JTextField getTxtNombre() {
+		return txtNombre;
+	}
+
+	public void setTxtNombre(JTextField txtNombre) {
+		this.txtNombre = txtNombre;
+	}
+
+	public JTextField getTxtApellido1() {
+		return txtApellido1;
+	}
+
+	public void setTxtApellido1(JTextField txtApellido1) {
+		this.txtApellido1 = txtApellido1;
+	}
+
 	public JTextField getTxtUsuario() {
 		return txtUsuario;
 	}
@@ -335,11 +316,5 @@ setLayout(new BorderLayout(0, 0));
 	public void setPasswordField(JPasswordField passwordField) {
 		this.passwordField = passwordField;
 	}
-
-	@Override
-	public void estableceControlador(ControladorEmpleados controlador) {
-		this.btnEnviar.addActionListener(controlador);
-		this.btnCancelar.addActionListener(controlador);
-	}
-
+	
 }

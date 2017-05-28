@@ -1,6 +1,9 @@
 package vista;
 
 import java.awt.CardLayout;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 
 import javax.swing.Box;
@@ -19,11 +22,7 @@ import controlador.ControladorIncidencias;
 import controlador.ControladorReservas;
 import controlador.ControladorUsuarios;
 import idiomas.Idiomas;
-import res.Exportar;
-
-import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import res.ExportarPDF;
 
 public class Marco extends JFrame{
 	private ResourceBundle bundle;
@@ -148,7 +147,7 @@ public class Marco extends JFrame{
 				}
 				if(vista.getName() != null){
 					JTable table = getTabla(vista.getName());	
-					Exportar.toPdf(table);
+					ExportarPDF.toPdf(table);
 				}
 			}
 		});

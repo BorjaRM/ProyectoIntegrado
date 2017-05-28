@@ -1,7 +1,6 @@
 package vista;
 
 import java.awt.BorderLayout;
-
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -45,12 +44,15 @@ public class EstanciasView extends JPanel implements IControladorEstancias{
 		add(botonera, BorderLayout.NORTH);
 		
 		btnNuevaEstancia = new JButton(bundle.getString("btnNewEstan"));
+		btnNuevaEstancia.setActionCommand("nueva estancia");
 		botonera.add(btnNuevaEstancia);
 		
 		btnEliminarEstancia = new JButton(bundle.getString("btnRmvEstan"));
+		btnEliminarEstancia.setActionCommand("eliminar estancia");
 		botonera.add(btnEliminarEstancia);
 		
 		btnModificarEstancia = new JButton(bundle.getString("btnModEstan"));
+		btnModificarEstancia.setActionCommand("modificar estancia");
 		botonera.add(btnModificarEstancia);
 		
 		JPanel panel_Tabla = new JPanel();

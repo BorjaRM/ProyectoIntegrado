@@ -37,7 +37,6 @@ public class EstanciaDAO {
 				estancias.add(new EstanciaVO(id_estancia,cod_hotel,nombre,tipo));
 			}
 		}catch(SQLException e){
-			e.printStackTrace();
 		} 		
 		return estancias;
 	}
@@ -48,7 +47,7 @@ public class EstanciaDAO {
 			try{
 				PreparedStatement consulta = this.modelo.getConexion().prepareStatement(sql);
 				consulta.setInt(1, estancia.getCod_hotel());
-				consulta.setString(2, estancia.getNombre());
+				consulta.setString(2, estancia.getNombre().toUpperCase());
 				consulta.setString(3, estancia.getTipo());
 				consulta.executeUpdate();
 			}catch(SQLException e){

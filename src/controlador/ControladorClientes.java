@@ -1,13 +1,13 @@
 package controlador;
 
 import java.awt.event.ActionEvent;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 import javax.swing.JOptionPane;
-
-import com.toedter.calendar.JDateChooser;
 
 import modelo.dao.ClienteDAO;
 import modelo.vo.ClienteVO;
@@ -90,7 +90,18 @@ public class ControladorClientes extends Controlador{
 	public void preparaNuevoClienteView(){
 		frame.creaNuevoClienteView(this);
 		this.ncv=frame.getNcv();
+		removePreviousData();
 		frame.muestraNuevoClientesView();
+	}
+	
+	public void removePreviousData(){
+		ncv.getTxt_Nombre().setText("");
+		ncv.getTxt_Apellidos().setText("");
+		ncv.getTxt_Identificacion().setText("");
+		ncv.getDateChooser().setDate(null);
+		ncv.getTxt_Telefono().setText("");
+		ncv.getTxt_Email().setText("");
+		ncv.getTxt_Nacionalidad().setText("");
 	}
 	
 	public void preparaModificaClienteView(){
@@ -108,17 +119,22 @@ public class ControladorClientes extends Controlador{
 		ArrayList <ClienteVO> clientes = modeloCliente.rellenaYConsigueArrayClientes();
 		mcv.getTxt_Apellidos().setText(clientes.get(posicionSeleccionada).getApellidos());
 		mcv.getTxt_Email().setText(clientes.get(posicionSeleccionada).getEmail());
+		try { 
+			String valorFecha = clientes.get(posicionSeleccionada).getFecha_nacimiento();
+			Date fecha = new SimpleDateFormat("yyyy-MM-dd").parse(valorFecha);
+			mcv.getDateChooser().setDate(fecha);   
+			}catch (ParseException e) { e.printStackTrace();} 
 		mcv.getDateChooser().setToolTipText(clientes.get(posicionSeleccionada).getFecha_nacimiento());
 		mcv.getTxt_Identificacion().setText(clientes.get(posicionSeleccionada).getIdentificacion());
 		mcv.getTxt_Nacionalidad().setText(clientes.get(posicionSeleccionada).getNacionalidad());
 		mcv.getTxt_Nombre().setText(clientes.get(posicionSeleccionada).getNombre());
 		mcv.getTxt_Telefono().setText(clientes.get(posicionSeleccionada).getTelefono());
-		
 	}
+	
 	public void modificaCliente(){
 		String apellidos =mcv.getTxt_Apellidos().getText();
 		String email =mcv.getTxt_Email().getText();
-		String fNacimiento =mcv.getDateChooser().getToolTipText();
+		String fNacimiento = transformaFecha(mcv.getDateChooser().getDate().getTime());
 		String nacionalidad =mcv.getTxt_Nacionalidad().getText();
 		String identificacion =mcv.getTxt_Identificacion().getText();
 		String nombre =mcv.getTxt_Nombre().getText();
@@ -126,6 +142,12 @@ public class ControladorClientes extends Controlador{
 		ClienteVO cliente = new ClienteVO("",nombre,apellidos,identificacion,fNacimiento,telefono,nacionalidad,email,"");
 		modeloCliente.modificarCliente(posicionSeleccionada, cliente);
 	}
+	
+	public String transformaFecha(long oldDate){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd",Locale.ENGLISH);
+		return sdf.format(oldDate);
+	}
+	
 	public void cancelar(){
 		if(cv == null){
 			if(esAdministrador)

@@ -23,7 +23,6 @@ import interfaces.IControladorReservas;
 import modelo.dao.HabitacionDAO;
 import modelo.vo.ClienteVO;
 import modelo.vo.HabitacionVO;
-import modelo.vo.HotelVO;
 
 public class NuevaReservaView extends JPanel implements IControladorReservas{
 	private JButton btnEnviar;

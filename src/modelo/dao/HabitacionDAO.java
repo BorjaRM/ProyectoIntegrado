@@ -1,10 +1,8 @@
 package modelo.dao;
 
-import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -45,7 +43,6 @@ public class HabitacionDAO {
 				habitaciones.add(new HabitacionVO(id_estancia,cod_hotel,nombre,tipo_hab,clasificacion,plazas,precio,descripcion));		
 			}
 		}catch (SQLException e) {
-			e.printStackTrace();
 		} 		
 		return habitaciones;		
 	}
@@ -109,7 +106,6 @@ public class HabitacionDAO {
 				habitaciones.add(new HabitacionVO(id_estancia,cod_hotel,nombre,tipo_hab,clasificacion,plazas,precio,descripcion));	
 			}
 		}catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return habitaciones;		
 	}
@@ -143,7 +139,6 @@ public class HabitacionDAO {
 				habitaciones.add(new HabitacionVO(id_estancia,cod_hotel,nombre,tipo_hab,clasificacion,plazas,precio,descripcion));	
 			}
 		}catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return habitaciones;		
 	}
@@ -158,7 +153,6 @@ public class HabitacionDAO {
 			while(resultadoConsulta.next())
 				total=resultadoConsulta.getInt("total_habitaciones");
 		}catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return total;
 	}

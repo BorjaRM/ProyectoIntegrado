@@ -9,19 +9,13 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.SwingConstants;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.ControladorIncidencias;
+import idiomas.Idiomas;
 import interfaces.IControladorIncidencias;
 import modelo.vo.EstanciaVO;
 import modelo.vo.IncidenciaVO;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import idiomas.Idiomas;
 
 public class IncidenciasView extends JPanel implements IControladorIncidencias{
 	ResourceBundle bundle = Idiomas.getBundle();

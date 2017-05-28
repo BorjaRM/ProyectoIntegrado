@@ -38,7 +38,6 @@ public class ReservaDAO {
 				reservas.add(r);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return reservas;
 	}
@@ -54,8 +53,6 @@ public class ReservaDAO {
           st.setString(6, reserva.getCod_habitacion());
           st.executeUpdate();
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
     }
 	
@@ -66,7 +63,6 @@ public class ReservaDAO {
 			Statement stmt = bd.getConexion().createStatement();
 			stmt.executeUpdate("DELETE FROM reserva WHERE codigo ='"+codigoString+"'");
 		} catch (SQLException e) {
-			e.printStackTrace();
 			System.err.println("Error al eliminar la reserva");
 		}
 	}
@@ -87,7 +83,6 @@ public class ReservaDAO {
 				llegadas.add(llegada);
 			}
 		}catch(SQLException e){
-			e.printStackTrace();
 		} 		
 		return llegadas;
 	}
@@ -108,7 +103,6 @@ public class ReservaDAO {
 				salidas.add(salida);
 			}
 		}catch(SQLException e){
-			e.printStackTrace();
 		} 		
 		return salidas;
 	}
@@ -124,7 +118,6 @@ public class ReservaDAO {
 			while(resultadoConsulta.next())
 				total=resultadoConsulta.getInt("total_reservas");
 		}catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return total;
 	}

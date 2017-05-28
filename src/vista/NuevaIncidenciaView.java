@@ -5,8 +5,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -24,7 +22,6 @@ import idiomas.Idiomas;
 import interfaces.IControladorIncidencias;
 import modelo.dao.IncidenciaDAO;
 import modelo.vo.EstanciaVO;
-import modelo.vo.IncidenciaVO;
 
 
 public class NuevaIncidenciaView extends JPanel implements IControladorIncidencias{

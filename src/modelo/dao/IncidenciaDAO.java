@@ -3,20 +3,12 @@ package modelo.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import modelo.BD;
 import modelo.vo.EstanciaVO;
 import modelo.vo.IncidenciaVO;
-import res.Md5;
-import vista.IncidenciasView;
 
 public class IncidenciaDAO {
 	private BD bd;
@@ -39,7 +31,6 @@ public class IncidenciaDAO {
 				
 				consultaIn.executeUpdate();
 			} catch (SQLException e) {
-				e.printStackTrace();
 				System.out.println("Error insertando datos de incidencia en la base de datos");
 			}
 		}
@@ -83,7 +74,6 @@ public class IncidenciaDAO {
 			ps.setInt(2, codigo);
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
 			System.err.println("Error al cambiar el estado de la incidencia");
 		}
 	}
@@ -110,7 +100,6 @@ public class IncidenciaDAO {
 				incidencia.add(i);
 			}
 		}catch(SQLException e){
-			e.printStackTrace();
 			System.err.println("Error haciendo la consulta de incidencias");
 		} 		
 		return incidencia;
@@ -132,24 +121,23 @@ public class IncidenciaDAO {
 				incidencias.add(incidencia);
 			}
 		}catch(SQLException e){
-			e.printStackTrace();
 		} 		
 		return incidencias;
 	} 
-		public int getTotalIncidencias(int refHotel){
-		 		int total=0;
-		 		String sql = ("SELECT count(*) AS total_incidencias FROM incidencia INNER JOIN estancia ON incidencia.cod_estancia=estancia.id "
+	
+	public int getTotalIncidencias(int refHotel){
+		int total=0;
+		String sql = ("SELECT count(*) AS total_incidencias FROM incidencia INNER JOIN estancia ON incidencia.cod_estancia=estancia.id "
 		 				+ "INNER JOIN hotel ON estancia.cod_hotel=hotel.codigo WHERE incidencia.estado='activa' AND hotel.codigo=?;");
-		 		try {
-		 			PreparedStatement consulta = this.bd.getConexion().prepareStatement(sql);
-		 			consulta.setInt(1, refHotel);
-		 			ResultSet resultadoConsulta = consulta.executeQuery();
-		 			while(resultadoConsulta.next())
-		 				total=resultadoConsulta.getInt("total_incidencias");
-				}catch (SQLException e) {
-		 			e.printStackTrace();
-		 		}
-		 	return total;
-		 	}
+		try {
+			PreparedStatement consulta = this.bd.getConexion().prepareStatement(sql);
+			consulta.setInt(1, refHotel);
+		 	ResultSet resultadoConsulta = consulta.executeQuery();
+		 	while(resultadoConsulta.next())
+		 		total=resultadoConsulta.getInt("total_incidencias");
+			}catch (SQLException e) {
+			}
+		return total;
+	}
 	
 }

@@ -10,13 +10,12 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 
 import controlador.ControladorEmpleados;
 import idiomas.Idiomas;
 import interfaces.IControladorEmpleados;
-import javax.swing.JPasswordField;
 
 public class ModificarEmpleadoView extends JPanel implements IControladorEmpleados{
 	private JTextField textField;

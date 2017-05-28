@@ -1,14 +1,10 @@
 package modelo.dao;
 
-import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import javax.swing.JOptionPane;
 
@@ -55,7 +51,6 @@ public class ClienteDAO {
 							+ "'"+cliente.getNacionalidad()+"', '"+cliente.getEmail()+"', NOW());");
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Se ha producido un error, no se ha podido completar la insercion", "Error", JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
 		}
 	}
 	
@@ -67,7 +62,6 @@ public class ClienteDAO {
 			stmt.executeUpdate("DELETE FROM reserva WHERE cod_cliente ='"+codigoString+"'");
 			stmt.executeUpdate("DELETE FROM cliente WHERE codigo = '"+codigoString+"';");
 		} catch (SQLException e) {
-			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "No se puede eliminar este cliente", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
@@ -98,7 +92,6 @@ public class ClienteDAO {
 			while(resultadoConsulta.next())
 				total=resultadoConsulta.getInt("total_clientes");
 		}catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return total;
 	}

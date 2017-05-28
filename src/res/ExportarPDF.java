@@ -13,13 +13,13 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 
-public class Exportar {
+public class ExportarPDF {
 	static Document doc;
 	
 	public static void toPdf(JTable table) {
 
         try {
-            doc = new Document(PageSize.A4, 0, 0, 50, 50);
+            doc = new Document(PageSize.A3, 0, 0, 50, 50);
             PdfWriter.getInstance(doc, new FileOutputStream(table.getName()+".pdf"));
             doc.open();
             ponTitulo(table.getName());

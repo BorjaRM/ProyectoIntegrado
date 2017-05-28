@@ -58,7 +58,6 @@ public class EmpleadosView extends JPanel implements IControladorEmpleados{
 		add(panel_Tabla, BorderLayout.CENTER);
 		panel_Tabla.setLayout(new BorderLayout(0, 0));
 		
-		
 		//Creamos la tabla que contiene los empleados
 		JScrollPane scrollPane = new JScrollPane();
 		empleados_model = new DefaultTableModel(empleados_head,0);

@@ -13,15 +13,12 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
 import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SpinnerNumberModel;
-import javax.swing.SwingConstants;
 
 import controlador.ControladorEstancias;
 import idiomas.Idiomas;
@@ -188,6 +185,30 @@ public class NuevaEstanciaView extends JPanel implements IControladorEstancias{
 		String tipo = TipoEstancia.USO_COMUN.name();
 		EstanciaVO estancia = new EstanciaVO(0, 0, nombre, tipo);
 		return estancia;
+	}
+
+	public JTextField getTxt_Nombre() {
+		return txt_Nombre;
+	}
+
+	public JTextField getTxt_nombre_uso() {
+		return txt_nombre_uso;
+	}
+
+	public JComboBox<TipoHabitacion> getDesplegableTipoHab() {
+		return desplegableTipoHab;
+	}
+
+	public JSpinner getSpinner_precio() {
+		return spinner_precio;
+	}
+
+	public JSpinner getSpinner_plazas() {
+		return spinner_plazas;
+	}
+
+	public JTextArea getText_descripcion() {
+		return text_descripcion;
 	}
 
 }
