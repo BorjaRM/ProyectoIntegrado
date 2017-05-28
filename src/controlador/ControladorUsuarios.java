@@ -8,6 +8,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 
 import idiomas.Idiomas;
+import modelo.ConexionAdmin;
 import modelo.dao.ClienteDAO;
 import modelo.dao.EmpleadoDAO;
 import modelo.dao.HabitacionDAO;
@@ -60,15 +61,15 @@ public class ControladorUsuarios extends Controlador implements MouseListener{
 			}else
 				JOptionPane.showMessageDialog(null, "Datos incorrectos, Acceso denegado");			
 		}else{
-			/*String pass = vistaLogin.getPasswordAdmin();
+			String pass = vistaLogin.getPasswordAdmin();
 			if(!pass.equalsIgnoreCase("")){
 				ConexionAdmin ca = new ConexionAdmin(pass);
-				if(ca.isDatosOk()){*/
+				if(ca.isDatosOk()){
 					preparaPrincipalAdminView();
 					vistaLogin.setVisible(false);
-				/*}
+				}
 			}else
-				JOptionPane.showMessageDialog(null, "Ha habido un error en la autenticación", "Error", JOptionPane.ERROR_MESSAGE);*/
+				JOptionPane.showMessageDialog(null, "Ha habido un error en la autenticación", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
