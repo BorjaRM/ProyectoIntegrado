@@ -15,7 +15,7 @@ public class HabitacionVO extends EstanciaVO{
 	}
 	
 	public String toString(){
-		return this.getNombre()+" - "+this.plazas+" plazas, "+this.precio+"€";
+		return this.getNombre()+" - "+this.clasificacion+", "+this.plazas+" plazas, "+this.precio+"€";
 	}
 
 	public String getClasificacion() {

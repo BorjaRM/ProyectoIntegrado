@@ -23,7 +23,7 @@ public class EmpleadosView extends JPanel implements IControladorEmpleados{
 	ResourceBundle bundle = Idiomas.getBundle();
 	private JTable tabla_empleados;
 	private DefaultTableModel empleados_model;
-	String[] empleados_head = {bundle.getString("jTblEmpID"),bundle.getString("jTblEmpNomb"),bundle.getString("jTblEmpApell"),bundle.getString("jTblEmpTelef"),bundle.getString("jTblEmpIniContr")};
+	String[] empleados_head = {bundle.getString("jTblEmpID"),bundle.getString("jTblEmpNomb"),bundle.getString("jTblEmpApell"),bundle.getString("jTblEmpTelef"),bundle.getString("jTblEmpIniContr"),bundle.getString("jLblRegEmpSalario"),bundle.getString("jLblRegEmpSS")};
 	private JButton btnNuevoEmpleado;
 	private JButton btnEliminarEmpleado;
 	private JButton btnModificarEmpleado;
@@ -79,6 +79,8 @@ public class EmpleadosView extends JPanel implements IControladorEmpleados{
 			fila[2] = empleados.get(i).getApellido1();
 			fila[3] = empleados.get(i).getTelefono();
 			fila[4] = empleados.get(i).getFecha_alta();
+			fila[5] = empleados.get(i).getSalario();
+			fila[6] = empleados.get(i).getSeguridad_social();
 			empleados_model.addRow(fila);
 		}
 		tabla_empleados.setModel(empleados_model);

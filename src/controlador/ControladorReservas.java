@@ -39,7 +39,7 @@ public class ControladorReservas extends Controlador implements PropertyChangeLi
 			case "ver reservas": preparaReservasView(); break;
 			case "nueva reserva": preparaNuevaReservaView(); break;
 			case "anular reserva": eliminaReserva(); break;
-			case "enviar": insertaReserva(); preparaReservasView(); break;
+			case "enviar": insertaReserva(); break;
 			case "cancelar": cancelar(); break;
 		}
 	}
@@ -50,17 +50,21 @@ public class ControladorReservas extends Controlador implements PropertyChangeLi
 		HabitacionVO habSeleccionada = null;
 		String inicio = null;
 		String fin = null;
-		try {
-			inicio = transformaFecha(nrv.getDateChooserLlegada().getDate().getTime());
-			fin = transformaFecha(nrv.getDateChooserSalida().getDate().getTime());
-			clienteSeleccionado = (ClienteVO) nrv.getListaClientes().getSelectedItem();
-			habSeleccionada = (HabitacionVO) nrv.getListaHabitaciones().getSelectedItem();
-			ReservaVO reserva = new ReservaVO("",inicio,fin,nrv.getListaPension().getSelectedItem().toString(),
-					clienteSeleccionado.getCodigo(),Controlador.refUsuario,String.valueOf(habSeleccionada.getId()));
-			modeloReserva.nuevaReserva(reserva);
-		}catch (Exception e){
-			 e.printStackTrace();
-		}
+		if(nrv.getDateChooserSalida().getDate().getTime() > nrv.getDateChooserLlegada().getDate().getTime()){
+			try {
+				inicio = transformaFecha(nrv.getDateChooserLlegada().getDate().getTime());
+				fin = transformaFecha(nrv.getDateChooserSalida().getDate().getTime());
+				clienteSeleccionado = (ClienteVO) nrv.getListaClientes().getSelectedItem();
+				habSeleccionada = (HabitacionVO) nrv.getListaHabitaciones().getSelectedItem();
+				ReservaVO reserva = new ReservaVO("",inicio,fin,nrv.getListaPension().getSelectedItem().toString(),
+						clienteSeleccionado.getCodigo(),Controlador.refUsuario,String.valueOf(habSeleccionada.getId()));
+				modeloReserva.nuevaReserva(reserva);
+				preparaReservasView();
+			}catch (Exception e){
+				 e.printStackTrace();
+			}
+		}else
+			JOptionPane.showMessageDialog(null, "La fecha de salida no puede ser anterior a la fecha de llegada", "Error", JOptionPane.ERROR_MESSAGE);
 	}
 	
 	public String transformaFecha(long oldDate){
@@ -71,9 +75,12 @@ public class ControladorReservas extends Controlador implements PropertyChangeLi
 	private void eliminaReserva(){
 		posicionSeleccionada = rv.getTable().getSelectedRow();
 		if(posicionSeleccionada != -1){
-		ReservaDAO modeloReserva = new ReservaDAO();
-		modeloReserva.eliminarReserva(posicionSeleccionada,refHotel);
-		rellenaTabla();
+			int eleccion = JOptionPane.showConfirmDialog(null, "Confirma que deseas cancelar esta reserva", "Borrar registro", JOptionPane.YES_NO_OPTION);
+			if(eleccion == JOptionPane.YES_OPTION) {
+				ReservaDAO modeloReserva = new ReservaDAO();
+				modeloReserva.eliminarReserva(posicionSeleccionada,refHotel);
+				rellenaTabla();
+			}
 		}else{
 			JOptionPane.showMessageDialog(null, "ERROR, Primero Selecciona Una Reserva");
 		}

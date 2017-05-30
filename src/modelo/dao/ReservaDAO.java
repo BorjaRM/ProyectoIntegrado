@@ -52,8 +52,7 @@ public class ReservaDAO {
           st.setString(5, reserva.getCod_usuario());
           st.setString(6, reserva.getCod_habitacion());
           st.executeUpdate();
-        } catch (SQLException e) {
-        }
+        } catch (SQLException e) {}
     }
 	
 	public void eliminarReserva(int posicion, int refHotel){

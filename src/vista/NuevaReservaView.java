@@ -226,6 +226,5 @@ public class NuevaReservaView extends JPanel implements IControladorReservas{
 		}
 		listaHabitaciones.setVisible(false);
 		listaHabitaciones.setVisible(true);
-
 	}
 }
